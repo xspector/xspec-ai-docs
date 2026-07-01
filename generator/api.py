@@ -100,6 +100,26 @@ def _signature(func):
     return "(" + ", ".join(parts) + ")"
 
 
+def _init_attrs(funcs):
+    """Public instance attributes assigned as self.X = ... in __init__ (these
+    are real attributes but not declared via property(), e.g.
+    Model.componentNames)."""
+    init = funcs.get("__init__")
+    names = []
+    if not init:
+        return names
+    for node in ast.walk(init):
+        if isinstance(node, ast.Assign):
+            for tgt in node.targets:
+                if (isinstance(tgt, ast.Attribute)
+                        and isinstance(tgt.value, ast.Name)
+                        and tgt.value.id == "self"
+                        and not tgt.attr.startswith("_")):
+                    if tgt.attr not in names:
+                        names.append(tgt.attr)
+    return names
+
+
 def _class_entry(cls):
     funcs = {n.name: n for n in cls.body if isinstance(n, ast.FunctionDef)}
     attributes, methods = [], []
@@ -142,6 +162,12 @@ def _class_entry(cls):
                 "signature": _signature(node),
                 "doc": _first_line(ast.get_docstring(node)),
             })
+    # instance attributes from __init__ not already declared as properties
+    prop_names = {a["name"] for a in attributes}
+    for nm in _init_attrs(funcs):
+        if nm not in prop_names:
+            attributes.append({"name": nm, "type": "", "access": "instance",
+                               "doc": ""})
     return attributes, methods
 
 

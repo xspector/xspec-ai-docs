@@ -68,6 +68,23 @@ def tier1_corpus_integrity():
           f"({len(manifest['command_tokens'])} tokens, "
           f"{len(manifest['commands'])} command docs)")
 
+    # intent index: every API ref must exist in the extracted api.json
+    api = json.loads((CORPUS / "api" / "api.json").read_text())
+
+    def _members(cls):
+        e = api.get(cls, {})
+        return ({a["name"] for a in e.get("attributes", [])} |
+                {m["name"] for m in e.get("methods", [])})
+
+    intents = json.loads((CORPUS / "intent_index.json").read_text())
+    for r in intents:
+        for cls, member in r["refs"]:
+            check(cls in api, f"intent '{r['intent']}': unknown class {cls}")
+            check(member in _members(cls),
+                  f"intent '{r['intent']}': {cls}.{member} not in api.json")
+    print(f"tier1: checked intent index ({len(intents)} intents, all API "
+          "refs resolve)")
+
 
 # Recipes are (label, callable) pairs. Each callable runs a full PyXspec
 # workflow against a shipped dataset and asserts on typed results.

@@ -9,7 +9,18 @@ Output of the existing `chain` command (Metropolis-Hastings or
 
 ## Attributes
 
-Set via the constructor (see `__init__` below); no get/set property attributes.
+| attribute | type | access | description |
+|-----------|------|--------|-------------|
+| file_name | — | instance |  |
+| param_labels | — | instance |  |
+| samples | — | instance |  |
+| statistic | — | instance |  |
+| log_post | — | instance |  |
+| chain_ids | — | instance |  |
+| n_chains | — | instance |  |
+| chain_type | — | instance |  |
+| termination | — | instance |  |
+| sample_stats | — | instance |  |
 
 ## Methods
 

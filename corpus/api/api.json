@@ -214,7 +214,50 @@
     "module": "data.py",
     "singleton": null,
     "summary": "**Fakeit command settings class.**",
-    "attributes": [],
+    "attributes": [
+      {
+        "name": "response",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "arf",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "background",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "exposure",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "correction",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "backExposure",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "fileName",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
     "methods": [
       {
         "name": "__init__",
@@ -495,7 +538,110 @@
     "module": "inference.py",
     "singleton": null,
     "summary": "Phase-(a) HMC/NUTS sampler output.",
-    "attributes": [],
+    "attributes": [
+      {
+        "name": "file_name",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "param_labels",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "samples",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "statistic",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "log_post",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "divergent",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "tree_depth",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "sample_stats",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "mass_diag",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "eps_adapted",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "n_chains",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "n_divergent",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "n_accepted",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "mean_accept",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "n_grad",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "termination",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "chain_ids",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
     "methods": [
       {
         "name": "__init__",
@@ -509,7 +655,68 @@
     "module": "inference.py",
     "singleton": null,
     "summary": "Output of the existing `chain` command (Metropolis-Hastings or",
-    "attributes": [],
+    "attributes": [
+      {
+        "name": "file_name",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "param_labels",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "samples",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "statistic",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "log_post",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "chain_ids",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "n_chains",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "chain_type",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "termination",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "sample_stats",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
     "methods": [
       {
         "name": "__init__",
@@ -523,7 +730,20 @@
     "module": "model.py",
     "singleton": null,
     "summary": "**Model component class**.",
-    "attributes": [],
+    "attributes": [
+      {
+        "name": "name",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "parameterNames",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
     "methods": [
       {
         "name": "__init__",
@@ -554,6 +774,30 @@
         "name": "startParIndex",
         "type": "",
         "access": "get",
+        "doc": ""
+      },
+      {
+        "name": "name",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "nParameters",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "expression",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "componentNames",
+        "type": "",
+        "access": "instance",
         "doc": ""
       }
     ],
@@ -732,7 +976,110 @@
     "module": "nest.py",
     "singleton": null,
     "summary": "In-memory view of a `nest run` output FITS file.",
-    "attributes": [],
+    "attributes": [
+      {
+        "name": "file_name",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "param_labels",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "samples",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "log_likelihood",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "log_weights",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "weights",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "equal_weight_samples",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "equal_weight_statistic",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "logZ",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "logZerr",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "info_H",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "n_live",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "n_like",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "n_iter",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "n_modes",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "converged",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "termination",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
     "methods": [
       {
         "name": "__init__",
@@ -1031,6 +1378,12 @@
         "type": "",
         "access": "get",
         "doc": ""
+      },
+      {
+        "name": "gain",
+        "type": "",
+        "access": "instance",
+        "doc": ""
       }
     ],
     "methods": [
@@ -1062,6 +1415,12 @@
         "type": "",
         "access": "get",
         "doc": "On/Off indicator for RModel object."
+      },
+      {
+        "name": "parameterNames",
+        "type": "",
+        "access": "instance",
+        "doc": ""
       }
     ],
     "methods": [

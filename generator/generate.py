@@ -13,6 +13,7 @@ from pathlib import Path
 import api
 import config
 import grounding
+import intents
 import modeldat
 import texmacros
 
@@ -251,6 +252,47 @@ Full per-class attribute/method tables: `corpus/api/<Class>.md`; machine form:
 """
 
 
+INTENT_CATEGORIES = [
+    ("session", "Session / setup"), ("data", "Data"), ("model", "Model"),
+    ("fit", "Fit"), ("errors", "Errors / confidence"),
+    ("derived", "Derived quantities"), ("plot", "Plot / output"),
+    ("sim", "Simulation / Bayesian"), ("save", "Save / restore"),
+]
+
+
+def emit_intents(recipes_dir, corpus):
+    """Emit the intent->API reverse index as markdown + JSON."""
+    rows = [{"category": c, "intent": i, "pyxspec": p, "tcl": t,
+             "refs": [list(r) for r in refs], "note": n}
+            for (c, i, p, t, refs, n) in intents.INTENTS]
+    (corpus / "intent_index.json").write_text(json.dumps(rows, indent=2))
+
+    lines = [
+        "---", "title: Intent -> API reverse index (I want to X -> call Y)",
+        "audience: agent", "priority: 4", "---", "",
+        "# Intent -> API index", "",
+        "Find the exact call from what you want to do. PyXspec-first; Tcl shown "
+        "for cross-reference. Every call is validated against `corpus/api/"
+        "api.json` (see tests).", "",
+    ]
+    for key, title in INTENT_CATEGORIES:
+        group = [r for r in rows if r["category"] == key]
+        if not group:
+            continue
+        lines += [f"## {title}", "",
+                  "| I want to... | PyXspec | Tcl | Notes |",
+                  "|--------------|---------|-----|-------|"]
+        for r in group:
+            py = r["pyxspec"].replace("|", "\\|")
+            tcl = r["tcl"].replace("|", "\\|")
+            lines.append(f"| {r['intent']} | `{py}` | "
+                         f"{('`'+tcl+'`') if tcl != '-' else '—'} | "
+                         f"{r['note']} |")
+        lines.append("")
+    (recipes_dir / "07_intent_index.md").write_text("\n".join(lines))
+    return rows
+
+
 def emit_api(pyxspec_dir, outdir):
     data = api.extract(pyxspec_dir)
     manifest = []
@@ -317,7 +359,9 @@ def main():
     rdir.mkdir(parents=True, exist_ok=True)
     (rdir / "tcl_pyxspec_map.md").write_text(TCL_PY_MAP)
     (rdir / "00_object_model.md").write_text(OBJECT_MODEL)
-    print("  emitted recipes/tcl_pyxspec_map.md + 00_object_model.md")
+    intent_rows = emit_intents(rdir, config.CORPUS)
+    print(f"  emitted recipes/tcl_pyxspec_map.md + 00_object_model.md + "
+          f"07_intent_index.md ({len(intent_rows)} intents)")
 
     # ---- PyXspec class-API reference ----
     adir = config.CORPUS / "api"
@@ -350,6 +394,7 @@ def main():
             "pyxspec_api_classes": len(manifest_api),
             "command_tokens": len(tokens),
             "command_docs": len(manifest_cmds),
+            "intents": len(intent_rows),
         },
         "models": manifest_models,
         "pyxspec_api": manifest_api,

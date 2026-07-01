@@ -1,0 +1,952 @@
+[
+  {
+    "category": "session",
+    "intent": "Run without blocking on prompts",
+    "pyxspec": "Fit.query = \"yes\"",
+    "tcl": "query yes",
+    "refs": [
+      [
+        "FitManager",
+        "query"
+      ]
+    ],
+    "note": "the single most important line for headless runs"
+  },
+  {
+    "category": "session",
+    "intent": "Silence console output",
+    "pyxspec": "Xset.chatter = 0",
+    "tcl": "chatter 0",
+    "refs": [
+      [
+        "XspecSettings",
+        "chatter"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "session",
+    "intent": "Set log-file verbosity",
+    "pyxspec": "Xset.logChatter = 10",
+    "tcl": "chatter 10 10",
+    "refs": [
+      [
+        "XspecSettings",
+        "logChatter"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "session",
+    "intent": "Open / close a log file",
+    "pyxspec": "Xset.openLog(\"run.log\") ... Xset.closeLog()",
+    "tcl": "log run.log ... log none",
+    "refs": [
+      [
+        "XspecSettings",
+        "openLog"
+      ],
+      [
+        "XspecSettings",
+        "closeLog"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "session",
+    "intent": "Set RNG seed (reproducible)",
+    "pyxspec": "Xset.seed = 12345",
+    "tcl": "xset seed 12345",
+    "refs": [
+      [
+        "XspecSettings",
+        "seed"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "session",
+    "intent": "Reset all data and models",
+    "pyxspec": "AllData.clear(); AllModels.clear()",
+    "tcl": "data none; model none",
+    "refs": [
+      [
+        "DataManager",
+        "clear"
+      ]
+    ],
+    "note": "do this at the top of a re-runnable script"
+  },
+  {
+    "category": "session",
+    "intent": "Set abundance table",
+    "pyxspec": "Xset.abund = \"wilm\"",
+    "tcl": "abund wilm",
+    "refs": [
+      [
+        "XspecSettings",
+        "abund"
+      ]
+    ],
+    "note": "tbabs assumes wilm"
+  },
+  {
+    "category": "session",
+    "intent": "Set photoionization cross-sections",
+    "pyxspec": "Xset.xsect = \"vern\"",
+    "tcl": "xsect vern",
+    "refs": [
+      [
+        "XspecSettings",
+        "xsect"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "session",
+    "intent": "Set cosmology",
+    "pyxspec": "Xset.cosmo = \"70,0,0.73\"",
+    "tcl": "cosmo 70 0 0.73",
+    "refs": [
+      [
+        "XspecSettings",
+        "cosmo"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "session",
+    "intent": "Set an arbitrary model xset key",
+    "pyxspec": "Xset.addModelString(\"APECROOT\", \"3.0.9\")",
+    "tcl": "xset APECROOT 3.0.9",
+    "refs": [
+      [
+        "XspecSettings",
+        "addModelString"
+      ]
+    ],
+    "note": "valid keys are in manifest.json xset_keys (documented subset)"
+  },
+  {
+    "category": "session",
+    "intent": "Set parallel processes",
+    "pyxspec": "Xset.parallel.leven = 4  # also .error, .steppar",
+    "tcl": "parallel leven 4",
+    "refs": [
+      [
+        "XspecSettings",
+        "parallel"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "data",
+    "intent": "Load a spectrum",
+    "pyxspec": "AllData(\"1:1 src.pha\")",
+    "tcl": "data 1:1 src.pha",
+    "refs": [
+      [
+        "DataManager",
+        "__call__"
+      ]
+    ],
+    "note": "returns None; response/arf/background auto-load from the PHA header"
+  },
+  {
+    "category": "data",
+    "intent": "Load multiple spectra (own groups)",
+    "pyxspec": "AllData(\"1:1 a.pha 2:2 b.pha\")",
+    "tcl": "data 1:1 a.pha 2:2 b.pha",
+    "refs": [
+      [
+        "DataManager",
+        "__call__"
+      ]
+    ],
+    "note": "2:1 would share one data group"
+  },
+  {
+    "category": "data",
+    "intent": "Get the Spectrum object",
+    "pyxspec": "s = AllData(1)",
+    "tcl": "-",
+    "refs": [
+      [
+        "DataManager",
+        "__call__"
+      ]
+    ],
+    "note": "AllData(int) returns the Spectrum"
+  },
+  {
+    "category": "data",
+    "intent": "Attach a response",
+    "pyxspec": "AllData(1).response = \"r.rmf\"",
+    "tcl": "response r.rmf",
+    "refs": [
+      [
+        "Spectrum",
+        "response"
+      ]
+    ],
+    "note": "reading .response raises if none attached"
+  },
+  {
+    "category": "data",
+    "intent": "Attach an ARF",
+    "pyxspec": "AllData(1).response.arf = \"a.arf\"",
+    "tcl": "arf a.arf",
+    "refs": [
+      [
+        "Response",
+        "arf"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "data",
+    "intent": "Attach a background",
+    "pyxspec": "AllData(1).background = \"b.pha\"",
+    "tcl": "backgrnd b.pha",
+    "refs": [
+      [
+        "Spectrum",
+        "background"
+      ]
+    ],
+    "note": "reading .background raises if none attached"
+  },
+  {
+    "category": "data",
+    "intent": "Restrict energy range",
+    "pyxspec": "AllData.ignore(\"**-0.5 10.0-**\")",
+    "tcl": "ignore **-0.5 10.0-**",
+    "refs": [
+      [
+        "DataManager",
+        "ignore"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "data",
+    "intent": "Ignore bad channels",
+    "pyxspec": "AllData.ignore(\"bad\")",
+    "tcl": "ignore bad",
+    "refs": [
+      [
+        "DataManager",
+        "ignore"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "data",
+    "intent": "Re-notice a range",
+    "pyxspec": "AllData.notice(\"0.5-10.0\")",
+    "tcl": "notice 0.5-10.0",
+    "refs": [
+      [
+        "DataManager",
+        "notice"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "data",
+    "intent": "Remove a spectrum",
+    "pyxspec": "AllData -= 1",
+    "tcl": "data 1 none",
+    "refs": [
+      [
+        "DataManager",
+        "clear"
+      ]
+    ],
+    "note": "AllData -= <n|Spectrum|\"*\">; \"*\" removes all"
+  },
+  {
+    "category": "data",
+    "intent": "Count spectra / data groups",
+    "pyxspec": "AllData.nSpectra; AllData.nGroups",
+    "tcl": "-",
+    "refs": [
+      [
+        "DataManager",
+        "nSpectra"
+      ],
+      [
+        "DataManager",
+        "nGroups"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "data",
+    "intent": "Get exposure",
+    "pyxspec": "AllData(1).exposure",
+    "tcl": "-",
+    "refs": [
+      [
+        "Spectrum",
+        "exposure"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "data",
+    "intent": "Get count rate",
+    "pyxspec": "AllData(1).rate",
+    "tcl": "tclout rate",
+    "refs": [
+      [
+        "Spectrum",
+        "rate"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "model",
+    "intent": "Define a model",
+    "pyxspec": "Model(\"tbabs*powerlaw\")",
+    "tcl": "model tbabs*powerlaw",
+    "refs": [
+      [
+        "Model",
+        "__init__"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "model",
+    "intent": "Define a named model for a source",
+    "pyxspec": "Model(\"phabs*po\", \"src2\", sourceNum=2)",
+    "tcl": "model src2:...",
+    "refs": [
+      [
+        "Model",
+        "__init__"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "model",
+    "intent": "Set a parameter value (by number)",
+    "pyxspec": "AllModels(1)(2).values = 1.8",
+    "tcl": "newpar 2 1.8",
+    "refs": [
+      [
+        "Parameter",
+        "values"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "model",
+    "intent": "Set a parameter value (by name)",
+    "pyxspec": "m.powerlaw.PhoIndex = 1.8",
+    "tcl": "-",
+    "refs": [
+      [
+        "Parameter",
+        "values"
+      ]
+    ],
+    "note": "component attrs are the model.dat canonical names (m.TBabs, m.powerlaw)"
+  },
+  {
+    "category": "model",
+    "intent": "Set value with limits",
+    "pyxspec": "AllModels(1)(2).values = \"1.8,,0.5,0.5,3,3\"",
+    "tcl": "newpar 2 1.8,,0.5,0.5,3,3",
+    "refs": [
+      [
+        "Parameter",
+        "values"
+      ]
+    ],
+    "note": "order: val,delta,min,bottom,top,max"
+  },
+  {
+    "category": "model",
+    "intent": "Freeze / thaw a parameter",
+    "pyxspec": "AllModels(1)(2).frozen = True   # or False",
+    "tcl": "freeze 2 / thaw 2",
+    "refs": [
+      [
+        "Parameter",
+        "frozen"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "model",
+    "intent": "Link parameters",
+    "pyxspec": "AllModels(2)(3).link = AllModels(1)(3)",
+    "tcl": "newpar 2:3 = 1:3",
+    "refs": [
+      [
+        "Parameter",
+        "link"
+      ]
+    ],
+    "note": "assign a Parameter object or an '=' string"
+  },
+  {
+    "category": "model",
+    "intent": "Unlink a parameter",
+    "pyxspec": "AllModels(2)(3).untie()",
+    "tcl": "untie 2:3",
+    "refs": [
+      [
+        "Parameter",
+        "untie"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "model",
+    "intent": "Get a parameter value",
+    "pyxspec": "AllModels(1)(2).values[0]",
+    "tcl": "tclout param 2",
+    "refs": [
+      [
+        "Parameter",
+        "values"
+      ]
+    ],
+    "note": "values is a 6-list; [0] is the fitted value"
+  },
+  {
+    "category": "model",
+    "intent": "List component names",
+    "pyxspec": "AllModels(1).componentNames",
+    "tcl": "show model",
+    "refs": [
+      [
+        "Model",
+        "componentNames"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "model",
+    "intent": "Number of parameters",
+    "pyxspec": "AllModels(1).nParameters",
+    "tcl": "-",
+    "refs": [
+      [
+        "Model",
+        "nParameters"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "model",
+    "intent": "Set many parameters at once",
+    "pyxspec": "AllModels(1).setPars(1.0, 1.8, 1e-3)",
+    "tcl": "-",
+    "refs": [
+      [
+        "Model",
+        "setPars"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "model",
+    "intent": "Use a table model",
+    "pyxspec": "Model(\"atable{mod.fits}*powerlaw\")",
+    "tcl": "model atable{mod.fits}*powerlaw",
+    "refs": [
+      [
+        "Model",
+        "__init__"
+      ]
+    ],
+    "note": "atable=additive table, mtable=multiplicative, etable=exponential"
+  },
+  {
+    "category": "fit",
+    "intent": "Choose the fit statistic",
+    "pyxspec": "Fit.statMethod = \"cstat\"",
+    "tcl": "statistic cstat",
+    "refs": [
+      [
+        "FitManager",
+        "statMethod"
+      ]
+    ],
+    "note": "cstat for low counts; chi only for well-grouped high counts"
+  },
+  {
+    "category": "fit",
+    "intent": "Choose the test statistic",
+    "pyxspec": "Fit.statTest = \"chi\"",
+    "tcl": "statistic test chi",
+    "refs": [
+      [
+        "FitManager",
+        "statTest"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "fit",
+    "intent": "Fit",
+    "pyxspec": "Fit.perform()",
+    "tcl": "fit",
+    "refs": [
+      [
+        "FitManager",
+        "perform"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "fit",
+    "intent": "Global (multi-start) fit",
+    "pyxspec": "Fit.globalFit()",
+    "tcl": "fit global",
+    "refs": [
+      [
+        "FitManager",
+        "globalFit"
+      ]
+    ],
+    "note": "derivative-free search then polish"
+  },
+  {
+    "category": "fit",
+    "intent": "Competitive basins after a global fit",
+    "pyxspec": "Fit.globalBasins",
+    "tcl": "-",
+    "refs": [
+      [
+        "FitManager",
+        "globalBasins"
+      ]
+    ],
+    "note": "flags degeneracies a single fit hides"
+  },
+  {
+    "category": "fit",
+    "intent": "Renormalize",
+    "pyxspec": "Fit.renorm()",
+    "tcl": "renorm",
+    "refs": [
+      [
+        "FitManager",
+        "renorm"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "fit",
+    "intent": "Get statistic and dof",
+    "pyxspec": "Fit.statistic; Fit.dof",
+    "tcl": "tclout stat; tclout dof",
+    "refs": [
+      [
+        "FitManager",
+        "statistic"
+      ],
+      [
+        "FitManager",
+        "dof"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "fit",
+    "intent": "Set max fit iterations",
+    "pyxspec": "Fit.nIterations = 100",
+    "tcl": "fit 100",
+    "refs": [
+      [
+        "FitManager",
+        "nIterations"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "errors",
+    "intent": "Confidence interval for a parameter",
+    "pyxspec": "Fit.error(\"2.706 1-3\"); AllModels(1)(1).error",
+    "tcl": "error 1-3",
+    "refs": [
+      [
+        "FitManager",
+        "error"
+      ],
+      [
+        "Parameter",
+        "error"
+      ]
+    ],
+    "note": "error is (lo, hi, code); code 'FFFFFFFFF' = clean"
+  },
+  {
+    "category": "errors",
+    "intent": "Steppar (1-D/2-D confidence scan)",
+    "pyxspec": "Fit.steppar(\"2 1.5 2.5 20\")",
+    "tcl": "steppar 2 1.5 2.5 20",
+    "refs": [
+      [
+        "FitManager",
+        "steppar"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "errors",
+    "intent": "Get steppar results",
+    "pyxspec": "Fit.stepparResults(\"delstat\")",
+    "tcl": "-",
+    "refs": [
+      [
+        "FitManager",
+        "stepparResults"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "errors",
+    "intent": "Goodness of fit (Monte Carlo)",
+    "pyxspec": "Fit.goodness(1000, sim=True)",
+    "tcl": "goodness 1000 sim",
+    "refs": [
+      [
+        "FitManager",
+        "goodness"
+      ]
+    ],
+    "note": "use this for cstat, not reduced-statistic"
+  },
+  {
+    "category": "errors",
+    "intent": "F-test",
+    "pyxspec": "Fit.ftest(chi2, dof2, chi1, dof1)",
+    "tcl": "ftest chi2 dof2 chi1 dof1",
+    "refs": [
+      [
+        "FitManager",
+        "ftest"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "errors",
+    "intent": "Covariance matrix",
+    "pyxspec": "Fit.covariance",
+    "tcl": "tclout covariance",
+    "refs": [
+      [
+        "FitManager",
+        "covariance"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "derived",
+    "intent": "Model flux",
+    "pyxspec": "AllModels.calcFlux(\"0.5 10.0\"); AllData(1).flux",
+    "tcl": "flux 0.5 10.0",
+    "refs": [
+      [
+        "ModelManager",
+        "calcFlux"
+      ],
+      [
+        "Spectrum",
+        "flux"
+      ]
+    ],
+    "note": "flux is a 6-tuple; calcFlux stores into Spectrum.flux, returns nothing"
+  },
+  {
+    "category": "derived",
+    "intent": "Flux with Monte-Carlo errors",
+    "pyxspec": "AllModels.calcFlux(\"0.5 10.0 err\")",
+    "tcl": "flux 0.5 10.0 err",
+    "refs": [
+      [
+        "ModelManager",
+        "calcFlux"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "derived",
+    "intent": "Fitted flux with a real confidence interval",
+    "pyxspec": "Model(\"cflux*tbabs*po\"); Fit.error on the lg10Flux parameter",
+    "tcl": "-",
+    "refs": [
+      [
+        "FitManager",
+        "error"
+      ]
+    ],
+    "note": "wrap in cflux/cpflux; its flux parameter gets a proper CI"
+  },
+  {
+    "category": "derived",
+    "intent": "Luminosity",
+    "pyxspec": "AllModels.calcLumin(\"0.5 10.0 0.01\"); AllData(1).lumin",
+    "tcl": "lumin 0.5 10.0 0.01",
+    "refs": [
+      [
+        "ModelManager",
+        "calcLumin"
+      ],
+      [
+        "Spectrum",
+        "lumin"
+      ]
+    ],
+    "note": "last arg is redshift"
+  },
+  {
+    "category": "derived",
+    "intent": "Equivalent width",
+    "pyxspec": "AllModels.eqwidth(2); AllData(1).eqwidth",
+    "tcl": "eqwidth 2",
+    "refs": [
+      [
+        "ModelManager",
+        "eqwidth"
+      ],
+      [
+        "Spectrum",
+        "eqwidth"
+      ]
+    ],
+    "note": "argument is the (additive line) component number"
+  },
+  {
+    "category": "plot",
+    "intent": "Set plot device (no GUI)",
+    "pyxspec": "Plot.device = \"/null\"",
+    "tcl": "cpd /null",
+    "refs": [
+      [
+        "PlotManager",
+        "device"
+      ]
+    ],
+    "note": "/null computes arrays without drawing"
+  },
+  {
+    "category": "plot",
+    "intent": "Set x-axis units",
+    "pyxspec": "Plot.xAxis = \"keV\"",
+    "tcl": "setplot energy",
+    "refs": [
+      [
+        "PlotManager",
+        "xAxis"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "plot",
+    "intent": "Plot data and residuals",
+    "pyxspec": "Plot(\"ldata\", \"delchi\")",
+    "tcl": "plot ldata delchi",
+    "refs": [
+      [
+        "PlotManager",
+        "__call__"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "plot",
+    "intent": "Extract plot arrays",
+    "pyxspec": "Plot.x(); Plot.y(); Plot.model()",
+    "tcl": "-",
+    "refs": [
+      [
+        "PlotManager",
+        "x"
+      ],
+      [
+        "PlotManager",
+        "y"
+      ],
+      [
+        "PlotManager",
+        "model"
+      ]
+    ],
+    "note": "how to 'see' a fit with no display"
+  },
+  {
+    "category": "plot",
+    "intent": "Extract error bars",
+    "pyxspec": "Plot.yErr()",
+    "tcl": "-",
+    "refs": [
+      [
+        "PlotManager",
+        "yErr"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "plot",
+    "intent": "Write a plot to a file",
+    "pyxspec": "Plot.device = \"/png\"; Plot(\"ldata\")",
+    "tcl": "cpd fig.png/png; plot ldata",
+    "refs": [
+      [
+        "PlotManager",
+        "device"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "plot",
+    "intent": "Plot individual model components",
+    "pyxspec": "Plot.addComp(1)",
+    "tcl": "-",
+    "refs": [
+      [
+        "PlotManager",
+        "addComp"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "sim",
+    "intent": "Simulate a spectrum (fakeit)",
+    "pyxspec": "fs = FakeitSettings(response=\"r.rmf\", exposure=1e4); AllData.fakeit(1, fs)",
+    "tcl": "fakeit ...",
+    "refs": [
+      [
+        "DataManager",
+        "fakeit"
+      ],
+      [
+        "FakeitSettings",
+        "__init__"
+      ]
+    ],
+    "note": "seed with Xset.seed for reproducibility"
+  },
+  {
+    "category": "sim",
+    "intent": "Run an MCMC chain",
+    "pyxspec": "Chain(\"c.fits\", burn=1000, runLength=10000, walkers=20, algorithm=\"gw\")",
+    "tcl": "chain length 10000; chain burn 1000; chain run c.fits",
+    "refs": [
+      [
+        "Chain",
+        "__init__"
+      ]
+    ],
+    "note": "constructing the Chain runs it"
+  },
+  {
+    "category": "sim",
+    "intent": "Marginal statistics from chains",
+    "pyxspec": "AllChains.stat(2)",
+    "tcl": "tclout chain stat",
+    "refs": [
+      [
+        "ChainManager",
+        "stat"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "sim",
+    "intent": "Enable Bayesian priors",
+    "pyxspec": "Fit.bayes = \"on\"",
+    "tcl": "bayes on",
+    "refs": [
+      [
+        "FitManager",
+        "bayes"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "sim",
+    "intent": "Set a parameter prior",
+    "pyxspec": "AllModels(1)(1).prior = \"cons\"  # e.g. constant/jeffreys/gauss",
+    "tcl": "-",
+    "refs": [
+      [
+        "Parameter",
+        "prior"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "save",
+    "intent": "Save the whole session",
+    "pyxspec": "Xset.save(\"session.xcm\", info=\"a\")",
+    "tcl": "save all session.xcm",
+    "refs": [
+      [
+        "XspecSettings",
+        "save"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "category": "save",
+    "intent": "Restore a session",
+    "pyxspec": "Xset.restore(\"session.xcm\")",
+    "tcl": "@session.xcm",
+    "refs": [
+      [
+        "XspecSettings",
+        "restore"
+      ]
+    ],
+    "note": ""
+  }
+]

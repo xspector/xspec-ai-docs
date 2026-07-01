@@ -16,6 +16,7 @@ Detector response class.
 | energies | — | get |  |
 | rmf | — | get |  |
 | sourceNumber | — | get |  |
+| gain | — | instance |  |
 
 ## Methods
 

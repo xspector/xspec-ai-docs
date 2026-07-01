@@ -71,6 +71,10 @@ Ranked by what an agent hits first when handed a dataset:
 6. **Model-selection guidance** — ✅ authored (`06_model_selection.md`);
    component-type counts derived from the model.dat corpus (228 add / 75 mul /
    24 con / 1 acn).
+7. **Intent → API reverse index** — ✅ (`07_intent_index.md` +
+   `intent_index.json`): 70 "I want to X → call Y" entries, PyXspec-first with
+   Tcl cross-reference. Every API reference is validated against `api.json`
+   (tests fail if an entry names a call that doesn't exist).
 
 > All six task-layer docs authored (2026-07-01). Reference layer + task layer
 > complete; remaining: full grounding manifest (step 3), commands reference.

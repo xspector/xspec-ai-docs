@@ -2,7 +2,7 @@
   "provenance": {
     "xspec_version": "13.0",
     "heasoft_src": "/Users/kaa/software/heasoft/Xspec/src",
-    "heasoft_commit": "1bad53cea8",
+    "heasoft_commit": "9bfdb9e804",
     "manual_dir": "/Users/kaa/software/Xspec-aux/doc/manual",
     "manual_commit": "57626605"
   },
@@ -10,7 +10,8 @@
     "models": 328,
     "pyxspec_api_classes": 18,
     "command_tokens": 161,
-    "command_docs": 79
+    "command_docs": 79,
+    "intents": 70
   },
   "models": [
     {
@@ -3244,14 +3245,14 @@
       "class": "ChainResult",
       "singleton": null,
       "doc": "corpus/api/ChainResult.md",
-      "n_attributes": 0,
+      "n_attributes": 10,
       "n_methods": 1
     },
     {
       "class": "Component",
       "singleton": null,
       "doc": "corpus/api/Component.md",
-      "n_attributes": 0,
+      "n_attributes": 2,
       "n_methods": 1
     },
     {
@@ -3265,7 +3266,7 @@
       "class": "FakeitSettings",
       "singleton": null,
       "doc": "corpus/api/FakeitSettings.md",
-      "n_attributes": 0,
+      "n_attributes": 7,
       "n_methods": 1
     },
     {
@@ -3279,14 +3280,14 @@
       "class": "HMCResult",
       "singleton": null,
       "doc": "corpus/api/HMCResult.md",
-      "n_attributes": 0,
+      "n_attributes": 17,
       "n_methods": 1
     },
     {
       "class": "Model",
       "singleton": null,
       "doc": "corpus/api/Model.md",
-      "n_attributes": 3,
+      "n_attributes": 7,
       "n_methods": 9
     },
     {
@@ -3300,7 +3301,7 @@
       "class": "NestedResult",
       "singleton": null,
       "doc": "corpus/api/NestedResult.md",
-      "n_attributes": 0,
+      "n_attributes": 17,
       "n_methods": 1
     },
     {
@@ -3321,14 +3322,14 @@
       "class": "RModel",
       "singleton": null,
       "doc": "corpus/api/RModel.md",
-      "n_attributes": 1,
+      "n_attributes": 2,
       "n_methods": 2
     },
     {
       "class": "Response",
       "singleton": null,
       "doc": "corpus/api/Response.md",
-      "n_attributes": 5,
+      "n_attributes": 6,
       "n_methods": 3
     },
     {

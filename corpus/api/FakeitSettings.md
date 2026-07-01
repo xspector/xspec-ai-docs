@@ -9,7 +9,15 @@ module: data.py
 
 ## Attributes
 
-Set via the constructor (see `__init__` below); no get/set property attributes.
+| attribute | type | access | description |
+|-----------|------|--------|-------------|
+| response | — | instance |  |
+| arf | — | instance |  |
+| background | — | instance |  |
+| exposure | — | instance |  |
+| correction | — | instance |  |
+| backExposure | — | instance |  |
+| fileName | — | instance |  |
 
 ## Methods
 

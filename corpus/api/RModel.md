@@ -12,6 +12,7 @@ module: response.py
 | attribute | type | access | description |
 |-----------|------|--------|-------------|
 | isOn | — | get | On/Off indicator for RModel object. |
+| parameterNames | — | instance |  |
 
 ## Methods
 

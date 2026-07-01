@@ -1,5 +1,5 @@
 # XSPEC / PyXspec AI docs
-> XSPEC 13.0 | manual@57626605 | heasoft@1bad53cea8
+> XSPEC 13.0 | manual@57626605 | heasoft@9bfdb9e804
 
 ## Models
 - [absori](corpus/models/absori.md): multiplicative model, 6 params
@@ -337,17 +337,17 @@
 - [AllModels](corpus/api/AllModels.md) (class `ModelManager`): 2 attrs, 20 methods
 - [Background](corpus/api/Background.md): 7 attrs, 1 methods
 - [Chain](corpus/api/Chain.md): 11 attrs, 3 methods
-- [ChainResult](corpus/api/ChainResult.md): 0 attrs, 1 methods
-- [Component](corpus/api/Component.md): 0 attrs, 1 methods
-- [FakeitSettings](corpus/api/FakeitSettings.md): 0 attrs, 1 methods
+- [ChainResult](corpus/api/ChainResult.md): 10 attrs, 1 methods
+- [Component](corpus/api/Component.md): 2 attrs, 1 methods
+- [FakeitSettings](corpus/api/FakeitSettings.md): 7 attrs, 1 methods
 - [Fit](corpus/api/Fit.md) (class `FitManager`): 20 attrs, 12 methods
-- [HMCResult](corpus/api/HMCResult.md): 0 attrs, 1 methods
-- [Model](corpus/api/Model.md): 3 attrs, 9 methods
-- [NestedResult](corpus/api/NestedResult.md): 0 attrs, 1 methods
+- [HMCResult](corpus/api/HMCResult.md): 17 attrs, 1 methods
+- [Model](corpus/api/Model.md): 7 attrs, 9 methods
+- [NestedResult](corpus/api/NestedResult.md): 17 attrs, 1 methods
 - [Parameter](corpus/api/Parameter.md): 9 attrs, 2 methods
 - [Plot](corpus/api/Plot.md) (class `PlotManager`): 11 attrs, 21 methods
-- [RModel](corpus/api/RModel.md): 1 attrs, 2 methods
-- [Response](corpus/api/Response.md): 5 attrs, 3 methods
+- [RModel](corpus/api/RModel.md): 2 attrs, 2 methods
+- [Response](corpus/api/Response.md): 6 attrs, 3 methods
 - [Spectrum](corpus/api/Spectrum.md): 28 attrs, 9 methods
 - [Xset](corpus/api/Xset.md) (class `XspecSettings`): 12 attrs, 9 methods
 
@@ -440,6 +440,7 @@
 - [Anti-patterns and known failure modes](corpus/recipes/04_antipatterns.md)
 - [Error and warning catalog (cause → fix)](corpus/recipes/05_error_catalog.md)
 - [Choosing and combining models](corpus/recipes/06_model_selection.md)
+- [Intent -> API reverse index (I want to X -> call Y)](corpus/recipes/07_intent_index.md)
 - [tcl_pyxspec_map](corpus/recipes/tcl_pyxspec_map.md)
 
 ## Grounding

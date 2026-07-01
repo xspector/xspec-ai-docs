@@ -14,6 +14,10 @@ module: model.py
 | flux | — | get |  |
 | lumin | — | get |  |
 | startParIndex | — | get |  |
+| name | — | instance |  |
+| nParameters | — | instance |  |
+| expression | — | instance |  |
+| componentNames | — | instance |  |
 
 ## Methods
 
