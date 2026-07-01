@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "xspec-ai-docs": {
+      "command": "/opt/miniconda3/bin/python",
+      "args": ["/Users/kaa/software/xspec-ai-docs/server/server.py"],
+      "env": {
+        "XSPEC_AI_CORPUS": "/Users/kaa/software/xspec-ai-docs/corpus"
+      }
+    }
+  }
+}

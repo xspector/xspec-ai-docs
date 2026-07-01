@@ -27,6 +27,9 @@ compute errors and fluxes, and return results as structured data.
 
 - **Structured text corpus now, MCP server later.** The corpus is authored so
   it doubles as the MCP's backing data — no rework when the server is added.
+  **Tier A (read-only) MCP server implemented** in `server/` (FastMCP; 8 tools
+  over the corpus JSON; data layer unit-tested). Tier B (live PyXspec
+  execution) remains future work.
 - **Drive surface: PyXspec-first**, interactive Tcl cross-referenced. PyXspec
   returns typed values, raises exceptions instead of blocking on interactive
   prompts, and avoids `tclout` string-scraping — all better for an execution

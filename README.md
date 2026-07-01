@@ -21,8 +21,16 @@ corpus/
   recipes/   00_object_model.md, 01..06 guides, tcl_pyxspec_map.md
   manifest.json                      full grounding set (anti-hallucination)
 generator/   generate.py + extractors (config, modeldat, texmacros, grounding, api)
-tests/       run_recipes.py (integrity + live-data recipes), audit_macros.py
+server/      MCP server (Tier A, read-only) over the corpus — see server/README.md
+tests/       run_recipes.py (integrity + live-data recipes), audit_macros.py,
+             test_server.py (MCP data-layer)
 ```
+
+## MCP server
+
+`server/` exposes the corpus as MCP tools (get_model, list_models, get_command,
+get_api, lookup_intent, validate, get_guide, corpus_info) — read-only, no XSPEC
+execution. See [server/README.md](server/README.md).
 
 Two content layers: an **auto-generated reference layer** (models, commands,
 PyXspec API — regenerated from source, never drifts) and a **hand-authored task
