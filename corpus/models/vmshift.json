@@ -1,0 +1,26 @@
+{
+  "name": "vmshift",
+  "type": "con",
+  "func": "C_vmshift",
+  "elo": "0.0",
+  "ehi": "1.0e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "Velocity",
+      "unit": "km/s",
+      "default": 0.0,
+      "hardmin": -10000.0,
+      "softmin": -10000.0,
+      "softmax": 10000.0,
+      "hardmax": 10000.0,
+      "delta": -10.0,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "vmshift"
+  ],
+  "title": "vmshift: velocity shift a multiplicative model"
+}

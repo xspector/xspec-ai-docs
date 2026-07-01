@@ -1,0 +1,33 @@
+{
+  "name": "TBabs",
+  "type": "mul",
+  "func": "C_tbabs",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "nH",
+      "unit": "10^22",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "tbabs",
+    "ztbabs",
+    "tbfeo",
+    "tbgas",
+    "tbgrain",
+    "tbpcf",
+    "tbvarabs",
+    "tbrel"
+  ],
+  "title": "tbabs, ztbabs, tbfeo, tbgas, tbgrain, tbpcf, tbvarabs, tbrel: ISM grain absorption"
+}

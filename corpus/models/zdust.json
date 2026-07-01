@@ -1,0 +1,62 @@
+{
+  "name": "zdust",
+  "type": "mul",
+  "func": "mszdst",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "method",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    },
+    {
+      "name": "E_BmV",
+      "unit": "",
+      "default": 0.1,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Rv",
+      "unit": "",
+      "default": 3.1,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "zdust"
+  ],
+  "title": "zdust:  extinction by dust grains"
+}

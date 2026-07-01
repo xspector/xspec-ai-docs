@@ -1,0 +1,98 @@
+{
+  "name": "pileup",
+  "type": "acn",
+  "func": "C_pileup",
+  "elo": "0.001",
+  "ehi": "1.0e20",
+  "npars_declared": 7,
+  "params": [
+    {
+      "name": "fr_time",
+      "unit": "s",
+      "default": 3.2,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "max_ph",
+      "unit": "",
+      "default": 5.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "g0",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "alpha",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "psffrac",
+      "unit": "",
+      "default": 0.95,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "nregions",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "scale"
+    },
+    {
+      "name": "fracexpo",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "scale"
+    }
+  ],
+  "family": [
+    "pileup"
+  ],
+  "title": "pileup: CCD pile-up model for Chandra"
+}

@@ -1,0 +1,135 @@
+{
+  "name": "zkerrbb",
+  "type": "add",
+  "func": "C_zkerrbb",
+  "elo": "0.",
+  "ehi": "1.e6",
+  "npars_declared": 9,
+  "params": [
+    {
+      "name": "eta",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "a",
+      "unit": "",
+      "default": 0.5,
+      "hardmin": -0.99,
+      "softmin": -0.99,
+      "softmax": 0.9999,
+      "hardmax": 0.9999,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "i",
+      "unit": "deg",
+      "default": 30.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 85.0,
+      "hardmax": 85.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Mbh",
+      "unit": "M_sun",
+      "default": 10000000.0,
+      "hardmin": 3.0,
+      "softmin": 3.0,
+      "softmax": 10000000000.0,
+      "hardmax": 10000000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Mdd",
+      "unit": "M0yr",
+      "default": 1.0,
+      "hardmin": 1e-05,
+      "softmin": 0.0001,
+      "softmax": 10000.0,
+      "hardmax": 100000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "z",
+      "unit": "",
+      "default": 0.01,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "fcol",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": -100.0,
+      "softmin": -100.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "rflag",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    },
+    {
+      "name": "lflag",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "kerrbb",
+    "zkerrbb"
+  ],
+  "title": "kerrbb, zkerrbb: multi-temperature blackbody model for thin accretion disk around a Kerr black hole"
+}

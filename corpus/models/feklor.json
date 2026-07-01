@@ -1,0 +1,29 @@
+{
+  "name": "feklor",
+  "type": "add",
+  "func": "C_FeKfromSevenLorentzians",
+  "elo": "0.01",
+  "ehi": "1.e6",
+  "npars_declared": 0,
+  "params": [
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "feklor",
+    "zfeklor",
+    "bfeklor",
+    "zbfeklor"
+  ],
+  "title": "feklor, zfeklor, bfeklor, zbfeklor:  Fe K$\\alpha$ line at high resolution"
+}

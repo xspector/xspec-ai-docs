@@ -1,0 +1,86 @@
+{
+  "name": "spline",
+  "type": "mul",
+  "func": "xsspln",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 6,
+  "params": [
+    {
+      "name": "Estart",
+      "unit": "keV",
+      "default": 0.1,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Ystart",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -1000000.0,
+      "softmin": -1000000.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Yend",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -1000000.0,
+      "softmin": -1000000.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "YPstart",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -1000000.0,
+      "softmin": -1000000.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "YPend",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -1000000.0,
+      "softmin": -1000000.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Eend",
+      "unit": "keV",
+      "default": 15.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "spline"
+  ],
+  "title": "spline: spline modification"
+}

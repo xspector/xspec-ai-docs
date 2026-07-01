@@ -1,0 +1,170 @@
+{
+  "name": "bwcycl",
+  "type": "add",
+  "func": "c_beckerwolff",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 12,
+  "params": [
+    {
+      "name": "Radius",
+      "unit": "km",
+      "default": 10.0,
+      "hardmin": 5.0,
+      "softmin": 5.0,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Mass",
+      "unit": "Solar",
+      "default": 1.4,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 3.0,
+      "hardmax": 3.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "csi",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "delta",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "B",
+      "unit": "1e12G",
+      "default": 4.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Mdot",
+      "unit": "1e17g/s",
+      "default": 1.0,
+      "hardmin": 1e-06,
+      "softmin": 1e-06,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Te",
+      "unit": "keV",
+      "default": 5.0,
+      "hardmin": 1.3,
+      "softmin": 1.3,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "r0",
+      "unit": "m",
+      "default": 44.0,
+      "hardmin": 10.0,
+      "softmin": 10.0,
+      "softmax": 1000.0,
+      "hardmax": 1000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "D",
+      "unit": "kpc",
+      "default": 5.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "BBnorm",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "CYCnorm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -1.0,
+      "softmin": -1.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "FFnorm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -1.0,
+      "softmin": -1.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "bwcycl"
+  ],
+  "title": "bwcycl: Becker-Wolff self-consistent cyclotron line model"
+}

@@ -1,0 +1,86 @@
+{
+  "name": "kdblur2",
+  "type": "con",
+  "func": "C_kdblur2",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 6,
+  "params": [
+    {
+      "name": "Index",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rin_G",
+      "unit": "",
+      "default": 4.5,
+      "hardmin": 1.235,
+      "softmin": 1.235,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rout_G",
+      "unit": "",
+      "default": 100.0,
+      "hardmin": 1.235,
+      "softmin": 1.235,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Incl",
+      "unit": "deg",
+      "default": 30.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": 1.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Rbreak",
+      "unit": "",
+      "default": 20.0,
+      "hardmin": 1.235,
+      "softmin": 1.235,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Index1",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "kdblur2"
+  ],
+  "title": "kdblur2: convolve with the laor2 model shape"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "dust",
+  "type": "mul",
+  "func": "xsdust",
+  "elo": "1.e-20",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "Frac",
+      "unit": "",
+      "default": 0.066,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.001,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Halosz",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 100000.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "dust"
+  ],
+  "title": "dust: dust scattering"
+}

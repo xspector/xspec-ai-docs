@@ -1,0 +1,170 @@
+{
+  "name": "xion",
+  "type": "mul",
+  "func": "xsxirf",
+  "elo": "0.1",
+  "ehi": "200.",
+  "npars_declared": 13,
+  "params": [
+    {
+      "name": "height",
+      "unit": "r_s",
+      "default": 5.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 2.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "lxovrld",
+      "unit": "",
+      "default": 0.3,
+      "hardmin": 0.02,
+      "softmin": 0.02,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.02,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "rate",
+      "unit": "",
+      "default": 0.05,
+      "hardmin": 0.001,
+      "softmin": 0.001,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "cosAng",
+      "unit": "",
+      "default": 0.9,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "inner",
+      "unit": "r_s",
+      "default": 3.0,
+      "hardmin": 2.0,
+      "softmin": 2.0,
+      "softmax": 1000.0,
+      "hardmax": 1000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "outer",
+      "unit": "r_s",
+      "default": 100.0,
+      "hardmin": 2.1,
+      "softmin": 2.1,
+      "softmax": 100000.0,
+      "hardmax": 100000.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "index",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 1.6,
+      "softmin": 1.6,
+      "softmax": 2.2,
+      "hardmax": 2.2,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Feabun",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 5.0,
+      "hardmax": 5.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "E_cut",
+      "unit": "keV",
+      "default": 150.0,
+      "hardmin": 20.0,
+      "softmin": 20.0,
+      "softmax": 300.0,
+      "hardmax": 300.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Ref_type",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 3.0,
+      "hardmax": 3.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rel_smear",
+      "unit": "",
+      "default": 4.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 4.0,
+      "hardmax": 4.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Geometry",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 4.0,
+      "hardmax": 4.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "xion"
+  ],
+  "title": "xion: reflected spectrum of photo-ionized accretion disk/ring"
+}

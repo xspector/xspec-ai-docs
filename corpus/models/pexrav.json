@@ -1,0 +1,110 @@
+{
+  "name": "pexrav",
+  "type": "add",
+  "func": "C_xspexrav",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 7,
+  "params": [
+    {
+      "name": "PhoIndex",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": -10.0,
+      "softmin": -9.0,
+      "softmax": 9.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "foldE",
+      "unit": "keV",
+      "default": 100.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 10.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "rel_refl",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "abund",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Fe_abund",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "cosIncl",
+      "unit": "",
+      "default": 0.45,
+      "hardmin": 0.05,
+      "softmin": 0.05,
+      "softmax": 0.95,
+      "hardmax": 0.95,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "pexrav"
+  ],
+  "title": "pexrav:  reflected powerlaw, neutral medium"
+}

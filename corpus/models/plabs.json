@@ -1,0 +1,38 @@
+{
+  "name": "plabs",
+  "type": "mul",
+  "func": "xsplab",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "index",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 5.0,
+      "hardmax": 5.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "coef",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "plabs"
+  ],
+  "title": "plabs: power law absorption"
+}

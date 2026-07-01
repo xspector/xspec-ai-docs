@@ -1,0 +1,170 @@
+{
+  "name": "stcone",
+  "type": "add",
+  "func": "c_stokesxicone",
+  "elo": "0.",
+  "ehi": "1.0e20",
+  "npars_declared": 12,
+  "params": [
+    {
+      "name": "PhoIndex",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 1.4,
+      "softmin": 1.4,
+      "softmax": 3.0,
+      "hardmax": 3.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "cos_incl",
+      "unit": "",
+      "default": 0.775,
+      "hardmin": 0.025,
+      "softmin": 0.025,
+      "softmax": 0.975,
+      "hardmax": 0.975,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Theta",
+      "unit": "",
+      "default": 60.0,
+      "hardmin": 5.0,
+      "softmin": 5.0,
+      "softmax": 89.0,
+      "hardmax": 89.0,
+      "delta": 1.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "rhorhoin",
+      "unit": "",
+      "default": 1.5,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.2,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "xi0",
+      "unit": "",
+      "default": 100.0,
+      "hardmin": -1000000.0,
+      "softmin": -1000000.0,
+      "softmax": 10000.0,
+      "hardmax": 10000.0,
+      "delta": 5.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "beta",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": -2.0,
+      "softmin": -2.0,
+      "softmax": 6.0,
+      "hardmax": 6.0,
+      "delta": -0.5,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "N_p",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.2,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "pol_deg",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -1.0,
+      "softmin": -1.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.005,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "chi",
+      "unit": "deg",
+      "default": 0.0,
+      "hardmin": -90.0,
+      "softmin": -90.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "pos_ang",
+      "unit": "deg",
+      "default": 0.0,
+      "hardmin": -90.0,
+      "softmin": -90.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "zshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Stokes",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -1.0,
+      "softmin": -1.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "stcone"
+  ],
+  "title": "stcone: X-ray polarized reflection from a double cone"
+}

@@ -1,0 +1,75 @@
+{
+  "name": "zvoigt",
+  "type": "add",
+  "func": "C_zvoigtLine",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "LineE",
+      "unit": "keV",
+      "default": 6.5,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Sigma",
+      "unit": "keV",
+      "default": 0.01,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 20.0,
+      "delta": 0.005,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Gamma",
+      "unit": "keV",
+      "default": 0.01,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 20.0,
+      "delta": 0.005,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "voigt",
+    "zvoigt"
+  ],
+  "title": "voigt, zvoigt:  Voigt line profile"
+}

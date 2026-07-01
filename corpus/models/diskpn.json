@@ -1,0 +1,50 @@
+{
+  "name": "diskpn",
+  "type": "add",
+  "func": "xsdiskpn",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "T_max",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.0001,
+      "softmin": 0.001,
+      "softmax": 100.0,
+      "hardmax": 200.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "R_in",
+      "unit": "R_g",
+      "default": 6.0,
+      "hardmin": 6.0,
+      "softmin": 6.0,
+      "softmax": 1000.0,
+      "hardmax": 1000.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "diskpn"
+  ],
+  "title": "diskpn: accretion disk, black hole, black body"
+}

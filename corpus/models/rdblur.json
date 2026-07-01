@@ -1,0 +1,62 @@
+{
+  "name": "rdblur",
+  "type": "con",
+  "func": "C_rdblur",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "Betor10",
+      "unit": "",
+      "default": -2.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rin_M",
+      "unit": "",
+      "default": 10.0,
+      "hardmin": 6.0,
+      "softmin": 6.0,
+      "softmax": 1000.0,
+      "hardmax": 10000.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rout_M",
+      "unit": "",
+      "default": 1000.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 10000000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Incl",
+      "unit": "deg",
+      "default": 30.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "rdblur"
+  ],
+  "title": "rdblur: convolve with the diskline model shape"
+}

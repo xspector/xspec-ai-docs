@@ -1,0 +1,63 @@
+{
+  "name": "zcutoffpl",
+  "type": "add",
+  "func": "C_zcutoffPowerLaw",
+  "elo": "1.e-20",
+  "ehi": "1.e20",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "PhoIndex",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -3.0,
+      "softmin": -2.0,
+      "softmax": 9.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "HighECut",
+      "unit": "keV",
+      "default": 15.0,
+      "hardmin": 0.01,
+      "softmin": 1.0,
+      "softmax": 500.0,
+      "hardmax": 500.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "cutoffpl",
+    "zcutoffpl"
+  ],
+  "title": "cutoffpl, zcutoffpl: power law, high energy exponential cutoff"
+}

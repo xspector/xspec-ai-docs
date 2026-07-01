@@ -1,0 +1,98 @@
+{
+  "name": "grad",
+  "type": "add",
+  "func": "grad",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 6,
+  "params": [
+    {
+      "name": "D",
+      "unit": "kpc",
+      "default": 10.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10000.0,
+      "hardmax": 10000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "i",
+      "unit": "deg",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Mass",
+      "unit": "solar",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Mdot",
+      "unit": "1e18",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "TclovTef",
+      "unit": "",
+      "default": 1.7,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "refflag",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -1.0,
+      "softmin": -1.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "grad"
+  ],
+  "title": "grad: accretion disk, Schwarzschild black hole"
+}

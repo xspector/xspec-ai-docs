@@ -1,0 +1,122 @@
+{
+  "name": "compmag",
+  "type": "add",
+  "func": "c_xscompmag",
+  "elo": "1.e-20",
+  "ehi": "1.e20",
+  "npars_declared": 8,
+  "params": [
+    {
+      "name": "kTbb",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.2,
+      "softmin": 0.2,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "kTe",
+      "unit": "keV",
+      "default": 5.0,
+      "hardmin": 0.2,
+      "softmin": 0.2,
+      "softmax": 2000.0,
+      "hardmax": 2000.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "tau",
+      "unit": "",
+      "default": 0.5,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "eta",
+      "unit": "",
+      "default": 0.5,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "beta0",
+      "unit": "",
+      "default": 0.57,
+      "hardmin": 0.0001,
+      "softmin": 0.0001,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "r0",
+      "unit": "",
+      "default": 0.25,
+      "hardmin": 0.0001,
+      "softmin": 0.0001,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "A",
+      "unit": "",
+      "default": 0.001,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "betaflag",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 2.0,
+      "hardmax": 2.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "compmag"
+  ],
+  "title": "compmag: Thermal and bulk Comptonization for cylindrical\n  accretion onto the polar cap of a magnetized neutron star"
+}

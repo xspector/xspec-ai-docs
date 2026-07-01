@@ -1,0 +1,62 @@
+{
+  "name": "hatm",
+  "type": "add",
+  "func": "C_hatm",
+  "elo": "0.",
+  "ehi": "20.",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "T",
+      "unit": "MK",
+      "default": 3.0,
+      "hardmin": 0.5,
+      "softmin": 0.5,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "NSmass",
+      "unit": "Msun",
+      "default": 1.4,
+      "hardmin": 0.6,
+      "softmin": 0.6,
+      "softmax": 2.8,
+      "hardmax": 2.8,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "NSrad",
+      "unit": "km",
+      "default": 10.0,
+      "hardmin": 5.0,
+      "softmin": 5.0,
+      "softmax": 23.0,
+      "hardmax": 23.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "hatm"
+  ],
+  "title": "hatm: Nonmagnetic hydrogen atmosphere of a neutron star"
+}

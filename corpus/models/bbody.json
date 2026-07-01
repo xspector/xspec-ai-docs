@@ -1,0 +1,39 @@
+{
+  "name": "bbody",
+  "type": "add",
+  "func": "xsblbd",
+  "elo": "1.e-20",
+  "ehi": "1.e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "kT",
+      "unit": "keV",
+      "default": 3.0,
+      "hardmin": 0.0001,
+      "softmin": 0.01,
+      "softmax": 100.0,
+      "hardmax": 200.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "bbody",
+    "zbbody"
+  ],
+  "title": "bbody, zbbody:  blackbody"
+}

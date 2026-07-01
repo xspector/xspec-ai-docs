@@ -1,0 +1,26 @@
+{
+  "name": "constant",
+  "type": "mul",
+  "func": "xscnst",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "factor",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10000000000.0,
+      "hardmax": 10000000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "constant"
+  ],
+  "title": "constant: energy-independent factor"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "zigm",
+  "type": "mul",
+  "func": "zigm",
+  "elo": "0.0",
+  "ehi": "1.0e20",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "scale"
+    },
+    {
+      "name": "model",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    },
+    {
+      "name": "lyman_limit",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    }
+  ],
+  "family": [
+    "zigm"
+  ],
+  "title": "zigm: UV/Optical attenuation by the intergalactic medium"
+}

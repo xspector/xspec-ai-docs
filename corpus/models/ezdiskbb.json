@@ -1,0 +1,38 @@
+{
+  "name": "ezdiskbb",
+  "type": "add",
+  "func": "ezdiskbb",
+  "elo": "0.01",
+  "ehi": "100.0",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "T_max",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "ezdiskbb"
+  ],
+  "title": "ezdiskbb: multiple blackbody disk model with zero-torque\n  inner boundary"
+}

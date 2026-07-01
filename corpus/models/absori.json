@@ -1,0 +1,86 @@
+{
+  "name": "absori",
+  "type": "mul",
+  "func": "C_xsabsori",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 6,
+  "params": [
+    {
+      "name": "PhoIndex",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 4.0,
+      "hardmax": 4.0,
+      "delta": -0.05,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "nH",
+      "unit": "10^22",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Temp_abs",
+      "unit": "K",
+      "default": 30000.0,
+      "hardmin": 10000.0,
+      "softmin": 10000.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": -1000.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "xi",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000.0,
+      "hardmax": 5000.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Fe_abund",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": -0.02,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "absori"
+  ],
+  "title": "absori: ionized absorber"
+}

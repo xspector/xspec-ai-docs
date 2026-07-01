@@ -1,0 +1,74 @@
+{
+  "name": "rfxconv",
+  "type": "con",
+  "func": "C_rfxconv",
+  "elo": "0.001",
+  "ehi": "1.0e20",
+  "npars_declared": 5,
+  "params": [
+    {
+      "name": "rel_refl",
+      "unit": "",
+      "default": -1.0,
+      "hardmin": -1.0,
+      "softmin": -1.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 4.0,
+      "hardmax": 4.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Fe_abund",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.5,
+      "softmin": 0.5,
+      "softmax": 3.0,
+      "hardmax": 3.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "cosIncl",
+      "unit": "",
+      "default": 0.5,
+      "hardmin": 0.05,
+      "softmin": 0.05,
+      "softmax": 0.95,
+      "hardmax": 0.95,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "log_xi",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 6.0,
+      "hardmax": 6.0,
+      "delta": 0.02,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "rfxconv"
+  ],
+  "title": "rfxconv: angle-dependent reflection from an ionized disk"
+}

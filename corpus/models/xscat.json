@@ -1,0 +1,62 @@
+{
+  "name": "xscat",
+  "type": "mul",
+  "func": "C_xscatmodel",
+  "elo": "0.0",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "NH",
+      "unit": "10^22",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000.0,
+      "hardmax": 1000.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Xpos",
+      "unit": "",
+      "default": 0.5,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 0.99,
+      "hardmax": 0.999,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Rext",
+      "unit": "arcsec",
+      "default": 10.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 235.0,
+      "hardmax": 240.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "DustModel",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    }
+  ],
+  "family": [
+    "xscat"
+  ],
+  "title": "xscat: dust scattering"
+}

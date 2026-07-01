@@ -1,0 +1,38 @@
+{
+  "name": "spexpcut",
+  "type": "mul",
+  "func": "C_superExpCutoff",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "Ecut",
+      "unit": "keV",
+      "default": 10.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "alpha",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -5.0,
+      "softmin": -5.0,
+      "softmax": 5.0,
+      "hardmax": 5.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "spexpcut"
+  ],
+  "title": "spexpcut: super-exponential cutoff absorption"
+}

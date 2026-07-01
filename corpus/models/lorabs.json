@@ -1,0 +1,51 @@
+{
+  "name": "lorabs",
+  "type": "mul",
+  "func": "C_lorentzianAbsorptionLine",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "LineE",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Width",
+      "unit": "keV",
+      "default": 0.01,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 20.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Strength",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "lorabs",
+    "zlorabs"
+  ],
+  "title": "lorabs, zlorabs: lorentzian absorption line"
+}

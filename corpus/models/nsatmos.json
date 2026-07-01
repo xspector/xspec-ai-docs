@@ -1,0 +1,74 @@
+{
+  "name": "nsatmos",
+  "type": "add",
+  "func": "nsatmos",
+  "elo": ".05",
+  "ehi": "10.",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "LogT_eff",
+      "unit": "K",
+      "default": 6.0,
+      "hardmin": 5.0,
+      "softmin": 5.0,
+      "softmax": 6.5,
+      "hardmax": 6.5,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "M_ns",
+      "unit": "Msun",
+      "default": 1.4,
+      "hardmin": 0.5,
+      "softmin": 0.5,
+      "softmax": 3.0,
+      "hardmax": 3.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "R_ns",
+      "unit": "km",
+      "default": 10.0,
+      "hardmin": 5.0,
+      "softmin": 5.0,
+      "softmax": 30.0,
+      "hardmax": 30.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "dist",
+      "unit": "kpc",
+      "default": 10.0,
+      "hardmin": 0.1,
+      "softmin": 0.1,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "nsatmos"
+  ],
+  "title": "nsatmos:  NS Hydrogen Atmosphere model with electron conduction and self-irradiation"
+}

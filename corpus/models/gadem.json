@@ -1,0 +1,103 @@
+{
+  "name": "gadem",
+  "type": "add",
+  "func": "C_gaussDem",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 6,
+  "params": [
+    {
+      "name": "Tmean",
+      "unit": "keV",
+      "default": 4.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 10.0,
+      "hardmax": 20.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Tsigma",
+      "unit": "keV",
+      "default": 0.1,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "nH",
+      "unit": "cm^-3",
+      "default": 1.0,
+      "hardmin": 1e-06,
+      "softmin": 1e-05,
+      "softmax": 1e+19,
+      "hardmax": 1e+20,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "abundanc",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "switch",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "gadem",
+    "vgadem",
+    "vvgadem",
+    "bgadem",
+    "bvgadem",
+    "bvvgadem"
+  ],
+  "title": "gadem, vgadem, vvgadem, bgadem, bvgadem, bvvgadem: plasma emission, multi-temperature with\n  gaussian distribution of emission\n  measure."
+}

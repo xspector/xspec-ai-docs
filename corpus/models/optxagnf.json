@@ -1,0 +1,159 @@
+{
+  "name": "optxagnf",
+  "type": "add",
+  "func": "optxagnf",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 11,
+  "params": [
+    {
+      "name": "mass",
+      "unit": "solar",
+      "default": 10000000.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 1000000000.0,
+      "hardmax": 1000000000.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "dist",
+      "unit": "Mpc",
+      "default": 100.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 1000000000.0,
+      "hardmax": 1000000000.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "logLoLEdd",
+      "unit": "",
+      "default": -1.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 2.0,
+      "hardmax": 2.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "astar",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 0.998,
+      "hardmax": 0.998,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "rcor",
+      "unit": "rg",
+      "default": 10.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "logrout",
+      "unit": "",
+      "default": 5.0,
+      "hardmin": 3.0,
+      "softmin": 3.0,
+      "softmax": 7.0,
+      "hardmax": 7.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "kT_e",
+      "unit": "keV",
+      "default": 0.2,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "tau",
+      "unit": "",
+      "default": 10.0,
+      "hardmin": 0.1,
+      "softmin": 0.1,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Gamma",
+      "unit": "",
+      "default": 2.1,
+      "hardmin": 1.05,
+      "softmin": 1.05,
+      "softmax": 5.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "fpl",
+      "unit": "",
+      "default": 0.0001,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 1e-06,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "optxagnf",
+    "optxagn"
+  ],
+  "title": "Optxagnf, optxagn:  Colour temperature corrected disc and energetically coupled Comptonisation model for AGN."
+}

@@ -1,0 +1,110 @@
+{
+  "name": "hrefl",
+  "type": "mul",
+  "func": "xshrfl",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 8,
+  "params": [
+    {
+      "name": "thetamin",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "thetamax",
+      "unit": "",
+      "default": 90.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "thetaobs",
+      "unit": "",
+      "default": 60.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Feabun",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 200.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "FeKedge",
+      "unit": "keV",
+      "default": 7.11,
+      "hardmin": 7.0,
+      "softmin": 7.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Escfrac",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 500.0,
+      "hardmax": 1000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "covfac",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 500.0,
+      "hardmax": 1000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "hrefl"
+  ],
+  "title": "hrefl: reflection model"
+}

@@ -1,0 +1,75 @@
+{
+  "name": "meka",
+  "type": "add",
+  "func": "C_meka",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "kT",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.001,
+      "softmin": 0.001,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "nH",
+      "unit": "cm-3",
+      "default": 1.0,
+      "hardmin": 1e-06,
+      "softmin": 1e-05,
+      "softmax": 1e+19,
+      "hardmax": 1e+20,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Abundanc",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000.0,
+      "hardmax": 1000.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "meka",
+    "vmeka"
+  ],
+  "title": "meka, vmeka: emission, hot diffuse gas\n  (Mewe-Gronenschild)"
+}

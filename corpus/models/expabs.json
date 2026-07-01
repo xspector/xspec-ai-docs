@@ -1,0 +1,26 @@
+{
+  "name": "expabs",
+  "type": "mul",
+  "func": "xsabsc",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "LowECut",
+      "unit": "keV",
+      "default": 2.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 200.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "expabs"
+  ],
+  "title": "expabs:  exponential roll-off at low E"
+}

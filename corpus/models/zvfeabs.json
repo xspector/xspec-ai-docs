@@ -1,0 +1,74 @@
+{
+  "name": "zvfeabs",
+  "type": "mul",
+  "func": "xszvfe",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 5,
+  "params": [
+    {
+      "name": "nH",
+      "unit": "10^22",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "metals",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "FEabun",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "FEKedge",
+      "unit": "keV",
+      "default": 7.11,
+      "hardmin": 7.0,
+      "softmin": 7.0,
+      "softmax": 9.5,
+      "hardmax": 9.5,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "zvfeabs"
+  ],
+  "title": "zvfeabs: photoelectric absorption with free Fe edge energy"
+}

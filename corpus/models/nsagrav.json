@@ -1,0 +1,62 @@
+{
+  "name": "nsagrav",
+  "type": "add",
+  "func": "nsagrav",
+  "elo": ".05",
+  "ehi": "10.",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "LogT_eff",
+      "unit": "K",
+      "default": 6.0,
+      "hardmin": 5.5,
+      "softmin": 5.5,
+      "softmax": 6.5,
+      "hardmax": 6.5,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "NSmass",
+      "unit": "Msun",
+      "default": 1.4,
+      "hardmin": 0.3,
+      "softmin": 0.3,
+      "softmax": 2.5,
+      "hardmax": 2.5,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "NSrad",
+      "unit": "km",
+      "default": 10.0,
+      "hardmin": 6.0,
+      "softmin": 6.0,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "nsagrav"
+  ],
+  "title": "nsagrav:  NS H atmosphere model for different g"
+}

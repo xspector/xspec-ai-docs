@@ -1,0 +1,63 @@
+{
+  "name": "zvgabs",
+  "type": "mul",
+  "func": "C_zvgaussianAbsorptionLine",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "LineE",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Sigma",
+      "unit": "km/s",
+      "default": 100.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 300000.0,
+      "hardmax": 300000.0,
+      "delta": 1.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Strength",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "vgabs",
+    "zvgabs"
+  ],
+  "title": "vgabs, zvgabs: gaussian absorption line with sigma in km/s"
+}

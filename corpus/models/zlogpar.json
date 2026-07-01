@@ -1,0 +1,75 @@
+{
+  "name": "zlogpar",
+  "type": "add",
+  "func": "C_zLogpar",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "alpha",
+      "unit": "",
+      "default": 1.5,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 4.0,
+      "hardmax": 4.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "beta",
+      "unit": "",
+      "default": 0.2,
+      "hardmin": -4.0,
+      "softmin": -4.0,
+      "softmax": 4.0,
+      "hardmax": 4.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "pivotE",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "scale"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "logpar",
+    "zlogpar"
+  ],
+  "title": "logpar, zlogpar:  log-parabolic blazar model"
+}

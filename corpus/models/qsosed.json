@@ -1,0 +1,99 @@
+{
+  "name": "qsosed",
+  "type": "add",
+  "func": "qsosed",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 6,
+  "params": [
+    {
+      "name": "mass",
+      "unit": "solar",
+      "default": 10000000.0,
+      "hardmin": 100000.0,
+      "softmin": 100000.0,
+      "softmax": 10000000000.0,
+      "hardmax": 10000000000.0,
+      "delta": -1000.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "dist",
+      "unit": "Mpc",
+      "default": 100.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 1000000000.0,
+      "hardmax": 1000000000.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "logmdot",
+      "unit": "Ledd",
+      "default": -1.0,
+      "hardmin": -1.65,
+      "softmin": -1.65,
+      "softmax": 0.39,
+      "hardmax": 0.39,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "astar",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -1.0,
+      "softmin": -1.0,
+      "softmax": 0.998,
+      "hardmax": 0.998,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "cosi",
+      "unit": "",
+      "default": 0.5,
+      "hardmin": 0.05,
+      "softmin": 0.05,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 5.0,
+      "hardmax": 5.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "agnsed",
+    "qsosed"
+  ],
+  "title": "agnsed, qsosed: AGN SED model"
+}

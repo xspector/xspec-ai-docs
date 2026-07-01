@@ -1,0 +1,62 @@
+{
+  "name": "zxipcf",
+  "type": "mul",
+  "func": "C_zxipcf",
+  "elo": "0.01",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "Nh",
+      "unit": "10^22",
+      "default": 10.0,
+      "hardmin": 0.05,
+      "softmin": 0.05,
+      "softmax": 500.0,
+      "hardmax": 500.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "log_xi",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": -3.0,
+      "softmin": -3.0,
+      "softmax": 6.0,
+      "hardmax": 6.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "CvrFract",
+      "unit": "",
+      "default": 0.5,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "zxipcf"
+  ],
+  "title": "zxipcf: partial covering absorption by partially ionized material"
+}

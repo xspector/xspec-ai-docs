@@ -1,0 +1,111 @@
+{
+  "name": "bsnapec",
+  "type": "add",
+  "func": "C_bsnapec",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 7,
+  "params": [
+    {
+      "name": "kT",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.008,
+      "softmin": 0.008,
+      "softmax": 64.0,
+      "hardmax": 64.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "N_SNe",
+      "unit": "10^9",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+20,
+      "hardmax": 1e+20,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "R",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+20,
+      "hardmax": 1e+20,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "SNIModelIndex",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 125.0,
+      "hardmax": 125.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "SNIIModelIndex",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 125.0,
+      "hardmax": 125.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Velocity",
+      "unit": "km/s",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10000.0,
+      "hardmax": 10000.0,
+      "delta": -10.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "snapec",
+    "bsnapec"
+  ],
+  "title": "snapec, bsnapec:  galaxy cluster spectrum using SN yields"
+}

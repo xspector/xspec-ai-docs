@@ -1,0 +1,38 @@
+{
+  "name": "zredden",
+  "type": "mul",
+  "func": "xszcrd",
+  "elo": "3.72e-4",
+  "ehi": "9.92e-3",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "E_BmV",
+      "unit": "",
+      "default": 0.05,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "zredden"
+  ],
+  "title": "zredden: redshifted version of redden"
+}

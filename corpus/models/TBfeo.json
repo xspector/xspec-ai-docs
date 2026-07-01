@@ -1,0 +1,69 @@
+{
+  "name": "TBfeo",
+  "type": "mul",
+  "func": "C_tbfeo",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "nH",
+      "unit": "10^22",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "O",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -1e+38,
+      "softmin": 0.0,
+      "softmax": 5.0,
+      "hardmax": 1e+38,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Fe",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -1e+38,
+      "softmin": 0.0,
+      "softmax": 5.0,
+      "hardmax": 1e+38,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -1.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "tbabs",
+    "ztbabs",
+    "tbfeo",
+    "tbgas",
+    "tbgrain",
+    "tbpcf",
+    "tbvarabs",
+    "tbrel"
+  ],
+  "title": "tbabs, ztbabs, tbfeo, tbgas, tbgrain, tbpcf, tbvarabs, tbrel: ISM grain absorption"
+}

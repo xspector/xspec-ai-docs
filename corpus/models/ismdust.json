@@ -1,0 +1,50 @@
+{
+  "name": "ismdust",
+  "type": "mul",
+  "func": "F_ismdust",
+  "elo": "0.01",
+  "ehi": "1.e6",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "msil",
+      "unit": "10^-4",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10000.0,
+      "hardmax": 100000.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "mgra",
+      "unit": "10^-4",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10000.0,
+      "hardmax": 100000.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -1.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "ismdust"
+  ],
+  "title": "ismdust:  Extinction due to a power-law distribution of\n  dust grains"
+}

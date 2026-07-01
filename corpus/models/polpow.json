@@ -1,0 +1,62 @@
+{
+  "name": "polpow",
+  "type": "mul",
+  "func": "C_polpow",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "Anorm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Aindex",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -5.0,
+      "softmin": -5.0,
+      "softmax": 5.0,
+      "hardmax": 5.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "psinorm",
+      "unit": "deg",
+      "default": 45.0,
+      "hardmin": -90.0,
+      "softmin": -90.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "psiindex",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -5.0,
+      "softmin": -5.0,
+      "softmax": 5.0,
+      "hardmax": 5.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "polpow"
+  ],
+  "title": "polpow: Power-law dependent polarization"
+}

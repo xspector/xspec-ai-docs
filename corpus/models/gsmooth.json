@@ -1,0 +1,38 @@
+{
+  "name": "gsmooth",
+  "type": "con",
+  "func": "C_gsmooth",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "Sig_6keV",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 20.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Index",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -1.0,
+      "softmin": -1.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "gsmooth"
+  ],
+  "title": "gsmooth: gaussian smoothing"
+}

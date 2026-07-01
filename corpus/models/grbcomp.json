@@ -1,0 +1,134 @@
+{
+  "name": "grbcomp",
+  "type": "add",
+  "func": "c_xsgrbcomp",
+  "elo": "1.e-20",
+  "ehi": "1.e20",
+  "npars_declared": 9,
+  "params": [
+    {
+      "name": "kTs",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "gamma",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "kTe",
+      "unit": "keV",
+      "default": 100.0,
+      "hardmin": 0.2,
+      "softmin": 0.2,
+      "softmax": 2000.0,
+      "hardmax": 2000.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "tau",
+      "unit": "",
+      "default": 5.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 200.0,
+      "hardmax": 200.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "beta",
+      "unit": "",
+      "default": 0.2,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "fbflag",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "log_A",
+      "unit": "",
+      "default": 5.0,
+      "hardmin": -8.0,
+      "softmin": -8.0,
+      "softmax": 8.0,
+      "hardmax": 8.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "z",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "a_boost",
+      "unit": "",
+      "default": 5.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 30.0,
+      "hardmax": 30.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "grbcomp"
+  ],
+  "title": "grbcomp: Two-phase Comptonization model of soft thermal seed photons for GRB prompt emission"
+}

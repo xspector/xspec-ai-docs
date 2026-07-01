@@ -1,0 +1,41 @@
+{
+  "name": "zphabs",
+  "type": "mul",
+  "func": "xszphb",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "nH",
+      "unit": "10^22",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "phabs",
+    "vphabs",
+    "zphabs",
+    "zvphabs"
+  ],
+  "title": "phabs, vphabs, zphabs, zvphabs:  photoelectric absorption"
+}

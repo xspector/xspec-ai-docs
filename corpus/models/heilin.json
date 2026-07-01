@@ -1,0 +1,50 @@
+{
+  "name": "heilin",
+  "type": "mul",
+  "func": "xsphei",
+  "elo": "0.01",
+  "ehi": "1.e20",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "nHeI",
+      "unit": "10^22",
+      "default": 1e-05,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 1e-07,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "b",
+      "unit": "km/s",
+      "default": 10.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 1.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "z",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.001,
+      "softmin": -0.001,
+      "softmax": 100000.0,
+      "hardmax": 100000.0,
+      "delta": 1e-06,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "heilin"
+  ],
+  "title": "heilin: Voigt absorption profiles for He I series"
+}

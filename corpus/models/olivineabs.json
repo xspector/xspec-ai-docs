@@ -1,0 +1,38 @@
+{
+  "name": "olivineabs",
+  "type": "mul",
+  "func": "F_olivineabs",
+  "elo": "0.01",
+  "ehi": "1.e6",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "moliv",
+      "unit": "10^-4",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10000.0,
+      "hardmax": 100000.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -1.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "olivineabs"
+  ],
+  "title": "olivineabs:  Absorption due to olivine."
+}

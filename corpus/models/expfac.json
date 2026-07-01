@@ -1,0 +1,50 @@
+{
+  "name": "expfac",
+  "type": "mul",
+  "func": "xsexp",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "Ampl",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Factor",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "StartE",
+      "unit": "keV",
+      "default": 0.5,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "expfac"
+  ],
+  "title": "expfac: exponential modification"
+}

@@ -1,0 +1,134 @@
+{
+  "name": "slimbh",
+  "type": "add",
+  "func": "c_slimbbmodel",
+  "elo": "1.0e3",
+  "ehi": "1.0e5",
+  "npars_declared": 9,
+  "params": [
+    {
+      "name": "M",
+      "unit": "Msun",
+      "default": 10.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000.0,
+      "hardmax": 1000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "a",
+      "unit": "GM/c",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 0.999,
+      "hardmax": 0.999,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "lumin",
+      "unit": "L_Edd",
+      "default": 0.5,
+      "hardmin": 0.05,
+      "softmin": 0.05,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "alpha",
+      "unit": "",
+      "default": 0.1,
+      "hardmin": 0.005,
+      "softmin": 0.005,
+      "softmax": 0.1,
+      "hardmax": 0.1,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "inc",
+      "unit": "deg",
+      "default": 60.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 85.0,
+      "hardmax": 85.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "D",
+      "unit": "kpc",
+      "default": 10.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10000.0,
+      "hardmax": 10000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "f_hard",
+      "unit": "",
+      "default": -1.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "lflag",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    },
+    {
+      "name": "vflag",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "slimbh"
+  ],
+  "title": "slimbh:  Stationary slim accretion disk"
+}

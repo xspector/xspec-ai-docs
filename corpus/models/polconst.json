@@ -1,0 +1,38 @@
+{
+  "name": "polconst",
+  "type": "mul",
+  "func": "C_polconst",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "A",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "psi",
+      "unit": "deg",
+      "default": 45.0,
+      "hardmin": -90.0,
+      "softmin": -90.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "polconst"
+  ],
+  "title": "polconst: Constant polarization"
+}

@@ -1,0 +1,93 @@
+{
+  "name": "TBgrain",
+  "type": "mul",
+  "func": "C_tbgrain",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 6,
+  "params": [
+    {
+      "name": "nH",
+      "unit": "10^22",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "h2",
+      "unit": "",
+      "default": 0.2,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "rho",
+      "unit": "g/cm^3",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 5.0,
+      "hardmax": 5.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "amin",
+      "unit": "mum",
+      "default": 0.025,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 0.25,
+      "hardmax": 0.25,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "amax",
+      "unit": "mum",
+      "default": 0.25,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "PL",
+      "unit": "",
+      "default": 3.5,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 5.0,
+      "hardmax": 5.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "tbabs",
+    "ztbabs",
+    "tbfeo",
+    "tbgas",
+    "tbgrain",
+    "tbpcf",
+    "tbvarabs",
+    "tbrel"
+  ],
+  "title": "tbabs, ztbabs, tbfeo, tbgas, tbgrain, tbpcf, tbvarabs, tbrel: ISM grain absorption"
+}

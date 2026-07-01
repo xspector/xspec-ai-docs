@@ -1,0 +1,98 @@
+{
+  "name": "comptb",
+  "type": "add",
+  "func": "c_xscomptb",
+  "elo": "1.e-20",
+  "ehi": "1.e20",
+  "npars_declared": 6,
+  "params": [
+    {
+      "name": "kTs",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.1,
+      "softmin": 0.1,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "gamma",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "alpha",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "delta",
+      "unit": "",
+      "default": 20.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 200.0,
+      "hardmax": 200.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "kTe",
+      "unit": "keV",
+      "default": 5.0,
+      "hardmin": 0.2,
+      "softmin": 0.2,
+      "softmax": 2000.0,
+      "hardmax": 2000.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "log_A",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -8.0,
+      "softmin": -8.0,
+      "softmax": 8.0,
+      "hardmax": 8.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "comptb"
+  ],
+  "title": "comptb: Thermal and bulk Comptonization of a seed blackbody-like spectrum"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "ssa",
+  "type": "add",
+  "func": "ssa",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "te",
+      "unit": "",
+      "default": 0.1,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 0.5,
+      "hardmax": 0.5,
+      "delta": 1e-05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "y",
+      "unit": "",
+      "default": 0.7,
+      "hardmin": 0.0001,
+      "softmin": 0.0001,
+      "softmax": 1000.0,
+      "hardmax": 1000.0,
+      "delta": 1e-05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "ssa"
+  ],
+  "title": "ssa: Strangeon star atmosphere"
+}

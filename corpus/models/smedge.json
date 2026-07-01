@@ -1,0 +1,62 @@
+{
+  "name": "smedge",
+  "type": "mul",
+  "func": "xssmdg",
+  "elo": "1.e-20",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "edgeE",
+      "unit": "keV",
+      "default": 7.0,
+      "hardmin": 0.1,
+      "softmin": 0.1,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "MaxTau",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 5.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "index",
+      "unit": "",
+      "default": -2.67,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "width",
+      "unit": "",
+      "default": 10.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "smedge"
+  ],
+  "title": "smedge: smeared edge"
+}

@@ -1,0 +1,1487 @@
+{
+  "ChainManager": {
+    "class": "ChainManager",
+    "module": "chain.py",
+    "singleton": "AllChains",
+    "summary": "**Monte Carlo Markov Chain container.**",
+    "attributes": [
+      {
+        "name": "defBurn",
+        "type": "",
+        "access": "get/set",
+        "doc": "Default burn length for new Chain objects (orig = 0)."
+      },
+      {
+        "name": "defFileType",
+        "type": "",
+        "access": "get/set",
+        "doc": "Default output file format (orig = 'fits')."
+      },
+      {
+        "name": "defLength",
+        "type": "",
+        "access": "get/set",
+        "doc": "Default chain length (orig = 100)."
+      },
+      {
+        "name": "defProposal",
+        "type": "",
+        "access": "get/set",
+        "doc": "Default chain proposal (orig = 'gaussian fit')."
+      },
+      {
+        "name": "defRand",
+        "type": "",
+        "access": "get/set",
+        "doc": "Default randomization setting (orig = False)."
+      },
+      {
+        "name": "defRescale",
+        "type": "",
+        "access": "get/set",
+        "doc": "Default covariance rescale fraction (orig = None)."
+      },
+      {
+        "name": "defTemperature",
+        "type": "",
+        "access": "get/set",
+        "doc": "Default chain temperature (orig = 1.0)."
+      },
+      {
+        "name": "defAlgorithm",
+        "type": "",
+        "access": "get/set",
+        "doc": "Default chain algorithm (orig = 'gw')."
+      },
+      {
+        "name": "defWalkers",
+        "type": "",
+        "access": "get/set",
+        "doc": "Default walkers parameter for 'gw' chains (orig = 10)."
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "()",
+        "doc": ""
+      },
+      {
+        "name": "__call__",
+        "signature": "(index)",
+        "doc": "Get a Chain object from the *AllChains* container."
+      },
+      {
+        "name": "best",
+        "signature": "()",
+        "doc": "Return the best-fit parameters and statistic in the loaded chains."
+      },
+      {
+        "name": "clear",
+        "signature": "()",
+        "doc": "Unload all chains from container"
+      },
+      {
+        "name": "dic",
+        "signature": "()",
+        "doc": "Calculate the deviance information criterion from all chains"
+      },
+      {
+        "name": "diagnostics",
+        "signature": "()",
+        "doc": "Return the Vehtari et al. (2021) MCMC diagnostic suite for all"
+      },
+      {
+        "name": "diag",
+        "signature": "()",
+        "doc": "Run `chain diag`: print the diagnostic verdict + per-parameter table."
+      },
+      {
+        "name": "margin",
+        "signature": "(argString)",
+        "doc": "Calculate a multi-dimensional probability distribution."
+      },
+      {
+        "name": "marginResults",
+        "signature": "(arg)",
+        "doc": "Retrieve values from the most recent margin calculation."
+      },
+      {
+        "name": "show",
+        "signature": "()",
+        "doc": "Display information for current attributes and loaded chains."
+      },
+      {
+        "name": "stat",
+        "signature": "(parIdx)",
+        "doc": "Display statistical information on a particular chain parameter."
+      }
+    ]
+  },
+  "Chain": {
+    "class": "Chain",
+    "module": "chain.py",
+    "singleton": null,
+    "summary": "**Monte Carlo Markov Chain class.**",
+    "attributes": [
+      {
+        "name": "burn",
+        "type": "",
+        "access": "get/set",
+        "doc": "The number of steps that will be thrown"
+      },
+      {
+        "name": "fileName",
+        "type": "",
+        "access": "get",
+        "doc": "Chain output file name."
+      },
+      {
+        "name": "fileType",
+        "type": "str",
+        "access": "get",
+        "doc": "Output format of the chain file [string]."
+      },
+      {
+        "name": "runLength",
+        "type": "int",
+        "access": "get/set",
+        "doc": "The length of chain to be added during the next run [int]."
+      },
+      {
+        "name": "totalLength",
+        "type": "int",
+        "access": "get",
+        "doc": "The cumulative length of the chain [int]."
+      },
+      {
+        "name": "proposal",
+        "type": "",
+        "access": "get/set",
+        "doc": "The proposal distribution and source of covariance"
+      },
+      {
+        "name": "rand",
+        "type": "",
+        "access": "get/set",
+        "doc": "Determines whether chain start point will be randomized"
+      },
+      {
+        "name": "rescale",
+        "type": "",
+        "access": "get/set",
+        "doc": "Determines whether a rescale fraction will be"
+      },
+      {
+        "name": "temperature",
+        "type": "",
+        "access": "get/set",
+        "doc": "The temperature parameter used in the Metropolis-Hastings"
+      },
+      {
+        "name": "algorithm",
+        "type": "",
+        "access": "get/set",
+        "doc": "The current chain algorithm.  Valid settings are 'gw'"
+      },
+      {
+        "name": "walkers",
+        "type": "int",
+        "access": "get/set",
+        "doc": "The number of walkers to be used for 'gw' chains [int]."
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(fileName, fileType=None, burn=None, runLength=None, proposal=None, rand=None, rescale=None, temperature=None, algorithm=None, walkers=None)",
+        "doc": "Construct a chain object, perform a run, and load into AllChains"
+      },
+      {
+        "name": "run",
+        "signature": "(append=True)",
+        "doc": "Perform a new chain run, either appending to or overwriting an"
+      },
+      {
+        "name": "show",
+        "signature": "()",
+        "doc": "Display current settings of Chain object's attributes."
+      }
+    ]
+  },
+  "FakeitSettings": {
+    "class": "FakeitSettings",
+    "module": "data.py",
+    "singleton": null,
+    "summary": "**Fakeit command settings class.**",
+    "attributes": [],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(response='', arf='', background='', exposure='', correction='', backExposure='', fileName='')",
+        "doc": "Create a FakeitSettings object."
+      }
+    ]
+  },
+  "DataManager": {
+    "class": "DataManager",
+    "module": "data.py",
+    "singleton": "AllData",
+    "summary": "**Spectral data container.**",
+    "attributes": [
+      {
+        "name": "nGroups",
+        "type": "int",
+        "access": "get",
+        "doc": "The number of data groups [int]."
+      },
+      {
+        "name": "nSpectra",
+        "type": "int",
+        "access": "get",
+        "doc": "The number of loaded spectra [int]."
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "()",
+        "doc": ""
+      },
+      {
+        "name": "__call__",
+        "signature": "(expr)",
+        "doc": "DataManager get or set spectra."
+      },
+      {
+        "name": "clear",
+        "signature": "()",
+        "doc": "Remove all spectra from the data container."
+      },
+      {
+        "name": "diagrsp",
+        "signature": "()",
+        "doc": "Diagonalize the current response matrix for ideal response."
+      },
+      {
+        "name": "dummyrsp",
+        "signature": "(lowE=None, highE=None, nBins=None, scaleType=None, chanOffset=None, chanWidth=None)",
+        "doc": "Create a dummy response and apply it to all spectra."
+      },
+      {
+        "name": "fakeit",
+        "signature": "(nSpectra=1, settings=None, applyStats=True, filePrefix='', noWrite=False)",
+        "doc": "Produce spectra with simulated data using XSPEC's fakeit command."
+      },
+      {
+        "name": "group",
+        "signature": "(groupArgs)",
+        "doc": "Apply a `group` command to all loaded spectra."
+      },
+      {
+        "name": "ignore",
+        "signature": "(ignoreRange)",
+        "doc": "Apply an ingore channels range to multiple loaded spectra."
+      },
+      {
+        "name": "notice",
+        "signature": "(noticeRange)",
+        "doc": "Apply a notice channels range to multiple loaded spectra."
+      },
+      {
+        "name": "removeDummyrsp",
+        "signature": "()",
+        "doc": "Remove all dummy responses, restore original responses (if any)."
+      },
+      {
+        "name": "show",
+        "signature": "()",
+        "doc": "Display information for all loaded spectra."
+      }
+    ]
+  },
+  "FitManager": {
+    "class": "FitManager",
+    "module": "fit.py",
+    "singleton": "Fit",
+    "summary": "**Xspec fitting class.**",
+    "attributes": [
+      {
+        "name": "bayes",
+        "type": "str",
+        "access": "get/set",
+        "doc": "Turn Bayesian inference on or off [string]."
+      },
+      {
+        "name": "bayesPriors",
+        "type": "str",
+        "access": "get",
+        "doc": "The current Bayesian prior settings, as a listing [string]"
+      },
+      {
+        "name": "covariance",
+        "type": "",
+        "access": "get",
+        "doc": "The covariance matrix from the most recent fit [tuple"
+      },
+      {
+        "name": "criticalDelta",
+        "type": "float",
+        "access": "get/set",
+        "doc": "Critical delta for fit statistic convergence [float]."
+      },
+      {
+        "name": "delta",
+        "type": "float",
+        "access": "get/set",
+        "doc": "Set fit delta values to be proportional to the parameter value [float]."
+      },
+      {
+        "name": "dof",
+        "type": "int",
+        "access": "get",
+        "doc": "The degrees of freedom for the fit [int] (GET only)."
+      },
+      {
+        "name": "method",
+        "type": "str",
+        "access": "get/set",
+        "doc": "The fitting algorithm to use [string]."
+      },
+      {
+        "name": "nIterations",
+        "type": "int",
+        "access": "get/set",
+        "doc": "The maximum number of fit iterations prior to query [int]."
+      },
+      {
+        "name": "nullhyp",
+        "type": "",
+        "access": "get",
+        "doc": "The null hypothesis probability for the chi-sq fit (GET only)."
+      },
+      {
+        "name": "nVarPars",
+        "type": "int",
+        "access": "get",
+        "doc": "The number of variable parameters for the fit [int] (GET only)."
+      },
+      {
+        "name": "previousGoodness",
+        "type": "float",
+        "access": "get",
+        "doc": "The goodness value from the immediately previous call [float] (GET only)."
+      },
+      {
+        "name": "previousGoodnessSims",
+        "type": "list",
+        "access": "get",
+        "doc": "The array of simulation values from the immediately previous goodness calculation [list] (GET only)."
+      },
+      {
+        "name": "query",
+        "type": "str",
+        "access": "get/set",
+        "doc": "The fit query setting [string]."
+      },
+      {
+        "name": "useChainRule",
+        "type": "str",
+        "access": "get/set",
+        "doc": "The fit useChainRule setting [string]."
+      },
+      {
+        "name": "statistic",
+        "type": "float",
+        "access": "get",
+        "doc": "Fit statistic value from the most recent fit [float] (GET only)."
+      },
+      {
+        "name": "statMethod",
+        "type": "str",
+        "access": "get/set",
+        "doc": "The type of fit statistic in use [string]."
+      },
+      {
+        "name": "statTest",
+        "type": "str",
+        "access": "get/set",
+        "doc": "The type of test statistic in use [string]."
+      },
+      {
+        "name": "testStatistic",
+        "type": "float",
+        "access": "get",
+        "doc": "Test statistic value from the most recent fit [float] (GET only)."
+      },
+      {
+        "name": "globalBasins",
+        "type": "",
+        "access": "get",
+        "doc": "Competitive basins from the most recent Fit.globalFit() or"
+      },
+      {
+        "name": "weight",
+        "type": "str",
+        "access": "get/set",
+        "doc": "Change the weighting function used in the calculation of chi-sq [string]."
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "()",
+        "doc": ""
+      },
+      {
+        "name": "error",
+        "signature": "(argString, respPar=False)",
+        "doc": "Determine confidence intervals of a fit."
+      },
+      {
+        "name": "ftest",
+        "signature": "(chisq2, dof2, chisq1, dof1)",
+        "doc": "Calculate the F-statistic and its probability given new and old"
+      },
+      {
+        "name": "goodness",
+        "signature": "(nRealizations=100, sim=False, fit='fit')",
+        "doc": "Perform a Monte Carlo calculation of the goodness-of-fit."
+      },
+      {
+        "name": "improve",
+        "signature": "()",
+        "doc": "Try to escape the current minimum (warm-restart global search)."
+      },
+      {
+        "name": "globalFit",
+        "signature": "(maxGen=None, popSize=None)",
+        "doc": "Perform a global fit (cold-start Differential Evolution + polish)."
+      },
+      {
+        "name": "compare",
+        "signature": "(alternatives, method='lm', useGlobal=False)",
+        "doc": "Compare alternative models against the current model (model selection)."
+      },
+      {
+        "name": "perform",
+        "signature": "()",
+        "doc": "Perform a fit."
+      },
+      {
+        "name": "renorm",
+        "signature": "(setting=None)",
+        "doc": "Renormalize the model to minimize statistic with current parameters."
+      },
+      {
+        "name": "show",
+        "signature": "()",
+        "doc": "Show fit information."
+      },
+      {
+        "name": "steppar",
+        "signature": "(argString)",
+        "doc": "Perform a steppar run."
+      },
+      {
+        "name": "stepparResults",
+        "signature": "(arg)",
+        "doc": "Retrieve values from the most recent steppar run."
+      }
+    ]
+  },
+  "HMCResult": {
+    "class": "HMCResult",
+    "module": "inference.py",
+    "singleton": null,
+    "summary": "Phase-(a) HMC/NUTS sampler output.",
+    "attributes": [],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(file_name)",
+        "doc": ""
+      }
+    ]
+  },
+  "ChainResult": {
+    "class": "ChainResult",
+    "module": "inference.py",
+    "singleton": null,
+    "summary": "Output of the existing `chain` command (Metropolis-Hastings or",
+    "attributes": [],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(file_name)",
+        "doc": ""
+      }
+    ]
+  },
+  "Component": {
+    "class": "Component",
+    "module": "model.py",
+    "singleton": null,
+    "summary": "**Model component class**.",
+    "attributes": [],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(compName, parNames)",
+        "doc": "Component constructor."
+      }
+    ]
+  },
+  "Model": {
+    "class": "Model",
+    "module": "model.py",
+    "singleton": null,
+    "summary": "**Xspec model class.**",
+    "attributes": [
+      {
+        "name": "flux",
+        "type": "",
+        "access": "get",
+        "doc": ""
+      },
+      {
+        "name": "lumin",
+        "type": "",
+        "access": "get",
+        "doc": ""
+      },
+      {
+        "name": "startParIndex",
+        "type": "",
+        "access": "get",
+        "doc": ""
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(exprString, modName='', sourceNum=1, setPars=None)",
+        "doc": "Model constructor."
+      },
+      {
+        "name": "__call__",
+        "signature": "(parIdx)",
+        "doc": "Get a Parameter object from the Model."
+      },
+      {
+        "name": "energies",
+        "signature": "(spectrumIndex)",
+        "doc": "Get the Model object's energies array for a given spectrum."
+      },
+      {
+        "name": "folded",
+        "signature": "(spectrumIndex)",
+        "doc": "Get the Model object's folded flux array for a given spectrum."
+      },
+      {
+        "name": "setPars",
+        "signature": "(*parVals)",
+        "doc": "Change the value of multiple parameters in a single function call."
+      },
+      {
+        "name": "show",
+        "signature": "()",
+        "doc": "Display information for a single Model object."
+      },
+      {
+        "name": "showList",
+        "signature": "()",
+        "doc": "Show the list of all available XSPEC model components."
+      },
+      {
+        "name": "untie",
+        "signature": "()",
+        "doc": "Remove links for all parameters in Model object"
+      },
+      {
+        "name": "values",
+        "signature": "(spectrumIndex)",
+        "doc": "Get the Model object's values array for a given spectrum."
+      }
+    ]
+  },
+  "ModelManager": {
+    "class": "ModelManager",
+    "module": "model.py",
+    "singleton": "AllModels",
+    "summary": "**Models container.**",
+    "attributes": [
+      {
+        "name": "sources",
+        "type": "",
+        "access": "get",
+        "doc": "A dictionary containing the currently active <source number>:<model name> assignments."
+      },
+      {
+        "name": "systematic",
+        "type": "",
+        "access": "get/set",
+        "doc": "The fractional model systematic error."
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "()",
+        "doc": ""
+      },
+      {
+        "name": "__call__",
+        "signature": "(groupNum, modName='')",
+        "doc": "Get Model objects from the AllModels container."
+      },
+      {
+        "name": "addPyMod",
+        "signature": "(func, parInfo, compType, calcsErrors=False, spectrumDependent=False)",
+        "doc": "Add a user-defined Python model function to XSPEC's models library."
+      },
+      {
+        "name": "calcFlux",
+        "signature": "(cmdStr)",
+        "doc": "Calculate the model flux for a given energy range."
+      },
+      {
+        "name": "calcLumin",
+        "signature": "(cmdStr)",
+        "doc": "Calculate the model luminosity for a given energy range and redshift."
+      },
+      {
+        "name": "clear",
+        "signature": "()",
+        "doc": "Remove all models."
+      },
+      {
+        "name": "eqwidth",
+        "signature": "(component, rangeFrac=None, err=False, number=None, level=None)",
+        "doc": "Calculate the equivalent width of a model component."
+      },
+      {
+        "name": "setEnergies",
+        "signature": "(arg1, arg2=None)",
+        "doc": "Specify new energy binning for model fluxes."
+      },
+      {
+        "name": "identify",
+        "signature": "(energy=None, delta=None, redshift=None, lineList=None, tplasma=None, emiss=None)",
+        "doc": "Identify spectral lines."
+      },
+      {
+        "name": "initpackage",
+        "signature": "(packageName, modDescrFile, dirPath=None, udmget=False)",
+        "doc": "Initialize a package of local models."
+      },
+      {
+        "name": "lmod",
+        "signature": "(packageName, dirPath=None)",
+        "doc": "Load a local models library."
+      },
+      {
+        "name": "mdefine",
+        "signature": "(commandStr=None)",
+        "doc": "Define a simple model using an arithmetic expression."
+      },
+      {
+        "name": "setPars",
+        "signature": "(*args)",
+        "doc": "Change the value of multiple parameters from multiple"
+      },
+      {
+        "name": "show",
+        "signature": "(parIDs=None)",
+        "doc": "Show all or a subset of Xspec model parameters."
+      },
+      {
+        "name": "simpars",
+        "signature": "()",
+        "doc": "Create a list of simulated parameter values."
+      },
+      {
+        "name": "systematicSingleModel",
+        "signature": "(modelName)",
+        "doc": "Get the systematic error setting for a specific model."
+      },
+      {
+        "name": "setSystematicSingleModel",
+        "signature": "(modelName, value)",
+        "doc": "Set a fractional systematic error for a specific model."
+      },
+      {
+        "name": "tclLoad",
+        "signature": "(fullLibPath)",
+        "doc": "Load a local model library by calling Tcl's 'load' command."
+      },
+      {
+        "name": "setActive",
+        "signature": "(modl_nm)",
+        "doc": "Sets the model specified with modl_nm to active."
+      },
+      {
+        "name": "setInactive",
+        "signature": "(modl_nm)",
+        "doc": "Sets the model specified by modl_nm to inactive."
+      }
+    ]
+  },
+  "NestedResult": {
+    "class": "NestedResult",
+    "module": "nest.py",
+    "singleton": null,
+    "summary": "In-memory view of a `nest run` output FITS file.",
+    "attributes": [],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(file_name)",
+        "doc": ""
+      }
+    ]
+  },
+  "Parameter": {
+    "class": "Parameter",
+    "module": "parameter.py",
+    "singleton": null,
+    "summary": "**Model or response parameter class.**",
+    "attributes": [
+      {
+        "name": "error",
+        "type": "tuple",
+        "access": "get",
+        "doc": "A tuple containing the results of the most recent fit *error*"
+      },
+      {
+        "name": "index",
+        "type": "",
+        "access": "get",
+        "doc": "Position of the parameter within the Model object."
+      },
+      {
+        "name": "name",
+        "type": "",
+        "access": "get/set",
+        "doc": "Name of Parameter (GET only)."
+      },
+      {
+        "name": "prior",
+        "type": "tuple",
+        "access": "get/set",
+        "doc": "A tuple containing the settings for the prior used when"
+      },
+      {
+        "name": "sigma",
+        "type": "",
+        "access": "get",
+        "doc": "The Parameter fit sigma (-1.0 when not applicable) (GET only)."
+      },
+      {
+        "name": "values",
+        "type": "list",
+        "access": "get/set",
+        "doc": "List of value floats [val,delta,min,bot,top,max]."
+      },
+      {
+        "name": "frozen",
+        "type": "bool",
+        "access": "get/set",
+        "doc": "Bool, if True then parameter is frozen."
+      },
+      {
+        "name": "unit",
+        "type": "",
+        "access": "get",
+        "doc": "An optional string for the parameter's units (GET only)."
+      },
+      {
+        "name": "link",
+        "type": "",
+        "access": "get/set",
+        "doc": "Parameter link expression string (empty if not linked)."
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(parName, parStrategy)",
+        "doc": "Parameter constructor."
+      },
+      {
+        "name": "untie",
+        "signature": "()",
+        "doc": "Remove parameter link (if any)"
+      }
+    ]
+  },
+  "PlotManager": {
+    "class": "PlotManager",
+    "module": "plot.py",
+    "singleton": "Plot",
+    "summary": "**Xspec plotting class.**",
+    "attributes": [
+      {
+        "name": "add",
+        "type": "",
+        "access": "get/set",
+        "doc": "Turn on/off the display of individual additive"
+      },
+      {
+        "name": "area",
+        "type": "",
+        "access": "get/set",
+        "doc": "Toggle displaying the data divided by the response"
+      },
+      {
+        "name": "background",
+        "type": "",
+        "access": "get/set",
+        "doc": "Toggle displaying the background spectrum (if any)"
+      },
+      {
+        "name": "commands",
+        "type": "",
+        "access": "get/set",
+        "doc": "Custom plot commands to be appended to Xspec-generated"
+      },
+      {
+        "name": "device",
+        "type": "str",
+        "access": "get/set",
+        "doc": "The plotting device name [string]."
+      },
+      {
+        "name": "perHz",
+        "type": "",
+        "access": "get/set",
+        "doc": "Toggle displaying Y-axis units per Hz when using"
+      },
+      {
+        "name": "redshift",
+        "type": "",
+        "access": "get/set",
+        "doc": "Apply a redshift to the X-axis energy or wavelength"
+      },
+      {
+        "name": "splashPage",
+        "type": "",
+        "access": "get/set",
+        "doc": "When set to False, the usual XSPEC version and build data"
+      },
+      {
+        "name": "xAxis",
+        "type": "str",
+        "access": "get/set",
+        "doc": "X-Axis Units [string]."
+      },
+      {
+        "name": "xLog",
+        "type": "",
+        "access": "get/set",
+        "doc": "Set the x-axis to logarithmic or linear for energy or"
+      },
+      {
+        "name": "yLog",
+        "type": "",
+        "access": "get/set",
+        "doc": "See xLog."
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(deviceStr)",
+        "doc": ""
+      },
+      {
+        "name": "__call__",
+        "signature": "(*panes)",
+        "doc": "Display the plot."
+      },
+      {
+        "name": "addCommand",
+        "signature": "(cmd)",
+        "doc": "Add a plot command [string] to the end of the plot commands list."
+      },
+      {
+        "name": "contourLevels",
+        "signature": "()",
+        "doc": "Return a list of the values of the drawn levels in a contour plot."
+      },
+      {
+        "name": "delCommand",
+        "signature": "(num)",
+        "doc": "Remove a plot command by (1-based) number [int]."
+      },
+      {
+        "name": "iplot",
+        "signature": "(*panes)",
+        "doc": "Display the plot and leave it in interactive plotting mode."
+      },
+      {
+        "name": "labels",
+        "signature": "(plotWindow=1)",
+        "doc": "Get the X, Y, and Title labels for the specified plot window."
+      },
+      {
+        "name": "noID",
+        "signature": "()",
+        "doc": "Turn off the plotting of line IDs."
+      },
+      {
+        "name": "setGroup",
+        "signature": "(groupStr)",
+        "doc": "Define a range of spectra to be in the same plot group."
+      },
+      {
+        "name": "setID",
+        "signature": "(temperature=None, emissivity=None, redshift=None)",
+        "doc": "Switch on plotting of line IDs."
+      },
+      {
+        "name": "setRebin",
+        "signature": "(minSig=None, maxBins=None, groupNum=None, errType=None)",
+        "doc": "Define characteristics used in rebinning the data (for plotting"
+      },
+      {
+        "name": "show",
+        "signature": "()",
+        "doc": "Display current plot settings"
+      },
+      {
+        "name": "x",
+        "signature": "(plotGroup=1, plotWindow=1)",
+        "doc": "Return a list of X-coordinate data values for a plot group and plot window"
+      },
+      {
+        "name": "xErr",
+        "signature": "(plotGroup=1, plotWindow=1)",
+        "doc": "Return a list of X-coordinate errors for a plot group and plot window"
+      },
+      {
+        "name": "y",
+        "signature": "(plotGroup=1, plotWindow=1)",
+        "doc": "Return a list of Y-coordinate data values for a plot group and plot window"
+      },
+      {
+        "name": "yErr",
+        "signature": "(plotGroup=1, plotWindow=1)",
+        "doc": "Return a list of Y-coordinate errors for a plot group and plot window"
+      },
+      {
+        "name": "z",
+        "signature": "()",
+        "doc": "Return a 2D list of the grid values for a 2D contour plot"
+      },
+      {
+        "name": "model",
+        "signature": "(plotGroup=1, plotWindow=1)",
+        "doc": "Return a list of Y-coordinate model values for a plot group and plot window"
+      },
+      {
+        "name": "backgroundVals",
+        "signature": "(plotGroup=1, plotWindow=1)",
+        "doc": "Return a list of background data values for a plot group and plot window"
+      },
+      {
+        "name": "addComp",
+        "signature": "(addCompNum=1, plotGroup=1, plotWindow=1)",
+        "doc": "Return a list of Y-coordinates for a particular add component of a model"
+      },
+      {
+        "name": "nAddComps",
+        "signature": "(plotGroup=1, plotWindow=1)",
+        "doc": "Return the number of add component plots for a given plot group."
+      }
+    ]
+  },
+  "Response": {
+    "class": "Response",
+    "module": "response.py",
+    "singleton": null,
+    "summary": "Detector response class.",
+    "attributes": [
+      {
+        "name": "arf",
+        "type": "",
+        "access": "get/set",
+        "doc": ""
+      },
+      {
+        "name": "chanEnergies",
+        "type": "",
+        "access": "get",
+        "doc": ""
+      },
+      {
+        "name": "energies",
+        "type": "",
+        "access": "get",
+        "doc": ""
+      },
+      {
+        "name": "rmf",
+        "type": "",
+        "access": "get",
+        "doc": ""
+      },
+      {
+        "name": "sourceNumber",
+        "type": "",
+        "access": "get",
+        "doc": ""
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(parent, respTuple)",
+        "doc": "Construct a Response object."
+      },
+      {
+        "name": "setPars",
+        "signature": "(*seqPars)",
+        "doc": "Set multiple response parameters with a single function call."
+      },
+      {
+        "name": "show",
+        "signature": "()",
+        "doc": "Display response information including (optional) response parameters."
+      }
+    ]
+  },
+  "RModel": {
+    "class": "RModel",
+    "module": "response.py",
+    "singleton": null,
+    "summary": "**Response Model class.**",
+    "attributes": [
+      {
+        "name": "isOn",
+        "type": "",
+        "access": "get",
+        "doc": "On/Off indicator for RModel object."
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(resp, parNames, rmodName)",
+        "doc": "RModel constructor."
+      },
+      {
+        "name": "off",
+        "signature": "()",
+        "doc": "Remove response parameters and turn the model OFF."
+      }
+    ]
+  },
+  "Background": {
+    "class": "Background",
+    "module": "spectrum.py",
+    "singleton": null,
+    "summary": "**Background spectral data class.**",
+    "attributes": [
+      {
+        "name": "areaScale",
+        "type": "",
+        "access": "get",
+        "doc": "The Background area scaling factor (GET only)."
+      },
+      {
+        "name": "backScale",
+        "type": "",
+        "access": "get",
+        "doc": "The Background back scaling factor (GET only)."
+      },
+      {
+        "name": "exposure",
+        "type": "float",
+        "access": "get",
+        "doc": "The exposure time keyword value [float] (GET only)."
+      },
+      {
+        "name": "fileName",
+        "type": "str",
+        "access": "get",
+        "doc": "The spectrum's file name [string] (GET only)."
+      },
+      {
+        "name": "isPoisson",
+        "type": "bool",
+        "access": "get",
+        "doc": "Boolean flag, True if spectrum has Poisson errors (GET only)."
+      },
+      {
+        "name": "values",
+        "type": "tuple",
+        "access": "get",
+        "doc": "Tuple of floats containing the background rates array in"
+      },
+      {
+        "name": "variance",
+        "type": "tuple",
+        "access": "get",
+        "doc": "Tuple of floats containing the variance of each"
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(backTuple, parent)",
+        "doc": "Construct a Background object."
+      }
+    ]
+  },
+  "Spectrum": {
+    "class": "Spectrum",
+    "module": "spectrum.py",
+    "singleton": null,
+    "summary": "**Spectral data class.**",
+    "attributes": [
+      {
+        "name": "areaScale",
+        "type": "",
+        "access": "get",
+        "doc": "The Spectrum area scaling factor."
+      },
+      {
+        "name": "background",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/Set the spectrum's background."
+      },
+      {
+        "name": "backScale",
+        "type": "",
+        "access": "get",
+        "doc": "The Spectrum background scaling factor."
+      },
+      {
+        "name": "cornorm",
+        "type": "float",
+        "access": "get/set",
+        "doc": "Get/Set the normalization of a spectrum's correction file. [float]"
+      },
+      {
+        "name": "correction",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/Set the correction file."
+      },
+      {
+        "name": "dataGroup",
+        "type": "int",
+        "access": "get",
+        "doc": "The data group to which the spectrum belongs [int]."
+      },
+      {
+        "name": "energies",
+        "type": "tuple",
+        "access": "get",
+        "doc": "Tuple of pairs of floats (also implemented as tuples)"
+      },
+      {
+        "name": "eqwidth",
+        "type": "tuple",
+        "access": "get",
+        "doc": "Tuple of 3 floats containing the results of the most recent"
+      },
+      {
+        "name": "exposure",
+        "type": "float",
+        "access": "get",
+        "doc": "The exposure time keyword value [float]."
+      },
+      {
+        "name": "fileName",
+        "type": "str",
+        "access": "get",
+        "doc": "The spectrum's file name [string]."
+      },
+      {
+        "name": "flux",
+        "type": "tuple",
+        "access": "get",
+        "doc": "A tuple containing the results of the most recent flux"
+      },
+      {
+        "name": "ignored",
+        "type": "list",
+        "access": "get",
+        "doc": "A list of the currently ignored (1-based) channel numbers."
+      },
+      {
+        "name": "index",
+        "type": "",
+        "access": "get",
+        "doc": "The spectrum's current index number within the AllData"
+      },
+      {
+        "name": "isPoisson",
+        "type": "bool",
+        "access": "get",
+        "doc": "Boolean flag, true if spectrum has Poisson errors."
+      },
+      {
+        "name": "lumin",
+        "type": "",
+        "access": "get",
+        "doc": "Similar to flux, the results of the most recent luminosity"
+      },
+      {
+        "name": "multiresponse",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/Set detector response ARRAY elements when using multiple"
+      },
+      {
+        "name": "noticed",
+        "type": "list",
+        "access": "get",
+        "doc": "A list of the currently noticed (1-based) channel numbers."
+      },
+      {
+        "name": "rate",
+        "type": "tuple",
+        "access": "get",
+        "doc": "A tuple containing the total Spectrum rates in counts/sec."
+      },
+      {
+        "name": "response",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/Set the detector response."
+      },
+      {
+        "name": "responsesUsed",
+        "type": "list",
+        "access": "get",
+        "doc": "Return a list of detector slot numbers with currently assigned"
+      },
+      {
+        "name": "statistic",
+        "type": "float",
+        "access": "get",
+        "doc": "Spectrum's contribution to the total fit statistic [float]."
+      },
+      {
+        "name": "values",
+        "type": "tuple",
+        "access": "get",
+        "doc": "Tuple of floats containing the spectrum rates for noticed"
+      },
+      {
+        "name": "variance",
+        "type": "tuple",
+        "access": "get",
+        "doc": "Tuple of floats containing the variance of each noticed"
+      },
+      {
+        "name": "xflt",
+        "type": "tuple",
+        "access": "get",
+        "doc": "XFLT key-value pairs returned as a tuple of tuples"
+      },
+      {
+        "name": "groupingFlags",
+        "type": "tuple",
+        "access": "get",
+        "doc": "Tuple of per-channel grouping flags {1, -1, 0} (GET only)."
+      },
+      {
+        "name": "groupIntent",
+        "type": "",
+        "access": "get",
+        "doc": "Cached source-side group intent as a string, e.g. ``\"optbin 5\"``,"
+      },
+      {
+        "name": "backGroupMap",
+        "type": "tuple",
+        "access": "get",
+        "doc": "Tuple of per-source-bin super-bin indices for the"
+      },
+      {
+        "name": "backGroupIntent",
+        "type": "",
+        "access": "get",
+        "doc": "Cached background-side group intent as a string, e.g."
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(dataFile, backFile='USE_DEFAULT', respFile='USE_DEFAULT', arfFile='USE_DEFAULT')",
+        "doc": "Construct a Spectrum object."
+      },
+      {
+        "name": "dummyrsp",
+        "signature": "(lowE=None, highE=None, nBins=None, scaleType=None, chanOffset=None, chanWidth=None, sourceNum=1)",
+        "doc": "Create a dummy response for this spectrum only."
+      },
+      {
+        "name": "fileinfo",
+        "signature": "(keyword)",
+        "doc": "Return the value of a particular keyword in the SPECTRUM extension."
+      },
+      {
+        "name": "group",
+        "signature": "(groupArgs)",
+        "doc": "Apply a `group` command to this spectrum."
+      },
+      {
+        "name": "ignore",
+        "signature": "(ignoreRange)",
+        "doc": "Ignore a range of the spectrum by channels or energy/wavelengths."
+      },
+      {
+        "name": "ignoredString",
+        "signature": "()",
+        "doc": "Return a string of ignored channel ranges."
+      },
+      {
+        "name": "notice",
+        "signature": "(noticeRange)",
+        "doc": "Notice a range of the spectrum by channels or energy/wavelengths."
+      },
+      {
+        "name": "noticedString",
+        "signature": "()",
+        "doc": "Return a string of noticed channel ranges."
+      },
+      {
+        "name": "show",
+        "signature": "()",
+        "doc": "Display information for this Spectrum object"
+      }
+    ]
+  },
+  "XspecSettings": {
+    "class": "XspecSettings",
+    "module": "xset.py",
+    "singleton": "Xset",
+    "summary": "**Storage class for Xspec settings.**",
+    "attributes": [
+      {
+        "name": "abund",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/Set the abundance table used in the plasma emission and"
+      },
+      {
+        "name": "allowNewAttributes",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/Set the flag which allows the setting of new"
+      },
+      {
+        "name": "allowPrompting",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/Set flag determining whether user prompting occurs."
+      },
+      {
+        "name": "chatter",
+        "type": "int",
+        "access": "get/set",
+        "doc": "Get/Set the console chatter level [int]."
+      },
+      {
+        "name": "logChatter",
+        "type": "int",
+        "access": "get/set",
+        "doc": "Get/Set the log chatter level [int]."
+      },
+      {
+        "name": "cosmo",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/Set the cosmology values."
+      },
+      {
+        "name": "log",
+        "type": "",
+        "access": "get",
+        "doc": "Get only: Returns the currently opened log file object,"
+      },
+      {
+        "name": "modelStrings",
+        "type": "",
+        "access": "get/set",
+        "doc": "XSPEC's internal database of <string_name>,"
+      },
+      {
+        "name": "parallel",
+        "type": "",
+        "access": "get",
+        "doc": "An attribute for controlling the number of parallel"
+      },
+      {
+        "name": "seed",
+        "type": "",
+        "access": "get/set",
+        "doc": "Re-seed and re-initialize XSPEC's random-number generator"
+      },
+      {
+        "name": "version",
+        "type": "",
+        "access": "get",
+        "doc": "The version strings for PyXspec and standard XSPEC."
+      },
+      {
+        "name": "xsect",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/set the photoelectric absorption cross-sections in use"
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "()",
+        "doc": ""
+      },
+      {
+        "name": "addModelString",
+        "signature": "(key, value)",
+        "doc": "Add a key,value pair of strings to XSPEC's internal database."
+      },
+      {
+        "name": "delModelString",
+        "signature": "(key)",
+        "doc": "Remove a key,value pair from XSPEC's internal model string database."
+      },
+      {
+        "name": "getModelString",
+        "signature": "(key)",
+        "doc": "Get the value for a particular key string in XSPEC's internal"
+      },
+      {
+        "name": "closeLog",
+        "signature": "()",
+        "doc": "Close XSPEC's current log file."
+      },
+      {
+        "name": "openLog",
+        "signature": "(fileName)",
+        "doc": "Open a file and set it to be XSPEC's log file."
+      },
+      {
+        "name": "show",
+        "signature": "()",
+        "doc": ""
+      },
+      {
+        "name": "restore",
+        "signature": "(fileName)",
+        "doc": "Restore the data/model configuration and settings."
+      },
+      {
+        "name": "save",
+        "signature": "(fileName, info='a')",
+        "doc": "Save the data and model configuration and XSPEC settings"
+      }
+    ]
+  }
+}

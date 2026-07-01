@@ -1,0 +1,26 @@
+{
+  "name": "partcov",
+  "type": "con",
+  "func": "C_PartialCovering",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "CvrFract",
+      "unit": "",
+      "default": 0.5,
+      "hardmin": 0.0,
+      "softmin": 0.05,
+      "softmax": 0.95,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "partcov"
+  ],
+  "title": "partcov: partial covering"
+}

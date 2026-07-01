@@ -1,0 +1,110 @@
+{
+  "name": "pexmon",
+  "type": "add",
+  "func": "pexmon",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 7,
+  "params": [
+    {
+      "name": "PhoIndex",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 1.1,
+      "softmin": 1.1,
+      "softmax": 2.5,
+      "hardmax": 2.5,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "foldE",
+      "unit": "keV",
+      "default": 1000.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "rel_refl",
+      "unit": "",
+      "default": -1.0,
+      "hardmin": -1000000.0,
+      "softmin": -1000000.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 4.0,
+      "hardmax": 4.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "abund",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Fe_abund",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Incl",
+      "unit": "deg",
+      "default": 60.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 85.0,
+      "hardmax": 85.0,
+      "delta": 1.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "pexmon"
+  ],
+  "title": "pexmon:  neutral Compton reflection with self-consistent Fe and Ni lines."
+}

@@ -1,0 +1,74 @@
+{
+  "name": "zxipab",
+  "type": "mul",
+  "func": "zxipab",
+  "elo": "0.01",
+  "ehi": "1.e20",
+  "npars_declared": 5,
+  "params": [
+    {
+      "name": "nHmin",
+      "unit": "10^22",
+      "default": 0.01,
+      "hardmin": 1e-07,
+      "softmin": 1e-07,
+      "softmax": 1000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "nHmax",
+      "unit": "10^22",
+      "default": 10.0,
+      "hardmin": 1e-07,
+      "softmin": 1e-07,
+      "softmax": 1000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "beta",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "log_xi",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": -3.0,
+      "softmin": -3.0,
+      "softmax": 6.0,
+      "hardmax": 6.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "zxipab"
+  ],
+  "title": "zxipab: power-law distribution of ionized absorbers"
+}

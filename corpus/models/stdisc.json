@@ -1,0 +1,122 @@
+{
+  "name": "stdisc",
+  "type": "add",
+  "func": "c_stokesnidisc",
+  "elo": "0.",
+  "ehi": "1.0e20",
+  "npars_declared": 8,
+  "params": [
+    {
+      "name": "Size",
+      "unit": "",
+      "default": 0.3,
+      "hardmin": 0.1,
+      "softmin": 0.1,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "PhoIndex",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 1.4,
+      "softmin": 1.4,
+      "softmax": 3.0,
+      "hardmax": 3.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "cos_incl",
+      "unit": "",
+      "default": 0.775,
+      "hardmin": 0.025,
+      "softmin": 0.025,
+      "softmax": 0.975,
+      "hardmax": 0.975,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "pol_deg",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "chi",
+      "unit": "deg",
+      "default": 0.0,
+      "hardmin": -90.0,
+      "softmin": -90.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": 5.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "pos_ang",
+      "unit": "deg",
+      "default": 0.0,
+      "hardmin": -90.0,
+      "softmin": -90.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -5.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "zshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Stokes",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -1.0,
+      "softmin": -1.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "stdisc"
+  ],
+  "title": "stdisc: X-ray polarized reflection from a distant accretion disc"
+}

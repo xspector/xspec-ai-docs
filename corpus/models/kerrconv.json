@@ -1,0 +1,98 @@
+{
+  "name": "kerrconv",
+  "type": "con",
+  "func": "C_spinconv",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 7,
+  "params": [
+    {
+      "name": "Index1",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Index2",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "r_br_g",
+      "unit": "",
+      "default": 6.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "a",
+      "unit": "",
+      "default": 0.998,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 0.998,
+      "hardmax": 0.998,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Incl",
+      "unit": "deg",
+      "default": 30.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rin_ms",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rout_ms",
+      "unit": "",
+      "default": 400.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "kerrconv"
+  ],
+  "title": "kerrconv: accretion disk line shape with BH spin as free parameter"
+}

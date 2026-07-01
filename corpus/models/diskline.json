@@ -1,0 +1,86 @@
+{
+  "name": "diskline",
+  "type": "add",
+  "func": "C_diskline",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 5,
+  "params": [
+    {
+      "name": "LineE",
+      "unit": "keV",
+      "default": 6.7,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Betor10",
+      "unit": "",
+      "default": -2.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rin_M",
+      "unit": "",
+      "default": 10.0,
+      "hardmin": 6.0,
+      "softmin": 6.0,
+      "softmax": 1000.0,
+      "hardmax": 10000.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rout_M",
+      "unit": "",
+      "default": 1000.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 10000000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Incl",
+      "unit": "deg",
+      "default": 30.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "diskline"
+  ],
+  "title": "diskline: accretion disk line emission, relativistic"
+}

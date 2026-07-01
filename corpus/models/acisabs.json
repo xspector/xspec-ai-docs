@@ -1,0 +1,110 @@
+{
+  "name": "acisabs",
+  "type": "mul",
+  "func": "C_acisabs",
+  "elo": "0.03",
+  "ehi": "15",
+  "npars_declared": 8,
+  "params": [
+    {
+      "name": "Tdays",
+      "unit": "days",
+      "default": 850.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10000.0,
+      "hardmax": 10000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 0.00722,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -1e-05,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "tauinf",
+      "unit": "",
+      "default": 0.582,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "tefold",
+      "unit": "days",
+      "default": 620.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 10000.0,
+      "hardmax": 10000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "nC",
+      "unit": "",
+      "default": 10.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 50.0,
+      "hardmax": 50.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "nH",
+      "unit": "",
+      "default": 20.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 50.0,
+      "hardmax": 50.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "nO",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 50.0,
+      "hardmax": 50.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "nN",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 50.0,
+      "hardmax": 50.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "acisabs"
+  ],
+  "title": "acisabs: Chandra ACIS q.e. decay"
+}

@@ -1,0 +1,62 @@
+{
+  "name": "thcomp",
+  "type": "con",
+  "func": "thcompf",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "Gamma_tau",
+      "unit": "",
+      "default": 1.7,
+      "hardmin": 1.001,
+      "softmin": 1.001,
+      "softmax": 5.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "kT_e",
+      "unit": "keV",
+      "default": 50.0,
+      "hardmin": 0.5,
+      "softmin": 0.5,
+      "softmax": 150.0,
+      "hardmax": 150.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "cov_frac",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "z",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 5.0,
+      "hardmax": 5.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "thcomp"
+  ],
+  "title": "ThComp: Thermally comptonized continuum"
+}

@@ -1,0 +1,26 @@
+{
+  "name": "log10con",
+  "type": "mul",
+  "func": "C_log10con",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "log10fac",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -20.0,
+      "softmin": -20.0,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "log10con"
+  ],
+  "title": "log10con:  Constant in base 10 log units"
+}

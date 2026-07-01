@@ -1,0 +1,86 @@
+{
+  "name": "nthComp",
+  "type": "add",
+  "func": "donthcomp",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 5,
+  "params": [
+    {
+      "name": "Gamma",
+      "unit": "",
+      "default": 1.7,
+      "hardmin": 1.001,
+      "softmin": 1.001,
+      "softmax": 5.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "kT_e",
+      "unit": "keV",
+      "default": 100.0,
+      "hardmin": 1.0,
+      "softmin": 5.0,
+      "softmax": 1000.0,
+      "hardmax": 1000.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "kT_bb",
+      "unit": "keV",
+      "default": 0.1,
+      "hardmin": 0.001,
+      "softmin": 0.001,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "inp_type",
+      "unit": "0/1",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "nthcomp"
+  ],
+  "title": "Nthcomp: Thermally comptonized continuum"
+}

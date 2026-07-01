@@ -1,0 +1,74 @@
+{
+  "name": "cyclabs",
+  "type": "mul",
+  "func": "xscycl",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 5,
+  "params": [
+    {
+      "name": "Depth0",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "E0",
+      "unit": "keV",
+      "default": 30.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Width0",
+      "unit": "keV",
+      "default": 10.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Depth2",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Width2",
+      "unit": "keV",
+      "default": 20.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "cyclabs"
+  ],
+  "title": "cyclabs: absorption line, cyclotron"
+}

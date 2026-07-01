@@ -1,0 +1,51 @@
+{
+  "name": "vlorabs",
+  "type": "mul",
+  "func": "C_vlorentzianAbsorptionLine",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "LineE",
+      "unit": "km/s",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Width",
+      "unit": "km/s",
+      "default": 100.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 20.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Strength",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "vlorabs",
+    "zvlorabs"
+  ],
+  "title": "vlorabs, zvlorabs: lorentzian absorption line with width\n  in km/s"
+}

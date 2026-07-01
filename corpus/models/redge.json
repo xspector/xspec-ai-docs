@@ -1,0 +1,50 @@
+{
+  "name": "redge",
+  "type": "add",
+  "func": "xredge",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "edge",
+      "unit": "keV",
+      "default": 1.4,
+      "hardmin": 0.001,
+      "softmin": 0.001,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "kT",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.001,
+      "softmin": 0.001,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "redge"
+  ],
+  "title": "redge: emission, recombination edge"
+}

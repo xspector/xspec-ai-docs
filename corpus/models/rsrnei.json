@@ -1,0 +1,112 @@
+{
+  "name": "rsrnei",
+  "type": "add",
+  "func": "C_rsrnei",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 7,
+  "params": [
+    {
+      "name": "kT",
+      "unit": "keV",
+      "default": 0.5,
+      "hardmin": 0.0808,
+      "softmin": 0.0808,
+      "softmax": 79.9,
+      "hardmax": 79.9,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "kT_init",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.0808,
+      "softmin": 0.0808,
+      "softmax": 79.9,
+      "hardmax": 79.9,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Abundanc",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000.0,
+      "hardmax": 10000.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Tau",
+      "unit": "s/cm^3",
+      "default": 100000000000.0,
+      "hardmin": 100000000.0,
+      "softmin": 100000000.0,
+      "softmax": 50000000000000.0,
+      "hardmax": 50000000000000.0,
+      "delta": 100000000.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Velocity",
+      "unit": "km/s",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10000.0,
+      "hardmax": 10000.0,
+      "delta": -10.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "RScolumn",
+      "unit": "10^22",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10000.0,
+      "hardmax": 10000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "rsrnei",
+    "rsvrnei",
+    "rsvvrnei"
+  ],
+  "title": "rsrnei, rsvrnei, rsvvrnei:  Non-equilibrium recombining\n  collisional plasma with resonance scattering"
+}

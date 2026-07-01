@@ -1,0 +1,38 @@
+{
+  "name": "rgsext",
+  "type": "con",
+  "func": "C_rgsExtendedSource",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "order",
+      "unit": "",
+      "default": -1.0,
+      "hardmin": -3.0,
+      "softmin": -3.0,
+      "softmax": -1.0,
+      "hardmax": -1.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "factor",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 1e-06,
+      "softmin": 1e-06,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "rgsext"
+  ],
+  "title": "rgsext: convolve an RGS spectrum for extended emission"
+}

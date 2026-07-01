@@ -1,0 +1,39 @@
+{
+  "name": "pcfabs",
+  "type": "mul",
+  "func": "xsabsp",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "nH",
+      "unit": "10^22",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "CvrFract",
+      "unit": "",
+      "default": 0.5,
+      "hardmin": 0.0,
+      "softmin": 0.05,
+      "softmax": 0.95,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "pcfabs",
+    "zpcfabs"
+  ],
+  "title": "pcfabs, zpcfabs: partial covering fraction absorption"
+}

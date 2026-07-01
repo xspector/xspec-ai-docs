@@ -1,0 +1,75 @@
+{
+  "name": "zbknpower",
+  "type": "add",
+  "func": "C_zBrokenPowerLaw",
+  "elo": "-1.e20",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "PhoIndx1",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -3.0,
+      "softmin": -2.0,
+      "softmax": 9.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "BreakE",
+      "unit": "keV",
+      "default": 5.0,
+      "hardmin": 0.0,
+      "softmin": 0.01,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "PhoIndx2",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": -3.0,
+      "softmin": -2.0,
+      "softmax": 9.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "bknpower",
+    "zbknpower"
+  ],
+  "title": "bknpower, zbknpower:  broken power law"
+}

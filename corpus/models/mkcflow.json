@@ -1,0 +1,87 @@
+{
+  "name": "mkcflow",
+  "type": "add",
+  "func": "C_xsmkcf",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 5,
+  "params": [
+    {
+      "name": "lowT",
+      "unit": "keV",
+      "default": 0.1,
+      "hardmin": 0.0808,
+      "softmin": 0.0808,
+      "softmax": 79.9,
+      "hardmax": 79.9,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "highT",
+      "unit": "keV",
+      "default": 4.0,
+      "hardmin": 0.0808,
+      "softmin": 0.0808,
+      "softmax": 79.9,
+      "hardmax": 79.9,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Abundanc",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 5.0,
+      "hardmax": 5.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.1,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "switch",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "mkcflow",
+    "vmcflow"
+  ],
+  "title": "mkcflow, vmcflow: cooling flow, mekal"
+}

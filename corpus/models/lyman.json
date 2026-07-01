@@ -1,0 +1,62 @@
+{
+  "name": "lyman",
+  "type": "mul",
+  "func": "xslyman",
+  "elo": "0.01",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "n",
+      "unit": "10^22",
+      "default": 1e-05,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 1e-07,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "b",
+      "unit": "km/s",
+      "default": 10.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 1.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "z",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.001,
+      "softmin": -0.001,
+      "softmax": 100000.0,
+      "hardmax": 100000.0,
+      "delta": 1e-06,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "ZA",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 2.0,
+      "hardmax": 2.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "lyman"
+  ],
+  "title": "lyman: Voigt absorption profiles for H I or He II Lyman series"
+}

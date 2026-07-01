@@ -1,0 +1,86 @@
+{
+  "name": "laor",
+  "type": "add",
+  "func": "C_laor",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 5,
+  "params": [
+    {
+      "name": "lineE",
+      "unit": "keV",
+      "default": 6.4,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Index",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rin_G",
+      "unit": "",
+      "default": 1.235,
+      "hardmin": 1.235,
+      "softmin": 1.235,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rout_G",
+      "unit": "",
+      "default": 400.0,
+      "hardmin": 1.235,
+      "softmin": 1.235,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Incl",
+      "unit": "deg",
+      "default": 30.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "laor"
+  ],
+  "title": "laor: accretion disk, black hole emission line"
+}

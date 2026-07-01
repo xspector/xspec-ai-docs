@@ -1,0 +1,62 @@
+{
+  "name": "swind1",
+  "type": "mul",
+  "func": "C_swind1",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "column",
+      "unit": "",
+      "default": 6.0,
+      "hardmin": 3.0,
+      "softmin": 3.0,
+      "softmax": 50.0,
+      "hardmax": 50.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "log_xi",
+      "unit": "",
+      "default": 2.5,
+      "hardmin": 2.1,
+      "softmin": 2.1,
+      "softmax": 4.1,
+      "hardmax": 4.1,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "sigma",
+      "unit": "",
+      "default": 0.1,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 0.5,
+      "hardmax": 0.5,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "swind1"
+  ],
+  "title": "swind1: absorption by partially ionized material with large velocity shear"
+}

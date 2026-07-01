@@ -1,0 +1,62 @@
+{
+  "name": "grbm",
+  "type": "add",
+  "func": "xsgrbm",
+  "elo": "1.e-20",
+  "ehi": "1.e+20",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "alpha",
+      "unit": "",
+      "default": -1.0,
+      "hardmin": -10.0,
+      "softmin": -3.0,
+      "softmax": 2.0,
+      "hardmax": 5.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "beta",
+      "unit": "",
+      "default": -2.0,
+      "hardmin": -10.0,
+      "softmin": -5.0,
+      "softmax": 2.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "tem",
+      "unit": "keV",
+      "default": 300.0,
+      "hardmin": 10.0,
+      "softmin": 50.0,
+      "softmax": 1000.0,
+      "hardmax": 10000.0,
+      "delta": 10.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "grbm"
+  ],
+  "title": "grbm: gamma-ray burst continuum"
+}

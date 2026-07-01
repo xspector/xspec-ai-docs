@@ -1,0 +1,86 @@
+{
+  "name": "bkn2pow",
+  "type": "add",
+  "func": "C_broken2PowerLaw",
+  "elo": "-1.e20",
+  "ehi": "1.e20",
+  "npars_declared": 5,
+  "params": [
+    {
+      "name": "PhoIndx1",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -3.0,
+      "softmin": -2.0,
+      "softmax": 9.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "BreakE1",
+      "unit": "keV",
+      "default": 5.0,
+      "hardmin": 0.0,
+      "softmin": 0.01,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "PhoIndx2",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": -3.0,
+      "softmin": -2.0,
+      "softmax": 9.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "BreakE2",
+      "unit": "keV",
+      "default": 10.0,
+      "hardmin": 0.0,
+      "softmin": 0.01,
+      "softmax": 1000000.0,
+      "hardmax": 1000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "PhoIndx3",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": -3.0,
+      "softmin": -2.0,
+      "softmax": 9.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "bkn2pow"
+  ],
+  "title": "bkn2pow: broken power law, 2 break energies"
+}

@@ -1,0 +1,134 @@
+{
+  "name": "sirf",
+  "type": "add",
+  "func": "C_sirf",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 9,
+  "params": [
+    {
+      "name": "tin",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 100.0,
+      "hardmax": 1000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "rin",
+      "unit": "rsph",
+      "default": 0.01,
+      "hardmin": 1e-06,
+      "softmin": 1e-05,
+      "softmax": 1.0,
+      "hardmax": 10.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "rout",
+      "unit": "rsph",
+      "default": 100.0,
+      "hardmin": 0.1,
+      "softmin": 0.1,
+      "softmax": 100000000.0,
+      "hardmax": 100000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "theta",
+      "unit": "deg",
+      "default": 22.9,
+      "hardmin": 0.0,
+      "softmin": 1.0,
+      "softmax": 89.0,
+      "hardmax": 90.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "incl",
+      "unit": "deg",
+      "default": 0.0,
+      "hardmin": -90.0,
+      "softmin": -90.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "valpha",
+      "unit": "",
+      "default": -0.5,
+      "hardmin": -1.5,
+      "softmin": -1.0,
+      "softmax": 2.0,
+      "hardmax": 5.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "gamma",
+      "unit": "",
+      "default": 1.333,
+      "hardmin": 0.5,
+      "softmin": 0.5,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "mdot",
+      "unit": "",
+      "default": 1000.0,
+      "hardmin": 0.5,
+      "softmin": 0.5,
+      "softmax": 10000000.0,
+      "hardmax": 10000000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "irrad",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 20.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "sirf"
+  ],
+  "title": "sirf:  self-irradiated funnel"
+}

@@ -1,0 +1,62 @@
+{
+  "name": "zbabs",
+  "type": "mul",
+  "func": "c_xszbabs",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "nH",
+      "unit": "10^22",
+      "default": 0.0001,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 1e-05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "nHeI",
+      "unit": "10^22",
+      "default": 1e-05,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 1e-06,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "nHeII",
+      "unit": "10^22",
+      "default": 1e-06,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 1e-07,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "z",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100000.0,
+      "hardmax": 1000000.0,
+      "delta": 1e-06,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "zbabs"
+  ],
+  "title": "zbabs: EUV ISM attenuation"
+}

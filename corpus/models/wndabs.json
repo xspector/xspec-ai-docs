@@ -1,0 +1,39 @@
+{
+  "name": "wndabs",
+  "type": "mul",
+  "func": "xswnab",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "nH",
+      "unit": "10^22",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 20.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "WindowE",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.03,
+      "softmin": 0.05,
+      "softmax": 20.0,
+      "hardmax": 20.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "wndabs",
+    "zwndabs"
+  ],
+  "title": "wndabs, zwndabs: photo-electric absorption, warm absorber"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "zhighect",
+  "type": "mul",
+  "func": "xszhcu",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "cutoffE",
+      "unit": "keV",
+      "default": 10.0,
+      "hardmin": 0.0001,
+      "softmin": 0.01,
+      "softmax": 100.0,
+      "hardmax": 200.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "foldE",
+      "unit": "keV",
+      "default": 15.0,
+      "hardmin": 0.0001,
+      "softmin": 0.01,
+      "softmax": 100.0,
+      "hardmax": 200.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "highecut",
+    "zhighect"
+  ],
+  "title": "highecut, zhighect: high-energy cutoff"
+}

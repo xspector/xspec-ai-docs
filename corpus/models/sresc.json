@@ -1,0 +1,50 @@
+{
+  "name": "sresc",
+  "type": "add",
+  "func": "sresc",
+  "elo": "1.e-20",
+  "ehi": "1.e+20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "alpha",
+      "unit": "",
+      "default": 0.5,
+      "hardmin": 1e-05,
+      "softmin": 0.3,
+      "softmax": 0.8,
+      "hardmax": 1.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "rolloff",
+      "unit": "Hz",
+      "default": 2.42e+17,
+      "hardmin": 10000000000.0,
+      "softmin": 1000000000000000.0,
+      "softmax": 1e+19,
+      "hardmax": 1e+25,
+      "delta": 10000000000.0,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "sresc"
+  ],
+  "title": "sresc: synchrotron spectrum, cut off by particle escape"
+}

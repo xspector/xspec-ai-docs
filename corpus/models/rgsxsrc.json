@@ -1,0 +1,26 @@
+{
+  "name": "rgsxsrc",
+  "type": "con",
+  "func": "C_rgsxsrc",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "order",
+      "unit": "",
+      "default": -1.0,
+      "hardmin": -3.0,
+      "softmin": -3.0,
+      "softmax": -1.0,
+      "hardmax": -1.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "rgsxsrc"
+  ],
+  "title": "rgsxsrc: convolve an RGS spectrum for extended emission"
+}

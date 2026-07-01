@@ -1,0 +1,26 @@
+{
+  "name": "vashift",
+  "type": "con",
+  "func": "C_vashift",
+  "elo": "0.0",
+  "ehi": "1.0e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "Velocity",
+      "unit": "km/s",
+      "default": 0.0,
+      "hardmin": -10000.0,
+      "softmin": -10000.0,
+      "softmax": 10000.0,
+      "hardmax": 10000.0,
+      "delta": -10.0,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "vashift"
+  ],
+  "title": "vashift: velocity shift an additive model"
+}

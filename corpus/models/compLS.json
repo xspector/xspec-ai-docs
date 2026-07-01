@@ -1,0 +1,50 @@
+{
+  "name": "compLS",
+  "type": "add",
+  "func": "compls",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "kT",
+      "unit": "keV",
+      "default": 2.0,
+      "hardmin": 0.001,
+      "softmin": 0.01,
+      "softmax": 10.0,
+      "hardmax": 20.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "tau",
+      "unit": "",
+      "default": 10.0,
+      "hardmin": 0.0001,
+      "softmin": 0.001,
+      "softmax": 100.0,
+      "hardmax": 200.0,
+      "delta": 0.0001,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "compLS"
+  ],
+  "title": "compLS:  Comptonization, Lamb & Sanford"
+}

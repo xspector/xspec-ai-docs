@@ -1,0 +1,134 @@
+{
+  "name": "kerrdisk",
+  "type": "add",
+  "func": "dospin",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 9,
+  "params": [
+    {
+      "name": "lineE",
+      "unit": "keV",
+      "default": 6.4,
+      "hardmin": 0.1,
+      "softmin": 0.1,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Index1",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Index2",
+      "unit": "",
+      "default": 3.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "r_br_g",
+      "unit": "",
+      "default": 6.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "a",
+      "unit": "",
+      "default": 0.998,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 0.998,
+      "hardmax": 0.998,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Incl",
+      "unit": "deg",
+      "default": 30.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rin_ms",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rout_ms",
+      "unit": "",
+      "default": 400.0,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 400.0,
+      "hardmax": 400.0,
+      "delta": -0.1,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "z",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.001,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "kerrdisk"
+  ],
+  "title": "kerrdisk: accretion disk line emission with BH spin as free parameter"
+}

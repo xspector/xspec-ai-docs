@@ -1,0 +1,4408 @@
+{
+  "provenance": {
+    "xspec_version": "13.0",
+    "heasoft_src": "/Users/kaa/software/heasoft/Xspec/src",
+    "heasoft_commit": "1bad53cea8",
+    "manual_dir": "/Users/kaa/software/Xspec-aux/doc/manual",
+    "manual_commit": "57626605"
+  },
+  "counts": {
+    "models": 328,
+    "pyxspec_api_classes": 18,
+    "command_tokens": 161,
+    "command_docs": 79
+  },
+  "models": [
+    {
+      "name": "absori",
+      "type": "mul",
+      "n_params": 6,
+      "family": [
+        "absori"
+      ]
+    },
+    {
+      "name": "acisabs",
+      "type": "mul",
+      "n_params": 8,
+      "family": [
+        "acisabs"
+      ]
+    },
+    {
+      "name": "agauss",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "agauss",
+        "zagauss"
+      ]
+    },
+    {
+      "name": "agnsed",
+      "type": "add",
+      "n_params": 16,
+      "family": [
+        "agnsed",
+        "qsosed"
+      ]
+    },
+    {
+      "name": "agnslim",
+      "type": "add",
+      "n_params": 15,
+      "family": [
+        "agnslim"
+      ]
+    },
+    {
+      "name": "apec",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "apec",
+        "vapec",
+        "vvapec",
+        "bapec",
+        "bvapec",
+        "bvvapec"
+      ]
+    },
+    {
+      "name": "bapec",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "apec",
+        "vapec",
+        "vvapec",
+        "bapec",
+        "bvapec",
+        "bvvapec"
+      ]
+    },
+    {
+      "name": "bbody",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "bbody",
+        "zbbody"
+      ]
+    },
+    {
+      "name": "bbodyrad",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "bbodyrad"
+      ]
+    },
+    {
+      "name": "bcempow",
+      "type": "add",
+      "n_params": 8,
+      "family": [
+        "cempow",
+        "vcempow",
+        "bcempow",
+        "bvcempow"
+      ]
+    },
+    {
+      "name": "bcheb6",
+      "type": "add",
+      "n_params": 12,
+      "family": [
+        "cheb6",
+        "vcheb6",
+        "bcheb6",
+        "bvcheb6"
+      ]
+    },
+    {
+      "name": "bcie",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "cie",
+        "vcie",
+        "vvcie",
+        "bcie",
+        "bvcie",
+        "bvvcie"
+      ]
+    },
+    {
+      "name": "bcoolflow",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "coolflow",
+        "vcoolflow",
+        "bcoolflow",
+        "bvcoolflow"
+      ]
+    },
+    {
+      "name": "bcph",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "cph",
+        "vcph",
+        "bcph",
+        "bvcph"
+      ]
+    },
+    {
+      "name": "bequil",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "equil",
+        "vequil",
+        "bequil",
+        "bvequil"
+      ]
+    },
+    {
+      "name": "bexpcheb6",
+      "type": "add",
+      "n_params": 12,
+      "family": [
+        "expcheb6",
+        "vexpcheb6",
+        "bexpcheb6",
+        "bvexpcheb6"
+      ]
+    },
+    {
+      "name": "bexrav",
+      "type": "add",
+      "n_params": 10,
+      "family": [
+        "bexrav"
+      ]
+    },
+    {
+      "name": "bexriv",
+      "type": "add",
+      "n_params": 12,
+      "family": [
+        "bexriv"
+      ]
+    },
+    {
+      "name": "bfekblor",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "fekblor",
+        "zfekblor",
+        "bfekblor",
+        "zbfekblor"
+      ]
+    },
+    {
+      "name": "bfeklor",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "feklor",
+        "zfeklor",
+        "bfeklor",
+        "zbfeklor"
+      ]
+    },
+    {
+      "name": "bgadem",
+      "type": "add",
+      "n_params": 8,
+      "family": [
+        "gadem",
+        "vgadem",
+        "vvgadem",
+        "bgadem",
+        "bvgadem",
+        "bvvgadem"
+      ]
+    },
+    {
+      "name": "bgnei",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "gnei",
+        "vgnei",
+        "vvgnei",
+        "bgnei",
+        "bvgnei",
+        "bvvgnei"
+      ]
+    },
+    {
+      "name": "bkn2pow",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "bkn2pow"
+      ]
+    },
+    {
+      "name": "bknpower",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "bknpower",
+        "zbknpower"
+      ]
+    },
+    {
+      "name": "bmc",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "bmc"
+      ]
+    },
+    {
+      "name": "bnei",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "nei",
+        "vnei",
+        "vvnei",
+        "bnei",
+        "bvnei",
+        "bvvnei"
+      ]
+    },
+    {
+      "name": "bnpshock",
+      "type": "add",
+      "n_params": 8,
+      "family": [
+        "npshock",
+        "vnpshock",
+        "vvnpshock",
+        "bnpshock",
+        "bvnpshock",
+        "bvvnpshock"
+      ]
+    },
+    {
+      "name": "bpshock",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "pshock",
+        "vpshock",
+        "vvpshock",
+        "bpshock",
+        "bvpshock",
+        "bvvpshock"
+      ]
+    },
+    {
+      "name": "bremss",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "bremss",
+        "vbremss",
+        "zbremss"
+      ]
+    },
+    {
+      "name": "brnei",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "rnei",
+        "vrnei",
+        "vvrnei",
+        "brnei",
+        "bvrnei",
+        "bvvrnei"
+      ]
+    },
+    {
+      "name": "bsedov",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "sedov",
+        "vsedov",
+        "vvsedov",
+        "bsedov",
+        "bvsedov",
+        "bvvsedov"
+      ]
+    },
+    {
+      "name": "bsnapec",
+      "type": "add",
+      "n_params": 8,
+      "family": [
+        "snapec",
+        "bsnapec"
+      ]
+    },
+    {
+      "name": "btapec",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "btapec",
+        "bvtapec",
+        "bvvtapec"
+      ]
+    },
+    {
+      "name": "bvapec",
+      "type": "add",
+      "n_params": 17,
+      "family": [
+        "apec",
+        "vapec",
+        "vvapec",
+        "bapec",
+        "bvapec",
+        "bvvapec"
+      ]
+    },
+    {
+      "name": "bvcempow",
+      "type": "add",
+      "n_params": 21,
+      "family": [
+        "cempow",
+        "vcempow",
+        "bcempow",
+        "bvcempow"
+      ]
+    },
+    {
+      "name": "bvcheb6",
+      "type": "add",
+      "n_params": 25,
+      "family": [
+        "cheb6",
+        "vcheb6",
+        "bcheb6",
+        "bvcheb6"
+      ]
+    },
+    {
+      "name": "bvcie",
+      "type": "add",
+      "n_params": 18,
+      "family": [
+        "cie",
+        "vcie",
+        "vvcie",
+        "bcie",
+        "bvcie",
+        "bvvcie"
+      ]
+    },
+    {
+      "name": "bvcoolflow",
+      "type": "add",
+      "n_params": 20,
+      "family": [
+        "coolflow",
+        "vcoolflow",
+        "bcoolflow",
+        "bvcoolflow"
+      ]
+    },
+    {
+      "name": "bvcph",
+      "type": "add",
+      "n_params": 19,
+      "family": [
+        "cph",
+        "vcph",
+        "bcph",
+        "bvcph"
+      ]
+    },
+    {
+      "name": "bvequil",
+      "type": "add",
+      "n_params": 16,
+      "family": [
+        "equil",
+        "vequil",
+        "bequil",
+        "bvequil"
+      ]
+    },
+    {
+      "name": "bvexpcheb6",
+      "type": "add",
+      "n_params": 25,
+      "family": [
+        "expcheb6",
+        "vexpcheb6",
+        "bexpcheb6",
+        "bvexpcheb6"
+      ]
+    },
+    {
+      "name": "bvgadem",
+      "type": "add",
+      "n_params": 21,
+      "family": [
+        "gadem",
+        "vgadem",
+        "vvgadem",
+        "bgadem",
+        "bvgadem",
+        "bvvgadem"
+      ]
+    },
+    {
+      "name": "bvgnei",
+      "type": "add",
+      "n_params": 19,
+      "family": [
+        "gnei",
+        "vgnei",
+        "vvgnei",
+        "bgnei",
+        "bvgnei",
+        "bvvgnei"
+      ]
+    },
+    {
+      "name": "bvnei",
+      "type": "add",
+      "n_params": 18,
+      "family": [
+        "nei",
+        "vnei",
+        "vvnei",
+        "bnei",
+        "bvnei",
+        "bvvnei"
+      ]
+    },
+    {
+      "name": "bvnpshock",
+      "type": "add",
+      "n_params": 20,
+      "family": [
+        "npshock",
+        "vnpshock",
+        "vvnpshock",
+        "bnpshock",
+        "bvnpshock",
+        "bvvnpshock"
+      ]
+    },
+    {
+      "name": "bvpshock",
+      "type": "add",
+      "n_params": 19,
+      "family": [
+        "pshock",
+        "vpshock",
+        "vvpshock",
+        "bpshock",
+        "bvpshock",
+        "bvvpshock"
+      ]
+    },
+    {
+      "name": "bvrnei",
+      "type": "add",
+      "n_params": 19,
+      "family": [
+        "rnei",
+        "vrnei",
+        "vvrnei",
+        "brnei",
+        "bvrnei",
+        "bvvrnei"
+      ]
+    },
+    {
+      "name": "bvsedov",
+      "type": "add",
+      "n_params": 19,
+      "family": [
+        "sedov",
+        "vsedov",
+        "vvsedov",
+        "bsedov",
+        "bvsedov",
+        "bvvsedov"
+      ]
+    },
+    {
+      "name": "bvtapec",
+      "type": "add",
+      "n_params": 18,
+      "family": [
+        "btapec",
+        "bvtapec",
+        "bvvtapec"
+      ]
+    },
+    {
+      "name": "bvvapec",
+      "type": "add",
+      "n_params": 34,
+      "family": [
+        "apec",
+        "vapec",
+        "vvapec",
+        "bapec",
+        "bvapec",
+        "bvvapec"
+      ]
+    },
+    {
+      "name": "bvvcie",
+      "type": "add",
+      "n_params": 35,
+      "family": [
+        "cie",
+        "vcie",
+        "vvcie",
+        "bcie",
+        "bvcie",
+        "bvvcie"
+      ]
+    },
+    {
+      "name": "bvvgadem",
+      "type": "add",
+      "n_params": 37,
+      "family": [
+        "gadem",
+        "vgadem",
+        "vvgadem",
+        "bgadem",
+        "bvgadem",
+        "bvvgadem"
+      ]
+    },
+    {
+      "name": "bvvgnei",
+      "type": "add",
+      "n_params": 36,
+      "family": [
+        "gnei",
+        "vgnei",
+        "vvgnei",
+        "bgnei",
+        "bvgnei",
+        "bvvgnei"
+      ]
+    },
+    {
+      "name": "bvvnei",
+      "type": "add",
+      "n_params": 35,
+      "family": [
+        "nei",
+        "vnei",
+        "vvnei",
+        "bnei",
+        "bvnei",
+        "bvvnei"
+      ]
+    },
+    {
+      "name": "bvvnpshock",
+      "type": "add",
+      "n_params": 37,
+      "family": [
+        "npshock",
+        "vnpshock",
+        "vvnpshock",
+        "bnpshock",
+        "bvnpshock",
+        "bvvnpshock"
+      ]
+    },
+    {
+      "name": "bvvpshock",
+      "type": "add",
+      "n_params": 36,
+      "family": [
+        "pshock",
+        "vpshock",
+        "vvpshock",
+        "bpshock",
+        "bvpshock",
+        "bvvpshock"
+      ]
+    },
+    {
+      "name": "bvvrnei",
+      "type": "add",
+      "n_params": 36,
+      "family": [
+        "rnei",
+        "vrnei",
+        "vvrnei",
+        "brnei",
+        "bvrnei",
+        "bvvrnei"
+      ]
+    },
+    {
+      "name": "bvvsedov",
+      "type": "add",
+      "n_params": 36,
+      "family": [
+        "sedov",
+        "vsedov",
+        "vvsedov",
+        "bsedov",
+        "bvsedov",
+        "bvvsedov"
+      ]
+    },
+    {
+      "name": "bvvtapec",
+      "type": "add",
+      "n_params": 35,
+      "family": [
+        "btapec",
+        "bvtapec",
+        "bvvtapec"
+      ]
+    },
+    {
+      "name": "bvvwdem",
+      "type": "add",
+      "n_params": 38,
+      "family": [
+        "wdem",
+        "vwdem",
+        "vvwdem",
+        "bwdem",
+        "bvwdem",
+        "bvvwdem"
+      ]
+    },
+    {
+      "name": "bvwdem",
+      "type": "add",
+      "n_params": 22,
+      "family": [
+        "wdem",
+        "vwdem",
+        "vvwdem",
+        "bwdem",
+        "bvwdem",
+        "bvvwdem"
+      ]
+    },
+    {
+      "name": "bwcycl",
+      "type": "add",
+      "n_params": 13,
+      "family": [
+        "bwcycl"
+      ]
+    },
+    {
+      "name": "bwdem",
+      "type": "add",
+      "n_params": 9,
+      "family": [
+        "wdem",
+        "vwdem",
+        "vvwdem",
+        "bwdem",
+        "bvwdem",
+        "bvvwdem"
+      ]
+    },
+    {
+      "name": "c6mekl",
+      "type": "add",
+      "n_params": 11,
+      "family": [
+        "c6mekl",
+        "c6vmekl",
+        "c6pmekl",
+        "c6pvmkl"
+      ]
+    },
+    {
+      "name": "c6pmekl",
+      "type": "add",
+      "n_params": 11,
+      "family": [
+        "c6mekl",
+        "c6vmekl",
+        "c6pmekl",
+        "c6pvmkl"
+      ]
+    },
+    {
+      "name": "c6pvmkl",
+      "type": "add",
+      "n_params": 24,
+      "family": [
+        "c6mekl",
+        "c6vmekl",
+        "c6pmekl",
+        "c6pvmkl"
+      ]
+    },
+    {
+      "name": "c6vmekl",
+      "type": "add",
+      "n_params": 24,
+      "family": [
+        "c6mekl",
+        "c6vmekl",
+        "c6pmekl",
+        "c6pvmkl"
+      ]
+    },
+    {
+      "name": "cabs",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "cabs"
+      ]
+    },
+    {
+      "name": "carbatm",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "carbatm"
+      ]
+    },
+    {
+      "name": "cemekl",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "cemekl",
+        "cevmkl"
+      ]
+    },
+    {
+      "name": "cempow",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "cempow",
+        "vcempow",
+        "bcempow",
+        "bvcempow"
+      ]
+    },
+    {
+      "name": "cevmkl",
+      "type": "add",
+      "n_params": 20,
+      "family": [
+        "cemekl",
+        "cevmkl"
+      ]
+    },
+    {
+      "name": "cflow",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "cflow"
+      ]
+    },
+    {
+      "name": "cflux",
+      "type": "con",
+      "n_params": 3,
+      "family": [
+        "cflux"
+      ]
+    },
+    {
+      "name": "cglumin",
+      "type": "con",
+      "n_params": 4,
+      "family": [
+        "cglumin"
+      ]
+    },
+    {
+      "name": "cheb6",
+      "type": "add",
+      "n_params": 11,
+      "family": [
+        "cheb6",
+        "vcheb6",
+        "bcheb6",
+        "bvcheb6"
+      ]
+    },
+    {
+      "name": "cie",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "cie",
+        "vcie",
+        "vvcie",
+        "bcie",
+        "bvcie",
+        "bvvcie"
+      ]
+    },
+    {
+      "name": "clumin",
+      "type": "con",
+      "n_params": 4,
+      "family": [
+        "clumin"
+      ]
+    },
+    {
+      "name": "compbb",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "compbb"
+      ]
+    },
+    {
+      "name": "compLS",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "compLS"
+      ]
+    },
+    {
+      "name": "compmag",
+      "type": "add",
+      "n_params": 9,
+      "family": [
+        "compmag"
+      ]
+    },
+    {
+      "name": "compPS",
+      "type": "add",
+      "n_params": 20,
+      "family": [
+        "compPS"
+      ]
+    },
+    {
+      "name": "compST",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "compST"
+      ]
+    },
+    {
+      "name": "comptb",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "comptb"
+      ]
+    },
+    {
+      "name": "compth",
+      "type": "add",
+      "n_params": 21,
+      "family": [
+        "eqpair",
+        "eqtherm",
+        "compth"
+      ]
+    },
+    {
+      "name": "compTT",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "compTT"
+      ]
+    },
+    {
+      "name": "constant",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "constant"
+      ]
+    },
+    {
+      "name": "coolflow",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "coolflow",
+        "vcoolflow",
+        "bcoolflow",
+        "bvcoolflow"
+      ]
+    },
+    {
+      "name": "cpflux",
+      "type": "con",
+      "n_params": 3,
+      "family": [
+        "cpflux"
+      ]
+    },
+    {
+      "name": "cph",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "cph",
+        "vcph",
+        "bcph",
+        "bvcph"
+      ]
+    },
+    {
+      "name": "cplinear",
+      "type": "add",
+      "n_params": 21,
+      "family": [
+        "cplinear"
+      ]
+    },
+    {
+      "name": "cutoffpl",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "cutoffpl",
+        "zcutoffpl"
+      ]
+    },
+    {
+      "name": "cyclabs",
+      "type": "mul",
+      "n_params": 5,
+      "family": [
+        "cyclabs"
+      ]
+    },
+    {
+      "name": "disk",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "disk"
+      ]
+    },
+    {
+      "name": "diskbb",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "diskbb"
+      ]
+    },
+    {
+      "name": "diskir",
+      "type": "add",
+      "n_params": 9,
+      "family": [
+        "diskir"
+      ]
+    },
+    {
+      "name": "diskline",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "diskline"
+      ]
+    },
+    {
+      "name": "diskm",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "diskm"
+      ]
+    },
+    {
+      "name": "disko",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "disko"
+      ]
+    },
+    {
+      "name": "diskpbb",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "diskpbb"
+      ]
+    },
+    {
+      "name": "diskpn",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "diskpn"
+      ]
+    },
+    {
+      "name": "dust",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "dust"
+      ]
+    },
+    {
+      "name": "edge",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "edge",
+        "zedge"
+      ]
+    },
+    {
+      "name": "eebremss",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "eebremss"
+      ]
+    },
+    {
+      "name": "eplogpar",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "eplogpar"
+      ]
+    },
+    {
+      "name": "eqpair",
+      "type": "add",
+      "n_params": 21,
+      "family": [
+        "eqpair",
+        "eqtherm",
+        "compth"
+      ]
+    },
+    {
+      "name": "eqtherm",
+      "type": "add",
+      "n_params": 21,
+      "family": [
+        "eqpair",
+        "eqtherm",
+        "compth"
+      ]
+    },
+    {
+      "name": "equil",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "equil",
+        "vequil",
+        "bequil",
+        "bvequil"
+      ]
+    },
+    {
+      "name": "expabs",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "expabs"
+      ]
+    },
+    {
+      "name": "expcheb6",
+      "type": "add",
+      "n_params": 11,
+      "family": [
+        "expcheb6",
+        "vexpcheb6",
+        "bexpcheb6",
+        "bvexpcheb6"
+      ]
+    },
+    {
+      "name": "expdec",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "expdec"
+      ]
+    },
+    {
+      "name": "expfac",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "expfac"
+      ]
+    },
+    {
+      "name": "ezdiskbb",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "ezdiskbb"
+      ]
+    },
+    {
+      "name": "fekblor",
+      "type": "add",
+      "n_params": 1,
+      "family": [
+        "fekblor",
+        "zfekblor",
+        "bfekblor",
+        "zbfekblor"
+      ]
+    },
+    {
+      "name": "feklor",
+      "type": "add",
+      "n_params": 1,
+      "family": [
+        "feklor",
+        "zfeklor",
+        "bfeklor",
+        "zbfeklor"
+      ]
+    },
+    {
+      "name": "gabs",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "gabs",
+        "zgabs"
+      ]
+    },
+    {
+      "name": "gadem",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "gadem",
+        "vgadem",
+        "vvgadem",
+        "bgadem",
+        "bvgadem",
+        "bvvgadem"
+      ]
+    },
+    {
+      "name": "gaussian",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "gauss",
+        "zgauss"
+      ]
+    },
+    {
+      "name": "gnei",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "gnei",
+        "vgnei",
+        "vvgnei",
+        "bgnei",
+        "bvgnei",
+        "bvvgnei"
+      ]
+    },
+    {
+      "name": "grad",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "grad"
+      ]
+    },
+    {
+      "name": "grbcomp",
+      "type": "add",
+      "n_params": 10,
+      "family": [
+        "grbcomp"
+      ]
+    },
+    {
+      "name": "grbjet",
+      "type": "add",
+      "n_params": 14,
+      "family": [
+        "grbjet"
+      ]
+    },
+    {
+      "name": "grbm",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "grbm"
+      ]
+    },
+    {
+      "name": "gsmooth",
+      "type": "con",
+      "n_params": 2,
+      "family": [
+        "gsmooth"
+      ]
+    },
+    {
+      "name": "hatm",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "hatm"
+      ]
+    },
+    {
+      "name": "heilin",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "heilin"
+      ]
+    },
+    {
+      "name": "highecut",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "highecut",
+        "zhighect"
+      ]
+    },
+    {
+      "name": "hrefl",
+      "type": "mul",
+      "n_params": 8,
+      "family": [
+        "hrefl"
+      ]
+    },
+    {
+      "name": "ireflect",
+      "type": "con",
+      "n_params": 7,
+      "family": [
+        "ireflect"
+      ]
+    },
+    {
+      "name": "ismabs",
+      "type": "mul",
+      "n_params": 31,
+      "family": [
+        "ismabs"
+      ]
+    },
+    {
+      "name": "ismdust",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "ismdust"
+      ]
+    },
+    {
+      "name": "jet",
+      "type": "add",
+      "n_params": 16,
+      "family": [
+        "jet"
+      ]
+    },
+    {
+      "name": "kdblur",
+      "type": "con",
+      "n_params": 4,
+      "family": [
+        "kdblur"
+      ]
+    },
+    {
+      "name": "kdblur2",
+      "type": "con",
+      "n_params": 6,
+      "family": [
+        "kdblur2"
+      ]
+    },
+    {
+      "name": "kerrbb",
+      "type": "add",
+      "n_params": 10,
+      "family": [
+        "kerrbb",
+        "zkerrbb"
+      ]
+    },
+    {
+      "name": "kerrconv",
+      "type": "con",
+      "n_params": 7,
+      "family": [
+        "kerrconv"
+      ]
+    },
+    {
+      "name": "kerrd",
+      "type": "add",
+      "n_params": 8,
+      "family": [
+        "kerrd"
+      ]
+    },
+    {
+      "name": "kerrdisk",
+      "type": "add",
+      "n_params": 10,
+      "family": [
+        "kerrdisk"
+      ]
+    },
+    {
+      "name": "kyconv",
+      "type": "con",
+      "n_params": 12,
+      "family": [
+        "kyconv"
+      ]
+    },
+    {
+      "name": "kyrline",
+      "type": "add",
+      "n_params": 12,
+      "family": [
+        "kyrline"
+      ]
+    },
+    {
+      "name": "laor",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "laor"
+      ]
+    },
+    {
+      "name": "laor2",
+      "type": "add",
+      "n_params": 8,
+      "family": [
+        "laor2"
+      ]
+    },
+    {
+      "name": "log10con",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "log10con"
+      ]
+    },
+    {
+      "name": "logconst",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "logconst"
+      ]
+    },
+    {
+      "name": "logpar",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "logpar",
+        "zlogpar"
+      ]
+    },
+    {
+      "name": "lorabs",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "lorabs",
+        "zlorabs"
+      ]
+    },
+    {
+      "name": "lorentz",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "lorentz",
+        "zlorentz"
+      ]
+    },
+    {
+      "name": "lsmooth",
+      "type": "con",
+      "n_params": 2,
+      "family": [
+        "lsmooth"
+      ]
+    },
+    {
+      "name": "lyman",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "lyman"
+      ]
+    },
+    {
+      "name": "meka",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "meka",
+        "vmeka"
+      ]
+    },
+    {
+      "name": "mekal",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "mekal",
+        "vmekal"
+      ]
+    },
+    {
+      "name": "mkcflow",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "mkcflow",
+        "vmcflow"
+      ]
+    },
+    {
+      "name": "nei",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "nei",
+        "vnei",
+        "vvnei",
+        "bnei",
+        "bvnei",
+        "bvvnei"
+      ]
+    },
+    {
+      "name": "nlapec",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "nlapec"
+      ]
+    },
+    {
+      "name": "notch",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "notch"
+      ]
+    },
+    {
+      "name": "npshock",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "npshock",
+        "vnpshock",
+        "vvnpshock",
+        "bnpshock",
+        "bvnpshock",
+        "bvvnpshock"
+      ]
+    },
+    {
+      "name": "nsa",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "nsa"
+      ]
+    },
+    {
+      "name": "nsagrav",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "nsagrav"
+      ]
+    },
+    {
+      "name": "nsatmos",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "nsatmos"
+      ]
+    },
+    {
+      "name": "nsmax",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "nsmax"
+      ]
+    },
+    {
+      "name": "nsmaxg",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "nsmaxg"
+      ]
+    },
+    {
+      "name": "nsx",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "nsx"
+      ]
+    },
+    {
+      "name": "nteea",
+      "type": "add",
+      "n_params": 16,
+      "family": [
+        "nteea"
+      ]
+    },
+    {
+      "name": "nthComp",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "nthcomp"
+      ]
+    },
+    {
+      "name": "olivineabs",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "olivineabs"
+      ]
+    },
+    {
+      "name": "optxagn",
+      "type": "add",
+      "n_params": 14,
+      "family": [
+        "optxagnf",
+        "optxagn"
+      ]
+    },
+    {
+      "name": "optxagnf",
+      "type": "add",
+      "n_params": 12,
+      "family": [
+        "optxagnf",
+        "optxagn"
+      ]
+    },
+    {
+      "name": "partcov",
+      "type": "con",
+      "n_params": 1,
+      "family": [
+        "partcov"
+      ]
+    },
+    {
+      "name": "pcfabs",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "pcfabs",
+        "zpcfabs"
+      ]
+    },
+    {
+      "name": "pegpwrlw",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "pegpwrlw"
+      ]
+    },
+    {
+      "name": "pexmon",
+      "type": "add",
+      "n_params": 8,
+      "family": [
+        "pexmon"
+      ]
+    },
+    {
+      "name": "pexrav",
+      "type": "add",
+      "n_params": 8,
+      "family": [
+        "pexrav"
+      ]
+    },
+    {
+      "name": "pexriv",
+      "type": "add",
+      "n_params": 10,
+      "family": [
+        "pexriv"
+      ]
+    },
+    {
+      "name": "phabs",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "phabs",
+        "vphabs",
+        "zphabs",
+        "zvphabs"
+      ]
+    },
+    {
+      "name": "pileup",
+      "type": "acn",
+      "n_params": 7,
+      "family": [
+        "pileup"
+      ]
+    },
+    {
+      "name": "plabs",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "plabs"
+      ]
+    },
+    {
+      "name": "plcabs",
+      "type": "add",
+      "n_params": 11,
+      "family": [
+        "plcabs"
+      ]
+    },
+    {
+      "name": "polconst",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "polconst"
+      ]
+    },
+    {
+      "name": "pollin",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "pollin"
+      ]
+    },
+    {
+      "name": "polpow",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "polpow"
+      ]
+    },
+    {
+      "name": "posm",
+      "type": "add",
+      "n_params": 1,
+      "family": [
+        "posm"
+      ]
+    },
+    {
+      "name": "powerlaw",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "powerlaw",
+        "zpowerlw"
+      ]
+    },
+    {
+      "name": "pshock",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "pshock",
+        "vpshock",
+        "vvpshock",
+        "bpshock",
+        "bvpshock",
+        "bvvpshock"
+      ]
+    },
+    {
+      "name": "pwab",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "pwab"
+      ]
+    },
+    {
+      "name": "qsosed",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "agnsed",
+        "qsosed"
+      ]
+    },
+    {
+      "name": "raymond",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "raymond",
+        "vraymond"
+      ]
+    },
+    {
+      "name": "rdblur",
+      "type": "con",
+      "n_params": 4,
+      "family": [
+        "rdblur"
+      ]
+    },
+    {
+      "name": "redden",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "redden"
+      ]
+    },
+    {
+      "name": "redge",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "redge"
+      ]
+    },
+    {
+      "name": "reflect",
+      "type": "con",
+      "n_params": 5,
+      "family": [
+        "reflect"
+      ]
+    },
+    {
+      "name": "refsch",
+      "type": "add",
+      "n_params": 14,
+      "family": [
+        "refsch"
+      ]
+    },
+    {
+      "name": "rfxconv",
+      "type": "con",
+      "n_params": 5,
+      "family": [
+        "rfxconv"
+      ]
+    },
+    {
+      "name": "rgsext",
+      "type": "con",
+      "n_params": 2,
+      "family": [
+        "rgsext"
+      ]
+    },
+    {
+      "name": "rgsxsrc",
+      "type": "con",
+      "n_params": 1,
+      "family": [
+        "rgsxsrc"
+      ]
+    },
+    {
+      "name": "rnei",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "rnei",
+        "vrnei",
+        "vvrnei",
+        "brnei",
+        "bvrnei",
+        "bvvrnei"
+      ]
+    },
+    {
+      "name": "rsapec",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "rsapec",
+        "rsvapec",
+        "rsvvapec"
+      ]
+    },
+    {
+      "name": "rsgaussian",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "rsgauss"
+      ]
+    },
+    {
+      "name": "rsrnei",
+      "type": "add",
+      "n_params": 8,
+      "family": [
+        "rsrnei",
+        "rsvrnei",
+        "rsvvrnei"
+      ]
+    },
+    {
+      "name": "rsvapec",
+      "type": "add",
+      "n_params": 18,
+      "family": [
+        "rsapec",
+        "rsvapec",
+        "rsvvapec"
+      ]
+    },
+    {
+      "name": "rsvrnei",
+      "type": "add",
+      "n_params": 20,
+      "family": [
+        "rsrnei",
+        "rsvrnei",
+        "rsvvrnei"
+      ]
+    },
+    {
+      "name": "rsvvapec",
+      "type": "add",
+      "n_params": 35,
+      "family": [
+        "rsapec",
+        "rsvapec",
+        "rsvvapec"
+      ]
+    },
+    {
+      "name": "rsvvrnei",
+      "type": "add",
+      "n_params": 37,
+      "family": [
+        "rsrnei",
+        "rsvrnei",
+        "rsvvrnei"
+      ]
+    },
+    {
+      "name": "sedov",
+      "type": "add",
+      "n_params": 6,
+      "family": [
+        "sedov",
+        "vsedov",
+        "vvsedov",
+        "bsedov",
+        "bvsedov",
+        "bvvsedov"
+      ]
+    },
+    {
+      "name": "simpl",
+      "type": "con",
+      "n_params": 3,
+      "family": [
+        "simpl"
+      ]
+    },
+    {
+      "name": "sirf",
+      "type": "add",
+      "n_params": 10,
+      "family": [
+        "sirf"
+      ]
+    },
+    {
+      "name": "slimbh",
+      "type": "add",
+      "n_params": 10,
+      "family": [
+        "slimbh"
+      ]
+    },
+    {
+      "name": "smaug",
+      "type": "add",
+      "n_params": 23,
+      "family": [
+        "smaug"
+      ]
+    },
+    {
+      "name": "smedge",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "smedge"
+      ]
+    },
+    {
+      "name": "snapec",
+      "type": "add",
+      "n_params": 7,
+      "family": [
+        "snapec",
+        "bsnapec"
+      ]
+    },
+    {
+      "name": "spexpcut",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "spexpcut"
+      ]
+    },
+    {
+      "name": "spline",
+      "type": "mul",
+      "n_params": 6,
+      "family": [
+        "spline"
+      ]
+    },
+    {
+      "name": "srcut",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "srcut"
+      ]
+    },
+    {
+      "name": "sresc",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "sresc"
+      ]
+    },
+    {
+      "name": "ssa",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "ssa"
+      ]
+    },
+    {
+      "name": "SSS_ice",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "SSSice"
+      ]
+    },
+    {
+      "name": "sssed",
+      "type": "add",
+      "n_params": 15,
+      "family": [
+        "SSsed"
+      ]
+    },
+    {
+      "name": "stbowl",
+      "type": "add",
+      "n_params": 13,
+      "family": [
+        "stbowl"
+      ]
+    },
+    {
+      "name": "stcone",
+      "type": "add",
+      "n_params": 13,
+      "family": [
+        "stcone"
+      ]
+    },
+    {
+      "name": "stdisc",
+      "type": "add",
+      "n_params": 9,
+      "family": [
+        "stdisc"
+      ]
+    },
+    {
+      "name": "step",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "step"
+      ]
+    },
+    {
+      "name": "sttorus",
+      "type": "add",
+      "n_params": 13,
+      "family": [
+        "sttorus"
+      ]
+    },
+    {
+      "name": "swind1",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "swind1"
+      ]
+    },
+    {
+      "name": "tapec",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "tapec",
+        "vtapec",
+        "vvtapec"
+      ]
+    },
+    {
+      "name": "TBabs",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "tbabs",
+        "ztbabs",
+        "tbfeo",
+        "tbgas",
+        "tbgrain",
+        "tbpcf",
+        "tbvarabs",
+        "tbrel"
+      ]
+    },
+    {
+      "name": "TBfeo",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "tbabs",
+        "ztbabs",
+        "tbfeo",
+        "tbgas",
+        "tbgrain",
+        "tbpcf",
+        "tbvarabs",
+        "tbrel"
+      ]
+    },
+    {
+      "name": "TBgas",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "tbabs",
+        "ztbabs",
+        "tbfeo",
+        "tbgas",
+        "tbgrain",
+        "tbpcf",
+        "tbvarabs",
+        "tbrel"
+      ]
+    },
+    {
+      "name": "TBgrain",
+      "type": "mul",
+      "n_params": 6,
+      "family": [
+        "tbabs",
+        "ztbabs",
+        "tbfeo",
+        "tbgas",
+        "tbgrain",
+        "tbpcf",
+        "tbvarabs",
+        "tbrel"
+      ]
+    },
+    {
+      "name": "TBpcf",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "tbabs",
+        "ztbabs",
+        "tbfeo",
+        "tbgas",
+        "tbgrain",
+        "tbpcf",
+        "tbvarabs",
+        "tbrel"
+      ]
+    },
+    {
+      "name": "TBrel",
+      "type": "mul",
+      "n_params": 42,
+      "family": [
+        "tbabs",
+        "ztbabs",
+        "tbfeo",
+        "tbgas",
+        "tbgrain",
+        "tbpcf",
+        "tbvarabs",
+        "tbrel"
+      ]
+    },
+    {
+      "name": "TBvarabs",
+      "type": "mul",
+      "n_params": 42,
+      "family": [
+        "tbabs",
+        "ztbabs",
+        "tbfeo",
+        "tbgas",
+        "tbgrain",
+        "tbpcf",
+        "tbvarabs",
+        "tbrel"
+      ]
+    },
+    {
+      "name": "thcomp",
+      "type": "con",
+      "n_params": 4,
+      "family": [
+        "thcomp"
+      ]
+    },
+    {
+      "name": "uvred",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "uvred"
+      ]
+    },
+    {
+      "name": "vagauss",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "vagauss",
+        "zvagauss"
+      ]
+    },
+    {
+      "name": "vapec",
+      "type": "add",
+      "n_params": 16,
+      "family": [
+        "apec",
+        "vapec",
+        "vvapec",
+        "bapec",
+        "bvapec",
+        "bvvapec"
+      ]
+    },
+    {
+      "name": "varabs",
+      "type": "mul",
+      "n_params": 18,
+      "family": [
+        "varabs",
+        "zvarabs"
+      ]
+    },
+    {
+      "name": "vashift",
+      "type": "con",
+      "n_params": 1,
+      "family": [
+        "vashift"
+      ]
+    },
+    {
+      "name": "vbremss",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "bremss",
+        "vbremss",
+        "zbremss"
+      ]
+    },
+    {
+      "name": "vcempow",
+      "type": "add",
+      "n_params": 20,
+      "family": [
+        "cempow",
+        "vcempow",
+        "bcempow",
+        "bvcempow"
+      ]
+    },
+    {
+      "name": "vcheb6",
+      "type": "add",
+      "n_params": 24,
+      "family": [
+        "cheb6",
+        "vcheb6",
+        "bcheb6",
+        "bvcheb6"
+      ]
+    },
+    {
+      "name": "vcie",
+      "type": "add",
+      "n_params": 17,
+      "family": [
+        "cie",
+        "vcie",
+        "vvcie",
+        "bcie",
+        "bvcie",
+        "bvvcie"
+      ]
+    },
+    {
+      "name": "vcoolflow",
+      "type": "add",
+      "n_params": 19,
+      "family": [
+        "coolflow",
+        "vcoolflow",
+        "bcoolflow",
+        "bvcoolflow"
+      ]
+    },
+    {
+      "name": "vcph",
+      "type": "add",
+      "n_params": 18,
+      "family": [
+        "cph",
+        "vcph",
+        "bcph",
+        "bvcph"
+      ]
+    },
+    {
+      "name": "vequil",
+      "type": "add",
+      "n_params": 15,
+      "family": [
+        "equil",
+        "vequil",
+        "bequil",
+        "bvequil"
+      ]
+    },
+    {
+      "name": "vexpcheb6",
+      "type": "add",
+      "n_params": 24,
+      "family": [
+        "expcheb6",
+        "vexpcheb6",
+        "bexpcheb6",
+        "bvexpcheb6"
+      ]
+    },
+    {
+      "name": "vgabs",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "vgabs",
+        "zvgabs"
+      ]
+    },
+    {
+      "name": "vgadem",
+      "type": "add",
+      "n_params": 20,
+      "family": [
+        "gadem",
+        "vgadem",
+        "vvgadem",
+        "bgadem",
+        "bvgadem",
+        "bvvgadem"
+      ]
+    },
+    {
+      "name": "vgaussian",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "vgauss",
+        "zvgauss"
+      ]
+    },
+    {
+      "name": "vgnei",
+      "type": "add",
+      "n_params": 18,
+      "family": [
+        "gnei",
+        "vgnei",
+        "vvgnei",
+        "bgnei",
+        "bvgnei",
+        "bvvgnei"
+      ]
+    },
+    {
+      "name": "vlorabs",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "vlorabs",
+        "zvlorabs"
+      ]
+    },
+    {
+      "name": "vlorentz",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "vlorentz",
+        "zvlorentz"
+      ]
+    },
+    {
+      "name": "vmcflow",
+      "type": "add",
+      "n_params": 19,
+      "family": [
+        "mkcflow",
+        "vmcflow"
+      ]
+    },
+    {
+      "name": "vmeka",
+      "type": "add",
+      "n_params": 18,
+      "family": [
+        "meka",
+        "vmeka"
+      ]
+    },
+    {
+      "name": "vmekal",
+      "type": "add",
+      "n_params": 19,
+      "family": [
+        "mekal",
+        "vmekal"
+      ]
+    },
+    {
+      "name": "vmshift",
+      "type": "con",
+      "n_params": 1,
+      "family": [
+        "vmshift"
+      ]
+    },
+    {
+      "name": "vnei",
+      "type": "add",
+      "n_params": 17,
+      "family": [
+        "nei",
+        "vnei",
+        "vvnei",
+        "bnei",
+        "bvnei",
+        "bvvnei"
+      ]
+    },
+    {
+      "name": "vnpshock",
+      "type": "add",
+      "n_params": 19,
+      "family": [
+        "npshock",
+        "vnpshock",
+        "vvnpshock",
+        "bnpshock",
+        "bvnpshock",
+        "bvvnpshock"
+      ]
+    },
+    {
+      "name": "voigt",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "voigt",
+        "zvoigt"
+      ]
+    },
+    {
+      "name": "voigtabs",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "voigtabs",
+        "zvoigtabs"
+      ]
+    },
+    {
+      "name": "vphabs",
+      "type": "mul",
+      "n_params": 18,
+      "family": [
+        "phabs",
+        "vphabs",
+        "zphabs",
+        "zvphabs"
+      ]
+    },
+    {
+      "name": "vpshock",
+      "type": "add",
+      "n_params": 18,
+      "family": [
+        "pshock",
+        "vpshock",
+        "vvpshock",
+        "bpshock",
+        "bvpshock",
+        "bvvpshock"
+      ]
+    },
+    {
+      "name": "vraymond",
+      "type": "add",
+      "n_params": 15,
+      "family": [
+        "raymond",
+        "vraymond"
+      ]
+    },
+    {
+      "name": "vrnei",
+      "type": "add",
+      "n_params": 18,
+      "family": [
+        "rnei",
+        "vrnei",
+        "vvrnei",
+        "brnei",
+        "bvrnei",
+        "bvvrnei"
+      ]
+    },
+    {
+      "name": "vsedov",
+      "type": "add",
+      "n_params": 18,
+      "family": [
+        "sedov",
+        "vsedov",
+        "vvsedov",
+        "bsedov",
+        "bvsedov",
+        "bvvsedov"
+      ]
+    },
+    {
+      "name": "vtapec",
+      "type": "add",
+      "n_params": 17,
+      "family": [
+        "tapec",
+        "vtapec",
+        "vvtapec"
+      ]
+    },
+    {
+      "name": "vvapec",
+      "type": "add",
+      "n_params": 33,
+      "family": [
+        "apec",
+        "vapec",
+        "vvapec",
+        "bapec",
+        "bvapec",
+        "bvvapec"
+      ]
+    },
+    {
+      "name": "vvcie",
+      "type": "add",
+      "n_params": 34,
+      "family": [
+        "cie",
+        "vcie",
+        "vvcie",
+        "bcie",
+        "bvcie",
+        "bvvcie"
+      ]
+    },
+    {
+      "name": "vvgadem",
+      "type": "add",
+      "n_params": 36,
+      "family": [
+        "gadem",
+        "vgadem",
+        "vvgadem",
+        "bgadem",
+        "bvgadem",
+        "bvvgadem"
+      ]
+    },
+    {
+      "name": "vvgnei",
+      "type": "add",
+      "n_params": 35,
+      "family": [
+        "gnei",
+        "vgnei",
+        "vvgnei",
+        "bgnei",
+        "bvgnei",
+        "bvvgnei"
+      ]
+    },
+    {
+      "name": "vvnei",
+      "type": "add",
+      "n_params": 34,
+      "family": [
+        "nei",
+        "vnei",
+        "vvnei",
+        "bnei",
+        "bvnei",
+        "bvvnei"
+      ]
+    },
+    {
+      "name": "vvnpshock",
+      "type": "add",
+      "n_params": 36,
+      "family": [
+        "npshock",
+        "vnpshock",
+        "vvnpshock",
+        "bnpshock",
+        "bvnpshock",
+        "bvvnpshock"
+      ]
+    },
+    {
+      "name": "vvoigt",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "vvoigt",
+        "zvvoigt"
+      ]
+    },
+    {
+      "name": "vvoigtabs",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "vvoigtabs",
+        "zvvoigtabs"
+      ]
+    },
+    {
+      "name": "vvpshock",
+      "type": "add",
+      "n_params": 35,
+      "family": [
+        "pshock",
+        "vpshock",
+        "vvpshock",
+        "bpshock",
+        "bvpshock",
+        "bvvpshock"
+      ]
+    },
+    {
+      "name": "vvrnei",
+      "type": "add",
+      "n_params": 35,
+      "family": [
+        "rnei",
+        "vrnei",
+        "vvrnei",
+        "brnei",
+        "bvrnei",
+        "bvvrnei"
+      ]
+    },
+    {
+      "name": "vvsedov",
+      "type": "add",
+      "n_params": 35,
+      "family": [
+        "sedov",
+        "vsedov",
+        "vvsedov",
+        "bsedov",
+        "bvsedov",
+        "bvvsedov"
+      ]
+    },
+    {
+      "name": "vvtapec",
+      "type": "add",
+      "n_params": 34,
+      "family": [
+        "tapec",
+        "vtapec",
+        "vvtapec"
+      ]
+    },
+    {
+      "name": "vvwdem",
+      "type": "add",
+      "n_params": 37,
+      "family": [
+        "wdem",
+        "vwdem",
+        "vvwdem",
+        "bwdem",
+        "bvwdem",
+        "bvvwdem"
+      ]
+    },
+    {
+      "name": "vwdem",
+      "type": "add",
+      "n_params": 21,
+      "family": [
+        "wdem",
+        "vwdem",
+        "vvwdem",
+        "bwdem",
+        "bvwdem",
+        "bvvwdem"
+      ]
+    },
+    {
+      "name": "wabs",
+      "type": "mul",
+      "n_params": 1,
+      "family": [
+        "wabs",
+        "zwabs"
+      ]
+    },
+    {
+      "name": "wdem",
+      "type": "add",
+      "n_params": 8,
+      "family": [
+        "wdem",
+        "vwdem",
+        "vvwdem",
+        "bwdem",
+        "bvwdem",
+        "bvvwdem"
+      ]
+    },
+    {
+      "name": "wndabs",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "wndabs",
+        "zwndabs"
+      ]
+    },
+    {
+      "name": "xilconv",
+      "type": "con",
+      "n_params": 6,
+      "family": [
+        "xilconv"
+      ]
+    },
+    {
+      "name": "xion",
+      "type": "mul",
+      "n_params": 13,
+      "family": [
+        "xion"
+      ]
+    },
+    {
+      "name": "xscat",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "xscat"
+      ]
+    },
+    {
+      "name": "zagauss",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "agauss",
+        "zagauss"
+      ]
+    },
+    {
+      "name": "zashift",
+      "type": "con",
+      "n_params": 1,
+      "family": [
+        "zashift"
+      ]
+    },
+    {
+      "name": "zbabs",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "zbabs"
+      ]
+    },
+    {
+      "name": "zbbody",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "bbody",
+        "zbbody"
+      ]
+    },
+    {
+      "name": "zbfekblor",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "fekblor",
+        "zfekblor",
+        "bfekblor",
+        "zbfekblor"
+      ]
+    },
+    {
+      "name": "zbfeklor",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "feklor",
+        "zfeklor",
+        "bfeklor",
+        "zbfeklor"
+      ]
+    },
+    {
+      "name": "zbknpower",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "bknpower",
+        "zbknpower"
+      ]
+    },
+    {
+      "name": "zbremss",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "bremss",
+        "vbremss",
+        "zbremss"
+      ]
+    },
+    {
+      "name": "zcutoffpl",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "cutoffpl",
+        "zcutoffpl"
+      ]
+    },
+    {
+      "name": "zdust",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "zdust"
+      ]
+    },
+    {
+      "name": "zedge",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "edge",
+        "zedge"
+      ]
+    },
+    {
+      "name": "zfekblor",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "fekblor",
+        "zfekblor",
+        "bfekblor",
+        "zbfekblor"
+      ]
+    },
+    {
+      "name": "zfeklor",
+      "type": "add",
+      "n_params": 2,
+      "family": [
+        "feklor",
+        "zfeklor",
+        "bfeklor",
+        "zbfeklor"
+      ]
+    },
+    {
+      "name": "zgabs",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "gabs",
+        "zgabs"
+      ]
+    },
+    {
+      "name": "zgauss",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "gauss",
+        "zgauss"
+      ]
+    },
+    {
+      "name": "zhighect",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "highecut",
+        "zhighect"
+      ]
+    },
+    {
+      "name": "zigm",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "zigm"
+      ]
+    },
+    {
+      "name": "zkerrbb",
+      "type": "add",
+      "n_params": 10,
+      "family": [
+        "kerrbb",
+        "zkerrbb"
+      ]
+    },
+    {
+      "name": "zlogpar",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "logpar",
+        "zlogpar"
+      ]
+    },
+    {
+      "name": "zlorabs",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "lorabs",
+        "zlorabs"
+      ]
+    },
+    {
+      "name": "zlorentz",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "lorentz",
+        "zlorentz"
+      ]
+    },
+    {
+      "name": "zmshift",
+      "type": "con",
+      "n_params": 1,
+      "family": [
+        "zmshift"
+      ]
+    },
+    {
+      "name": "zpcfabs",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "pcfabs",
+        "zpcfabs"
+      ]
+    },
+    {
+      "name": "zphabs",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "phabs",
+        "vphabs",
+        "zphabs",
+        "zvphabs"
+      ]
+    },
+    {
+      "name": "zpowerlw",
+      "type": "add",
+      "n_params": 3,
+      "family": [
+        "powerlaw",
+        "zpowerlw"
+      ]
+    },
+    {
+      "name": "zredden",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "zredden"
+      ]
+    },
+    {
+      "name": "zsmdust",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "zsmdust"
+      ]
+    },
+    {
+      "name": "zTBabs",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "tbabs",
+        "ztbabs",
+        "tbfeo",
+        "tbgas",
+        "tbgrain",
+        "tbpcf",
+        "tbvarabs",
+        "tbrel"
+      ]
+    },
+    {
+      "name": "zvagauss",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "vagauss",
+        "zvagauss"
+      ]
+    },
+    {
+      "name": "zvarabs",
+      "type": "mul",
+      "n_params": 19,
+      "family": [
+        "varabs",
+        "zvarabs"
+      ]
+    },
+    {
+      "name": "zvfeabs",
+      "type": "mul",
+      "n_params": 5,
+      "family": [
+        "zvfeabs"
+      ]
+    },
+    {
+      "name": "zvgabs",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "vgabs",
+        "zvgabs"
+      ]
+    },
+    {
+      "name": "zvgaussian",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "vgauss",
+        "zvgauss"
+      ]
+    },
+    {
+      "name": "zvlorabs",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "vlorabs",
+        "zvlorabs"
+      ]
+    },
+    {
+      "name": "zvlorentz",
+      "type": "add",
+      "n_params": 4,
+      "family": [
+        "vlorentz",
+        "zvlorentz"
+      ]
+    },
+    {
+      "name": "zvoigt",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "voigt",
+        "zvoigt"
+      ]
+    },
+    {
+      "name": "zvoigtabs",
+      "type": "mul",
+      "n_params": 5,
+      "family": [
+        "voigtabs",
+        "zvoigtabs"
+      ]
+    },
+    {
+      "name": "zvphabs",
+      "type": "mul",
+      "n_params": 19,
+      "family": [
+        "phabs",
+        "vphabs",
+        "zphabs",
+        "zvphabs"
+      ]
+    },
+    {
+      "name": "zvvoigt",
+      "type": "add",
+      "n_params": 5,
+      "family": [
+        "vvoigt",
+        "zvvoigt"
+      ]
+    },
+    {
+      "name": "zvvoigtabs",
+      "type": "mul",
+      "n_params": 5,
+      "family": [
+        "vvoigtabs",
+        "zvvoigtabs"
+      ]
+    },
+    {
+      "name": "zwabs",
+      "type": "mul",
+      "n_params": 2,
+      "family": [
+        "wabs",
+        "zwabs"
+      ]
+    },
+    {
+      "name": "zwndabs",
+      "type": "mul",
+      "n_params": 3,
+      "family": [
+        "wndabs",
+        "zwndabs"
+      ]
+    },
+    {
+      "name": "zxipab",
+      "type": "mul",
+      "n_params": 5,
+      "family": [
+        "zxipab"
+      ]
+    },
+    {
+      "name": "zxipcf",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "zxipcf"
+      ]
+    }
+  ],
+  "pyxspec_api": [
+    {
+      "class": "Background",
+      "singleton": null,
+      "doc": "corpus/api/Background.md",
+      "n_attributes": 7,
+      "n_methods": 1
+    },
+    {
+      "class": "Chain",
+      "singleton": null,
+      "doc": "corpus/api/Chain.md",
+      "n_attributes": 11,
+      "n_methods": 3
+    },
+    {
+      "class": "ChainManager",
+      "singleton": "AllChains",
+      "doc": "corpus/api/AllChains.md",
+      "n_attributes": 9,
+      "n_methods": 11
+    },
+    {
+      "class": "ChainResult",
+      "singleton": null,
+      "doc": "corpus/api/ChainResult.md",
+      "n_attributes": 0,
+      "n_methods": 1
+    },
+    {
+      "class": "Component",
+      "singleton": null,
+      "doc": "corpus/api/Component.md",
+      "n_attributes": 0,
+      "n_methods": 1
+    },
+    {
+      "class": "DataManager",
+      "singleton": "AllData",
+      "doc": "corpus/api/AllData.md",
+      "n_attributes": 2,
+      "n_methods": 11
+    },
+    {
+      "class": "FakeitSettings",
+      "singleton": null,
+      "doc": "corpus/api/FakeitSettings.md",
+      "n_attributes": 0,
+      "n_methods": 1
+    },
+    {
+      "class": "FitManager",
+      "singleton": "Fit",
+      "doc": "corpus/api/Fit.md",
+      "n_attributes": 20,
+      "n_methods": 12
+    },
+    {
+      "class": "HMCResult",
+      "singleton": null,
+      "doc": "corpus/api/HMCResult.md",
+      "n_attributes": 0,
+      "n_methods": 1
+    },
+    {
+      "class": "Model",
+      "singleton": null,
+      "doc": "corpus/api/Model.md",
+      "n_attributes": 3,
+      "n_methods": 9
+    },
+    {
+      "class": "ModelManager",
+      "singleton": "AllModels",
+      "doc": "corpus/api/AllModels.md",
+      "n_attributes": 2,
+      "n_methods": 20
+    },
+    {
+      "class": "NestedResult",
+      "singleton": null,
+      "doc": "corpus/api/NestedResult.md",
+      "n_attributes": 0,
+      "n_methods": 1
+    },
+    {
+      "class": "Parameter",
+      "singleton": null,
+      "doc": "corpus/api/Parameter.md",
+      "n_attributes": 9,
+      "n_methods": 2
+    },
+    {
+      "class": "PlotManager",
+      "singleton": "Plot",
+      "doc": "corpus/api/Plot.md",
+      "n_attributes": 11,
+      "n_methods": 21
+    },
+    {
+      "class": "RModel",
+      "singleton": null,
+      "doc": "corpus/api/RModel.md",
+      "n_attributes": 1,
+      "n_methods": 2
+    },
+    {
+      "class": "Response",
+      "singleton": null,
+      "doc": "corpus/api/Response.md",
+      "n_attributes": 5,
+      "n_methods": 3
+    },
+    {
+      "class": "Spectrum",
+      "singleton": null,
+      "doc": "corpus/api/Spectrum.md",
+      "n_attributes": 28,
+      "n_methods": 9
+    },
+    {
+      "class": "XspecSettings",
+      "singleton": "Xset",
+      "doc": "corpus/api/Xset.md",
+      "n_attributes": 12,
+      "n_methods": 9
+    }
+  ],
+  "command_tokens": [
+    "?",
+    "abund",
+    "addcomp",
+    "arf",
+    "autosave",
+    "backgrnd",
+    "bayes",
+    "chain",
+    "chatter",
+    "compare",
+    "comsum",
+    "corfile",
+    "cornorm",
+    "cosmo",
+    "cpd",
+    "data",
+    "delcomp",
+    "diagrsp",
+    "dummyrsp",
+    "editmod",
+    "energies",
+    "eqwidth",
+    "error",
+    "exit",
+    "fakeit",
+    "fit",
+    "flux",
+    "freeze",
+    "ftest",
+    "gain",
+    "genetic",
+    "goodness",
+    "group",
+    "help",
+    "hmc",
+    "identify",
+    "ignore",
+    "improve",
+    "initpackage",
+    "iplot",
+    "lmod",
+    "log",
+    "lumin",
+    "margin",
+    "mdefine",
+    "method",
+    "model",
+    "nest",
+    "newpar",
+    "notice",
+    "parallel",
+    "plot",
+    "query",
+    "quit",
+    "recornrm",
+    "renorm",
+    "rerror",
+    "response",
+    "rfreeze",
+    "rmodel",
+    "rnewpar",
+    "rthaw",
+    "runtie",
+    "save",
+    "script",
+    "setplot",
+    "show",
+    "sim",
+    "statistic",
+    "steppar",
+    "systematic",
+    "tclout",
+    "thaw",
+    "thleqw",
+    "time",
+    "uncertain",
+    "undo",
+    "unknown",
+    "untie",
+    "version",
+    "weight",
+    "xabund",
+    "xaddcomp",
+    "xarf",
+    "xautosave",
+    "xbackgrnd",
+    "xbayes",
+    "xchain",
+    "xchatter",
+    "xcompare",
+    "xcomsum",
+    "xcorfile",
+    "xcornorm",
+    "xcosmo",
+    "xcpd",
+    "xdata",
+    "xdelcomp",
+    "xdiagrsp",
+    "xdummyrsp",
+    "xeditmod",
+    "xenergies",
+    "xeqwidth",
+    "xerror",
+    "xexit",
+    "xfakeit",
+    "xfit",
+    "xflux",
+    "xfreeze",
+    "xftest",
+    "xgain",
+    "xgoodness",
+    "xgroup",
+    "xhelp",
+    "xhmc",
+    "xidentify",
+    "xignore",
+    "ximprove",
+    "xinitpackage",
+    "xiplot",
+    "xlmod",
+    "xlog",
+    "xlumin",
+    "xmargin",
+    "xmdefine",
+    "xmethod",
+    "xmodel",
+    "xnest",
+    "xnewpar",
+    "xnotice",
+    "xparallel",
+    "xplot",
+    "xquery",
+    "xquit",
+    "xrenorm",
+    "xrerror",
+    "xresponse",
+    "xrfreeze",
+    "xrmodel",
+    "xrnewpar",
+    "xrthaw",
+    "xruntie",
+    "xsave",
+    "xscript",
+    "xsect",
+    "xset",
+    "xsetplot",
+    "xshow",
+    "xsim",
+    "xstatistic",
+    "xsteppar",
+    "xsystematic",
+    "xtclout",
+    "xthaw",
+    "xtime",
+    "xuncertain",
+    "xundo",
+    "xuntie",
+    "xversion",
+    "xweight",
+    "xxsect",
+    "xxset"
+  ],
+  "commands": [
+    {
+      "name": "autosave",
+      "aliases": [
+        "xautosave"
+      ],
+      "doc": "corpus/commands/autosave.md"
+    },
+    {
+      "name": "chatter",
+      "aliases": [
+        "xchatter"
+      ],
+      "doc": "corpus/commands/chatter.md"
+    },
+    {
+      "name": "exit",
+      "aliases": [
+        "quit",
+        "xexit",
+        "xquit"
+      ],
+      "doc": "corpus/commands/exit.md"
+    },
+    {
+      "name": "help",
+      "aliases": [
+        "xhelp"
+      ],
+      "doc": "corpus/commands/help.md"
+    },
+    {
+      "name": "log",
+      "aliases": [
+        "xlog"
+      ],
+      "doc": "corpus/commands/log.md"
+    },
+    {
+      "name": "parallel",
+      "aliases": [
+        "xparallel"
+      ],
+      "doc": "corpus/commands/parallel.md"
+    },
+    {
+      "name": "query",
+      "aliases": [
+        "xquery"
+      ],
+      "doc": "corpus/commands/query.md"
+    },
+    {
+      "name": "save",
+      "aliases": [
+        "xsave"
+      ],
+      "doc": "corpus/commands/save.md"
+    },
+    {
+      "name": "script",
+      "aliases": [
+        "xscript"
+      ],
+      "doc": "corpus/commands/script.md"
+    },
+    {
+      "name": "show",
+      "aliases": [
+        "xshow"
+      ],
+      "doc": "corpus/commands/show.md"
+    },
+    {
+      "name": "syscall",
+      "aliases": [],
+      "doc": "corpus/commands/syscall.md"
+    },
+    {
+      "name": "tclout",
+      "aliases": [
+        "xtclout"
+      ],
+      "doc": "corpus/commands/tclout.md"
+    },
+    {
+      "name": "tcloutr",
+      "aliases": [],
+      "doc": "corpus/commands/tcloutr.md"
+    },
+    {
+      "name": "time",
+      "aliases": [
+        "xtime"
+      ],
+      "doc": "corpus/commands/time.md"
+    },
+    {
+      "name": "undo",
+      "aliases": [
+        "xundo"
+      ],
+      "doc": "corpus/commands/undo.md"
+    },
+    {
+      "name": "version",
+      "aliases": [
+        "xversion"
+      ],
+      "doc": "corpus/commands/version.md"
+    },
+    {
+      "name": "arf",
+      "aliases": [
+        "xarf"
+      ],
+      "doc": "corpus/commands/arf.md"
+    },
+    {
+      "name": "backgrnd",
+      "aliases": [
+        "xbackgrnd"
+      ],
+      "doc": "corpus/commands/backgrnd.md"
+    },
+    {
+      "name": "corfile",
+      "aliases": [
+        "xcorfile"
+      ],
+      "doc": "corpus/commands/corfile.md"
+    },
+    {
+      "name": "cornorm",
+      "aliases": [
+        "xcornorm"
+      ],
+      "doc": "corpus/commands/cornorm.md"
+    },
+    {
+      "name": "data",
+      "aliases": [
+        "xdata"
+      ],
+      "doc": "corpus/commands/data.md"
+    },
+    {
+      "name": "diagrsp",
+      "aliases": [
+        "xdiagrsp"
+      ],
+      "doc": "corpus/commands/diagrsp.md"
+    },
+    {
+      "name": "fakeit",
+      "aliases": [
+        "xfakeit"
+      ],
+      "doc": "corpus/commands/fakeit.md"
+    },
+    {
+      "name": "group",
+      "aliases": [
+        "xgroup"
+      ],
+      "doc": "corpus/commands/group.md"
+    },
+    {
+      "name": "ignore",
+      "aliases": [
+        "xignore"
+      ],
+      "doc": "corpus/commands/ignore.md"
+    },
+    {
+      "name": "notice",
+      "aliases": [
+        "xnotice"
+      ],
+      "doc": "corpus/commands/notice.md"
+    },
+    {
+      "name": "response",
+      "aliases": [
+        "xresponse"
+      ],
+      "doc": "corpus/commands/response.md"
+    },
+    {
+      "name": "bayes",
+      "aliases": [
+        "xbayes"
+      ],
+      "doc": "corpus/commands/bayes.md"
+    },
+    {
+      "name": "chain",
+      "aliases": [
+        "xchain"
+      ],
+      "doc": "corpus/commands/chain.md"
+    },
+    {
+      "name": "compare",
+      "aliases": [
+        "xcompare"
+      ],
+      "doc": "corpus/commands/compare.md"
+    },
+    {
+      "name": "error",
+      "aliases": [
+        "rerror",
+        "uncertain",
+        "xerror",
+        "xrerror",
+        "xuncertain"
+      ],
+      "doc": "corpus/commands/error.md"
+    },
+    {
+      "name": "fit",
+      "aliases": [
+        "xfit"
+      ],
+      "doc": "corpus/commands/fit.md"
+    },
+    {
+      "name": "freeze",
+      "aliases": [
+        "rfreeze",
+        "xfreeze",
+        "xrfreeze"
+      ],
+      "doc": "corpus/commands/freeze.md"
+    },
+    {
+      "name": "ftest",
+      "aliases": [
+        "xftest"
+      ],
+      "doc": "corpus/commands/ftest.md"
+    },
+    {
+      "name": "goodness",
+      "aliases": [
+        "xgoodness"
+      ],
+      "doc": "corpus/commands/goodness.md"
+    },
+    {
+      "name": "hmc",
+      "aliases": [
+        "xhmc"
+      ],
+      "doc": "corpus/commands/hmc.md"
+    },
+    {
+      "name": "improve",
+      "aliases": [
+        "ximprove"
+      ],
+      "doc": "corpus/commands/improve.md"
+    },
+    {
+      "name": "margin",
+      "aliases": [
+        "xmargin"
+      ],
+      "doc": "corpus/commands/margin.md"
+    },
+    {
+      "name": "nest",
+      "aliases": [
+        "xnest"
+      ],
+      "doc": "corpus/commands/nest.md"
+    },
+    {
+      "name": "renorm",
+      "aliases": [
+        "xrenorm"
+      ],
+      "doc": "corpus/commands/renorm.md"
+    },
+    {
+      "name": "sim",
+      "aliases": [
+        "xsim"
+      ],
+      "doc": "corpus/commands/sim.md"
+    },
+    {
+      "name": "steppar",
+      "aliases": [
+        "xsteppar"
+      ],
+      "doc": "corpus/commands/steppar.md"
+    },
+    {
+      "name": "thaw",
+      "aliases": [
+        "rthaw",
+        "xrthaw",
+        "xthaw"
+      ],
+      "doc": "corpus/commands/thaw.md"
+    },
+    {
+      "name": "weight",
+      "aliases": [
+        "xweight"
+      ],
+      "doc": "corpus/commands/weight.md"
+    },
+    {
+      "name": "addcomp",
+      "aliases": [
+        "xaddcomp"
+      ],
+      "doc": "corpus/commands/addcomp.md"
+    },
+    {
+      "name": "addline",
+      "aliases": [],
+      "doc": "corpus/commands/addline.md"
+    },
+    {
+      "name": "delcomp",
+      "aliases": [
+        "xdelcomp"
+      ],
+      "doc": "corpus/commands/delcomp.md"
+    },
+    {
+      "name": "dummyrsp",
+      "aliases": [
+        "xdummyrsp"
+      ],
+      "doc": "corpus/commands/dummyrsp.md"
+    },
+    {
+      "name": "editmod",
+      "aliases": [
+        "xeditmod"
+      ],
+      "doc": "corpus/commands/editmod.md"
+    },
+    {
+      "name": "energies",
+      "aliases": [
+        "xenergies"
+      ],
+      "doc": "corpus/commands/energies.md"
+    },
+    {
+      "name": "eqwidth",
+      "aliases": [
+        "xeqwidth"
+      ],
+      "doc": "corpus/commands/eqwidth.md"
+    },
+    {
+      "name": "flux",
+      "aliases": [
+        "lumin",
+        "xflux",
+        "xlumin"
+      ],
+      "doc": "corpus/commands/flux.md"
+    },
+    {
+      "name": "gain",
+      "aliases": [
+        "xgain"
+      ],
+      "doc": "corpus/commands/gain.md"
+    },
+    {
+      "name": "identify",
+      "aliases": [
+        "xidentify"
+      ],
+      "doc": "corpus/commands/identify.md"
+    },
+    {
+      "name": "initpackage",
+      "aliases": [
+        "xinitpackage"
+      ],
+      "doc": "corpus/commands/initpackage.md"
+    },
+    {
+      "name": "lmod",
+      "aliases": [
+        "xlmod"
+      ],
+      "doc": "corpus/commands/lmod.md"
+    },
+    {
+      "name": "lumin",
+      "aliases": [
+        "flux",
+        "xflux",
+        "xlumin"
+      ],
+      "doc": "corpus/commands/lumin.md"
+    },
+    {
+      "name": "mdefine",
+      "aliases": [
+        "xmdefine"
+      ],
+      "doc": "corpus/commands/mdefine.md"
+    },
+    {
+      "name": "model",
+      "aliases": [
+        "xmodel"
+      ],
+      "doc": "corpus/commands/model.md"
+    },
+    {
+      "name": "modid",
+      "aliases": [],
+      "doc": "corpus/commands/modid.md"
+    },
+    {
+      "name": "newpar",
+      "aliases": [
+        "rnewpar",
+        "xnewpar",
+        "xrnewpar"
+      ],
+      "doc": "corpus/commands/newpar.md"
+    },
+    {
+      "name": "systematic",
+      "aliases": [
+        "xsystematic"
+      ],
+      "doc": "corpus/commands/systematic.md"
+    },
+    {
+      "name": "untie",
+      "aliases": [
+        "runtie",
+        "xruntie",
+        "xuntie"
+      ],
+      "doc": "corpus/commands/untie.md"
+    },
+    {
+      "name": "cpd",
+      "aliases": [
+        "xcpd"
+      ],
+      "doc": "corpus/commands/cpd.md"
+    },
+    {
+      "name": "hardcopy",
+      "aliases": [],
+      "doc": "corpus/commands/hardcopy.md"
+    },
+    {
+      "name": "iplot",
+      "aliases": [
+        "xiplot"
+      ],
+      "doc": "corpus/commands/iplot.md"
+    },
+    {
+      "name": "plot",
+      "aliases": [
+        "xplot"
+      ],
+      "doc": "corpus/commands/plot.md"
+    },
+    {
+      "name": "setplot",
+      "aliases": [
+        "xsetplot"
+      ],
+      "doc": "corpus/commands/setplot.md"
+    },
+    {
+      "name": "abund",
+      "aliases": [
+        "xabund"
+      ],
+      "doc": "corpus/commands/abund.md"
+    },
+    {
+      "name": "cosmo",
+      "aliases": [
+        "xcosmo"
+      ],
+      "doc": "corpus/commands/cosmo.md"
+    },
+    {
+      "name": "method",
+      "aliases": [
+        "xmethod"
+      ],
+      "doc": "corpus/commands/method.md"
+    },
+    {
+      "name": "statistic",
+      "aliases": [
+        "xstatistic"
+      ],
+      "doc": "corpus/commands/statistic.md"
+    },
+    {
+      "name": "xsect",
+      "aliases": [
+        "xxsect"
+      ],
+      "doc": "corpus/commands/xsect.md"
+    },
+    {
+      "name": "xset",
+      "aliases": [
+        "xxset"
+      ],
+      "doc": "corpus/commands/xset.md"
+    },
+    {
+      "name": "lrt",
+      "aliases": [],
+      "doc": "corpus/commands/lrt.md"
+    },
+    {
+      "name": "multifake",
+      "aliases": [],
+      "doc": "corpus/commands/multifake.md"
+    },
+    {
+      "name": "rescalecov",
+      "aliases": [],
+      "doc": "corpus/commands/rescalecov.md"
+    },
+    {
+      "name": "simftest",
+      "aliases": [],
+      "doc": "corpus/commands/simftest.md"
+    },
+    {
+      "name": "writefits",
+      "aliases": [],
+      "doc": "corpus/commands/writefits.md"
+    }
+  ],
+  "statistics": {
+    "fit": [
+      "chi",
+      "cstat",
+      "lstat",
+      "pgstat",
+      "pstat",
+      "whittle",
+      "chicov",
+      "chistokes"
+    ],
+    "test": [
+      "chi",
+      "pchi",
+      "cstat",
+      "runs"
+    ]
+  },
+  "plot_types": [
+    "background",
+    "chain",
+    "chisq",
+    "contour",
+    "counts",
+    "data",
+    "deespec",
+    "delchi",
+    "dem",
+    "despec",
+    "dspec",
+    "edata",
+    "eedata",
+    "eemodel",
+    "eeufspec",
+    "efficiency",
+    "emodel",
+    "eqw",
+    "eufspec",
+    "fitstat",
+    "foldmodel",
+    "goodness",
+    "icounts",
+    "insensitivity",
+    "integprob",
+    "lcounts",
+    "ldata",
+    "ledata",
+    "leedata",
+    "margin",
+    "model",
+    "polangle",
+    "polfrac",
+    "ratio",
+    "residuals",
+    "sensitivity",
+    "sum",
+    "ufspec"
+  ],
+  "tclout_keys": [
+    "?",
+    "areascal",
+    "arf",
+    "backgrnd",
+    "backscal",
+    "chain",
+    "chatter",
+    "compinfo",
+    "cosmo",
+    "covariance",
+    "datagrp",
+    "datasets",
+    "delstat",
+    "dof",
+    "energies",
+    "eqwidth",
+    "error",
+    "errsims",
+    "expos",
+    "fileinfo",
+    "filename",
+    "fitpars",
+    "fitstat",
+    "flux",
+    "ftest",
+    "gain",
+    "goodness",
+    "idline",
+    "ignore",
+    "lumin",
+    "margin",
+    "modcomp",
+    "model",
+    "modgroups",
+    "modkeyval",
+    "modnames",
+    "modpar",
+    "modval",
+    "n",
+    "nchan",
+    "noticed",
+    "nullhyp",
+    "option",
+    "param",
+    "pars",
+    "peakrsid",
+    "pfree",
+    "pinfo",
+    "plink",
+    "plot",
+    "plotgrp",
+    "query",
+    "rate",
+    "rerror",
+    "response",
+    "result",
+    "scan",
+    "sigma",
+    "sim",
+    "simpars",
+    "sims",
+    "solab",
+    "stat",
+    "statistic",
+    "statmethod",
+    "steppar",
+    "systematic",
+    "test",
+    "unnamed",
+    "varpar",
+    "version",
+    "weight",
+    "xflt"
+  ],
+  "xset_keys": [
+    "APEC",
+    "APECBROADPSEUDO",
+    "APECDOECOR",
+    "APECEEBREMSS",
+    "APECEIGENFILE",
+    "APECLOGINTERP",
+    "APECMINFLUX",
+    "APECMULTITHREAD",
+    "APECNOLINES",
+    "APECROOT",
+    "APECTHERMAL",
+    "APECUSENEI",
+    "APECUSESPEX",
+    "APECVELOCITY",
+    "AREASCAL",
+    "ASCA",
+    "BEXRAV",
+    "BEXRIV",
+    "CARBATM",
+    "CDD1",
+    "CDD3",
+    "CDDT",
+    "CFLOW",
+    "COMOVING",
+    "COMPPS",
+    "DISC",
+    "DSET",
+    "DUMMY",
+    "EINT",
+    "ELASTIC",
+    "ENERGIES",
+    "EQPAIR",
+    "EVOL",
+    "EW_0",
+    "FAST",
+    "FIXED",
+    "FRACEXPO",
+    "FSRQ",
+    "FWHM",
+    "GRAD",
+    "GT09",
+    "HATM",
+    "HIELIMIT",
+    "HT95",
+    "IFILE",
+    "IFILE1",
+    "IGEOM",
+    "IMAGE",
+    "IREFLECT",
+    "KD18",
+    "KD19",
+    "L121",
+    "LOELIMIT",
+    "MASS",
+    "MAXTAU",
+    "MEKAL",
+    "MIXFACT",
+    "MNRAS",
+    "MUST",
+    "NEIAPECROOT",
+    "NNPTFILE",
+    "NORMVAL",
+    "NSAGRAV",
+    "NSMAX",
+    "NSMAXG",
+    "NTEEA",
+    "ODDT",
+    "OFILE",
+    "OFILE1",
+    "OGIP",
+    "ONLY",
+    "P12A",
+    "P13A",
+    "P15A",
+    "P18A",
+    "P20A",
+    "P22A",
+    "P25A",
+    "P30A",
+    "P30B",
+    "P35A",
+    "P35B",
+    "P35C",
+    "P40A",
+    "P40B",
+    "P40C",
+    "PARAMETERS",
+    "PASJ",
+    "PEXRAV",
+    "PEXRIV",
+    "PS96",
+    "REFLECT",
+    "RFXCONV",
+    "RGS_XSOURCE_BORESIGHT",
+    "RGS_XSOURCE_EXTRACTION",
+    "RGS_XSOURCE_IMAGE",
+    "RISCO",
+    "SCATTERING",
+    "SLIMBB",
+    "SNII",
+    "SNRS",
+    "SPEX",
+    "SPEXBROADPSEUDO",
+    "SPEXEEBREMSS",
+    "SPEXLOGINTERP",
+    "SPEXMINFLUX",
+    "SPEXMULTITHREAD",
+    "SPEXNOLINES",
+    "SPEXROOT",
+    "SPEXTHERMAL",
+    "SPEXVELOCITY",
+    "SRON",
+    "STOKES",
+    "SUZPSF",
+    "SUZSF",
+    "T30A",
+    "T30B",
+    "T35A",
+    "T35B",
+    "T35C",
+    "T40A",
+    "T40B",
+    "T40C",
+    "TBABSVERSION",
+    "THIS",
+    "TLUSTY",
+    "U12A",
+    "U13A",
+    "U15A",
+    "U18A",
+    "U20A",
+    "U22A",
+    "U25A",
+    "U30A",
+    "U30B",
+    "U35A",
+    "U35B",
+    "U35C",
+    "U40A",
+    "U40B",
+    "U40C",
+    "UNILLUMINATED",
+    "UNITY",
+    "UVOT",
+    "VALID",
+    "VERY",
+    "WDD1",
+    "WDD2",
+    "WDD3",
+    "WMAP",
+    "XFLT",
+    "XFLT0001",
+    "XFLT0002",
+    "XFLT0003",
+    "XFLT0004",
+    "XFLT0006",
+    "XILCONV",
+    "XILLVER",
+    "XMMPSF",
+    "XSCAT",
+    "XSET",
+    "XSPEC11",
+    "XSPEC12",
+    "XSTAR",
+    "Z12A",
+    "Z13A",
+    "Z15A",
+    "Z15B",
+    "Z18A",
+    "Z20A",
+    "Z22A",
+    "Z25A",
+    "Z30A",
+    "Z30B",
+    "ZDABAS",
+    "ZERO",
+    "ZXIPCF"
+  ],
+  "abundances": [
+    "feld",
+    "angr",
+    "aneb",
+    "grsa",
+    "wilm",
+    "lodd",
+    "aspl",
+    "lpgp",
+    "lpgs",
+    "felc",
+    "file",
+    "read"
+  ],
+  "xsect": [
+    "bcmc",
+    "obcm",
+    "vern"
+  ],
+  "provenance_notes": {
+    "models": "manager/model.dat + XSmodel*.tex",
+    "pyxspec_api": "ast extraction of XSUser/Python/xspec/*.py",
+    "command_tokens": "XSGlobal.cxx createCommandMap (authoritative)",
+    "commands": "Commands.tex \\input list",
+    "statistics": "XSstatistic.tex / XSappendixStatistics.tex",
+    "plot_types": "XSPlot/Plot/PlotCommandCreator.cxx",
+    "tclout_keys": "XStclout.tex (documented options)",
+    "xset_keys": "documented subset; xset accepts arbitrary KEY VALUE",
+    "abundances": "manager/abundances.dat",
+    "xsect": "XSFunctions/NeutralOpacity.cxx"
+  }
+}

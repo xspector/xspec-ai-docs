@@ -1,0 +1,26 @@
+{
+  "name": "zashift",
+  "type": "con",
+  "func": "C_zashift",
+  "elo": "0.0",
+  "ehi": "1.0e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "zashift"
+  ],
+  "title": "zashift: redshift an additive model"
+}

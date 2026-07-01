@@ -1,0 +1,50 @@
+{
+  "name": "diskpbb",
+  "type": "add",
+  "func": "diskpbb",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "Tin",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.1,
+      "softmin": 0.1,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.02,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "p",
+      "unit": "",
+      "default": 0.75,
+      "hardmin": 0.5,
+      "softmin": 0.5,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "diskpbb"
+  ],
+  "title": "diskpbb:  accretion disk, power-law dependence for T(r)"
+}

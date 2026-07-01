@@ -1,0 +1,62 @@
+{
+  "name": "eebremss",
+  "type": "add",
+  "func": "C_eebremss",
+  "elo": "0.0",
+  "ehi": "1.e20",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "T",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.05,
+      "softmin": 0.05,
+      "softmax": 10000000000.0,
+      "hardmax": 10000000000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "eperh",
+      "unit": "",
+      "default": 1.2,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Redshift",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -0.999,
+      "softmin": -0.999,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "eebremss"
+  ],
+  "title": "eebremss: electron-electron bremsstrahlung spectrum"
+}

@@ -1,0 +1,26 @@
+{
+  "name": "redden",
+  "type": "mul",
+  "func": "xscred",
+  "elo": "3.72e-4",
+  "ehi": "9.92e-3",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "E_BmV",
+      "unit": "",
+      "default": 0.05,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.001,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "redden"
+  ],
+  "title": "redden: interstellar extinction"
+}

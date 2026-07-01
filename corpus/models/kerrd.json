@@ -1,0 +1,110 @@
+{
+  "name": "kerrd",
+  "type": "add",
+  "func": "C_kerrd",
+  "elo": "0.03",
+  "ehi": "1.e20",
+  "npars_declared": 7,
+  "params": [
+    {
+      "name": "distance",
+      "unit": "kpc",
+      "default": 1.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 1000.0,
+      "hardmax": 1000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "TcoloTeff",
+      "unit": "",
+      "default": 1.5,
+      "hardmin": 1.0,
+      "softmin": 1.0,
+      "softmax": 2.0,
+      "hardmax": 2.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "M",
+      "unit": "solar",
+      "default": 1.0,
+      "hardmin": 0.1,
+      "softmin": 0.1,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Mdot",
+      "unit": "1e18",
+      "default": 1.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "Incl",
+      "unit": "deg",
+      "default": 30.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 90.0,
+      "hardmax": 90.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rin",
+      "unit": "Rg",
+      "default": 1.235,
+      "hardmin": 1.235,
+      "softmin": 1.235,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Rout",
+      "unit": "Rg",
+      "default": 100000.0,
+      "hardmin": 10000.0,
+      "softmin": 10000.0,
+      "softmax": 100000000.0,
+      "hardmax": 100000000.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "kerrd"
+  ],
+  "title": "kerrd: optically thick accretion disk around a Kerr black hole"
+}

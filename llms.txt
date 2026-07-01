@@ -1,0 +1,446 @@
+# XSPEC / PyXspec AI docs
+> XSPEC 13.0 | manual@57626605 | heasoft@1bad53cea8
+
+## Models
+- [absori](corpus/models/absori.md): multiplicative model, 6 params
+- [acisabs](corpus/models/acisabs.md): multiplicative model, 8 params
+- [agauss](corpus/models/agauss.md): additive model, 3 params
+- [agnsed](corpus/models/agnsed.md): additive model, 16 params
+- [agnslim](corpus/models/agnslim.md): additive model, 15 params
+- [apec](corpus/models/apec.md): additive model, 4 params
+- [bapec](corpus/models/bapec.md): additive model, 5 params
+- [bbody](corpus/models/bbody.md): additive model, 2 params
+- [bbodyrad](corpus/models/bbodyrad.md): additive model, 2 params
+- [bcempow](corpus/models/bcempow.md): additive model, 8 params
+- [bcheb6](corpus/models/bcheb6.md): additive model, 12 params
+- [bcie](corpus/models/bcie.md): additive model, 6 params
+- [bcoolflow](corpus/models/bcoolflow.md): additive model, 7 params
+- [bcph](corpus/models/bcph.md): additive model, 6 params
+- [bequil](corpus/models/bequil.md): additive model, 5 params
+- [bexpcheb6](corpus/models/bexpcheb6.md): additive model, 12 params
+- [bexrav](corpus/models/bexrav.md): additive model, 10 params
+- [bexriv](corpus/models/bexriv.md): additive model, 12 params
+- [bfekblor](corpus/models/bfekblor.md): additive model, 2 params
+- [bfeklor](corpus/models/bfeklor.md): additive model, 2 params
+- [bgadem](corpus/models/bgadem.md): additive model, 8 params
+- [bgnei](corpus/models/bgnei.md): additive model, 7 params
+- [bkn2pow](corpus/models/bkn2pow.md): additive model, 6 params
+- [bknpower](corpus/models/bknpower.md): additive model, 4 params
+- [bmc](corpus/models/bmc.md): additive model, 4 params
+- [bnei](corpus/models/bnei.md): additive model, 6 params
+- [bnpshock](corpus/models/bnpshock.md): additive model, 8 params
+- [bpshock](corpus/models/bpshock.md): additive model, 7 params
+- [bremss](corpus/models/bremss.md): additive model, 2 params
+- [brnei](corpus/models/brnei.md): additive model, 7 params
+- [bsedov](corpus/models/bsedov.md): additive model, 7 params
+- [bsnapec](corpus/models/bsnapec.md): additive model, 8 params
+- [btapec](corpus/models/btapec.md): additive model, 6 params
+- [bvapec](corpus/models/bvapec.md): additive model, 17 params
+- [bvcempow](corpus/models/bvcempow.md): additive model, 21 params
+- [bvcheb6](corpus/models/bvcheb6.md): additive model, 25 params
+- [bvcie](corpus/models/bvcie.md): additive model, 18 params
+- [bvcoolflow](corpus/models/bvcoolflow.md): additive model, 20 params
+- [bvcph](corpus/models/bvcph.md): additive model, 19 params
+- [bvequil](corpus/models/bvequil.md): additive model, 16 params
+- [bvexpcheb6](corpus/models/bvexpcheb6.md): additive model, 25 params
+- [bvgadem](corpus/models/bvgadem.md): additive model, 21 params
+- [bvgnei](corpus/models/bvgnei.md): additive model, 19 params
+- [bvnei](corpus/models/bvnei.md): additive model, 18 params
+- [bvnpshock](corpus/models/bvnpshock.md): additive model, 20 params
+- [bvpshock](corpus/models/bvpshock.md): additive model, 19 params
+- [bvrnei](corpus/models/bvrnei.md): additive model, 19 params
+- [bvsedov](corpus/models/bvsedov.md): additive model, 19 params
+- [bvtapec](corpus/models/bvtapec.md): additive model, 18 params
+- [bvvapec](corpus/models/bvvapec.md): additive model, 34 params
+- [bvvcie](corpus/models/bvvcie.md): additive model, 35 params
+- [bvvgadem](corpus/models/bvvgadem.md): additive model, 37 params
+- [bvvgnei](corpus/models/bvvgnei.md): additive model, 36 params
+- [bvvnei](corpus/models/bvvnei.md): additive model, 35 params
+- [bvvnpshock](corpus/models/bvvnpshock.md): additive model, 37 params
+- [bvvpshock](corpus/models/bvvpshock.md): additive model, 36 params
+- [bvvrnei](corpus/models/bvvrnei.md): additive model, 36 params
+- [bvvsedov](corpus/models/bvvsedov.md): additive model, 36 params
+- [bvvtapec](corpus/models/bvvtapec.md): additive model, 35 params
+- [bvvwdem](corpus/models/bvvwdem.md): additive model, 38 params
+- [bvwdem](corpus/models/bvwdem.md): additive model, 22 params
+- [bwcycl](corpus/models/bwcycl.md): additive model, 13 params
+- [bwdem](corpus/models/bwdem.md): additive model, 9 params
+- [c6mekl](corpus/models/c6mekl.md): additive model, 11 params
+- [c6pmekl](corpus/models/c6pmekl.md): additive model, 11 params
+- [c6pvmkl](corpus/models/c6pvmkl.md): additive model, 24 params
+- [c6vmekl](corpus/models/c6vmekl.md): additive model, 24 params
+- [cabs](corpus/models/cabs.md): multiplicative model, 1 params
+- [carbatm](corpus/models/carbatm.md): additive model, 4 params
+- [cemekl](corpus/models/cemekl.md): additive model, 7 params
+- [cempow](corpus/models/cempow.md): additive model, 7 params
+- [cevmkl](corpus/models/cevmkl.md): additive model, 20 params
+- [cflow](corpus/models/cflow.md): additive model, 6 params
+- [cflux](corpus/models/cflux.md): convolution model, 3 params
+- [cglumin](corpus/models/cglumin.md): convolution model, 4 params
+- [cheb6](corpus/models/cheb6.md): additive model, 11 params
+- [cie](corpus/models/cie.md): additive model, 5 params
+- [clumin](corpus/models/clumin.md): convolution model, 4 params
+- [compbb](corpus/models/compbb.md): additive model, 4 params
+- [compLS](corpus/models/compLS.md): additive model, 3 params
+- [compmag](corpus/models/compmag.md): additive model, 9 params
+- [compPS](corpus/models/compPS.md): additive model, 20 params
+- [compST](corpus/models/compST.md): additive model, 3 params
+- [comptb](corpus/models/comptb.md): additive model, 7 params
+- [compth](corpus/models/compth.md): additive model, 21 params
+- [compTT](corpus/models/compTT.md): additive model, 6 params
+- [constant](corpus/models/constant.md): multiplicative model, 1 params
+- [coolflow](corpus/models/coolflow.md): additive model, 6 params
+- [cpflux](corpus/models/cpflux.md): convolution model, 3 params
+- [cph](corpus/models/cph.md): additive model, 5 params
+- [cplinear](corpus/models/cplinear.md): additive model, 21 params
+- [cutoffpl](corpus/models/cutoffpl.md): additive model, 3 params
+- [cyclabs](corpus/models/cyclabs.md): multiplicative model, 5 params
+- [disk](corpus/models/disk.md): additive model, 4 params
+- [diskbb](corpus/models/diskbb.md): additive model, 2 params
+- [diskir](corpus/models/diskir.md): additive model, 9 params
+- [diskline](corpus/models/diskline.md): additive model, 6 params
+- [diskm](corpus/models/diskm.md): additive model, 5 params
+- [disko](corpus/models/disko.md): additive model, 5 params
+- [diskpbb](corpus/models/diskpbb.md): additive model, 3 params
+- [diskpn](corpus/models/diskpn.md): additive model, 3 params
+- [dust](corpus/models/dust.md): multiplicative model, 2 params
+- [edge](corpus/models/edge.md): multiplicative model, 2 params
+- [eebremss](corpus/models/eebremss.md): additive model, 4 params
+- [eplogpar](corpus/models/eplogpar.md): additive model, 3 params
+- [eqpair](corpus/models/eqpair.md): additive model, 21 params
+- [eqtherm](corpus/models/eqtherm.md): additive model, 21 params
+- [equil](corpus/models/equil.md): additive model, 4 params
+- [expabs](corpus/models/expabs.md): multiplicative model, 1 params
+- [expcheb6](corpus/models/expcheb6.md): additive model, 11 params
+- [expdec](corpus/models/expdec.md): additive model, 2 params
+- [expfac](corpus/models/expfac.md): multiplicative model, 3 params
+- [ezdiskbb](corpus/models/ezdiskbb.md): additive model, 2 params
+- [fekblor](corpus/models/fekblor.md): additive model, 1 params
+- [feklor](corpus/models/feklor.md): additive model, 1 params
+- [gabs](corpus/models/gabs.md): multiplicative model, 3 params
+- [gadem](corpus/models/gadem.md): additive model, 7 params
+- [gaussian](corpus/models/gaussian.md): additive model, 3 params
+- [gnei](corpus/models/gnei.md): additive model, 6 params
+- [grad](corpus/models/grad.md): additive model, 7 params
+- [grbcomp](corpus/models/grbcomp.md): additive model, 10 params
+- [grbjet](corpus/models/grbjet.md): additive model, 14 params
+- [grbm](corpus/models/grbm.md): additive model, 4 params
+- [gsmooth](corpus/models/gsmooth.md): convolution model, 2 params
+- [hatm](corpus/models/hatm.md): additive model, 4 params
+- [heilin](corpus/models/heilin.md): multiplicative model, 3 params
+- [highecut](corpus/models/highecut.md): multiplicative model, 2 params
+- [hrefl](corpus/models/hrefl.md): multiplicative model, 8 params
+- [ireflect](corpus/models/ireflect.md): convolution model, 7 params
+- [ismabs](corpus/models/ismabs.md): multiplicative model, 31 params
+- [ismdust](corpus/models/ismdust.md): multiplicative model, 3 params
+- [jet](corpus/models/jet.md): additive model, 16 params
+- [kdblur](corpus/models/kdblur.md): convolution model, 4 params
+- [kdblur2](corpus/models/kdblur2.md): convolution model, 6 params
+- [kerrbb](corpus/models/kerrbb.md): additive model, 10 params
+- [kerrconv](corpus/models/kerrconv.md): convolution model, 7 params
+- [kerrd](corpus/models/kerrd.md): additive model, 8 params
+- [kerrdisk](corpus/models/kerrdisk.md): additive model, 10 params
+- [kyconv](corpus/models/kyconv.md): convolution model, 12 params
+- [kyrline](corpus/models/kyrline.md): additive model, 12 params
+- [laor](corpus/models/laor.md): additive model, 6 params
+- [laor2](corpus/models/laor2.md): additive model, 8 params
+- [log10con](corpus/models/log10con.md): multiplicative model, 1 params
+- [logconst](corpus/models/logconst.md): multiplicative model, 1 params
+- [logpar](corpus/models/logpar.md): additive model, 4 params
+- [lorabs](corpus/models/lorabs.md): multiplicative model, 3 params
+- [lorentz](corpus/models/lorentz.md): additive model, 3 params
+- [lsmooth](corpus/models/lsmooth.md): convolution model, 2 params
+- [lyman](corpus/models/lyman.md): multiplicative model, 4 params
+- [meka](corpus/models/meka.md): additive model, 5 params
+- [mekal](corpus/models/mekal.md): additive model, 6 params
+- [mkcflow](corpus/models/mkcflow.md): additive model, 6 params
+- [nei](corpus/models/nei.md): additive model, 5 params
+- [nlapec](corpus/models/nlapec.md): additive model, 4 params
+- [notch](corpus/models/notch.md): multiplicative model, 3 params
+- [npshock](corpus/models/npshock.md): additive model, 7 params
+- [nsa](corpus/models/nsa.md): additive model, 5 params
+- [nsagrav](corpus/models/nsagrav.md): additive model, 4 params
+- [nsatmos](corpus/models/nsatmos.md): additive model, 5 params
+- [nsmax](corpus/models/nsmax.md): additive model, 4 params
+- [nsmaxg](corpus/models/nsmaxg.md): additive model, 6 params
+- [nsx](corpus/models/nsx.md): additive model, 6 params
+- [nteea](corpus/models/nteea.md): additive model, 16 params
+- [nthComp](corpus/models/nthComp.md): additive model, 6 params
+- [olivineabs](corpus/models/olivineabs.md): multiplicative model, 2 params
+- [optxagn](corpus/models/optxagn.md): additive model, 14 params
+- [optxagnf](corpus/models/optxagnf.md): additive model, 12 params
+- [partcov](corpus/models/partcov.md): convolution model, 1 params
+- [pcfabs](corpus/models/pcfabs.md): multiplicative model, 2 params
+- [pegpwrlw](corpus/models/pegpwrlw.md): additive model, 4 params
+- [pexmon](corpus/models/pexmon.md): additive model, 8 params
+- [pexrav](corpus/models/pexrav.md): additive model, 8 params
+- [pexriv](corpus/models/pexriv.md): additive model, 10 params
+- [phabs](corpus/models/phabs.md): multiplicative model, 1 params
+- [pileup](corpus/models/pileup.md): pile-up/acn model, 7 params
+- [plabs](corpus/models/plabs.md): multiplicative model, 2 params
+- [plcabs](corpus/models/plcabs.md): additive model, 11 params
+- [polconst](corpus/models/polconst.md): multiplicative model, 2 params
+- [pollin](corpus/models/pollin.md): multiplicative model, 4 params
+- [polpow](corpus/models/polpow.md): multiplicative model, 4 params
+- [posm](corpus/models/posm.md): additive model, 1 params
+- [powerlaw](corpus/models/powerlaw.md): additive model, 2 params
+- [pshock](corpus/models/pshock.md): additive model, 6 params
+- [pwab](corpus/models/pwab.md): multiplicative model, 3 params
+- [qsosed](corpus/models/qsosed.md): additive model, 7 params
+- [raymond](corpus/models/raymond.md): additive model, 4 params
+- [rdblur](corpus/models/rdblur.md): convolution model, 4 params
+- [redden](corpus/models/redden.md): multiplicative model, 1 params
+- [redge](corpus/models/redge.md): additive model, 3 params
+- [reflect](corpus/models/reflect.md): convolution model, 5 params
+- [refsch](corpus/models/refsch.md): additive model, 14 params
+- [rfxconv](corpus/models/rfxconv.md): convolution model, 5 params
+- [rgsext](corpus/models/rgsext.md): convolution model, 2 params
+- [rgsxsrc](corpus/models/rgsxsrc.md): convolution model, 1 params
+- [rnei](corpus/models/rnei.md): additive model, 6 params
+- [rsapec](corpus/models/rsapec.md): additive model, 6 params
+- [rsgaussian](corpus/models/rsgaussian.md): additive model, 4 params
+- [rsrnei](corpus/models/rsrnei.md): additive model, 8 params
+- [rsvapec](corpus/models/rsvapec.md): additive model, 18 params
+- [rsvrnei](corpus/models/rsvrnei.md): additive model, 20 params
+- [rsvvapec](corpus/models/rsvvapec.md): additive model, 35 params
+- [rsvvrnei](corpus/models/rsvvrnei.md): additive model, 37 params
+- [sedov](corpus/models/sedov.md): additive model, 6 params
+- [simpl](corpus/models/simpl.md): convolution model, 3 params
+- [sirf](corpus/models/sirf.md): additive model, 10 params
+- [slimbh](corpus/models/slimbh.md): additive model, 10 params
+- [smaug](corpus/models/smaug.md): additive model, 23 params
+- [smedge](corpus/models/smedge.md): multiplicative model, 4 params
+- [snapec](corpus/models/snapec.md): additive model, 7 params
+- [spexpcut](corpus/models/spexpcut.md): multiplicative model, 2 params
+- [spline](corpus/models/spline.md): multiplicative model, 6 params
+- [srcut](corpus/models/srcut.md): additive model, 3 params
+- [sresc](corpus/models/sresc.md): additive model, 3 params
+- [ssa](corpus/models/ssa.md): additive model, 3 params
+- [SSS_ice](corpus/models/SSS_ice.md): multiplicative model, 1 params
+- [sssed](corpus/models/sssed.md): additive model, 15 params
+- [stbowl](corpus/models/stbowl.md): additive model, 13 params
+- [stcone](corpus/models/stcone.md): additive model, 13 params
+- [stdisc](corpus/models/stdisc.md): additive model, 9 params
+- [step](corpus/models/step.md): additive model, 3 params
+- [sttorus](corpus/models/sttorus.md): additive model, 13 params
+- [swind1](corpus/models/swind1.md): multiplicative model, 4 params
+- [tapec](corpus/models/tapec.md): additive model, 5 params
+- [TBabs](corpus/models/TBabs.md): multiplicative model, 1 params
+- [TBfeo](corpus/models/TBfeo.md): multiplicative model, 4 params
+- [TBgas](corpus/models/TBgas.md): multiplicative model, 2 params
+- [TBgrain](corpus/models/TBgrain.md): multiplicative model, 6 params
+- [TBpcf](corpus/models/TBpcf.md): multiplicative model, 3 params
+- [TBrel](corpus/models/TBrel.md): multiplicative model, 42 params
+- [TBvarabs](corpus/models/TBvarabs.md): multiplicative model, 42 params
+- [thcomp](corpus/models/thcomp.md): convolution model, 4 params
+- [uvred](corpus/models/uvred.md): multiplicative model, 1 params
+- [vagauss](corpus/models/vagauss.md): additive model, 3 params
+- [vapec](corpus/models/vapec.md): additive model, 16 params
+- [varabs](corpus/models/varabs.md): multiplicative model, 18 params
+- [vashift](corpus/models/vashift.md): convolution model, 1 params
+- [vbremss](corpus/models/vbremss.md): additive model, 3 params
+- [vcempow](corpus/models/vcempow.md): additive model, 20 params
+- [vcheb6](corpus/models/vcheb6.md): additive model, 24 params
+- [vcie](corpus/models/vcie.md): additive model, 17 params
+- [vcoolflow](corpus/models/vcoolflow.md): additive model, 19 params
+- [vcph](corpus/models/vcph.md): additive model, 18 params
+- [vequil](corpus/models/vequil.md): additive model, 15 params
+- [vexpcheb6](corpus/models/vexpcheb6.md): additive model, 24 params
+- [vgabs](corpus/models/vgabs.md): multiplicative model, 3 params
+- [vgadem](corpus/models/vgadem.md): additive model, 20 params
+- [vgaussian](corpus/models/vgaussian.md): additive model, 3 params
+- [vgnei](corpus/models/vgnei.md): additive model, 18 params
+- [vlorabs](corpus/models/vlorabs.md): multiplicative model, 3 params
+- [vlorentz](corpus/models/vlorentz.md): additive model, 3 params
+- [vmcflow](corpus/models/vmcflow.md): additive model, 19 params
+- [vmeka](corpus/models/vmeka.md): additive model, 18 params
+- [vmekal](corpus/models/vmekal.md): additive model, 19 params
+- [vmshift](corpus/models/vmshift.md): convolution model, 1 params
+- [vnei](corpus/models/vnei.md): additive model, 17 params
+- [vnpshock](corpus/models/vnpshock.md): additive model, 19 params
+- [voigt](corpus/models/voigt.md): additive model, 4 params
+- [voigtabs](corpus/models/voigtabs.md): multiplicative model, 4 params
+- [vphabs](corpus/models/vphabs.md): multiplicative model, 18 params
+- [vpshock](corpus/models/vpshock.md): additive model, 18 params
+- [vraymond](corpus/models/vraymond.md): additive model, 15 params
+- [vrnei](corpus/models/vrnei.md): additive model, 18 params
+- [vsedov](corpus/models/vsedov.md): additive model, 18 params
+- [vtapec](corpus/models/vtapec.md): additive model, 17 params
+- [vvapec](corpus/models/vvapec.md): additive model, 33 params
+- [vvcie](corpus/models/vvcie.md): additive model, 34 params
+- [vvgadem](corpus/models/vvgadem.md): additive model, 36 params
+- [vvgnei](corpus/models/vvgnei.md): additive model, 35 params
+- [vvnei](corpus/models/vvnei.md): additive model, 34 params
+- [vvnpshock](corpus/models/vvnpshock.md): additive model, 36 params
+- [vvoigt](corpus/models/vvoigt.md): additive model, 4 params
+- [vvoigtabs](corpus/models/vvoigtabs.md): multiplicative model, 4 params
+- [vvpshock](corpus/models/vvpshock.md): additive model, 35 params
+- [vvrnei](corpus/models/vvrnei.md): additive model, 35 params
+- [vvsedov](corpus/models/vvsedov.md): additive model, 35 params
+- [vvtapec](corpus/models/vvtapec.md): additive model, 34 params
+- [vvwdem](corpus/models/vvwdem.md): additive model, 37 params
+- [vwdem](corpus/models/vwdem.md): additive model, 21 params
+- [wabs](corpus/models/wabs.md): multiplicative model, 1 params
+- [wdem](corpus/models/wdem.md): additive model, 8 params
+- [wndabs](corpus/models/wndabs.md): multiplicative model, 2 params
+- [xilconv](corpus/models/xilconv.md): convolution model, 6 params
+- [xion](corpus/models/xion.md): multiplicative model, 13 params
+- [xscat](corpus/models/xscat.md): multiplicative model, 4 params
+- [zagauss](corpus/models/zagauss.md): additive model, 4 params
+- [zashift](corpus/models/zashift.md): convolution model, 1 params
+- [zbabs](corpus/models/zbabs.md): multiplicative model, 4 params
+- [zbbody](corpus/models/zbbody.md): additive model, 3 params
+- [zbfekblor](corpus/models/zbfekblor.md): additive model, 3 params
+- [zbfeklor](corpus/models/zbfeklor.md): additive model, 3 params
+- [zbknpower](corpus/models/zbknpower.md): additive model, 5 params
+- [zbremss](corpus/models/zbremss.md): additive model, 3 params
+- [zcutoffpl](corpus/models/zcutoffpl.md): additive model, 4 params
+- [zdust](corpus/models/zdust.md): multiplicative model, 4 params
+- [zedge](corpus/models/zedge.md): multiplicative model, 3 params
+- [zfekblor](corpus/models/zfekblor.md): additive model, 2 params
+- [zfeklor](corpus/models/zfeklor.md): additive model, 2 params
+- [zgabs](corpus/models/zgabs.md): multiplicative model, 4 params
+- [zgauss](corpus/models/zgauss.md): additive model, 4 params
+- [zhighect](corpus/models/zhighect.md): multiplicative model, 3 params
+- [zigm](corpus/models/zigm.md): multiplicative model, 3 params
+- [zkerrbb](corpus/models/zkerrbb.md): additive model, 10 params
+- [zlogpar](corpus/models/zlogpar.md): additive model, 5 params
+- [zlorabs](corpus/models/zlorabs.md): multiplicative model, 4 params
+- [zlorentz](corpus/models/zlorentz.md): additive model, 4 params
+- [zmshift](corpus/models/zmshift.md): convolution model, 1 params
+- [zpcfabs](corpus/models/zpcfabs.md): multiplicative model, 3 params
+- [zphabs](corpus/models/zphabs.md): multiplicative model, 2 params
+- [zpowerlw](corpus/models/zpowerlw.md): additive model, 3 params
+- [zredden](corpus/models/zredden.md): multiplicative model, 2 params
+- [zsmdust](corpus/models/zsmdust.md): multiplicative model, 4 params
+- [zTBabs](corpus/models/zTBabs.md): multiplicative model, 2 params
+- [zvagauss](corpus/models/zvagauss.md): additive model, 4 params
+- [zvarabs](corpus/models/zvarabs.md): multiplicative model, 19 params
+- [zvfeabs](corpus/models/zvfeabs.md): multiplicative model, 5 params
+- [zvgabs](corpus/models/zvgabs.md): multiplicative model, 4 params
+- [zvgaussian](corpus/models/zvgaussian.md): additive model, 4 params
+- [zvlorabs](corpus/models/zvlorabs.md): multiplicative model, 4 params
+- [zvlorentz](corpus/models/zvlorentz.md): additive model, 4 params
+- [zvoigt](corpus/models/zvoigt.md): additive model, 5 params
+- [zvoigtabs](corpus/models/zvoigtabs.md): multiplicative model, 5 params
+- [zvphabs](corpus/models/zvphabs.md): multiplicative model, 19 params
+- [zvvoigt](corpus/models/zvvoigt.md): additive model, 5 params
+- [zvvoigtabs](corpus/models/zvvoigtabs.md): multiplicative model, 5 params
+- [zwabs](corpus/models/zwabs.md): multiplicative model, 2 params
+- [zwndabs](corpus/models/zwndabs.md): multiplicative model, 3 params
+- [zxipab](corpus/models/zxipab.md): multiplicative model, 5 params
+- [zxipcf](corpus/models/zxipcf.md): multiplicative model, 4 params
+
+## PyXspec API (18 classes)
+- [AllChains](corpus/api/AllChains.md) (class `ChainManager`): 9 attrs, 11 methods
+- [AllData](corpus/api/AllData.md) (class `DataManager`): 2 attrs, 11 methods
+- [AllModels](corpus/api/AllModels.md) (class `ModelManager`): 2 attrs, 20 methods
+- [Background](corpus/api/Background.md): 7 attrs, 1 methods
+- [Chain](corpus/api/Chain.md): 11 attrs, 3 methods
+- [ChainResult](corpus/api/ChainResult.md): 0 attrs, 1 methods
+- [Component](corpus/api/Component.md): 0 attrs, 1 methods
+- [FakeitSettings](corpus/api/FakeitSettings.md): 0 attrs, 1 methods
+- [Fit](corpus/api/Fit.md) (class `FitManager`): 20 attrs, 12 methods
+- [HMCResult](corpus/api/HMCResult.md): 0 attrs, 1 methods
+- [Model](corpus/api/Model.md): 3 attrs, 9 methods
+- [NestedResult](corpus/api/NestedResult.md): 0 attrs, 1 methods
+- [Parameter](corpus/api/Parameter.md): 9 attrs, 2 methods
+- [Plot](corpus/api/Plot.md) (class `PlotManager`): 11 attrs, 21 methods
+- [RModel](corpus/api/RModel.md): 1 attrs, 2 methods
+- [Response](corpus/api/Response.md): 5 attrs, 3 methods
+- [Spectrum](corpus/api/Spectrum.md): 28 attrs, 9 methods
+- [Xset](corpus/api/Xset.md) (class `XspecSettings`): 12 attrs, 9 methods
+
+## Commands (79 docs, 161 valid tokens incl. aliases)
+- [abund](corpus/commands/abund.md) (aliases: xabund)
+- [addcomp](corpus/commands/addcomp.md) (aliases: xaddcomp)
+- [addline](corpus/commands/addline.md)
+- [arf](corpus/commands/arf.md) (aliases: xarf)
+- [autosave](corpus/commands/autosave.md) (aliases: xautosave)
+- [backgrnd](corpus/commands/backgrnd.md) (aliases: xbackgrnd)
+- [bayes](corpus/commands/bayes.md) (aliases: xbayes)
+- [chain](corpus/commands/chain.md) (aliases: xchain)
+- [chatter](corpus/commands/chatter.md) (aliases: xchatter)
+- [compare](corpus/commands/compare.md) (aliases: xcompare)
+- [corfile](corpus/commands/corfile.md) (aliases: xcorfile)
+- [cornorm](corpus/commands/cornorm.md) (aliases: xcornorm)
+- [cosmo](corpus/commands/cosmo.md) (aliases: xcosmo)
+- [cpd](corpus/commands/cpd.md) (aliases: xcpd)
+- [data](corpus/commands/data.md) (aliases: xdata)
+- [delcomp](corpus/commands/delcomp.md) (aliases: xdelcomp)
+- [diagrsp](corpus/commands/diagrsp.md) (aliases: xdiagrsp)
+- [dummyrsp](corpus/commands/dummyrsp.md) (aliases: xdummyrsp)
+- [editmod](corpus/commands/editmod.md) (aliases: xeditmod)
+- [energies](corpus/commands/energies.md) (aliases: xenergies)
+- [eqwidth](corpus/commands/eqwidth.md) (aliases: xeqwidth)
+- [error](corpus/commands/error.md) (aliases: rerror, uncertain, xerror, xrerror, xuncertain)
+- [exit](corpus/commands/exit.md) (aliases: quit, xexit, xquit)
+- [fakeit](corpus/commands/fakeit.md) (aliases: xfakeit)
+- [fit](corpus/commands/fit.md) (aliases: xfit)
+- [flux](corpus/commands/flux.md) (aliases: lumin, xflux, xlumin)
+- [freeze](corpus/commands/freeze.md) (aliases: rfreeze, xfreeze, xrfreeze)
+- [ftest](corpus/commands/ftest.md) (aliases: xftest)
+- [gain](corpus/commands/gain.md) (aliases: xgain)
+- [goodness](corpus/commands/goodness.md) (aliases: xgoodness)
+- [group](corpus/commands/group.md) (aliases: xgroup)
+- [hardcopy](corpus/commands/hardcopy.md)
+- [help](corpus/commands/help.md) (aliases: xhelp)
+- [hmc](corpus/commands/hmc.md) (aliases: xhmc)
+- [identify](corpus/commands/identify.md) (aliases: xidentify)
+- [ignore](corpus/commands/ignore.md) (aliases: xignore)
+- [improve](corpus/commands/improve.md) (aliases: ximprove)
+- [initpackage](corpus/commands/initpackage.md) (aliases: xinitpackage)
+- [iplot](corpus/commands/iplot.md) (aliases: xiplot)
+- [lmod](corpus/commands/lmod.md) (aliases: xlmod)
+- [log](corpus/commands/log.md) (aliases: xlog)
+- [lrt](corpus/commands/lrt.md)
+- [lumin](corpus/commands/lumin.md) (aliases: flux, xflux, xlumin)
+- [margin](corpus/commands/margin.md) (aliases: xmargin)
+- [mdefine](corpus/commands/mdefine.md) (aliases: xmdefine)
+- [method](corpus/commands/method.md) (aliases: xmethod)
+- [model](corpus/commands/model.md) (aliases: xmodel)
+- [modid](corpus/commands/modid.md)
+- [multifake](corpus/commands/multifake.md)
+- [nest](corpus/commands/nest.md) (aliases: xnest)
+- [newpar](corpus/commands/newpar.md) (aliases: rnewpar, xnewpar, xrnewpar)
+- [notice](corpus/commands/notice.md) (aliases: xnotice)
+- [parallel](corpus/commands/parallel.md) (aliases: xparallel)
+- [plot](corpus/commands/plot.md) (aliases: xplot)
+- [query](corpus/commands/query.md) (aliases: xquery)
+- [renorm](corpus/commands/renorm.md) (aliases: xrenorm)
+- [rescalecov](corpus/commands/rescalecov.md)
+- [response](corpus/commands/response.md) (aliases: xresponse)
+- [save](corpus/commands/save.md) (aliases: xsave)
+- [script](corpus/commands/script.md) (aliases: xscript)
+- [setplot](corpus/commands/setplot.md) (aliases: xsetplot)
+- [show](corpus/commands/show.md) (aliases: xshow)
+- [sim](corpus/commands/sim.md) (aliases: xsim)
+- [simftest](corpus/commands/simftest.md)
+- [statistic](corpus/commands/statistic.md) (aliases: xstatistic)
+- [steppar](corpus/commands/steppar.md) (aliases: xsteppar)
+- [syscall](corpus/commands/syscall.md)
+- [systematic](corpus/commands/systematic.md) (aliases: xsystematic)
+- [tclout](corpus/commands/tclout.md) (aliases: xtclout)
+- [tcloutr](corpus/commands/tcloutr.md)
+- [thaw](corpus/commands/thaw.md) (aliases: rthaw, xrthaw, xthaw)
+- [time](corpus/commands/time.md) (aliases: xtime)
+- [undo](corpus/commands/undo.md) (aliases: xundo)
+- [untie](corpus/commands/untie.md) (aliases: runtie, xruntie, xuntie)
+- [version](corpus/commands/version.md) (aliases: xversion)
+- [weight](corpus/commands/weight.md) (aliases: xweight)
+- [writefits](corpus/commands/writefits.md)
+- [xsect](corpus/commands/xsect.md) (aliases: xxsect)
+- [xset](corpus/commands/xset.md) (aliases: xxset)
+
+## Recipes / guides
+- [PyXspec object model and indexing contract](corpus/recipes/00_object_model.md)
+- [Running XSPEC headless and getting structured results out](corpus/recipes/01_headless_and_output.md)
+- [Ingesting a dataset and the two decisions you must get right](corpus/recipes/02_data_ingestion_and_decisions.md)
+- [End-to-end runnable recipes (PyXspec-first)](corpus/recipes/03_recipes.md)
+- [Anti-patterns and known failure modes](corpus/recipes/04_antipatterns.md)
+- [Error and warning catalog (cause → fix)](corpus/recipes/05_error_catalog.md)
+- [Choosing and combining models](corpus/recipes/06_model_selection.md)
+- [tcl_pyxspec_map](corpus/recipes/tcl_pyxspec_map.md)
+
+## Grounding
+- [manifest.json](corpus/manifest.json)

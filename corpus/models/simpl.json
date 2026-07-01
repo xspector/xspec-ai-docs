@@ -1,0 +1,50 @@
+{
+  "name": "simpl",
+  "type": "con",
+  "func": "C_simpl",
+  "elo": "0.05",
+  "ehi": "1.e6",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "Gamma",
+      "unit": "",
+      "default": 2.3,
+      "hardmin": 1.0,
+      "softmin": 1.1,
+      "softmax": 4.0,
+      "hardmax": 5.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "FracSctr",
+      "unit": "",
+      "default": 0.05,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 0.4,
+      "hardmax": 1.0,
+      "delta": 0.005,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "UpScOnly",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -1.0,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "simpl"
+  ],
+  "title": "simpl: comptonization of a seed spectrum"
+}

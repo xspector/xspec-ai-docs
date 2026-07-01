@@ -1,0 +1,50 @@
+{
+  "name": "eplogpar",
+  "type": "add",
+  "func": "eplogpar",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "Ep",
+      "unit": "keV",
+      "default": 0.1,
+      "hardmin": 1e-10,
+      "softmin": 1e-06,
+      "softmax": 100.0,
+      "hardmax": 10000.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "beta",
+      "unit": "",
+      "default": 0.2,
+      "hardmin": -4.0,
+      "softmin": -4.0,
+      "softmax": 4.0,
+      "hardmax": 4.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "eplogpar"
+  ],
+  "title": "eplogpar:  log-parabolic blazar model with $\\nu$F$_{"
+}

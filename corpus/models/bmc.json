@@ -1,0 +1,62 @@
+{
+  "name": "bmc",
+  "type": "add",
+  "func": "xsbmc",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 3,
+  "params": [
+    {
+      "name": "kT",
+      "unit": "keV",
+      "default": 1.0,
+      "hardmin": 0.0001,
+      "softmin": 0.01,
+      "softmax": 100.0,
+      "hardmax": 200.0,
+      "delta": 0.05,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "alpha",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0001,
+      "softmin": 0.01,
+      "softmax": 4.0,
+      "hardmax": 6.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "log_A",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": -8.0,
+      "softmin": -6.0,
+      "softmax": 6.0,
+      "hardmax": 8.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "norm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 1e+24,
+      "hardmax": 1e+24,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "norm"
+    }
+  ],
+  "family": [
+    "bmc"
+  ],
+  "title": "bmc: Comptonization by relativistic matter"
+}
