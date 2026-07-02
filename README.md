@@ -1,9 +1,16 @@
 # xspec-ai-docs
 
 AI-optimized documentation for XSPEC and PyXspec — a machine-consumable corpus
-designed for agents that actually run spectral analysis, not for human reading.
+for agents that actually run spectral analysis, plus two MCP servers that expose
+it and drive a live PyXspec.
 
-See [PLAN.md](PLAN.md) for the full design and rationale.
+Three things live here:
+
+1. **A docs corpus** — models, commands, PyXspec class API, task guides, and a
+   grounding manifest, generated from source. See [PLAN.md](PLAN.md).
+2. **`xspec-ai-docs` MCP server (Tier A)** — read-only lookups over the corpus.
+3. **`xspec-run` MCP server (Tier B)** — executes a live PyXspec session. See
+   [PLAN-B.md](PLAN-B.md).
 
 ## Entry point
 
@@ -15,28 +22,61 @@ An agent should start there.
 ```
 llms.txt                     root index (generated)
 corpus/
-  api/       <Class>.md + api.json   PyXspec class API (attrs w/ type+access, method sigs)
+  api/       <Class>.md + api.json   PyXspec class API (18 classes; attrs w/ type+access, method sigs)
   models/    <name>.md + .json       328 models (params/limits from model.dat + prose)
   commands/  <cmd>.md                79 interactive commands
-  recipes/   00_object_model.md, 01..06 guides, tcl_pyxspec_map.md
+  recipes/   00_object_model.md, 01..07 guides, tcl_pyxspec_map.md
   manifest.json                      full grounding set (anti-hallucination)
-generator/   generate.py + extractors (config, modeldat, texmacros, grounding, api)
-server/      MCP server (Tier A, read-only) over the corpus — see server/README.md
-tests/       run_recipes.py (integrity + live-data recipes), audit_macros.py,
-             test_server.py (MCP data-layer)
+  intent_index.json                  "I want to X -> call Y" (also recipes/07)
+generator/   generate.py + extractors (config, modeldat, texmacros, grounding, api, intents)
+server/      MCP servers: server.py (Tier A) + xspec_run.py/runner.py/worker.py (Tier B)
+             -- see server/README.md
+tests/       audit_macros.py, run_recipes.py, test_server.py (Tier A),
+             test_xspec_run.py (Tier B)
+PLAN.md / PLAN-B.md          design docs (corpus + Tier A / Tier B)
 ```
-
-## MCP server
-
-`server/` exposes the corpus as MCP tools (get_model, list_models, get_command,
-get_api, lookup_intent, validate, get_guide, corpus_info) — read-only, no XSPEC
-execution. See [server/README.md](server/README.md).
 
 Two content layers: an **auto-generated reference layer** (models, commands,
 PyXspec API — regenerated from source, never drifts) and a **hand-authored task
 layer** (the guides in `corpus/recipes/`, PyXspec-first).
 
-## Regenerating
+## MCP servers
+
+Full details and client config in [server/README.md](server/README.md);
+`server/mcp-config.example.json` has both entries ready to adapt.
+
+### Tier A — `xspec-ai-docs` (read-only)
+
+Lookups over the corpus; no XSPEC execution, safe to run anywhere.
+Tools: `get_model`, `list_models`, `get_command`, `get_api`, `lookup_intent`,
+`validate` (anti-hallucination), `get_guide`, `corpus_info`.
+
+```
+python server/server.py          # stdio; reads ../corpus (or $XSPEC_AI_CORPUS)
+```
+
+### Tier B — `xspec-run` (executes live PyXspec)
+
+Drives a real fitting session: load data, define models, fit, error, flux,
+steppar, plot arrays, fakeit, MCMC, save/restore — plus `xspec_get`/`xspec_set`/
+`xspec_call` for **100% of the PyXspec object-model API**. Runs PyXspec in an
+isolated worker subprocess (`worker.py`) managed by `runner.py`; the server
+(`xspec_run.py`) never imports xspec.
+
+```
+python server/xspec_run.py       # stdio; requires HEADAS + PyXspec
+```
+
+Requires `mcp>=1.0` (`server/requirements.txt`). Env: `XSPEC_DATA_ROOT`
+(read allowlist), `XSPEC_OUTPUT_ROOT` (write allowlist), `XSPEC_HEADAS`,
+`XSPEC_PYTHON`.
+
+**Posture:** the structured tools are path-allowlisted and headless-guarded; the
+generic `xspec_get/set/call` are deliberately unrestricted (can reach
+code-loading / Tcl-script restore) — appropriate for a trusted local single-user
+setup. Drop the three generic tools for a less-trusted deployment.
+
+## Regenerating the corpus
 
 The generator reads two external source trees (paths in `generator/config.py`,
 override via `XSPEC_HEASOFT_SRC` / `XSPEC_MANUAL_DIR`):
@@ -52,10 +92,11 @@ Provenance (XSPEC version + both source commits) is stamped into
 
 ```
 python tests/audit_macros.py     # LaTeX->markdown conversion is clean (models+commands)
-python tests/run_recipes.py      # corpus integrity + (with HEADAS) recipes run on real data
+python tests/run_recipes.py      # corpus integrity + (with HEADAS) recipes on real data
+python tests/test_server.py      # Tier A MCP data-layer
+python tests/test_xspec_run.py   # Tier B: live fit + tools + crash recovery (needs HEADAS)
 ```
 
-`run_recipes.py` tier 2 requires an initialized HEADAS/PyXspec; it executes the
-documented recipes against the datasets shipped in the XSPEC manual's
-`walkthrough/` directory and checks the extracted PyXspec API against live
-object introspection.
+The HEADAS-dependent tests execute against the datasets shipped in the XSPEC
+manual's `walkthrough/` directory and check the extracted PyXspec API against
+live object introspection; they skip cleanly if HEADAS is absent.
