@@ -236,6 +236,21 @@ class XspecRunner:
     def plot(self, types="ldata", xAxis="keV"):
         return self._call("plot", {"types": types, "xAxis": xAxis})
 
+    def plot_image(self, fileName, types="ldata delchi", xAxis="keV"):
+        return self._call("plot_image", {
+            "fileName": self._resolve_write(fileName), "types": types,
+            "xAxis": xAxis})
+
+    def assess_fit(self, goodness_sims=0, timeout=None):
+        return self._call("assess_fit", {"goodness_sims": goodness_sims},
+                          timeout=timeout)
+
+    def export_script(self):
+        return self._call("export_script")
+
+    def journal(self):
+        return self._call("journal")
+
     # ---- B3: fakeit, MCMC, save/restore ----
     def fakeit(self, settings=None, nSpectra=1, applyStats=True, seed=None):
         if nSpectra > MAX_FAKE_SPECTRA:

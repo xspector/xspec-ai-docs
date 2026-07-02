@@ -122,6 +122,43 @@ def plot(types: str = "ldata", xAxis: str = "keV") -> dict:
 
 
 @mcp.tool()
+def plot_image(fileName: str, types: str = "ldata delchi",
+               xAxis: str = "keV") -> dict:
+    """Render a plot to an image file under the output root (for a human to look
+    at). The device is inferred from the extension (.gif/.ps/.cps/.eps/.pdf;
+    note this build has no PNG driver). Returns the file path. Use `plot` for
+    numeric arrays instead."""
+    with _LOCK:
+        return _RUNNER.plot_image(fileName, types, xAxis)
+
+
+@mcp.tool()
+def assess_fit(goodness_sims: int = 0, timeout_s: float = 0) -> dict:
+    """Composite fit-quality check: returns {acceptable, issues, ...} covering
+    parameters pegged at soft limits, a runs test for systematic residuals,
+    reduced chi-square sanity, and (if goodness_sims>0, cstat family) a
+    Monte-Carlo goodness. Call after fit instead of remembering each check."""
+    with _LOCK:
+        return _RUNNER.assess_fit(goodness_sims, timeout_s or None)
+
+
+@mcp.tool()
+def export_script() -> dict:
+    """Emit a standalone PyXspec script reproducing every mutating operation of
+    the current session (a reproducible artifact for the result). Returns
+    {nOps, script}."""
+    with _LOCK:
+        return _RUNNER.export_script()
+
+
+@mcp.tool()
+def journal() -> dict:
+    """Return the raw list of mutating operations recorded this session."""
+    with _LOCK:
+        return _RUNNER.journal()
+
+
+@mcp.tool()
 def fakeit(response: str = "", arf: str = "", background: str = "",
            exposure: float = None, nSpectra: int = 1, applyStats: bool = True,
            seed: int = None) -> dict:

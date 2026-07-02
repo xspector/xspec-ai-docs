@@ -59,9 +59,11 @@ python server/server.py          # stdio; reads ../corpus (or $XSPEC_AI_CORPUS)
 
 Drives a real fitting session: load data, define models, fit, error, flux,
 steppar, plot arrays, fakeit, MCMC, save/restore — plus `xspec_get`/`xspec_set`/
-`xspec_call` for **100% of the PyXspec object-model API**. Runs PyXspec in an
-isolated worker subprocess (`worker.py`) managed by `runner.py`; the server
-(`xspec_run.py`) never imports xspec.
+`xspec_call` for **100% of the PyXspec object-model API**. Agent aids:
+`assess_fit` (composite quality verdict), `plot_image` (a figure for a human),
+`export_script`/`journal` (a reproducible PyXspec script of the session). Runs
+PyXspec in an isolated worker subprocess (`worker.py`) managed by `runner.py`;
+the server (`xspec_run.py`) never imports xspec.
 
 ```
 python server/xspec_run.py       # stdio; requires HEADAS + PyXspec

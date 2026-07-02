@@ -10,6 +10,7 @@ Response: {"ok": true, "result": {...}} | {"ok": false, "error": "...",
           "category": "..."}
 """
 import json
+import math
 import os
 import re
 import sys
@@ -37,6 +38,9 @@ def _headless():
 
 
 _headless()
+
+# session journal: every mutating op, so export_script can reproduce the session
+_JOURNAL = []
 
 _ERROR_CATS = [
     ("no data loaded", "no_data"),
@@ -79,6 +83,7 @@ def h_reset(a):
     AllData.clear()
     AllModels.clear()
     _headless()
+    _JOURNAL.clear()
     return {"cleared": True}
 
 
@@ -352,6 +357,194 @@ def h_restore_session(a):
     return h_get_state({})
 
 
+def h_assess_fit(a):
+    """Composite quality check so the agent doesn't have to remember them all."""
+    issues = []
+    stat, dof, sm = Fit.statistic, Fit.dof, Fit.statMethod
+    reduced = stat / dof if dof else None
+
+    # parameters pegged at a soft limit (values = [val,delta,hmin,smin,smax,hmax])
+    m = AllModels(1)
+    for i in range(1, m.nParameters + 1):
+        p = AllModels(1)(i)
+        if p.frozen or p.link:
+            continue
+        val, smin, smax = p.values[0], p.values[3], p.values[4]
+        # "pegged" = clamped to a limit: closeness relative to the limit's own
+        # scale, NOT the (possibly enormous) full range.
+        if abs(val - smin) <= 1e-6 * max(1.0, abs(smin), abs(val)):
+            issues.append(f"par {i} ({p.name}) pegged at soft min {smin:g}")
+        elif abs(val - smax) <= 1e-6 * max(1.0, abs(smax), abs(val)):
+            issues.append(f"par {i} ({p.name}) pegged at soft max {smax:g}")
+
+    # residual correlation: Wald-Wolfowitz runs test on delchi
+    runs_info = None
+    try:
+        Plot.device = "/null"
+        Plot("delchi")
+        res = []
+        for g in range(1, max(1, AllData.nGroups) + 1):
+            try:
+                res += list(Plot.y(g, 1))
+            except Exception:
+                pass
+        signs = [1 if v > 0 else -1 for v in res if v != 0]
+        n1 = signs.count(1)
+        n2 = signs.count(-1)
+        n = n1 + n2
+        if n > 10 and n1 and n2:
+            runs = 1 + sum(signs[k] != signs[k - 1] for k in range(1, n))
+            mu = 2 * n1 * n2 / n + 1
+            var = (2 * n1 * n2 * (2 * n1 * n2 - n)) / (n * n * (n - 1))
+            z = (runs - mu) / math.sqrt(var) if var > 0 else 0.0
+            runs_info = {"runs": runs, "expected": round(mu, 1),
+                         "z": round(z, 2), "nbins": n}
+            if z < -2:
+                issues.append(f"systematic residuals (runs test z={z:.1f}; "
+                              "model likely missing structure)")
+    except Exception:
+        pass
+
+    # reduced chi-square sanity (only meaningful for chi)
+    if sm == "chi" and reduced is not None:
+        if reduced > 1.5:
+            issues.append(f"reduced chi-square high ({reduced:.2f}); poor fit")
+        elif reduced < 0.5:
+            issues.append(f"reduced chi-square low ({reduced:.2f}); "
+                          "over-fit or over-estimated errors")
+
+    # optional Monte-Carlo goodness (slow; opt-in)
+    goodness = None
+    sims = a.get("goodness_sims", 0)
+    if sims and sm in ("cstat", "lstat", "pgstat", "pstat"):
+        goodness = Fit.goodness(sims, sim=True)
+        if goodness >= 95:
+            issues.append(f"goodness {goodness:.0f}% of sims below observed; "
+                          "fit worse than most simulations")
+
+    return {"statistic": stat, "dof": dof, "statMethod": sm,
+            "reduced": reduced, "runs_test": runs_info, "goodness": goodness,
+            "acceptable": not issues, "issues": issues}
+
+
+# file extension -> PGPLOT/giza device (this build has no /png driver)
+_IMG_DEV = {".gif": "/gif", ".png": "/png", ".ps": "/cps", ".cps": "/cps",
+            ".eps": "/vcps", ".pdf": "/pdf"}
+
+
+def h_plot_image(a):
+    fn = a["fileName"]
+    ext = os.path.splitext(fn)[1].lower()
+    dev = _IMG_DEV.get(ext)
+    if not dev:
+        raise ValueError(f"unsupported image extension {ext!r}; "
+                         f"use one of {sorted(_IMG_DEV)}")
+    # cpgopen for an unavailable device fails at Plot() time, not on assignment,
+    # with an empty message -> wrap both and raise a clear one.
+    try:
+        Plot.device = fn + dev
+        Plot.xAxis = a.get("xAxis", "keV")
+        Plot(*(a.get("types") or "ldata delchi").split())
+    except Exception:
+        Plot.device = "/null"
+        raise ValueError(f"could not render {dev} in this PGPLOT/giza build "
+                         "(no PNG driver here; try .gif or .ps)")
+    Plot.device = "/null"
+    return {"fileName": fn, "device": dev}
+
+
+# ---- session journal -> reproducible script ----
+
+def _fmt_args(args, kwargs):
+    parts = [repr(x) for x in (args or [])]
+    parts += [f"{k}={v!r}" for k, v in (kwargs or {}).items()]
+    return ", ".join(parts)
+
+
+def _script_lines(rec):
+    c, a = rec["cmd"], rec["args"]
+    if c == "load_data":
+        spec, grp = a.get("spectrum", 1), a.get("group") or a.get("spectrum", 1)
+        out = [f'AllData("{spec}:{grp} {a["pha"]}")']
+        s = f"AllData({spec})"
+        if a.get("rmf"):
+            out.append(f'{s}.response = "{a["rmf"]}"')
+        if a.get("arf"):
+            out.append(f'{s}.response.arf = "{a["arf"]}"')
+        if a.get("back"):
+            out.append(f'{s}.background = "{a["back"]}"')
+        if a.get("ignore_bad", True):
+            out.append('AllData.ignore("bad")')
+        if a.get("energy_range"):
+            out.append(f'AllData.ignore("{a["energy_range"]}")')
+        return out
+    if c == "define_model":
+        extra = ""
+        if a.get("modName"):
+            extra = f', "{a["modName"]}", {a.get("sourceNum", 1)}'
+        elif a.get("sourceNum", 1) != 1:
+            extra = f', "", {a["sourceNum"]}'
+        return [f'Model("{a["expr"]}"{extra})']
+    if c == "set_parameter":
+        p = f"AllModels(1)({a['index']})"
+        out = []
+        if a.get("values_string"):
+            out.append(f'{p}.values = "{a["values_string"]}"')
+        elif a.get("value") is not None:
+            out.append(f"{p}.values = {a['value']!r}")
+        if a.get("freeze"):
+            out.append(f"{p}.frozen = True")
+        if a.get("thaw"):
+            out.append(f"{p}.frozen = False")
+        if a.get("unlink"):
+            out.append(f"{p}.untie()")
+        elif a.get("link") is not None:
+            lk = a["link"]
+            out.append(f"{p}.link = AllModels(1)({lk})" if isinstance(lk, int)
+                       else f'{p}.link = "{lk}"')
+        return out
+    if c == "fit":
+        out = []
+        if a.get("statistic"):
+            out.append(f'Fit.statMethod = "{a["statistic"]}"')
+        out.append("Fit.perform()")
+        return out
+    if c == "error":
+        return [f'Fit.error("{a["spec"]}")']
+    if c == "calc_flux":
+        r = a["range"] + (" err" if a.get("err") else "")
+        return [f'AllModels.calcFlux("{r}")']
+    if c == "calc_lumin":
+        return [f'AllModels.calcLumin("{a["range"]}")']
+    if c == "steppar":
+        return [f'Fit.steppar("{a["spec"]}")']
+    if c == "fakeit":
+        return [f"# fakeit({a.get('nSpectra', 1)} spectra, "
+                f"settings={a.get('settings')})"]
+    if c == "save_session":
+        return [f'Xset.save("{a["fileName"]}", info="{a.get("info", "a")}")']
+    if c == "restore_session":
+        return [f'Xset.restore("{a["fileName"]}")']
+    if c == "xset":
+        return [f"{a['target']} = {a['value']!r}"]
+    if c == "xcall":
+        return [f"{a['target']}.{a['method']}({_fmt_args(a.get('args'), a.get('kwargs'))})"]
+    return [f"# (unrepr) {c} {a}"]
+
+
+def h_export_script(a):
+    header = ["from xspec import *", "", "Xset.allowPrompting = False",
+              'Fit.query = "yes"', "AllData.clear()", "AllModels.clear()", ""]
+    body = []
+    for rec in _JOURNAL:
+        body += _script_lines(rec)
+    return {"nOps": len(_JOURNAL), "script": "\n".join(header + body) + "\n"}
+
+
+def h_journal(a):
+    return {"nOps": len(_JOURNAL), "ops": list(_JOURNAL)}
+
+
 HANDLERS = {"reset_session": h_reset, "load_data": h_load_data,
             "define_model": h_define_model, "fit": h_fit,
             "get_state": h_get_state, "set_parameter": h_set_parameter,
@@ -360,7 +553,14 @@ HANDLERS = {"reset_session": h_reset, "load_data": h_load_data,
             "fakeit": h_fakeit, "run_mcmc": h_run_mcmc,
             "save_session": h_save_session,
             "restore_session": h_restore_session,
-            "xget": h_xget, "xset": h_xset, "xcall": h_xcall}
+            "xget": h_xget, "xset": h_xset, "xcall": h_xcall,
+            "assess_fit": h_assess_fit, "plot_image": h_plot_image,
+            "export_script": h_export_script, "journal": h_journal}
+
+# ops that change session state -> recorded in the journal for export_script
+_MUTATING = {"load_data", "define_model", "set_parameter", "fit", "error",
+             "calc_flux", "calc_lumin", "steppar", "fakeit", "save_session",
+             "restore_session", "xset", "xcall"}
 
 
 def main():
@@ -385,7 +585,11 @@ def main():
                   "category": "protocol"})
             continue
         try:
-            send({"ok": True, "result": h(req.get("args") or {})})
+            args = req.get("args") or {}
+            result = h(args)
+            if cmd in _MUTATING:
+                _JOURNAL.append({"cmd": cmd, "args": args})
+            send({"ok": True, "result": result})
         except Exception as e:
             send({"ok": False, "error": str(e), "category": _classify(str(e))})
 

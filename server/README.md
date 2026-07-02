@@ -69,6 +69,13 @@ Keep it separate from the read-only Tier A server; it is opt-in and higher-risk.
 `get_state`, `set_parameter`, `error`, `calc_flux`, `calc_lumin`, `steppar`,
 `plot`, `fakeit`, `run_mcmc`, `save_session`, `restore_session`.
 
+**Agent aids:** `assess_fit` (composite quality check — pegged limits, residual
+runs test, reduced-chi sanity, optional Monte-Carlo goodness → `{acceptable,
+issues}`), `plot_image` (render a figure for a human; device inferred from
+extension — .gif/.ps/.cps/.eps/.pdf; no PNG driver in this giza build),
+`export_script` / `journal` (emit a standalone PyXspec script reproducing the
+session — a reproducible artifact).
+
 **Full API coverage:** `xspec_get`, `xspec_set`, `xspec_call` navigate the live
 object graph (`ROOT.attr(int)...` against AllData/AllModels/Fit/Xset/Plot/
 AllChains) to reach **any** attribute or method — 100% of the object-model API,

@@ -85,6 +85,9 @@ Composite, safe steps returning typed JSON (guide 01 patterns):
 | `fakeit(...)` | simulate spectra (seeded) | B3 ✅ |
 | `run_mcmc(...)` | MCMC chain (length capped, overwrites) | B3 ✅ |
 | `save_session` / `restore_session` | .xcm persistence | B3 ✅ |
+| `assess_fit(...)` | composite quality check → {acceptable, issues} | aids ✅ |
+| `plot_image(...)` | render a figure (device from extension; no PNG in giza) | aids ✅ |
+| `export_script` / `journal` | reproducible PyXspec script of the session | aids ✅ |
 
 **Blocking-prompt guards proven necessary during B2/B3:** beyond the fit query,
 two more prompts would hang a headless run and are now handled by overwriting

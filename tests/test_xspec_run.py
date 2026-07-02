@@ -157,6 +157,40 @@ try:
     # a non-root target is rejected by the resolver
     check(not r.xget("os.system")["ok"], "generic: rejects non-root target")
 
+    # ---- batch: assess_fit, plot_image, export_script ----
+    r.reset_session()
+    r.load_data("s54405.pha", energy_range="**-0.5 8.0-**")
+    r.define_model("tbabs*powerlaw")
+    r.fit("cstat")
+    af = r.assess_fit(goodness_sims=50)
+    check(af["ok"], f"assess_fit ok: {af}")
+    ar = af["result"]
+    check(isinstance(ar["acceptable"], bool) and isinstance(ar["issues"], list)
+          and ar["runs_test"] is not None and ar["goodness"] is not None,
+          f"assess_fit structure: {ar}")
+
+    # deterministic pegged-limit detection: drive PhoIndex to its soft max
+    r.xset("AllModels(1)(2).values", "9,,,,")     # PhoIndex soft max is 9
+    pegged = r.assess_fit()["result"]
+    check(any("par 2" in s and "pegged" in s for s in pegged["issues"]),
+          f"assess_fit detects pegged limit: {pegged['issues']}")
+    r.fit("cstat")                                # restore a real fit
+
+    # png driver is absent in this giza build -> gif; also confirm clear error
+    pg = r.plot_image("poc_plot.gif", "ldata delchi")
+    check(pg["ok"] and os.path.exists(pg["result"]["fileName"]),
+          f"plot_image wrote a file: {pg}")
+    badext = r.plot_image("poc_plot.png")
+    check(not badext["ok"] and "giza" in badext.get("error", ""),
+          f"plot_image reports missing png driver clearly: {badext}")
+
+    ex = r.export_script()
+    check(ex["ok"], f"export_script ok: {ex}")
+    script = ex["result"]["script"]
+    check("from xspec import" in script and 'Model("tbabs*powerlaw")' in script
+          and "Fit.perform()" in script and "AllData(" in script,
+          "export_script reproduces the session")
+
     # ---- crash recovery: worker dies between calls (segfault / CPU-kill) ----
     r.proc.kill()
     r.proc.wait()                              # dead, but proc handle retained
@@ -178,6 +212,10 @@ try:
               "members (Fit.covariance/nIterations, Xset.abund/version/parallel,"
               " Fit.goodness, AllModels.setPars, addModelString) across all "
               "6 roots")
+        print(f"batch verified: assess_fit (acceptable={ar['acceptable']}, "
+              f"runs z={ar['runs_test']['z']}, goodness={ar['goodness']:.0f}%), "
+              f"pegged-limit detection, plot_image, export_script "
+              f"({ex['result']['nOps']} ops)")
 finally:
     r.close()
 
