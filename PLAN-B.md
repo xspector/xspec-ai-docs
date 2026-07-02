@@ -100,8 +100,18 @@ arbitrary Python — an eval tool is effectively RCE. Excluded by default.
 - **Filesystem allowlist** — data paths must resolve inside a configured
   `data_root`; anything outside is rejected. (B1: enforced in the runner, the
   trust boundary.)
-- **No blocking prompts** — force `Fit.query="yes"`, `chatter=0` at session
-  init; never expose `query="on"`.
+- **No blocking prompts** — the systemic guard is `Xset.allowPrompting=False`
+  (the kill-switch for the whole class), plus `Fit.query="yes"` and `chatter=0`,
+  re-asserted at session init AND after every `restore` (an `.xcm` is a Tcl
+  script that can re-enable prompts). This subsumes the per-command overwrite
+  workarounds for `save`/`run_mcmc`.
+- **Crash/timeout are structured, not fatal** — a worker that dies mid-call
+  (segfault, CPU-limit) returns `{ok:false, category:"crashed"|"timeout",
+  session_lost:true}`; the next call auto-restarts a fresh worker and flags
+  `session_restarted:true` so the agent knows prior state is gone.
+- **Per-call timeouts** — long ops (`fit`/`error`/`steppar`/`run_mcmc`/
+  `xspec_call`) accept a `timeout_s` override so a legitimate long run isn't
+  killed at the default.
 - **Timeouts** — every call has a deadline; on expiry the worker is killed and
   the response flags `session_lost` so the agent knows state was cleared.
   (B2: auto-restart + `ulimit` resource caps.)

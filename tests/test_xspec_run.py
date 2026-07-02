@@ -85,8 +85,10 @@ try:
     check(not capped["ok"] and capped["category"] == "capped", "steppar cap")
 
     pl_ = r.plot("ldata delchi")
-    check(pl_["ok"] and len(pl_["result"]["x"]) > 0 and "model" in pl_["result"],
-          "plot arrays")
+    panels = pl_["result"]["panels"] if pl_["ok"] else []
+    p0 = panels[0]["groups"][0] if panels and panels[0]["groups"] else {}
+    check(pl_["ok"] and len(panels) == 2 and len(p0.get("x", [])) > 0
+          and "model" in p0, "plot panels (ldata+delchi)")
 
     # ---- B3: fakeit, mcmc, save/restore ----
     fk = r.fakeit(nSpectra=1, applyStats=True, seed=42)
@@ -155,13 +157,21 @@ try:
     # a non-root target is rejected by the resolver
     check(not r.xget("os.system")["ok"], "generic: rejects non-root target")
 
+    # ---- crash recovery: worker dies between calls (segfault / CPU-kill) ----
+    r.proc.kill()
+    r.proc.wait()                              # dead, but proc handle retained
+    nxt = r.get_state()                        # next call must auto-restart
+    check(nxt["ok"] and nxt.get("session_restarted")
+          and nxt["result"]["nSpectra"] == 0,
+          f"dead worker -> auto-restart, flagged, empty session: {nxt}")
+
     if not fails:
         pl = next(p for p in res["params"] if p["name"] == "PhoIndex")
         print(f"Tier B PoC OK: stat={res['statistic']:.1f}/{res['dof']} "
               f"PhoIndex={pl['value']:.2f} err=[{ep['low']:.2f},{ep['high']:.2f}] "
               f"flux={fx['result']['spectra'][0]['flux'][0]:.2e} "
               f"steppts={len(stp['result']['delstat'])} "
-              f"plotpts={len(pl_['result']['x'])}")
+              f"plotpts={len(p0.get('x', []))}")
         print("B2/B3 tools verified: set_parameter, error, calc_flux, "
               "calc_lumin, steppar(+cap), plot, fakeit, save/restore, mcmc")
         print("generic dispatch verified: xget/xset/xcall reach uncovered "

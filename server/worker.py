@@ -26,9 +26,17 @@ def send(obj):
 from xspec import (AllData, AllModels, Model, Fit, Xset, Plot,  # noqa: E402
                    FakeitSettings, Chain, AllChains)
 
-Xset.chatter = 0
-Xset.logChatter = 0
-Fit.query = "yes"
+
+def _headless():
+    """Global guards against every hidden interactive prompt (the systemic fix:
+    allowPrompting=False is the kill-switch for the whole class of hangs)."""
+    Xset.allowPrompting = False
+    Xset.chatter = 0
+    Xset.logChatter = 0
+    Fit.query = "yes"
+
+
+_headless()
 
 _ERROR_CATS = [
     ("no data loaded", "no_data"),
@@ -70,14 +78,15 @@ def _dump_params(source=1):
 def h_reset(a):
     AllData.clear()
     AllModels.clear()
-    Fit.query = "yes"
-    Xset.chatter = 0
+    _headless()
     return {"cleared": True}
 
 
 def h_load_data(a):
-    AllData(f"1:1 {a['pha']}")
-    s = AllData(1)
+    spec = a.get("spectrum", 1)
+    group = a.get("group") or spec
+    AllData(f"{spec}:{group} {a['pha']}")
+    s = AllData(spec)
     if a.get("rmf"):
         s.response = a["rmf"]
     if a.get("arf"):
@@ -97,13 +106,15 @@ def h_load_data(a):
         bkg = s.background.fileName
     except Exception:
         pass
-    return {"nSpectra": AllData.nSpectra, "exposure": s.exposure,
+    return {"spectrum": spec, "group": group, "nSpectra": AllData.nSpectra,
+            "nGroups": AllData.nGroups, "exposure": s.exposure,
             "response": rmf, "background": bkg}
 
 
 def h_define_model(a):
-    m = Model(a["expr"])
-    return {"expression": a["expr"], "components": m.componentNames,
+    m = Model(a["expr"], a.get("modName", ""), a.get("sourceNum", 1))
+    return {"expression": a["expr"], "modName": a.get("modName", ""),
+            "sourceNum": a.get("sourceNum", 1), "components": m.componentNames,
             "nParameters": m.nParameters, "params": _dump_params()}
 
 
@@ -116,20 +127,38 @@ def h_fit(a):
 
 
 def h_get_state(a):
-    st = {"nSpectra": AllData.nSpectra}
+    st = {"nSpectra": AllData.nSpectra, "nGroups": AllData.nGroups,
+          "query": Fit.query}
+    spectra = []
+    for i in range(1, AllData.nSpectra + 1):
+        s = AllData(i)
+        d = {"index": i, "exposure": s.exposure}
+        try:
+            d["fileName"] = s.fileName
+        except Exception:
+            pass
+        try:
+            d["response"] = s.response.rmf
+        except Exception:
+            d["response"] = None
+        spectra.append(d)
+    st["spectra"] = spectra
     try:
         m = AllModels(1)
-        st["model"] = {"components": m.componentNames,
+        st["model"] = {"expression": m.expression,
+                       "components": m.componentNames,
                        "nParameters": m.nParameters}
         st["params"] = _dump_params()
     except Exception:
         st["model"] = None
-    try:
-        st["statistic"] = Fit.statistic
-        st["dof"] = Fit.dof
-        st["statMethod"] = Fit.statMethod
-    except Exception:
-        pass
+    for key, get in (("statistic", lambda: Fit.statistic),
+                     ("dof", lambda: Fit.dof),
+                     ("statMethod", lambda: Fit.statMethod),
+                     ("testStatistic", lambda: Fit.testStatistic)):
+        try:
+            st[key] = get()
+        except Exception:
+            pass
     return st
 
 
@@ -196,20 +225,34 @@ def h_plot(a):
     Plot.xAxis = a.get("xAxis", "keV")
     types = (a.get("types") or "ldata").split()
     Plot(*types)
-    res = {"types": types, "xAxis": Plot.xAxis,
-           "x": list(Plot.x()), "y": list(Plot.y())}
-    for key, fn in (("model", Plot.model), ("yErr", Plot.yErr)):
-        try:
-            res[key] = list(fn())
-        except Exception:
-            pass
-    return res
+    ngroups = max(1, AllData.nGroups)
+    panels = []
+    for w, t in enumerate(types, 1):          # one plot window per plot type
+        groups = []
+        for g in range(1, ngroups + 1):       # one group per data group
+            try:
+                d = {"group": g, "x": list(Plot.x(g, w)),
+                     "y": list(Plot.y(g, w))}
+            except Exception:
+                continue
+            for key, fn in (("model", Plot.model), ("yErr", Plot.yErr)):
+                try:
+                    d[key] = list(fn(g, w))
+                except Exception:
+                    pass
+            groups.append(d)
+        panels.append({"window": w, "type": t, "groups": groups})
+    return {"types": types, "xAxis": Plot.xAxis, "nGroups": ngroups,
+            "panels": panels}
 
 
 def h_fakeit(a):
     if a.get("seed") is not None:
         Xset.seed = a["seed"]
-    s = a.get("settings") or {}
+    # drop None/empty so FakeitSettings gets '' (its "use current") default
+    # rather than the literal string "None"
+    s = {k: v for k, v in (a.get("settings") or {}).items()
+         if v is not None and v != ""}
     fs = FakeitSettings(response=s.get("response", ""), arf=s.get("arf", ""),
                         background=s.get("background", ""),
                         exposure=s.get("exposure", ""))
@@ -305,6 +348,7 @@ def h_save_session(a):
 
 def h_restore_session(a):
     Xset.restore(a["fileName"])
+    _headless()          # an .xcm is a Tcl script; it may have re-enabled prompts
     return h_get_state({})
 
 

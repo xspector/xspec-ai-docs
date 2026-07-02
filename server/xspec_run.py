@@ -29,30 +29,35 @@ def reset_session() -> dict:
 
 @mcp.tool()
 def load_data(pha: str, rmf: str = "", arf: str = "", back: str = "",
-              ignore_bad: bool = True, energy_range: str = "") -> dict:
-    """Load a spectrum (and optionally attach response/arf/background), ignore
-    bad channels, and restrict the energy range. Paths must be inside the
-    configured data root. energy_range is an XSPEC ignore expression, e.g.
-    '**-0.5 8.0-**'."""
+              ignore_bad: bool = True, energy_range: str = "",
+              spectrum: int = 1, group: int = 0) -> dict:
+    """Load a spectrum into slot `spectrum` (data group `group`, default =
+    spectrum) and optionally attach response/arf/background, ignore bad
+    channels, and restrict the energy range. Call repeatedly with increasing
+    `spectrum` for joint fits. Paths must be inside the data root; energy_range
+    is an XSPEC ignore expression, e.g. '**-0.5 8.0-**'."""
     with _LOCK:
         return _RUNNER.load_data(pha, rmf or None, arf or None, back or None,
-                                 ignore_bad, energy_range or None)
+                                 ignore_bad, energy_range or None,
+                                 spectrum, group or None)
 
 
 @mcp.tool()
-def define_model(expr: str) -> dict:
-    """Define the model from an XSPEC expression (e.g. 'tbabs*powerlaw').
-    Returns component names, parameter count, and the parameter list."""
+def define_model(expr: str, modName: str = "", sourceNum: int = 1) -> dict:
+    """Define a model from an XSPEC expression (e.g. 'tbabs*powerlaw'). Optional
+    `modName` (named model) and `sourceNum` (>1 for background/multi-source
+    models). Returns components, parameter count, and the parameter list."""
     with _LOCK:
-        return _RUNNER.define_model(expr)
+        return _RUNNER.define_model(expr, modName or None, sourceNum)
 
 
 @mcp.tool()
-def fit(statistic: str = "") -> dict:
+def fit(statistic: str = "", timeout_s: float = 0) -> dict:
     """Fit the current model to the data (optionally setting the fit statistic
-    first, e.g. 'cstat'). Returns statistic, dof, and fitted parameters."""
+    first, e.g. 'cstat'). `timeout_s` overrides the default per-call timeout for
+    a long fit. Returns statistic, dof, and fitted parameters."""
     with _LOCK:
-        return _RUNNER.fit(statistic or None)
+        return _RUNNER.fit(statistic or None, timeout_s or None)
 
 
 @mcp.tool()
@@ -76,11 +81,12 @@ def set_parameter(index: int, value: float = None, values_string: str = "",
 
 
 @mcp.tool()
-def error(spec: str) -> dict:
-    """Confidence intervals via the error command (e.g. '2.706 1-3'). Returns
-    each parameter's (low, high, code); code 'FFFFFFFFF' means clean."""
+def error(spec: str, timeout_s: float = 0) -> dict:
+    """Confidence intervals via the error command (e.g. '2.706 1-3'). Requires a
+    current fit (freeze/thaw/newpar invalidates it -> re-fit first). Returns each
+    parameter's (low, high, code); code 'FFFFFFFFF' means clean."""
     with _LOCK:
-        return _RUNNER.error(spec)
+        return _RUNNER.error(spec, timeout_s or None)
 
 
 @mcp.tool()
@@ -99,11 +105,12 @@ def calc_lumin(energy_range: str) -> dict:
 
 
 @mcp.tool()
-def steppar(spec: str) -> dict:
+def steppar(spec: str, timeout_s: float = 0) -> dict:
     """Steppar scan (e.g. '2 1.5 2.5 20', or two triples for a 2-D grid).
-    Returns the delta-statistic grid. Grid size is capped."""
+    Returns the delta-statistic grid. Grid size is capped; `timeout_s` overrides
+    the per-call timeout for a large scan."""
     with _LOCK:
-        return _RUNNER.steppar(spec)
+        return _RUNNER.steppar(spec, timeout_s or None)
 
 
 @mcp.tool()
@@ -128,10 +135,14 @@ def fakeit(response: str = "", arf: str = "", background: str = "",
 
 @mcp.tool()
 def run_mcmc(fileName: str, burn: int = 1000, runLength: int = 10000,
-             walkers: int = 10, algorithm: str = "gw") -> dict:
-    """Run an MCMC chain, written under the output root. runLength is capped."""
+             walkers: int = 10, algorithm: str = "gw",
+             timeout_s: float = 0) -> dict:
+    """Run an MCMC chain, written under the output root (overwrites). runLength
+    is capped; set `timeout_s` for a long chain (else it may hit the default
+    timeout and lose the session)."""
     with _LOCK:
-        return _RUNNER.run_mcmc(fileName, burn, runLength, walkers, algorithm)
+        return _RUNNER.run_mcmc(fileName, burn, runLength, walkers, algorithm,
+                                timeout_s or None)
 
 
 @mcp.tool()
@@ -172,9 +183,10 @@ def xspec_set(target: str, value: Any) -> dict:
 
 @mcp.tool()
 def xspec_call(target: str, method: str, args: list = None,
-               kwargs: dict = None) -> dict:
+               kwargs: dict = None, timeout_s: float = 0) -> dict:
     """Call ANY PyXspec method. `target` resolves to the object; `method` is the
-    method name; `args`/`kwargs` are JSON. Examples:
+    method name; `args`/`kwargs` are JSON; `timeout_s` overrides the per-call
+    timeout for long methods (goodness, chains). Examples:
     xspec_call('Fit','goodness',[1000],{'sim':true});
     xspec_call('AllModels','setPars',[1.0,1.8,1e-3]);
     xspec_call('Xset','addModelString',['APECROOT','3.0.9']);
@@ -183,7 +195,7 @@ def xspec_call(target: str, method: str, args: list = None,
     NOTE: unrestricted -- this can reach code-loading (lmod/initpackage/tclLoad)
     and Tcl-script restore, and file-path args are not allowlisted."""
     with _LOCK:
-        return _RUNNER.xcall(target, method, args, kwargs)
+        return _RUNNER.xcall(target, method, args, kwargs, timeout_s or None)
 
 
 if __name__ == "__main__":

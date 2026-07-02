@@ -6,6 +6,7 @@ allowlist -- the trust boundary. `xspec_run.py` wraps this as MCP tools.
 """
 import json
 import os
+import re
 import select
 import subprocess
 from pathlib import Path
@@ -86,6 +87,12 @@ class XspecRunner:
             self.proc.kill()
             self.proc.wait(timeout=5)
         self.proc = None
+        if self._resp:
+            try:
+                self._resp.close()      # avoid fd leak per restart
+            except Exception:
+                pass
+            self._resp = None
 
     def close(self):
         try:
@@ -98,17 +105,36 @@ class XspecRunner:
         self.kill()
 
     # ---- protocol ----
+    def _fail(self, error, category):
+        self.kill()
+        return {"ok": False, "error": error, "category": category,
+                "session_lost": True}
+
     def _call(self, cmd, args=None, timeout=None):
+        # (re)start the worker; flag a restart only if a prior one had died
+        was_dead = self.proc is not None and self.proc.poll() is not None
         if not self.alive():
             self.start()
-        self.proc.stdin.write(json.dumps({"cmd": cmd, "args": args or {}}) + "\n")
-        self.proc.stdin.flush()
+        try:
+            self.proc.stdin.write(
+                json.dumps({"cmd": cmd, "args": args or {}}) + "\n")
+            self.proc.stdin.flush()
+        except (BrokenPipeError, OSError, ValueError):
+            return self._fail("worker died before the request was sent",
+                              "crashed")
         line = self._read(timeout or self.timeout)
-        if line is None:                # timeout -> engine may be wedged
-            self.kill()
-            return {"ok": False, "error": "operation timed out",
-                    "category": "timeout", "session_lost": True}
-        return json.loads(line)
+        if line is None:                # select timed out -> engine wedged
+            return self._fail("operation timed out", "timeout")
+        if line == "":                  # EOF -> worker crashed mid-operation
+            return self._fail("worker crashed during the operation "
+                              "(segfault / CPU limit?)", "crashed")
+        try:
+            resp = json.loads(line)
+        except json.JSONDecodeError:
+            return self._fail(f"corrupt worker response: {line!r}", "crashed")
+        if was_dead:
+            resp["session_restarted"] = True   # prior session state was lost
+        return resp
 
     # ---- filesystem allowlist (trust boundary) ----
     def _resolve(self, p):
@@ -150,8 +176,9 @@ class XspecRunner:
         return self._call("reset_session")
 
     def load_data(self, pha, rmf=None, arf=None, back=None,
-                  ignore_bad=True, energy_range=None):
-        args = {"pha": self._resolve(pha), "ignore_bad": ignore_bad}
+                  ignore_bad=True, energy_range=None, spectrum=1, group=None):
+        args = {"pha": self._resolve(pha), "ignore_bad": ignore_bad,
+                "spectrum": spectrum, "group": group}
         if rmf:
             args["rmf"] = self._resolve(rmf)
         if arf:
@@ -162,11 +189,13 @@ class XspecRunner:
             args["energy_range"] = energy_range
         return self._call("load_data", args)
 
-    def define_model(self, expr):
-        return self._call("define_model", {"expr": expr})
+    def define_model(self, expr, modName=None, sourceNum=1):
+        return self._call("define_model", {"expr": expr, "modName": modName or "",
+                                           "sourceNum": sourceNum})
 
-    def fit(self, statistic=None):
-        return self._call("fit", {"statistic": statistic} if statistic else {})
+    def fit(self, statistic=None, timeout=None):
+        a = {"statistic": statistic} if statistic else {}
+        return self._call("fit", a, timeout=timeout)
 
     def get_state(self):
         return self._call("get_state")
@@ -178,8 +207,8 @@ class XspecRunner:
             "index": index, "value": value, "values_string": values_string,
             "freeze": freeze, "thaw": thaw, "link": link, "unlink": unlink})
 
-    def error(self, spec):
-        return self._call("error", {"spec": spec})
+    def error(self, spec, timeout=None):
+        return self._call("error", {"spec": spec}, timeout=timeout)
 
     def calc_flux(self, energy_range, err=False):
         return self._call("calc_flux", {"range": energy_range, "err": err})
@@ -187,21 +216,22 @@ class XspecRunner:
     def calc_lumin(self, energy_range):
         return self._call("calc_lumin", {"range": energy_range})
 
-    def steppar(self, spec):
-        # cap the grid size (product of the 'steps' token of each param)
-        toks = spec.split()
-        steps = toks[3::4]
+    def steppar(self, spec, timeout=None):
+        # cap the grid (product of step-counts). Keep only numeric tokens so
+        # keywords like 'log'/'best' don't shift the (par lo hi steps) grouping.
+        nums = [t for t in spec.split()
+                if re.match(r"-?[\d.]+([eE][-+]?\d+)?$", t)]
         grid = 1
-        for s in steps:
+        for s in nums[3::4]:
             try:
-                grid *= int(s)
+                grid *= int(float(s))
             except ValueError:
                 pass
         if grid > MAX_STEPPAR_GRID:
             return {"ok": False, "category": "capped",
                     "error": f"steppar grid {grid} exceeds cap "
                              f"{MAX_STEPPAR_GRID}"}
-        return self._call("steppar", {"spec": spec})
+        return self._call("steppar", {"spec": spec}, timeout=timeout)
 
     def plot(self, types="ldata", xAxis="keV"):
         return self._call("plot", {"types": types, "xAxis": xAxis})
@@ -220,7 +250,7 @@ class XspecRunner:
                                      "applyStats": applyStats, "seed": seed})
 
     def run_mcmc(self, fileName, burn=1000, runLength=10000, walkers=10,
-                 algorithm="gw"):
+                 algorithm="gw", timeout=None):
         if runLength > MAX_CHAIN_LENGTH:
             return {"ok": False, "category": "capped",
                     "error": f"runLength {runLength} exceeds cap "
@@ -228,7 +258,7 @@ class XspecRunner:
         return self._call("run_mcmc", {
             "fileName": self._resolve_write(fileName), "burn": burn,
             "runLength": runLength, "walkers": walkers,
-            "algorithm": algorithm}, timeout=self.timeout)
+            "algorithm": algorithm}, timeout=timeout)
 
     def save_session(self, fileName, info="a"):
         return self._call("save_session",
@@ -246,6 +276,7 @@ class XspecRunner:
     def xset(self, target, value):
         return self._call("xset", {"target": target, "value": value})
 
-    def xcall(self, target, method, args=None, kwargs=None):
+    def xcall(self, target, method, args=None, kwargs=None, timeout=None):
         return self._call("xcall", {"target": target, "method": method,
-                                    "args": args or [], "kwargs": kwargs or {}})
+                                    "args": args or [], "kwargs": kwargs or {}},
+                          timeout=timeout)
