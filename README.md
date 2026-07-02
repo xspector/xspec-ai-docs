@@ -34,6 +34,7 @@ server/      MCP servers: server.py (Tier A) + xspec_run.py/runner.py/worker.py 
 tests/       audit_macros.py, run_recipes.py, test_server.py (Tier A),
              test_xspec_run.py (Tier B)
 bench/       benchmark.py -- ground-truth calibration of xspec-run (see bench/README.md)
+.claude/skills/xray-fit/     Claude Code skill: disciplined end-to-end fitting workflow
 PLAN.md / PLAN-B.md          design docs (corpus + Tier A / Tier B)
 ```
 
@@ -104,6 +105,14 @@ python tests/test_xspec_run.py   # Tier B: live fit + tools + crash recovery (ne
 The HEADAS-dependent tests execute against the datasets shipped in the XSPEC
 manual's `walkthrough/` directory and check the extracted PyXspec API against
 live object introspection; they skip cleanly if HEADAS is absent.
+
+## Skill
+
+`.claude/skills/xray-fit/SKILL.md` is a Claude Code skill that drives both
+servers through a disciplined end-to-end workflow (inspect → decide statistic +
+band → load → model → fit → assess → errors/flux → export a reproducible
+script). Copy it to `~/.claude/skills/xray-fit/` to make it available globally;
+it triggers when you ask to fit or analyze an X-ray spectrum.
 
 ## Benchmarking
 
