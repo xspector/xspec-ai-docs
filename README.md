@@ -12,6 +12,10 @@ Three things live here:
 3. **`xspec-run` MCP server (Tier B)** — executes a live PyXspec session. See
    [PLAN-B.md](PLAN-B.md).
 
+A third layer — a learning loop (casebook of worked cases + automatic episode
+capture, so agents get better with every analysis) — is designed in
+[PLAN-C.md](PLAN-C.md); not yet implemented.
+
 ## Entry point
 
 `llms.txt` is the root index (models, PyXspec API, commands, guides, grounding).
@@ -35,7 +39,7 @@ tests/       audit_macros.py, run_recipes.py, test_server.py (Tier A),
              test_xspec_run.py (Tier B)
 bench/       benchmark.py -- ground-truth calibration of xspec-run (see bench/README.md)
 .claude/skills/xray-fit/     Claude Code skill: disciplined end-to-end fitting workflow
-PLAN.md / PLAN-B.md          design docs (corpus + Tier A / Tier B)
+PLAN.md / PLAN-B.md / PLAN-C.md   design docs (corpus + Tier A / Tier B / learning loop)
 ```
 
 Two content layers: an **auto-generated reference layer** (models, commands,
