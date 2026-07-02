@@ -33,6 +33,7 @@ server/      MCP servers: server.py (Tier A) + xspec_run.py/runner.py/worker.py 
              -- see server/README.md
 tests/       audit_macros.py, run_recipes.py, test_server.py (Tier A),
              test_xspec_run.py (Tier B)
+bench/       benchmark.py -- ground-truth calibration of xspec-run (see bench/README.md)
 PLAN.md / PLAN-B.md          design docs (corpus + Tier A / Tier B)
 ```
 
@@ -102,3 +103,16 @@ python tests/test_xspec_run.py   # Tier B: live fit + tools + crash recovery (ne
 The HEADAS-dependent tests execute against the datasets shipped in the XSPEC
 manual's `walkthrough/` directory and check the extracted PyXspec API against
 live object introspection; they skip cleanly if HEADAS is absent.
+
+## Benchmarking
+
+```
+python bench/benchmark.py [N]    # ground-truth calibration of xspec-run (needs HEADAS)
+```
+
+Generates synthetic spectra with known parameters via `fakeit`, recovers them
+through the server, and scores **coverage** (does the truth land in the 90%/1σ
+CI at the nominal rate?) and **pull** (unbiased, correctly-sized errors) — with
+a trap showing `chi` is mis-calibrated on low counts where `cstat` is not. This
+measures whether the results are trustworthy, not just that the tools run. See
+[bench/README.md](bench/README.md).
