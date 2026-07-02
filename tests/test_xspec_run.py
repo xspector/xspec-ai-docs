@@ -113,6 +113,48 @@ try:
     except ValueError:
         pass
 
+    # ---- generic dispatch: reach members no structured tool covers ----
+    r.reset_session()
+    r.load_data("s54405.pha", energy_range="**-0.5 8.0-**")
+    r.define_model("tbabs*powerlaw")
+    r.fit("cstat")
+
+    # all 6 roots resolve
+    for root in ("AllData", "AllModels", "Fit", "Xset", "Plot", "AllChains"):
+        check(r.xget(root)["ok"], f"generic: root {root} resolves")
+
+    # xget an attribute no tool exposes
+    cov = r.xget("Fit.covariance")
+    check(cov["ok"] and isinstance(cov["result"]["value"], list),
+          "generic: Fit.covariance")
+    check(r.xget("Xset.version")["ok"], "generic: Xset.version")
+    check(r.xget("AllData(1).response.rmf")["ok"], "generic: nested get rmf")
+
+    # xset a scalar, a string, a bool-on-navigated-Parameter, a nested handler
+    ni = r.xset("Fit.nIterations", 55)
+    check(ni["ok"] and ni["result"]["value"] == 55, "generic: set Fit.nIterations")
+    check(r.xset("Xset.abund", "wilm")["ok"], "generic: set Xset.abund")
+    fz = r.xset("AllModels(1)(2).frozen", True)
+    check(fz["ok"] and fz["result"]["value"] is True,
+          "generic: set Parameter.frozen")
+    r.xset("AllModels(1)(2).frozen", False)
+    pj = r.xset("Xset.parallel.leven", 2)
+    check(pj["ok"] and pj["result"]["value"] == 2,
+          "generic: set nested Xset.parallel.leven")
+
+    # xcall methods no tool exposes
+    r.fit("cstat")
+    gd = r.xcall("Fit", "goodness", [50], {"sim": True})
+    check(gd["ok"], f"generic: call Fit.goodness -> {gd}")
+    sp = r.xcall("AllModels(1)", "setPars", [0.1, 2.0, 1e-3])  # Model.setPars
+    v = r.xget("AllModels(1)(2).values")["result"]["value"][0]
+    check(sp["ok"] and abs(v - 2.0) < 1e-6, f"generic: call Model.setPars (v={v})")
+    check(r.xcall("Xset", "addModelString", ["APECROOT", "3.0.9"])["ok"],
+          "generic: call Xset.addModelString")
+
+    # a non-root target is rejected by the resolver
+    check(not r.xget("os.system")["ok"], "generic: rejects non-root target")
+
     if not fails:
         pl = next(p for p in res["params"] if p["name"] == "PhoIndex")
         print(f"Tier B PoC OK: stat={res['statistic']:.1f}/{res['dof']} "
@@ -122,6 +164,10 @@ try:
               f"plotpts={len(pl_['result']['x'])}")
         print("B2/B3 tools verified: set_parameter, error, calc_flux, "
               "calc_lumin, steppar(+cap), plot, fakeit, save/restore, mcmc")
+        print("generic dispatch verified: xget/xset/xcall reach uncovered "
+              "members (Fit.covariance/nIterations, Xset.abund/version/parallel,"
+              " Fit.goodness, AllModels.setPars, addModelString) across all "
+              "6 roots")
 finally:
     r.close()
 

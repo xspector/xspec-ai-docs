@@ -7,6 +7,7 @@ Run (stdio):  python server/xspec_run.py
 Requires HEADAS + PyXspec installed; the worker bootstraps HEADAS itself.
 """
 import threading
+from typing import Any
 
 from mcp.server.fastmcp import FastMCP
 
@@ -147,6 +148,42 @@ def restore_session(fileName: str) -> dict:
     Returns the resulting state."""
     with _LOCK:
         return _RUNNER.restore_session(fileName)
+
+
+@mcp.tool()
+def xspec_get(target: str) -> dict:
+    """Read ANY PyXspec attribute by object-path. The path starts at a root
+    (AllData, AllModels, Fit, Xset, Plot, AllChains) and navigates via .attr and
+    (int) indexing. Examples: 'Fit.covariance', 'AllModels(1)(2).values',
+    'AllData(1).response.rmf', 'Xset.abund', 'Xset.parallel.leven'."""
+    with _LOCK:
+        return _RUNNER.xget(target)
+
+
+@mcp.tool()
+def xspec_set(target: str, value: Any) -> dict:
+    """Set ANY writable PyXspec attribute by object-path (must end in an
+    attribute). Examples: xspec_set('Fit.nIterations', 100),
+    xspec_set('Xset.abund', 'wilm'), xspec_set('AllModels(1)(2).frozen', true),
+    xspec_set('Xset.cosmo', '70,0,0.73')."""
+    with _LOCK:
+        return _RUNNER.xset(target, value)
+
+
+@mcp.tool()
+def xspec_call(target: str, method: str, args: list = None,
+               kwargs: dict = None) -> dict:
+    """Call ANY PyXspec method. `target` resolves to the object; `method` is the
+    method name; `args`/`kwargs` are JSON. Examples:
+    xspec_call('Fit','goodness',[1000],{'sim':true});
+    xspec_call('AllModels','setPars',[1.0,1.8,1e-3]);
+    xspec_call('Xset','addModelString',['APECROOT','3.0.9']);
+    xspec_call('AllChains','margin',['1 1.5 2.5 50']).
+
+    NOTE: unrestricted -- this can reach code-loading (lmod/initpackage/tclLoad)
+    and Tcl-script restore, and file-path args are not allowlisted."""
+    with _LOCK:
+        return _RUNNER.xcall(target, method, args, kwargs)
 
 
 if __name__ == "__main__":

@@ -69,9 +69,16 @@ Keep it separate from the read-only Tier A server; it is opt-in and higher-risk.
 `get_state`, `set_parameter`, `error`, `calc_flux`, `calc_lumin`, `steppar`,
 `plot`, `fakeit`, `run_mcmc`, `save_session`, `restore_session`.
 
+**Full API coverage:** `xspec_get`, `xspec_set`, `xspec_call` navigate the live
+object graph (`ROOT.attr(int)...` against AllData/AllModels/Fit/Xset/Plot/
+AllChains) to reach **any** attribute or method — 100% of the object-model API,
+not just the 15 structured tools. Unrestricted (per design decision): these do
+not enforce the filesystem allowlist and can reach code-loading/`restore` (RCE);
+appropriate for trusted local use. Drop them for a less-trusted deployment.
+
 Resource caps: steppar grid, MCMC length, fakeit spectra count, and a worker
-CPU-time `ulimit`. Read paths must be under `XSPEC_DATA_ROOT`; written files
-(chains, `.xcm`) under `XSPEC_OUTPUT_ROOT`.
+CPU-time `ulimit`. For the structured tools, read paths must be under
+`XSPEC_DATA_ROOT`; written files (chains, `.xcm`) under `XSPEC_OUTPUT_ROOT`.
 
 **How it works:** the server (`xspec_run.py`) never imports `xspec`; it manages a
 worker subprocess (`worker.py`) that runs PyXspec in a HEADAS-initialized shell.

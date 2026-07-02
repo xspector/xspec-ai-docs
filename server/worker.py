@@ -11,6 +11,7 @@ Response: {"ok": true, "result": {...}} | {"ok": false, "error": "...",
 """
 import json
 import os
+import re
 import sys
 
 # protocol channel (inherited fd); responses go here, never to stdout
@@ -228,6 +229,72 @@ def h_run_mcmc(a):
     return {"fileName": a["fileName"], "runLength": a.get("runLength", 10000)}
 
 
+# ---- generic dispatch: reach 100% of the PyXspec object-model API ----
+# A target is  ROOT ( .attr | (int) )*  resolved against the live objects with
+# getattr / __call__(int) -- NOT eval. Covers e.g. "Fit.covariance",
+# "AllModels(1)(2).values", "AllData(1).response.rmf", "Xset.parallel.leven".
+_ROOTS = {"AllData": AllData, "AllModels": AllModels, "Fit": Fit,
+          "Xset": Xset, "Plot": Plot, "AllChains": AllChains}
+_STEP = re.compile(r"\.([A-Za-z_]\w*)|\((-?\d+)\)")
+
+
+def _parse_target(target):
+    m = re.match(r"\s*([A-Za-z_]\w*)\s*", target)
+    if not m or m.group(1) not in _ROOTS:
+        raise ValueError(f"target must start with one of {sorted(_ROOTS)}")
+    root, rest, i, steps = m.group(1), target[m.end():], 0, []
+    for tm in _STEP.finditer(rest):
+        if tm.start() != i:
+            raise ValueError(f"cannot parse target near: {rest[i:]!r}")
+        i = tm.end()
+        steps.append(("attr", tm.group(1)) if tm.group(1) is not None
+                     else ("call", int(tm.group(2))))
+    if rest[i:].strip():
+        raise ValueError(f"trailing characters in target: {rest[i:]!r}")
+    return root, steps
+
+
+def _walk(root, steps):
+    obj = _ROOTS[root]
+    for kind, val in steps:
+        obj = getattr(obj, val) if kind == "attr" else obj(val)
+    return obj
+
+
+def _safe(v):
+    if v is None or isinstance(v, (bool, int, float, str)):
+        return v
+    if isinstance(v, (list, tuple)):
+        return [_safe(x) for x in v]
+    if isinstance(v, dict):
+        return {str(k): _safe(x) for k, x in v.items()}
+    return {"_type": type(v).__name__, "repr": repr(v)[:500]}
+
+
+def h_xget(a):
+    root, steps = _parse_target(a["target"])
+    return {"target": a["target"], "value": _safe(_walk(root, steps))}
+
+
+def h_xset(a):
+    root, steps = _parse_target(a["target"])
+    if not steps or steps[-1][0] != "attr":
+        raise ValueError("set target must end in an attribute")
+    parent = _walk(root, steps[:-1])
+    setattr(parent, steps[-1][1], a["value"])
+    return {"target": a["target"],
+            "value": _safe(getattr(parent, steps[-1][1]))}
+
+
+def h_xcall(a):
+    root, steps = _parse_target(a["target"])
+    obj = _walk(root, steps)
+    method = getattr(obj, a["method"])
+    result = method(*(a.get("args") or []), **(a.get("kwargs") or {}))
+    return {"target": a["target"], "method": a["method"],
+            "result": _safe(result)}
+
+
 def h_save_session(a):
     # save to an existing file otherwise prompts "overwrite?" and blocks
     if os.path.exists(a["fileName"]):
@@ -248,7 +315,8 @@ HANDLERS = {"reset_session": h_reset, "load_data": h_load_data,
             "calc_lumin": h_calc_lumin, "steppar": h_steppar, "plot": h_plot,
             "fakeit": h_fakeit, "run_mcmc": h_run_mcmc,
             "save_session": h_save_session,
-            "restore_session": h_restore_session}
+            "restore_session": h_restore_session,
+            "xget": h_xget, "xset": h_xset, "xcall": h_xcall}
 
 
 def main():

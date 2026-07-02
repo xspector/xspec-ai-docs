@@ -238,3 +238,14 @@ class XspecRunner:
     def restore_session(self, fileName):
         return self._call("restore_session",
                           {"fileName": self._resolve_readable(fileName)})
+
+    # ---- generic dispatch (full API coverage; unrestricted) ----
+    def xget(self, target):
+        return self._call("xget", {"target": target})
+
+    def xset(self, target, value):
+        return self._call("xset", {"target": target, "value": value})
+
+    def xcall(self, target, method, args=None, kwargs=None):
+        return self._call("xcall", {"target": target, "method": method,
+                                    "args": args or [], "kwargs": kwargs or {}})

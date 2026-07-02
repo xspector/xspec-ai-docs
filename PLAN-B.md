@@ -1,9 +1,35 @@
 # Tier B — PyXspec execution MCP server (design)
 
-Status: **B1 + B2 + B3 implemented and verified** against live data
-(`server/worker.py`, `server/runner.py`, `server/xspec_run.py`;
-`tests/test_xspec_run.py`). 15 tools. Remaining future item: multi-worker
-session pool.
+Status: **B1 + B2 + B3 + generic dispatch implemented and verified** against
+live data (`server/worker.py`, `server/runner.py`, `server/xspec_run.py`;
+`tests/test_xspec_run.py`). 15 guarded tools + 3 generic tools giving **100%
+object-model API coverage**. Remaining future item: multi-worker session pool.
+
+## Full coverage (generic dispatch)
+
+The 15 structured tools cover ~15% of the 230-member executable API (135 attrs +
+95 methods across 15 classes). To reach **any** PyXspec operation without a
+per-member tool explosion, three generic tools navigate the live object graph:
+
+- `xspec_get(target)` — read any attribute by object-path
+- `xspec_set(target, value)` — write any attribute
+- `xspec_call(target, method, args, kwargs)` — call any method
+
+A **target** is `ROOT (.attr | (int))*` resolved with `getattr`/`__call__(int)`
+against a whitelist of roots (`AllData/AllModels/Fit/Xset/Plot/AllChains`) — NOT
+`eval`. Examples: `Fit.covariance`, `AllModels(1)(2).values`,
+`AllData(1).response.rmf`, `Xset.parallel.leven`. The resolver reaches every
+attribute/method/nested-handler in the object model, so coverage is complete by
+construction.
+
+**Posture (chosen: full & unrestricted).** These tools deliberately do not
+enforce the filesystem allowlist and can reach code-loading methods
+(`lmod`/`initpackage`/`tclLoad`/`addPyMod`), Tcl-script `restore`, and (via
+dunder navigation) arbitrary Python — i.e. effectively local RCE with XSPEC's
+capabilities. This is appropriate for a trusted local single-user setup. The 15
+structured tools remain the guarded, path-checked, ergonomic path; the generic
+tools are the completeness escape hatch. For a less-trusted deployment, drop the
+three generic tools (and keep the structured set) or gate them behind a flag.
 
 Tier A (`server/server.py`) is stateless retrieval over the static corpus. Tier B
 is a **stateful compute engine**: it drives a live PyXspec so an agent can load
