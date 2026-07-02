@@ -88,6 +88,8 @@ Composite, safe steps returning typed JSON (guide 01 patterns):
 | `assess_fit(...)` | composite quality check → {acceptable, issues} | aids ✅ |
 | `plot_image(...)` | render a figure (device from extension; no PNG in giza) | aids ✅ |
 | `export_script` / `journal` | reproducible PyXspec script of the session | aids ✅ |
+| `pha_info(pha)` | inspect a PHA header (mission/exposure/RMF/ARF/grouping) | prep ✅ |
+| `group_spectrum(...)` | ftgrouppha (heasoftpy); self-contained output | prep ✅ |
 
 **Blocking-prompt guards proven necessary during B2/B3:** beyond the fit query,
 two more prompts would hang a headless run and are now handled by overwriting

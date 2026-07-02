@@ -8,6 +8,7 @@ import json
 import os
 import re
 import select
+import shlex
 import subprocess
 from pathlib import Path
 
@@ -161,13 +162,19 @@ class XspecRunner:
         return str(path)
 
     def _resolve_readable(self, p):
-        """Readable from either the data root or the output root."""
+        """Readable from either the data root or the output root. Distinguishes
+        an allowlist violation (ValueError) from within-root-but-missing
+        (FileNotFoundError)."""
         path = Path(p)
         roots = [self.data_root, self.output_root]
         cands = ([path.resolve()] if path.is_absolute()
                  else [(r / p).resolve() for r in roots])
-        for c in cands:
-            if any(c == r or r in c.parents for r in roots) and c.exists():
+        within = [c for c in cands
+                  if any(c == r or r in c.parents for r in roots)]
+        if not within:
+            raise ValueError(f"path outside data/output roots: {p}")
+        for c in within:
+            if c.exists():
                 return str(c)
         raise FileNotFoundError(f"not found under data/output root: {p}")
 
@@ -177,7 +184,8 @@ class XspecRunner:
 
     def load_data(self, pha, rmf=None, arf=None, back=None,
                   ignore_bad=True, energy_range=None, spectrum=1, group=None):
-        args = {"pha": self._resolve(pha), "ignore_bad": ignore_bad,
+        # spectrum may be a grouped product under the output root
+        args = {"pha": self._resolve_readable(pha), "ignore_bad": ignore_bad,
                 "spectrum": spectrum, "group": group}
         if rmf:
             args["rmf"] = self._resolve(rmf)
@@ -295,3 +303,105 @@ class XspecRunner:
         return self._call("xcall", {"target": target, "method": method,
                                     "args": args or [], "kwargs": kwargs or {}},
                           timeout=timeout)
+
+    # ---- data prep (pre-analysis; no worker session needed) ----
+    def _headas_python(self, code, extra_env=None, timeout=180):
+        """Run a Python snippet in a HEADAS-initialized subprocess (so heasoftpy
+        imports). HEADAS CLI tools prompt to /dev/tty with no terminal;
+        heasoftpy runs them non-interactively, so we go through it."""
+        env = dict(os.environ)
+        env["HEADAS"] = self.headas
+        env["PATH"] = "/opt/homebrew/bin:" + env.get("PATH", "")
+        env.update(extra_env or {})
+        cmd = ('source "$HEADAS/headas-init.sh" >/dev/null 2>&1; exec '
+               + shlex.quote(self.python) + " -c " + shlex.quote(code))
+        p = subprocess.run(["bash", "-c", cmd], env=env, capture_output=True,
+                           text=True, timeout=timeout)
+        return p.returncode, p.stdout, p.stderr
+
+    def pha_info(self, pha):
+        """Inspect a PHA header: mission, exposure, linked RMF/ARF/background,
+        grouping, total counts -- what the agent needs to decide how to proceed
+        (guide 02). Reads the FITS header directly; no XSPEC session."""
+        from astropy.io import fits
+        path = self._resolve_readable(pha)   # data root or output (grouped) root
+        info = {"file": path}
+        with fits.open(path) as hdul:
+            hdu = hdul["SPECTRUM"] if "SPECTRUM" in hdul else hdul[1]
+            h, prim = hdu.header, hdul[0].header
+            for key in ("TELESCOP", "INSTRUME", "FILTER", "EXPOSURE",
+                        "RESPFILE", "ANCRFILE", "BACKFILE", "CORRFILE",
+                        "CHANTYPE", "DETCHANS", "AREASCAL", "BACKSCAL",
+                        "POISSERR", "HDUCLAS2"):
+                v = h.get(key, prim.get(key))
+                if v is not None:
+                    info[key] = v
+            cols = ([c.name.upper() for c in hdu.columns]
+                    if getattr(hdu, "columns", None) else [])
+            info["grouped"] = "GROUPING" in cols
+            info["type2"] = "SPEC_NUM" in cols or h.get("HDUCLAS4") == "TYPE:II"
+            try:
+                import numpy as np
+                if "COUNTS" in cols:
+                    info["total_counts"] = float(np.sum(hdu.data["COUNTS"]))
+                elif "RATE" in cols and info.get("EXPOSURE"):
+                    info["total_counts"] = float(
+                        np.sum(hdu.data["RATE"]) * info["EXPOSURE"])
+            except Exception:
+                pass
+        return {"ok": True, "result": info}
+
+    def group_spectrum(self, infile, outfile, grouptype="min", groupscale=25,
+                       backfile=None, respfile=None, arffile=None):
+        """Group a spectrum with ftgrouppha (grouptype: min/snmin/bmin/opt/
+        optmin/const). opt/optmin need respfile. Writes under the output root.
+        Any of respfile/arffile/backfile supplied are embedded as absolute paths
+        in the output so the grouped file is self-contained (loads from any
+        directory)."""
+        outpath = self._resolve_write(outfile)
+        params = {"infile": self._resolve(infile), "outfile": outpath,
+                  "grouptype": grouptype, "groupscale": groupscale,
+                  "clobber": "yes"}
+        if backfile:
+            params["backfile"] = self._resolve(backfile)
+        if respfile:
+            params["respfile"] = self._resolve(respfile)
+        code = ("import os, json, sys, heasoftpy as hsp; "
+                "p = json.loads(os.environ['XSPEC_GRP_PARAMS']); "
+                "sys.exit(hsp.ftgrouppha(**p).returncode)")
+        rc, out, err = self._headas_python(
+            code, extra_env={"XSPEC_GRP_PARAMS": json.dumps(params)})
+        if rc != 0 or not os.path.exists(outpath):
+            return {"ok": False, "category": "prep",
+                    "error": (err or out).strip()[-500:] or
+                    f"ftgrouppha exited {rc}"}
+        # make the grouped file self-contained: embed absolute RESPFILE/
+        # ANCRFILE/BACKFILE so it loads from any directory. Caller-supplied
+        # paths win; otherwise promote a real relative keyword to absolute.
+        # (%match% / none are left alone -- there is no concrete file to embed.)
+        rewritten = []
+        supplied = {"RESPFILE": respfile, "ANCRFILE": arffile,
+                    "BACKFILE": backfile}
+        try:
+            from astropy.io import fits
+            indir = os.path.dirname(self._resolve(infile))
+            with fits.open(outpath, mode="update") as hdul:
+                hdu = hdul["SPECTRUM"] if "SPECTRUM" in hdul else hdul[1]
+                for key, given in supplied.items():
+                    if given:
+                        hdu.header[key] = self._resolve(given)
+                        rewritten.append(key)
+                        continue
+                    v = hdu.header.get(key)
+                    if v and v.upper() != "NONE" and not os.path.isabs(v):
+                        cand = os.path.join(indir, v)
+                        if os.path.exists(cand):
+                            hdu.header[key] = cand
+                            rewritten.append(key)
+                hdul.flush()
+        except Exception:
+            pass
+        return {"ok": True, "result": {"outfile": outpath,
+                                       "grouptype": grouptype,
+                                       "groupscale": groupscale,
+                                       "abspath_keywords": rewritten}}

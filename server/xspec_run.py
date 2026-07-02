@@ -19,6 +19,32 @@ mcp = FastMCP("xspec-run")
 
 
 @mcp.tool()
+def pha_info(pha: str) -> dict:
+    """Inspect a spectrum's FITS header before loading: mission/instrument,
+    exposure, linked RESPFILE/ANCRFILE/BACKFILE, whether it's already grouped,
+    and total counts. Use this to decide statistic and whether to group
+    (guide 02). Read-only; no XSPEC session. Path must be under the data root."""
+    with _LOCK:
+        return _RUNNER.pha_info(pha)
+
+
+@mcp.tool()
+def group_spectrum(infile: str, outfile: str, grouptype: str = "min",
+                   groupscale: float = 25, backfile: str = "",
+                   respfile: str = "", arffile: str = "") -> dict:
+    """Group a spectrum with ftgrouppha, writing `outfile` under the output
+    root. grouptype: 'min' (min counts/bin, groupscale=counts), 'snmin' (min
+    S/N), 'opt'/'optmin' (optimal; need respfile), 'bmin', 'const'. Group before
+    loading for a chi-squared fit; leave ungrouped for cstat. Supplying
+    respfile/arffile/backfile embeds them (absolute) so the output is
+    self-contained."""
+    with _LOCK:
+        return _RUNNER.group_spectrum(infile, outfile, grouptype, groupscale,
+                                      backfile or None, respfile or None,
+                                      arffile or None)
+
+
+@mcp.tool()
 def reset_session() -> dict:
     """Clear all data and models and set headless defaults (query=yes,
     chatter=0). Call at the start of an analysis for a clean, reproducible

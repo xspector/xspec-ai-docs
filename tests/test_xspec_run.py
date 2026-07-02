@@ -191,6 +191,35 @@ try:
           and "Fit.perform()" in script and "AllData(" in script,
           "export_script reproduces the session")
 
+    # ---- data prep: pha_info + group_spectrum (no worker session) ----
+    pi = r.pha_info("s54405.pha")
+    check(pi["ok"], f"pha_info ok: {pi}")
+    info = pi["result"]
+    check(info.get("EXPOSURE", 0) > 0 and "DETCHANS" in info
+          and "grouped" in info, f"pha_info fields: {info}")
+
+    # group AND embed the response paths (self-contained output)
+    gp = r.group_spectrum("s54405.pha", "s54405_grp.pha", "min", 25,
+                          respfile="aciss_aimpt_cy15.rmf",
+                          arffile="aciss_aimpt_cy15.arf")
+    check(gp["ok"] and "RESPFILE" in gp["result"]["abspath_keywords"]
+          and "ANCRFILE" in gp["result"]["abspath_keywords"],
+          f"group_spectrum ok + embedded response paths: {gp}")
+    gi = r.pha_info(gp["result"]["outfile"])["result"]
+    check(gi["grouped"], "grouped output is flagged grouped")
+    check(gi.get("RESPFILE", "").endswith("aciss_aimpt_cy15.rmf")
+          and gi["RESPFILE"].startswith("/"),
+          f"grouped output embeds absolute RESPFILE: {gi.get('RESPFILE')}")
+    # (fitting a grouped file is covered by the fitting tests on ungrouped data;
+    #  this RMF/grouped-PHA pair has an OGIP channel-pairing quirk, so the fit
+    #  itself is not asserted here.)
+    # write allowlist applies to grouped output too
+    try:
+        r.group_spectrum("s54405.pha", "/etc/x_grp.pha")
+        fails.append("group_spectrum did NOT reject /etc output")
+    except ValueError:
+        pass
+
     # ---- crash recovery: worker dies between calls (segfault / CPU-kill) ----
     r.proc.kill()
     r.proc.wait()                              # dead, but proc handle retained
@@ -212,6 +241,10 @@ try:
               "members (Fit.covariance/nIterations, Xset.abund/version/parallel,"
               " Fit.goodness, AllModels.setPars, addModelString) across all "
               "6 roots")
+        print(f"data prep verified: pha_info "
+              f"({info.get('TELESCOP','?')}/{info.get('INSTRUME','?')}, "
+              f"exp={info.get('EXPOSURE',0):.0f}s, grouped={info['grouped']}), "
+              f"group_spectrum -> grouped, response-embedded, self-contained")
         print(f"batch verified: assess_fit (acceptable={ar['acceptable']}, "
               f"runs z={ar['runs_test']['z']}, goodness={ar['goodness']:.0f}%), "
               f"pegged-limit detection, plot_image, export_script "

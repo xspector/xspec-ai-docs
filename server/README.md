@@ -76,6 +76,11 @@ extension — .gif/.ps/.cps/.eps/.pdf; no PNG driver in this giza build),
 `export_script` / `journal` (emit a standalone PyXspec script reproducing the
 session — a reproducible artifact).
 
+**Data prep (pre-analysis; no session needed):** `pha_info` (inspect a PHA
+header — mission, exposure, linked RMF/ARF/background, grouping, counts),
+`group_spectrum` (ftgrouppha via heasoftpy; grouptype min/snmin/opt/…; embeds
+absolute response/arf/background paths so the grouped output is self-contained).
+
 **Full API coverage:** `xspec_get`, `xspec_set`, `xspec_call` navigate the live
 object graph (`ROOT.attr(int)...` against AllData/AllModels/Fit/Xset/Plot/
 AllChains) to reach **any** attribute or method — 100% of the object-model API,
