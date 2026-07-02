@@ -65,7 +65,13 @@ A **separate** server that drives a live PyXspec so an agent can actually run an
 analysis (load → model → fit → inspect). Design: [../PLAN-B.md](../PLAN-B.md).
 Keep it separate from the read-only Tier A server; it is opt-in and higher-risk.
 
-**B1 tools:** `reset_session`, `load_data`, `define_model`, `fit`, `get_state`.
+**Tools (B1–B3):** `reset_session`, `load_data`, `define_model`, `fit`,
+`get_state`, `set_parameter`, `error`, `calc_flux`, `calc_lumin`, `steppar`,
+`plot`, `fakeit`, `run_mcmc`, `save_session`, `restore_session`.
+
+Resource caps: steppar grid, MCMC length, fakeit spectra count, and a worker
+CPU-time `ulimit`. Read paths must be under `XSPEC_DATA_ROOT`; written files
+(chains, `.xcm`) under `XSPEC_OUTPUT_ROOT`.
 
 **How it works:** the server (`xspec_run.py`) never imports `xspec`; it manages a
 worker subprocess (`worker.py`) that runs PyXspec in a HEADAS-initialized shell.
@@ -73,7 +79,8 @@ The worker sends JSON responses on a dedicated fd (XSPEC's stdout noise is
 discarded). Calls are serialized (XSPEC is not thread-safe) with per-call
 timeouts; data paths are restricted to `XSPEC_DATA_ROOT`.
 
-**Env:** `XSPEC_DATA_ROOT` (allowlisted data dir), `XSPEC_HEADAS` (HEADAS path),
+**Env:** `XSPEC_DATA_ROOT` (allowlisted read dir), `XSPEC_OUTPUT_ROOT`
+(allowlisted write dir for chains/.xcm), `XSPEC_HEADAS` (HEADAS path),
 `XSPEC_PYTHON` (interpreter that can import `xspec`).
 
 **Config entry:**

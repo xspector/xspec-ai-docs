@@ -1,7 +1,9 @@
 # Tier B — PyXspec execution MCP server (design)
 
-Status: **design + B1 proof-of-concept** (`server/worker.py`, `server/runner.py`,
-`server/xspec_run.py`).
+Status: **B1 + B2 + B3 implemented and verified** against live data
+(`server/worker.py`, `server/runner.py`, `server/xspec_run.py`;
+`tests/test_xspec_run.py`). 15 tools. Remaining future item: multi-worker
+session pool.
 
 Tier A (`server/server.py`) is stateless retrieval over the static corpus. Tier B
 is a **stateful compute engine**: it drives a live PyXspec so an agent can load
@@ -42,15 +44,27 @@ MCP client ──stdio──> Tier B server ──pipe──> PyXspec worker sub
 
 Composite, safe steps returning typed JSON (guide 01 patterns):
 
-| Tool | Does | B1? |
+| Tool | Does | Phase |
 |---|---|---|
-| `reset_session` | clear all; force `Fit.query="yes"`, `chatter=0` | ✅ |
-| `load_data(pha, rmf?, arf?, back?, ...)` | load + attach + verify | ✅ |
-| `define_model(expr, ...)` | `Model(...)`; return components + params | ✅ |
-| `fit(statistic?)` | `Fit.perform()`; return stat/dof/params | ✅ |
-| `get_state()` | structured snapshot of data + model + fit | ✅ |
-| `set_parameter`, `error`, `calc_flux/lumin`, `steppar`, `plot` (arrays) | | B2 |
-| `fakeit`, MCMC, `save/restore` | | B3 |
+| `reset_session` | clear all; force `Fit.query="yes"`, `chatter=0` | B1 ✅ |
+| `load_data(pha, rmf?, arf?, back?, ...)` | load + attach + verify | B1 ✅ |
+| `define_model(expr)` | `Model(...)`; return components + params | B1 ✅ |
+| `fit(statistic?)` | `Fit.perform()`; return stat/dof/params | B1 ✅ |
+| `get_state()` | structured snapshot of data + model + fit | B1 ✅ |
+| `set_parameter(index, ...)` | value/limits/freeze/thaw/link/unlink | B2 ✅ |
+| `error(spec)` | confidence intervals per parameter | B2 ✅ |
+| `calc_flux` / `calc_lumin` | derived quantities per spectrum | B2 ✅ |
+| `steppar(spec)` | Δstat scan (grid size capped) | B2 ✅ |
+| `plot(types)` | plot arrays (x/y/model/yErr), no GUI | B2 ✅ |
+| `fakeit(...)` | simulate spectra (seeded) | B3 ✅ |
+| `run_mcmc(...)` | MCMC chain (length capped, overwrites) | B3 ✅ |
+| `save_session` / `restore_session` | .xcm persistence | B3 ✅ |
+
+**Blocking-prompt guards proven necessary during B2/B3:** beyond the fit query,
+two more prompts would hang a headless run and are now handled by overwriting
+first — `run_mcmc` and `save_session` both prompt when their output file already
+exists. `error`/`steppar` also require a *current* fit (freeze/thaw invalidates
+it), which surfaces as a structured error the agent can act on.
 
 **No generic `exec(code)` tool.** PyXspec can run shell (Tcl `syscall`) and
 arbitrary Python — an eval tool is effectively RCE. Excluded by default.
