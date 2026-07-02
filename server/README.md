@@ -56,3 +56,42 @@ or a `.mcp.json`). See `mcp-config.example.json`:
 `tests/test_server.py`); `server.py` is a thin FastMCP wrapper over it. The
 server bundles no data — it reads the same corpus the generator produces, so it
 never drifts from the docs.
+
+---
+
+# Tier B — execution server (`xspec_run.py`, proof-of-concept)
+
+A **separate** server that drives a live PyXspec so an agent can actually run an
+analysis (load → model → fit → inspect). Design: [../PLAN-B.md](../PLAN-B.md).
+Keep it separate from the read-only Tier A server; it is opt-in and higher-risk.
+
+**B1 tools:** `reset_session`, `load_data`, `define_model`, `fit`, `get_state`.
+
+**How it works:** the server (`xspec_run.py`) never imports `xspec`; it manages a
+worker subprocess (`worker.py`) that runs PyXspec in a HEADAS-initialized shell.
+The worker sends JSON responses on a dedicated fd (XSPEC's stdout noise is
+discarded). Calls are serialized (XSPEC is not thread-safe) with per-call
+timeouts; data paths are restricted to `XSPEC_DATA_ROOT`.
+
+**Env:** `XSPEC_DATA_ROOT` (allowlisted data dir), `XSPEC_HEADAS` (HEADAS path),
+`XSPEC_PYTHON` (interpreter that can import `xspec`).
+
+**Config entry:**
+
+```json
+{
+  "mcpServers": {
+    "xspec-run": {
+      "command": "/opt/miniconda3/bin/python",
+      "args": ["/Users/kaa/software/xspec-ai-docs/server/xspec_run.py"],
+      "env": {
+        "XSPEC_DATA_ROOT": "/Users/kaa/software/Xspec-aux/doc/manual/walkthrough",
+        "XSPEC_HEADAS": "/Users/kaa/software/heasoft/aarch64-apple-darwin25.4.0"
+      }
+    }
+  }
+}
+```
+
+Test: `python tests/test_xspec_run.py` (skips if HEADAS is absent; otherwise
+runs a real fit against the walkthrough data through the worker protocol).
