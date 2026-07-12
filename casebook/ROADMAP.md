@@ -104,12 +104,14 @@ needing other instruments note the response they will require.
    -diverges-below-the-disk trap is a separate lesson, deferred to a future case.
    (20 BH-XRB + 32 state-transition papers.)
 
-6. **⬜ Cyclotron-line significance.** `xrb / high / chi / cutoffpl*gabs` (Ginga
-   or NuSTAR band). Trap: CRSF "detections" that are really continuum curvature —
-   and the **F-test is invalid for line significance** (Protassov et al. 2002);
-   significance must come from `fakeit` simulations. Spawns
-   `ftest-invalid-for-line-significance`. (7 CRSF papers; a live literature
-   debate — "the elusive cyclotron line in 4U 1901+03".)
+6. **✅ Cyclotron-line significance.** `xrb / high / chi / cutoffpl*gabs` (Ginga
+   LAC). Trap: the **F-test is invalid for a searched line** (bounded depth +
+   unidentified energy/width; Protassov et al. 2002). Calibrated against 300
+   line-free sims, a searched `gabs` clears the naive χ²₁ 1% bar (Δχ²>6.63) in
+   **9.4%** of cases; the true 99% threshold is Δχ²≈11.5, so a "2.6σ" line is
+   really <2σ. Authored as `ginga-cyclotron-ftest-001`. Spawns
+   `ftest-invalid-for-line-significance`. (7 CRSF papers; a live debate — "the
+   elusive cyclotron line in 4U 1901+03".)
 
 7. **⬜ Spectro-polarimetry.** `xrb / mid / chistokes / polconst*(...)`. Joint
    I,Q,U fitting; trap: fitting Stokes spectra with plain chi, or claiming a
@@ -147,7 +149,7 @@ graduate `candidate → validated` (PLAN-C §4, the `fakeit` gate):
 | `counts-per-bin-not-total-drives-statistic` | 3 | **validated** (`bench/lessons/…`) |
 | `single-temperature-fe-bias` | 4 | **validated** (`bench/lessons/…`) |
 | `systematics-dominate-above-1e5-counts` | 5 | **validated** (`bench/lessons/…`) |
-| `ftest-invalid-for-line-significance` | 6, 10 | not yet authored |
+| `ftest-invalid-for-line-significance` | 6, 10 | candidate (harness pending) |
 
 ## Method
 
