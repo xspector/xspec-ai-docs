@@ -447,8 +447,9 @@
 - [manifest.json](corpus/manifest.json)
 
 ## Casebook (judgment layer)
-> 9 case(s), 9 lesson(s) — worked studies + reusable lessons; retrieve by data fingerprint. See [SCHEMA.md](casebook/SCHEMA.md).
+> 10 case(s), 9 lesson(s) — worked studies + reusable lessons; retrieve by data fingerprint. See [SCHEMA.md](casebook/SCHEMA.md).
 - [A million-count black-hole binary — where the error bars stop meaning what they say](casebook/cases/chandra-bhxrb-vhigh-systematics-001.md) (core)
+- [Blazar curvature — when the F-test IS valid, and how chi fakes curvature](casebook/cases/chandra-blazar-curvature-001.md) (core)
 - [Cluster metallicity on Chandra — how a single temperature biases the iron abundance threefold](casebook/cases/chandra-cluster-fe-bias-001.md) (core)
 - [Faint GRB afterglow at low counts — cstat over chi, and freezing what the data cannot constrain](casebook/cases/chandra-grb-afterglow-001.md) (core)
 - [Obscured Seyfert on Chandra — why an unabsorbed fit drives the photon index flat](casebook/cases/chandra-obscured-agn-001.md) (core)

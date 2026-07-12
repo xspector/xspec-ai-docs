@@ -27,7 +27,7 @@ not_when: >
   best checked but less badly biased than a searched line.
 status: validated
 validation: bench/lessons/ftest-invalid-for-line-significance.py
-evidence_cases: [ginga-cyclotron-ftest-001]
+evidence_cases: [ginga-cyclotron-ftest-001, chandra-blazar-curvature-001]
 promoted_to: null
 provenance:
   origin: hand-authored
@@ -69,7 +69,14 @@ feature can be real *and* small.
 
 The F-test is fine where its assumptions hold: nested continuum models with an
 interior, identified extra parameter -- a spectral break, a cutoff, a freed
-abundance. The failure is specific to bounded, searched line components.
+abundance. `chandra-blazar-curvature-001` is the calibrated mirror image: adding a
+log-parabola curvature `beta` (interior -- it can be either sign -- and identified
+under the power-law null) gives a null `delta-cstat` that follows chi-square_1
+almost exactly, with a **1.0%** false-alarm rate at the 1% threshold, against the
+**9%** for the searched line. The discriminator is boundary + identifiability, not
+"line vs continuum". (That case also shows a separate trap: `chi` standard
+weighting can *manufacture* spurious curvature, so use `cstat` before testing --
+see [[flat-photon-index-means-absorption]] and the counts-per-bin family.)
 
 ## Promotion status
 
@@ -79,7 +86,7 @@ asserts the false-alarm rate at the naive chi-square_1 1% threshold is several
 times too high (~8%) while the null distribution stays sane (median ~2). Both
 conditions hold.
 
-Not yet eligible for *promotion* into a guide/skill: that needs
-`len(evidence_cases) >= 3` (PLAN-C §4), and there is one so far. The blazar
-curvature case (the F-test's admissible `not_when`) would add a contrasting
-evidence case.
+Two evidence cases now — `ginga-cyclotron-ftest-001` (the rule: F-test invalid for
+a searched line) and `chandra-blazar-curvature-001` (the `not_when`: F-test valid
+for interior curvature). One more independent case would meet the recurrence bar
+for promotion (PLAN-C §4).

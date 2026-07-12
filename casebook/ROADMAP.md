@@ -135,10 +135,14 @@ needing other instruments note the response they will require.
    `young-plasma-needs-nei-not-equilibrium`. (19 SNR + eROSITA remnant-survey
    papers.)
 
-10. **⬜ Blazar curvature — nested-model significance.** `agn / high / chi /
-    logpar vs. powerlaw`. The other half of the F-test teaching: when the
-    F-test *is* admissible (nested, parameter not on a boundary) and when it is
-    not. (39 blazar papers.)
+10. **✅ Blazar curvature — nested-model significance.** `agn / high / cstat /
+    logpar`. The other half of the F-test teaching: adding an interior, identified
+    curvature `beta` gives a null Δcstat that matches χ²₁ (1.0% false-alarm at the
+    1% bar, vs case 6's 9%), so the F-test *is* valid here. A curved truth
+    (beta=0.4) is detected at Δcstat=73. Bonus trap: `chi` weighting *manufactures*
+    curvature (median Δχ²=17 on curvature-free data) where `cstat` gives 0.46.
+    Authored as `chandra-blazar-curvature-001`; the `not_when` evidence case for
+    `ftest-invalid-for-line-significance`. (39 blazar papers.)
 
 Cases 1, 8, and 5 close the counts-regime grid (`mid`, `vlow`, `vhigh`); case 3
 exposes the per-bin subtlety the grid cannot express.
