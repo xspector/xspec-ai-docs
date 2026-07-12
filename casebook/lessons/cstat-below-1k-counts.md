@@ -16,7 +16,7 @@ not_when: >
   model the background and then use cstat, or group up and use chi.
 status: validated
 validation: bench/benchmark.py
-evidence_cases: [nicer-lowcount-thermal-001]
+evidence_cases: [nicer-lowcount-thermal-001, chandra-grb-afterglow-001]
 promoted_to: null
 provenance:
   origin: hand-authored
@@ -37,6 +37,9 @@ The dedicated per-lesson harness (`bench/lessons/cstat-lowcount.py`) is the
 future home once `bench/lessons/` exists (PLAN-C L3); until then `benchmark.py`
 is the standing validation.
 
-**Promotion status:** validated, but only one evidence case so far — needs ≥3
-independent cases before it is eligible to change the guides/skill (PLAN-C §4).
-The statistic default in the `xray-fit` skill already reflects it.
+**Promotion status:** validated, with two independent evidence cases so far
+(`nicer-lowcount-thermal-001`, a thermal NS where chi would mis-estimate the
+radius; `chandra-grb-afterglow-001`, a power-law afterglow where chi halves the
+flux and hides it behind a reduced chi-square of 0.49) — needs ≥3 before it is
+eligible to change the guides/skill (PLAN-C §4). The statistic default in the
+`xray-fit` skill already reflects it.

@@ -12,8 +12,8 @@
     "command_tokens": 161,
     "command_docs": 79,
     "intents": 70,
-    "casebook_cases": 1,
-    "casebook_lessons": 2
+    "casebook_cases": 3,
+    "casebook_lessons": 3
   },
   "models": [
     {

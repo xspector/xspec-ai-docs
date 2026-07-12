@@ -24,6 +24,7 @@ was asserted.
 | Harness | Validates |
 |---|---|
 | `peg-at-limit-means-wrong-model.py` | a parameter pegged at a limit **and** correlated residuals ⇒ structurally wrong model. Fits `tbabs*powerlaw` to power-law+line data (nH pegs at 0 + residuals) vs. the correct `powerlaw+gaussian` at truth (quiet). |
+| `flat-photon-index-means-absorption.py` | an implausibly flat/inverted photon index **and** a soft residual (but **not** a pegged parameter) ⇒ missing intrinsic absorption. Fits Galactic-only `tbabs*powerlaw` to an absorbed Seyfert twin (Γ→−1.0 + residual) vs. the correct `tbabs*ztbabs*powerlaw` at truth (Γ→1.73, quiet). |
 
 ## Run
 
