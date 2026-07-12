@@ -94,11 +94,14 @@ needing other instruments note the response they will require.
    (statistic is cstat, not chi — the peaked CCD spectrum has a sparse Fe-K tail).
    Spawns `single-temperature-fe-bias`. *Fills `high`.* (49 cluster papers.)
 
-5. **⬜ BH-XRB state decomposition.** `xrb / vhigh / chi + systematics /
-   tbabs*(diskbb+powerlaw)`. Two traps: an additive power law diverging below the
-   disk is unphysical (use a convolution — `thcomp`/`simpl`); and at ~10⁶ counts
-   *calibration beats statistics* — without a systematic error the χ² is
-   meaningless. Spawns `systematics-dominate-above-1e5-counts`. *Fills `vhigh`.*
+5. **✅ BH-XRB, systematics-limited.** `xrb / vhigh / chi /
+   tbabs*(diskbb+powerlaw+gaussian)`. At ~10⁶ counts the disk-temperature
+   statistical error is ±0.34% — far below the ~1–2% calibration floor, so it is
+   meaningless without a systematic term — and a weak Fe line is 6.4σ at 10⁶ but
+   0σ at 10⁴ counts. Authored as `chandra-bhxrb-vhigh-systematics-001` (the one
+   genuine `chi` case: median ~330 counts/bin). Spawns
+   `systematics-dominate-above-1e5-counts`. *Fills `vhigh`.* The additive-power-law
+   -diverges-below-the-disk trap is a separate lesson, deferred to a future case.
    (20 BH-XRB + 32 state-transition papers.)
 
 6. **⬜ Cyclotron-line significance.** `xrb / high / chi / cutoffpl*gabs` (Ginga
@@ -143,7 +146,7 @@ graduate `candidate → validated` (PLAN-C §4, the `fakeit` gate):
 | `flat-photon-index-means-absorption` | 1 | **validated** (`bench/lessons/…`) |
 | `counts-per-bin-not-total-drives-statistic` | 3 | **validated** (`bench/lessons/…`) |
 | `single-temperature-fe-bias` | 4 | **validated** (`bench/lessons/…`) |
-| `systematics-dominate-above-1e5-counts` | 5 | not yet authored |
+| `systematics-dominate-above-1e5-counts` | 5 | candidate (harness pending) |
 | `ftest-invalid-for-line-significance` | 6, 10 | not yet authored |
 
 ## Method
