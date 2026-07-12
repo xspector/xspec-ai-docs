@@ -24,8 +24,8 @@ not_when: >
   structurally wrong model (wrong continuum, missing component -- see the model
   lessons), not the sub-percent-systematics regime. This is about statistics
   having shrunk below systematics, not a licence to ignore real misfits.
-status: candidate
-validation: null
+status: validated
+validation: bench/lessons/systematics-dominate-above-1e5-counts.py
 evidence_cases: [chandra-bhxrb-vhigh-systematics-001]
 promoted_to: null
 provenance:
@@ -66,8 +66,11 @@ error is the real error; do not inflate it with a systematic you do not need.
 
 ## Promotion status
 
-`candidate`. Needs a `bench/lessons/systematics-dominate-above-1e5-counts.py`
-harness: fake one bright twin at ~10^6 and ~10^4 counts and assert (a) the
-statistical error on the disk temperature is sub-percent at 10^6, and (b) a fixed
-weak line is highly significant at 10^6 but insignificant at 10^4. The twin exists
-in `chandra-bhxrb-vhigh-systematics-001`'s provenance.
+`validated`. The harness `bench/lessons/systematics-dominate-above-1e5-counts.py`
+fakes one bright twin at ~10^6 and ~10^4 counts and asserts (a) the disk-temperature
+statistical error is sub-percent at 10^6 (±0.34%), and (b) the same weak Fe line is
+highly significant at 10^6 (delta-chi 40.6) but insignificant at 10^4 (delta-chi 0)
+— both directions.
+
+Not yet eligible for *promotion* into a guide/skill: that needs
+`len(evidence_cases) >= 3` (PLAN-C §4), and there is one so far.
