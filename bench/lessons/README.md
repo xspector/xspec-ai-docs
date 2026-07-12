@@ -30,6 +30,7 @@ was asserted.
 | `systematics-dominate-above-1e5-counts.py` | above ~10⁵ counts statistics fall below the calibration floor. On a bright `tbabs*(diskbb+powerlaw+gaussian)` twin faked at 10⁶ and 10⁴ counts: the disk-temperature stat error is ±0.34% at 10⁶, and the Fe line is Δχ²=40.6 (6.4σ) at 10⁶ but 0 at 10⁴. |
 | `ftest-invalid-for-line-significance.py` | Monte-Carlo: 150 line-free `cutoffpl` sims, each fit with a searched `gabs`. The naive χ²₁ 1% threshold (Δχ²>6.63) is cleared by ~8% of null sims, not 1% — the F-test is anti-conservative for searched lines. |
 | `below-100-counts-cannot-discriminate-models.py` | model discrimination needs counts. A `bbodyrad` (kT=0.1) twin faked at ~80 counts is fit equally by `diskbb` (Δcstat=−1.6, wrong model wins); at ~40000 counts diskbb is decisively worse (Δcstat=+170). |
+| `young-plasma-needs-nei-not-equilibrium.py` | a young/under-ionized plasma needs NEI. Equilibrium `apec` fit to a `nei` twin (kT=3, Tau=1e10) returns kT=0.55 keV (6× low) at Δcstat=+1070 worse; `nei` recovers kT=3.2 and Tau=1e10. |
 
 ## Run
 

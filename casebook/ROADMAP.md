@@ -154,7 +154,7 @@ graduate `candidate → validated` (PLAN-C §4, the `fakeit` gate):
 | `counts-per-bin-not-total-drives-statistic` | 3 | **validated** (`bench/lessons/…`) |
 | `single-temperature-fe-bias` | 4 | **validated** (`bench/lessons/…`) |
 | `below-100-counts-cannot-discriminate-models` | 8 | **validated** (`bench/lessons/…`) |
-| `young-plasma-needs-nei-not-equilibrium` | 9 | candidate (harness pending) |
+| `young-plasma-needs-nei-not-equilibrium` | 9 | **validated** (`bench/lessons/…`) |
 | `systematics-dominate-above-1e5-counts` | 5 | **validated** (`bench/lessons/…`) |
 | `ftest-invalid-for-line-significance` | 6, 10 | **validated** (`bench/lessons/…`) |
 

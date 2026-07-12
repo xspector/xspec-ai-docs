@@ -22,8 +22,8 @@ not_when: >
   plasma whose temperature is independently pinned (e.g. by a bright continuum) and
   whose ionization is consistent with that temperature. NEI is for the
   counts-carrying under-ionized case, not every thermal spectrum.
-status: candidate
-validation: null
+status: validated
+validation: bench/lessons/young-plasma-needs-nei-not-equilibrium.py
 evidence_cases: [chandra-snr-nei-001]
 promoted_to: null
 provenance:
@@ -66,7 +66,11 @@ NEI.
 
 ## Promotion status
 
-`candidate`. Needs a `bench/lessons/young-plasma-needs-nei-not-equilibrium.py`
-harness: fake a low-Tau `nei` twin, fit equilibrium `apec` and assert kT is badly
-underestimated with a much worse statistic, while `nei` recovers kT and Tau. The
-twin exists in `chandra-snr-nei-001`'s provenance.
+`validated`. The harness `bench/lessons/young-plasma-needs-nei-not-equilibrium.py`
+fakes the low-Tau `nei` twin and asserts equilibrium `apec` underestimates kT
+(0.55 vs 3.0 keV) at a far worse statistic (delta-cstat ~1070), while `nei`
+recovers kT=3.2 and Tau=1.0e10 — both directions. (It thaws the frozen-by-default
+Abundanc.)
+
+Not yet eligible for *promotion* into a guide/skill: that needs
+`len(evidence_cases) >= 3` (PLAN-C §4), and there is one so far.
