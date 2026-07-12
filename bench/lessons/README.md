@@ -28,6 +28,7 @@ was asserted.
 | `counts-per-bin-not-total-drives-statistic.py` | counts **per bin**, not total, set the statistic. On a real XRISM/Resolve twin (27k counts, median 1/bin), chi biases the Fe abundance to 1.00 (truth 0.70) behind a reduced chi of 0.67 while cstat recovers it. **HEADAS-only + needs the 372 MB Resolve RMF locally** (self-skips otherwise); ~2–3 min. |
 | `single-temperature-fe-bias.py` | a single-temperature fit to multi-phase ICM biases the iron abundance. Fits `tbabs*apec` to a two-phase (1.0+2.5 keV, Fe=0.5) twin → Fe=0.17 at cstat/dof=5.5, vs. `tbabs*(apec+apec)` → Fe=0.51 at cstat/dof=1.1. (Thaws apec's frozen-by-default Abundanc.) |
 | `systematics-dominate-above-1e5-counts.py` | above ~10⁵ counts statistics fall below the calibration floor. On a bright `tbabs*(diskbb+powerlaw+gaussian)` twin faked at 10⁶ and 10⁴ counts: the disk-temperature stat error is ±0.34% at 10⁶, and the Fe line is Δχ²=40.6 (6.4σ) at 10⁶ but 0 at 10⁴. |
+| `ftest-invalid-for-line-significance.py` | Monte-Carlo: 150 line-free `cutoffpl` sims, each fit with a searched `gabs`. The naive χ²₁ 1% threshold (Δχ²>6.63) is cleared by ~8% of null sims, not 1% — the F-test is anti-conservative for searched lines. |
 
 ## Run
 

@@ -25,8 +25,8 @@ not_when: >
   admissible. A line at a single FIXED, pre-specified energy with a two-sided
   normalisation is a milder case (a half-chi-square-1 boundary effect only), still
   best checked but less badly biased than a searched line.
-status: candidate
-validation: null
+status: validated
+validation: bench/lessons/ftest-invalid-for-line-significance.py
 evidence_cases: [ginga-cyclotron-ftest-001]
 promoted_to: null
 provenance:
@@ -73,8 +73,13 @@ abundance. The failure is specific to bounded, searched line components.
 
 ## Promotion status
 
-`candidate`. Needs a `bench/lessons/ftest-invalid-for-line-significance.py`
-harness: simulate many line-free `cutoffpl` datasets, fit each with a searched
-`gabs`, and assert the false-alarm rate at the naive chi-square_1 threshold is
-several times the nominal 1%. The twin exists in `ginga-cyclotron-ftest-001`'s
-provenance.
+`validated`. The harness `bench/lessons/ftest-invalid-for-line-significance.py`
+runs 150 line-free `cutoffpl` simulations, fits each with a searched `gabs`, and
+asserts the false-alarm rate at the naive chi-square_1 1% threshold is several
+times too high (~8%) while the null distribution stays sane (median ~2). Both
+conditions hold.
+
+Not yet eligible for *promotion* into a guide/skill: that needs
+`len(evidence_cases) >= 3` (PLAN-C §4), and there is one so far. The blazar
+curvature case (the F-test's admissible `not_when`) would add a contrasting
+evidence case.

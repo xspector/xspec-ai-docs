@@ -149,7 +149,7 @@ graduate `candidate → validated` (PLAN-C §4, the `fakeit` gate):
 | `counts-per-bin-not-total-drives-statistic` | 3 | **validated** (`bench/lessons/…`) |
 | `single-temperature-fe-bias` | 4 | **validated** (`bench/lessons/…`) |
 | `systematics-dominate-above-1e5-counts` | 5 | **validated** (`bench/lessons/…`) |
-| `ftest-invalid-for-line-significance` | 6, 10 | candidate (harness pending) |
+| `ftest-invalid-for-line-significance` | 6, 10 | **validated** (`bench/lessons/…`) |
 
 ## Method
 
