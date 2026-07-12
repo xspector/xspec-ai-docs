@@ -119,11 +119,13 @@ needing other instruments note the response they will require.
    `chistokes` vocabulary slot. Needs an IXPE response set. (27 polarimetry
    papers.)
 
-8. **⬜ Super-soft TDE, very low counts.** `tde / vlow / cstat /
-   tbabs*zashift(bbody)`. Trap: below ~100 counts, bbody vs. diskbb is
-   *undecidable* — report kT with honest non-parabolic intervals and refuse the
-   model comparison; goodness only via Monte Carlo. *Fills `vlow`.* (16 TDE
-   papers.)
+8. **✅ Super-soft TDE, very low counts.** `tde / vlow / cstat / tbabs*bbodyrad`.
+   At ~81 counts, bbody vs. diskbb is *undecidable* — the wrong model (diskbb) even
+   fits marginally better (Δcstat=1.6, noise); report kT=0.10 keV with its
+   asymmetric interval and refuse the model comparison; goodness by Monte-Carlo.
+   Authored as `chandra-tde-supersoft-vlow-001`; spawns
+   `below-100-counts-cannot-discriminate-models` and gives `cstat-below-1k-counts`
+   its 3rd evidence case (→ promotion-eligible). *Fills `vlow`.* (16 TDE papers.)
 
 9. **⬜ Young SNR — non-equilibrium plasma.** `snr / mid / cstat / tbabs*vnei`.
    Trap: fitting a collisional-*equilibrium* apec to a young remnant misreads kT;
@@ -148,6 +150,7 @@ graduate `candidate → validated` (PLAN-C §4, the `fakeit` gate):
 | `flat-photon-index-means-absorption` | 1 | **validated** (`bench/lessons/…`) |
 | `counts-per-bin-not-total-drives-statistic` | 3 | **validated** (`bench/lessons/…`) |
 | `single-temperature-fe-bias` | 4 | **validated** (`bench/lessons/…`) |
+| `below-100-counts-cannot-discriminate-models` | 8 | candidate (harness pending) |
 | `systematics-dominate-above-1e5-counts` | 5 | **validated** (`bench/lessons/…`) |
 | `ftest-invalid-for-line-significance` | 6, 10 | **validated** (`bench/lessons/…`) |
 
