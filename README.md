@@ -101,17 +101,31 @@ Provenance (XSPEC version + both source commits) is stamped into
 
 ## Verifying
 
+One entry point runs everything:
+
 ```
-python tests/audit_macros.py     # LaTeX->markdown conversion is clean (models+commands)
-python tests/run_recipes.py      # corpus integrity + (with HEADAS) recipes on real data
-python tests/test_server.py      # Tier A MCP data-layer
-python tests/test_xspec_run.py   # Tier B: live fit + tools + crash recovery (needs HEADAS)
-python tests/validate_casebook.py # Tier C: casebook schemas + refs + grounding (no HEADAS)
+python tests/run_all.py          # fast, corpus-only (this is what CI runs)
+python tests/run_all.py --live   # also the HEADAS-dependent Tier B suite
 ```
 
-The HEADAS-dependent tests execute against the datasets shipped in the XSPEC
-manual's `walkthrough/` directory and check the extracted PyXspec API against
-live object introspection; they skip cleanly if HEADAS is absent.
+Or run a suite directly:
+
+```
+python tests/audit_macros.py      # LaTeX->markdown conversion is clean (models+commands)
+python tests/test_server.py       # Tier A MCP data-layer (incl. casebook retrieval)
+python tests/validate_casebook.py # Tier C: casebook schemas + refs + grounding (no HEADAS)
+python tests/run_recipes.py       # corpus integrity + (with HEADAS) recipes on real data
+python tests/test_xspec_run.py    # Tier B: live fit + tools + crash recovery (needs HEADAS)
+python generator/generate.py --check   # committed corpus is in sync with source (drift gate)
+```
+
+The fast, corpus-only suites run in GitHub Actions
+(`.github/workflows/ci.yml`) on every push and PR. The HEADAS-dependent tests
+execute against the datasets shipped in the XSPEC manual's `walkthrough/`
+directory and check the extracted PyXspec API against live object introspection;
+they skip cleanly if HEADAS is absent — so they run locally, not in CI. The
+`--check` drift gate needs the heasoft/manual source trees and self-skips when
+they are absent.
 
 ## Skill
 

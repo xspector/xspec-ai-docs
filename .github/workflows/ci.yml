@@ -1,0 +1,24 @@
+name: checks
+
+# Runs the corpus-only checks on every push and PR. These need no HEADAS and no
+# heasoft/manual source trees -- they validate the committed corpus, the PyXspec
+# API reference, and the casebook against their schemas + grounding set. The
+# HEADAS-dependent Tier B suite (tests/run_all.py --live) and the source-drift
+# check (which needs the heasoft/manual checkouts) run locally, not here.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  fast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation deps (pyyaml + jsonschema)
+        run: pip install -r generator/requirements.txt
+      - name: Run fast checks (corpus-only, no HEADAS)
+        run: python tests/run_all.py
