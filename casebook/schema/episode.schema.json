@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://xspec-ai-docs/casebook/episode.schema.json",
+  "title": "xspec-run episode (machine-captured, private)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "created", "fingerprint", "journal", "outcome_label"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "created": {"type": "string"},
+    "fingerprint": {
+      "type": "object",
+      "$comment": "Same shape as case.context, auto-computable fields; annotations optional.",
+      "required": ["mission", "counts_regime"],
+      "properties": {
+        "mission": {"type": "string"},
+        "instrument": {"type": "string"},
+        "counts_regime": {"enum": ["vlow", "low", "mid", "high", "vhigh"]},
+        "grouped": {"type": "boolean"},
+        "background": {"enum": ["none", "subtracted", "modeled", "dominated"]},
+        "source_type": {"enum": ["agn", "xrb", "cv", "star", "snr", "pwn_pulsar", "isolated_ns", "cluster", "galaxy", "grb", "tde", "solar_system", "diffuse", "other"]},
+        "model_family": {"type": "array", "items": {"type": "string"}},
+        "statistic": {"type": "string"}
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text"],
+        "properties": {
+          "at_op": {"type": "integer"},
+          "tag": {"type": "string"},
+          "text": {"type": "string"}
+        }
+      }
+    },
+    "journal": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["cmd"],
+        "properties": {
+          "cmd": {"type": "string"},
+          "args": {"type": "object"}
+        }
+      }
+    },
+    "assess_history": {"type": "array", "items": {"type": "object"}},
+    "final_state": {"type": "object"},
+    "outcome_label": {"enum": ["converged_clean", "converged_caveats", "abandoned", "failed"]},
+    "script": {"type": "string"}
+  }
+}

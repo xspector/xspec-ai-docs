@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://xspec-ai-docs/casebook/lesson.schema.json",
+  "title": "Casebook lesson (frontmatter)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "one_line", "rule", "applies_when", "not_when", "status", "validation", "evidence_cases", "promoted_to", "provenance"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+    "one_line": {"type": "string", "minLength": 1},
+    "rule": {"type": "string", "minLength": 1},
+    "applies_when": {"type": "string", "minLength": 1},
+    "not_when": {"type": "string", "minLength": 1},
+    "status": {"enum": ["candidate", "validated", "promoted"]},
+    "validation": {"type": ["string", "null"]},
+    "evidence_cases": {"type": "array", "items": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"}},
+    "promoted_to": {"type": ["string", "null"]},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "date"],
+      "properties": {
+        "origin": {"type": "string"},
+        "date": {"type": "string", "format": "date"},
+        "reviewed_by": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$comment": "A validated or promoted lesson must name a validation harness.",
+      "if": {"properties": {"status": {"enum": ["validated", "promoted"]}}},
+      "then": {"properties": {"validation": {"type": "string", "minLength": 1}}}
+    },
+    {
+      "$comment": "A promoted lesson must record where it was promoted to.",
+      "if": {"properties": {"status": {"const": "promoted"}}},
+      "then": {"properties": {"promoted_to": {"type": "string", "minLength": 1}}}
+    }
+  ]
+}

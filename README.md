@@ -38,6 +38,7 @@ server/      MCP servers: server.py (Tier A) + xspec_run.py/runner.py/worker.py 
 tests/       audit_macros.py, run_recipes.py, test_server.py (Tier A),
              test_xspec_run.py (Tier B)
 bench/       benchmark.py -- ground-truth calibration of xspec-run (see bench/README.md)
+casebook/    SCHEMA.md + schema/*.json + cases/ + lessons/ -- Tier C judgment layer (see PLAN-C.md)
 .claude/skills/xray-fit/     Claude Code skill: disciplined end-to-end fitting workflow
 PLAN.md / PLAN-B.md / PLAN-C.md   design docs (corpus + Tier A / Tier B / learning loop)
 ```
@@ -104,6 +105,7 @@ python tests/audit_macros.py     # LaTeX->markdown conversion is clean (models+c
 python tests/run_recipes.py      # corpus integrity + (with HEADAS) recipes on real data
 python tests/test_server.py      # Tier A MCP data-layer
 python tests/test_xspec_run.py   # Tier B: live fit + tools + crash recovery (needs HEADAS)
+python tests/validate_casebook.py # Tier C: casebook schemas + refs + grounding (no HEADAS)
 ```
 
 The HEADAS-dependent tests execute against the datasets shipped in the XSPEC

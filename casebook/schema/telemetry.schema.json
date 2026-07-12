@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://xspec-ai-docs/casebook/telemetry.schema.json",
+  "title": "Opt-in scrubbed telemetry fingerprint",
+  "$comment": "additionalProperties:false is load-bearing here: the schema itself enforces the privacy exclusions (no paths, values, coordinates, exposure, dates).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "mission", "counts_regime", "outcome_label"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "mission": {"type": "string"},
+    "instrument": {"type": "string"},
+    "counts_regime": {"enum": ["vlow", "low", "mid", "high", "vhigh"]},
+    "grouped": {"type": "boolean"},
+    "background": {"enum": ["none", "subtracted", "modeled", "dominated"]},
+    "source_type": {"enum": ["agn", "xrb", "cv", "star", "snr", "pwn_pulsar", "isolated_ns", "cluster", "galaxy", "grb", "tde", "solar_system", "diffuse", "other"]},
+    "model_family": {"type": "array", "items": {"type": "string"}},
+    "statistic": {"enum": ["cstat", "chi", "lstat", "pgstat", "pstat", "whittle", "chicov", "chistokes"]},
+    "decision_sequence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["point", "choice"],
+        "properties": {
+          "point": {"enum": ["statistic", "band", "grouping", "model", "add_component", "errors", "stop"]},
+          "choice": {"type": "string"}
+        }
+      }
+    },
+    "outcome_label": {"enum": ["converged_clean", "converged_caveats", "abandoned", "failed"]},
+    "n_iterations": {"type": "integer", "minimum": 0},
+    "assess_issue_kinds": {
+      "type": "array",
+      "items": {"enum": ["pegged_limit", "systematic_residual", "reduced_chi_high", "reduced_chi_low", "goodness_poor"]}
+    }
+  }
+}
