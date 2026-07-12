@@ -458,7 +458,7 @@
 - [XRISM/Resolve cluster turbulence — 27000 counts, ~1 per bin, and why chi is still wrong](casebook/cases/xrism-cluster-turbulence-001.md) (core)
 
 ### Lessons
-- [Below ~100 counts, continuum models of similar shape (blackbody vs disk-blackbody, thermal vs power law) fit equally well -- do not claim one over the other, and report non-parabolic intervals.](casebook/lessons/below-100-counts-cannot-discriminate-models.md) (candidate)
+- [Below ~100 counts, continuum models of similar shape (blackbody vs disk-blackbody, thermal vs power law) fit equally well -- do not claim one over the other, and report non-parabolic intervals.](casebook/lessons/below-100-counts-cannot-discriminate-models.md) (validated)
 - [The statistic is set by counts per bin, not total counts: a high-resolution spectrum with tens of thousands of counts but ~1 per fine bin still needs cstat, not chi.](casebook/lessons/counts-per-bin-not-total-drives-statistic.md) (validated)
 - [Use cstat, not chi, below ~1000 total counts on Poisson data.](casebook/lessons/cstat-below-1k-counts.md) (validated)
 - [A power-law fit that drives the photon index implausibly flat (Gamma < ~1) is usually signalling missing low-energy absorption, not a hard intrinsic spectrum.](casebook/lessons/flat-photon-index-means-absorption.md) (validated)

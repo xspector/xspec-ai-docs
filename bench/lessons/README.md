@@ -29,6 +29,7 @@ was asserted.
 | `single-temperature-fe-bias.py` | a single-temperature fit to multi-phase ICM biases the iron abundance. Fits `tbabs*apec` to a two-phase (1.0+2.5 keV, Fe=0.5) twin → Fe=0.17 at cstat/dof=5.5, vs. `tbabs*(apec+apec)` → Fe=0.51 at cstat/dof=1.1. (Thaws apec's frozen-by-default Abundanc.) |
 | `systematics-dominate-above-1e5-counts.py` | above ~10⁵ counts statistics fall below the calibration floor. On a bright `tbabs*(diskbb+powerlaw+gaussian)` twin faked at 10⁶ and 10⁴ counts: the disk-temperature stat error is ±0.34% at 10⁶, and the Fe line is Δχ²=40.6 (6.4σ) at 10⁶ but 0 at 10⁴. |
 | `ftest-invalid-for-line-significance.py` | Monte-Carlo: 150 line-free `cutoffpl` sims, each fit with a searched `gabs`. The naive χ²₁ 1% threshold (Δχ²>6.63) is cleared by ~8% of null sims, not 1% — the F-test is anti-conservative for searched lines. |
+| `below-100-counts-cannot-discriminate-models.py` | model discrimination needs counts. A `bbodyrad` (kT=0.1) twin faked at ~80 counts is fit equally by `diskbb` (Δcstat=−1.6, wrong model wins); at ~40000 counts diskbb is decisively worse (Δcstat=+170). |
 
 ## Run
 

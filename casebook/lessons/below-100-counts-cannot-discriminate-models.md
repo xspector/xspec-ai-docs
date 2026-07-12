@@ -22,8 +22,8 @@ not_when: >
   sharply even at low counts (a strong line vs none at a known energy; a hard
   power law vs a soft thermal peak). The rule is about similar-shaped continua in
   the counts-starved regime, not a claim that models are never distinguishable.
-status: candidate
-validation: null
+status: validated
+validation: bench/lessons/below-100-counts-cannot-discriminate-models.py
 evidence_cases: [chandra-tde-supersoft-vlow-001]
 promoted_to: null
 provenance:
@@ -66,8 +66,11 @@ that spectral models are forever indistinguishable.
 
 ## Promotion status
 
-`candidate`. Needs a `bench/lessons/below-100-counts-cannot-discriminate-models.py`
-harness: fake a blackbody twin at ~80 counts and assert blackbody and disk-blackbody
-are statistically indistinguishable (|delta-cstat| small), then fake at high counts
-and assert they separate. The twin exists in `chandra-tde-supersoft-vlow-001`'s
-provenance.
+`validated`. The harness `bench/lessons/below-100-counts-cannot-discriminate-models.py`
+fakes the blackbody twin at ~80 and ~40000 counts: at 80 counts blackbody and
+disk-blackbody are indistinguishable (delta-cstat = -1.6, the wrong model even
+wins), while at 40000 counts diskbb is decisively worse (delta-cstat = +170) —
+both directions.
+
+Not yet eligible for *promotion* into a guide/skill: that needs
+`len(evidence_cases) >= 3` (PLAN-C §4), and there is one so far.
