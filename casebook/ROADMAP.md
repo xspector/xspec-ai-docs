@@ -86,11 +86,13 @@ needing other instruments note the response they will require.
    ~1 count/bin. A per-bin refinement is now motivated, not hypothetical. (XRISM =
    top mission, 38 papers.)
 
-4. **⬜ Cluster ICM abundance.** `cluster / high / chi / tbabs*apec` (or
-   `vapec`). Trap: a single-temperature fit to multi-phase gas biases the Fe
-   abundance low (the classic "Fe bias"); background *modelling* vs. subtraction
-   matters in the outskirts. Spawns `single-temperature-fe-bias`. *Fills part of
-   `high`.* (49 cluster papers.)
+4. **✅ Cluster ICM abundance.** `cluster / high / cstat / tbabs*apec` vs
+   `tbabs*(apec+apec)`. Trap: a single-temperature fit to two-phase (1.0+2.5 keV)
+   gas biases the Fe abundance **threefold low** (0.17 vs a true 0.50) behind a
+   deceptively tight error bar; cstat/dof=5.5 and Fe-L residuals are the tell, and
+   a second temperature recovers 0.51. Authored as `chandra-cluster-fe-bias-001`
+   (statistic is cstat, not chi — the peaked CCD spectrum has a sparse Fe-K tail).
+   Spawns `single-temperature-fe-bias`. *Fills `high`.* (49 cluster papers.)
 
 5. **⬜ BH-XRB state decomposition.** `xrb / vhigh / chi + systematics /
    tbabs*(diskbb+powerlaw)`. Two traps: an additive power law diverging below the
@@ -140,7 +142,7 @@ graduate `candidate → validated` (PLAN-C §4, the `fakeit` gate):
 |---|---|---|
 | `flat-photon-index-means-absorption` | 1 | **validated** (`bench/lessons/…`) |
 | `counts-per-bin-not-total-drives-statistic` | 3 | **validated** (`bench/lessons/…`) |
-| `single-temperature-fe-bias` | 4 | not yet authored |
+| `single-temperature-fe-bias` | 4 | candidate (harness pending) |
 | `systematics-dominate-above-1e5-counts` | 5 | not yet authored |
 | `ftest-invalid-for-line-significance` | 6, 10 | not yet authored |
 
