@@ -454,7 +454,7 @@
 - [XRISM/Resolve cluster turbulence — 27000 counts, ~1 per bin, and why chi is still wrong](casebook/cases/xrism-cluster-turbulence-001.md) (core)
 
 ### Lessons
-- [The statistic is set by counts per bin, not total counts: a high-resolution spectrum with tens of thousands of counts but ~1 per fine bin still needs cstat, not chi.](casebook/lessons/counts-per-bin-not-total-drives-statistic.md) (candidate)
+- [The statistic is set by counts per bin, not total counts: a high-resolution spectrum with tens of thousands of counts but ~1 per fine bin still needs cstat, not chi.](casebook/lessons/counts-per-bin-not-total-drives-statistic.md) (validated)
 - [Use cstat, not chi, below ~1000 total counts on Poisson data.](casebook/lessons/cstat-below-1k-counts.md) (validated)
 - [A power-law fit that drives the photon index implausibly flat (Gamma < ~1) is usually signalling missing low-energy absorption, not a hard intrinsic spectrum.](casebook/lessons/flat-photon-index-means-absorption.md) (validated)
 - [A parameter pegged at a limit plus correlated residuals means the model is structurally wrong, not just badly initialised.](casebook/lessons/peg-at-limit-means-wrong-model.md) (validated)

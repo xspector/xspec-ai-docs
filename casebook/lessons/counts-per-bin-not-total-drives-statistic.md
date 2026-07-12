@@ -24,8 +24,8 @@ not_when: >
   reason about; or a modest grouping that stays FINER than the instrumental
   resolution (grouping is not forbidden per se -- only grouping past the resolution
   to rescue chi is). The bin, not the exposure or the total, is what to look at.
-status: candidate
-validation: null
+status: validated
+validation: bench/lessons/counts-per-bin-not-total-drives-statistic.py
 evidence_cases: [xrism-cluster-turbulence-001]
 promoted_to: null
 provenance:
@@ -74,8 +74,15 @@ fine, and well-populated bins are chi's proper home. The rule is only that the
 
 ## Promotion status
 
-`candidate`. Needs a `bench/lessons/counts-per-bin-not-total-drives-statistic.py`
-harness (fit chi and cstat to the same microcalorimeter `fakeit` twin; assert chi
-biases the abundance/flux away from truth while cstat recovers them) before it can
-move to `validated` (PLAN-C §4). The twin exists in
-`xrism-cluster-turbulence-001`'s provenance.
+`validated`. The harness `bench/lessons/counts-per-bin-not-total-drives-statistic.py`
+fakes the microcalorimeter twin on the real Resolve Hp response, confirms the
+regime is genuinely high-total / low-per-bin (~27000 counts, median 1/bin), then
+fits it both ways: chi biases the iron abundance to 1.00 (truth 0.70) behind a
+reduced chi-square of 0.67, while cstat recovers 0.71. Both directions pass, so
+the lesson is re-verified on every run. (HEADAS-only and self-skips without the
+372 MB RMF, so it is not in CI.)
+
+Not yet eligible for *promotion* into a guide/skill: that needs
+`len(evidence_cases) >= 3` (PLAN-C §4), and there is one so far. A grating case
+(Chandra HETG / XMM RGS) would add independent evidence in the same per-bin
+regime.
