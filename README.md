@@ -56,7 +56,8 @@ Full details and client config in [server/README.md](server/README.md);
 
 Lookups over the corpus; no XSPEC execution, safe to run anywhere.
 Tools: `get_model`, `list_models`, `get_command`, `get_api`, `lookup_intent`,
-`validate` (anti-hallucination), `get_guide`, `corpus_info`.
+`validate` (anti-hallucination), `get_guide`, `find_cases`/`get_case` (casebook
+retrieval, Tier C), `corpus_info`.
 
 ```
 python server/server.py          # stdio; reads ../corpus (or $XSPEC_AI_CORPUS)

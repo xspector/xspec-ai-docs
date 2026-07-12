@@ -37,6 +37,16 @@ class Corpus:
                           for p in (self.root / "commands").glob("*.md")}
         self._recipes = {p.stem.lower(): p
                          for p in (self.root / "recipes").glob("*.md")}
+        # casebook (Tier C) lives beside corpus/, hand-authored markdown read
+        # directly (canonical, not generated) so new cases are findable without
+        # a regen. Parsed lazily -- needs pyyaml, absence degrades gracefully.
+        cb = self.root.parent / "casebook"
+        self._cases = {p.stem.lower(): p for p in (cb / "cases").glob("*.md")} \
+            if (cb / "cases").exists() else {}
+        self._lessons = {p.stem.lower(): p
+                         for p in (cb / "lessons").glob("*.md")} \
+            if (cb / "lessons").exists() else {}
+        self._casebook = None
         # api: allow lookup by class OR singleton name
         self._api_alias = {}
         for cls, e in self.api.items():
@@ -140,6 +150,110 @@ class Corpus:
         return {"provenance": self.manifest["provenance"],
                 "counts": self.manifest["counts"]}
 
+    # ---- casebook (Tier C judgment layer) ----
+    def _load_casebook(self):
+        """Parse + cache case/lesson frontmatter. Needs pyyaml; raises
+        RuntimeError if absent so callers can degrade gracefully."""
+        if self._casebook is not None:
+            return self._casebook
+        try:
+            import yaml
+        except ImportError:
+            raise RuntimeError("casebook retrieval needs pyyaml "
+                               "(pip install -r server/requirements.txt)")
+
+        def parse(index, subdir):
+            out = {}
+            for stem, p in index.items():
+                raw = p.read_text()
+                fm, body = _split_frontmatter(raw)
+                d = yaml.safe_load(fm) or {}
+                d["_raw"], d["_body"] = raw, body
+                d["_doc"] = f"casebook/{subdir}/{p.name}"
+                out[d.get("id", stem)] = d
+            return out
+
+        self._casebook = (parse(self._cases, "cases"),
+                          parse(self._lessons, "lessons"))
+        return self._casebook
+
+    def find_cases(self, mission=None, counts_regime=None, source_type=None,
+                   model=None, statistic=None, text=None, limit=10):
+        """Rank casebook cases by data-fingerprint match: weighted exact-field
+        overlap, free text as tiebreak. Each match summarizes its lessons."""
+        try:
+            cases, lessons = self._load_casebook()
+        except RuntimeError as e:
+            return {"error": str(e), "count": 0, "results": []}
+        has_filter = any([mission, counts_regime, source_type, model,
+                          statistic, text])
+        terms = [t for t in re.split(r"\W+", (text or "").lower()) if t]
+        scored = []
+        for cid, c in cases.items():
+            ctx = c.get("context", {})
+            score = 0.0
+            if _eq(ctx.get("mission"), mission):
+                score += 3
+            if _eq(ctx.get("counts_regime"), counts_regime):
+                score += 3
+            if _eq(ctx.get("source_type"), source_type):
+                score += 3
+            if model and model.lower() in [m.lower()
+                                           for m in ctx.get("model_family", [])]:
+                score += 2
+            if _eq(ctx.get("statistic"), statistic):
+                score += 2
+            if terms:
+                hay = (json.dumps(ctx) + " " + (c.get("title") or "") + " "
+                       + (c.get("_body") or "")).lower()
+                score += 0.5 * sum(t in hay for t in terms)
+            if has_filter and score <= 0:
+                continue
+            scored.append((score, cid, c))
+        scored.sort(key=lambda s: (-s[0], s[1]))
+        results = [{
+            "id": cid, "title": c.get("title"), "status": c.get("status"),
+            "score": round(score, 1), "context": c.get("context", {}),
+            "verdict": (c.get("outcome") or {}).get("verdict"),
+            "lessons": [{"id": lid,
+                         "one_line": (lessons.get(lid) or {}).get("one_line", ""),
+                         "status": (lessons.get(lid) or {}).get("status", "")}
+                        for lid in c.get("lessons", [])],
+            "doc": c.get("_doc"),
+        } for score, cid, c in scored[:limit]]
+        return {"count": len(results), "total_cases": len(cases),
+                "results": results}
+
+    def get_case(self, case_id):
+        """Full worked case + the full text of every lesson it cites, so the
+        judgment arrives in one call."""
+        try:
+            cases, lessons = self._load_casebook()
+        except RuntimeError as e:
+            return {"found": False, "error": str(e)}
+        cid = next((k for k in cases if k.lower() == case_id.lower()), None)
+        if cid is None:
+            return {"found": False, "query": case_id,
+                    "suggestions": difflib.get_close_matches(
+                        case_id.lower(), [k.lower() for k in cases], 5, 0.4)}
+        c = cases[cid]
+        cited = []
+        for lid in c.get("lessons", []):
+            les = lessons.get(lid)
+            cited.append({"id": lid, "one_line": les.get("one_line"),
+                          "rule": les.get("rule"),
+                          "applies_when": les.get("applies_when"),
+                          "not_when": les.get("not_when"),
+                          "status": les.get("status"),
+                          "validation": les.get("validation"),
+                          "doc_markdown": les.get("_raw")}
+                         if les else {"id": lid, "missing": True})
+        return {"found": True, "id": cid, "title": c.get("title"),
+                "status": c.get("status"), "context": c.get("context"),
+                "decisions": c.get("decisions"), "outcome": c.get("outcome"),
+                "provenance": c.get("provenance"),
+                "doc_markdown": c.get("_raw"), "lessons": cited}
+
     @staticmethod
     def _close(key, index, n=5):
         return difflib.get_close_matches(key, list(index), n, 0.5)
@@ -158,3 +272,12 @@ def _frontmatter(text):
 
 def _listval(s):
     return [x.strip() for x in s.strip("[]").split(",") if x.strip()]
+
+
+def _split_frontmatter(text):
+    m = re.match(r"^---\n(.*?)\n---\n?(.*)$", text, re.S)
+    return (m.group(1), m.group(2)) if m else ("", text)
+
+
+def _eq(a, b):
+    return a is not None and b is not None and str(a).lower() == str(b).lower()

@@ -16,6 +16,8 @@ XSPEC execution.
 | `lookup_intent(query)` | "how do I X?" → exact PyXspec call (+ Tcl) |
 | `validate(name, kind)` | check a name against the grounding set (anti-hallucination); returns canonical form or suggestions |
 | `get_guide(name)` | task-layer guides; no arg lists them |
+| `find_cases(mission, counts_regime, source_type, model, statistic, text)` | retrieve worked casebook cases by data fingerprint (Tier C); ranked, lessons summarized |
+| `get_case(case_id)` | full worked case + the full text of every lesson it cites |
 | `corpus_info()` | provenance (XSPEC version + source commits) + counts |
 
 ## Requirements

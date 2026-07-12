@@ -1,1 +1,4 @@
 mcp>=1.0
+# Tier A casebook retrieval (find_cases/get_case) parses case frontmatter.
+# Absence degrades gracefully: those two tools return an error, the rest serve.
+pyyaml

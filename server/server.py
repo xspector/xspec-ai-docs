@@ -74,6 +74,34 @@ def get_guide(name: str = "") -> dict:
 
 
 @mcp.tool()
+def find_cases(mission: str = "", counts_regime: str = "", source_type: str = "",
+               model: str = "", statistic: str = "", text: str = "",
+               limit: int = 10) -> dict:
+    """Retrieve worked analysis cases from the casebook (the judgment layer) by
+    data fingerprint. All filters optional and combinable: mission (e.g.
+    'NICER'), counts_regime ('vlow'/'low'/'mid'/'high'/'vhigh'), source_type
+    (e.g. 'agn', 'xrb', 'isolated_ns'), model (a component name; matches the
+    case's model_family), statistic, and free text. Compute the fingerprint
+    from pha_info, then call this before deciding statistic/band/model. Returns
+    ranked matches, each summarizing its lessons; call get_case for the full
+    study. Retrieved lessons are hypotheses to check (applies_when/not_when),
+    not rules — assess_fit remains the judge."""
+    return C.find_cases(mission or None, counts_regime or None,
+                        source_type or None, model or None, statistic or None,
+                        text or None, limit)
+
+
+@mcp.tool()
+def get_case(case_id: str) -> dict:
+    """Full worked analysis case from the casebook: the fingerprint, the
+    decisions (with rejected alternatives and triggers), the outcome, the prose
+    study (including what a careless analysis would get wrong), and the full
+    text of every lesson it cites (rule + applies_when + not_when). Use after
+    find_cases. Lessons are hypotheses; verify against the data at hand."""
+    return C.get_case(case_id)
+
+
+@mcp.tool()
 def corpus_info() -> dict:
     """Provenance (XSPEC version + source commits) and item counts for the
     corpus this server is serving."""

@@ -75,6 +75,41 @@ check(C.get_guide("01")["found"], "get_guide by prefix")
 check("07_intent_index" in [g for g in C.get_guide()["guides"]],
       "get_guide includes intent index")
 
+# casebook retrieval (Tier C) -- needs pyyaml; skip cleanly if absent
+fc = C.find_cases(mission="NICER")
+if "error" in fc and "pyyaml" in fc["error"]:
+    print("note: pyyaml absent -- skipped casebook checks")
+else:
+    seed = "nicer-lowcount-thermal-001"
+    check(any(r["id"] == seed for r in fc["results"]), "find_cases by mission")
+    # fingerprint filters: counts_regime and model (model_family)
+    check(any(r["id"] == seed for r in
+              C.find_cases(counts_regime="low")["results"]),
+          "find_cases by counts_regime")
+    check(any(r["id"] == seed for r in
+              C.find_cases(model="nsatmos")["results"]),
+          "find_cases by model_family")
+    # combined filters rank the seed top; lessons summarized inline
+    top = C.find_cases(mission="NICER", counts_regime="low",
+                       source_type="isolated_ns")["results"][0]
+    check(top["id"] == seed and top["score"] >= 9, "find_cases weighted score")
+    check(any(l["id"] == "cstat-below-1k-counts" for l in top["lessons"]),
+          "find_cases inlines lessons")
+    # non-matching filter -> no results
+    check(C.find_cases(mission="NoSuchMission")["count"] == 0,
+          "find_cases empty on miss")
+    # get_case: full study + cited lessons inlined with rule/applies_when
+    gc = C.get_case(seed)
+    check(gc["found"] and gc["doc_markdown"].startswith("---"),
+          "get_case returns full doc")
+    check(len(gc["lessons"]) == 2, "get_case inlines both lessons")
+    check(all(l.get("applies_when") and l.get("not_when")
+              for l in gc["lessons"]), "get_case lessons have conditions")
+    # unknown case -> suggestions
+    bad = C.get_case("nicer-lowcount-thermal-999")
+    check(not bad["found"] and seed in bad["suggestions"],
+          "get_case unknown suggests")
+
 # provenance
 info = C.info()
 check("xspec_version" in info["provenance"], "info provenance")
