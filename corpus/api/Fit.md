@@ -41,6 +41,7 @@ Singleton instance `Fit` (class `FitManager`).
 - `error(argString, respPar=False)` — Determine confidence intervals of a fit.
 - `ftest(chisq2, dof2, chisq1, dof1)` — Calculate the F-statistic and its probability given new and old
 - `goodness(nRealizations=100, sim=False, fit='fit')` — Perform a Monte Carlo calculation of the goodness-of-fit.
+- `simulate(nRealizations, fSigma=1.0, nostat=False, fit=False, hook=None)` — Bulk posterior-predictive simulation (the `sim` command).
 - `improve()` — Try to escape the current minimum (warm-restart global search).
 - `globalFit(maxGen=None, popSize=None)` — Perform a global fit (cold-start Differential Evolution + polish).
 - `compare(alternatives, method='lm', useGlobal=False)` — Compare alternative models against the current model (model selection).

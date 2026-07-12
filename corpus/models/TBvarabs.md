@@ -52,23 +52,23 @@ _Authoritative from `model.dat`. Negative fit-delta = frozen; additive models ca
 | # | param | unit | default | soft min | soft max | hard min | hard max | delta | note |
 |---|-------|------|---------|----------|----------|----------|----------|-------|------|
 | 1 | nH | 10^22 | 1 | 0 | 100000 | 0 | 1000000 | 0.001 |  |
-| 2 | He | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 3 | C | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 4 | N | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 5 | O | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 6 | Ne | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 7 | Na | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 8 | Mg | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 9 | Al | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 10 | Si | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 11 | S | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 12 | Cl | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 13 | Ar | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 14 | Ca | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 15 | Cr | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 16 | Fe | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 17 | Co | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
-| 18 | Ni | — | 1 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
+| 2 | He | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 3 | C | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 4 | N | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 5 | O | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 6 | Ne | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 7 | Na | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 8 | Mg | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 9 | Al | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 10 | Si | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 11 | S | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 12 | Cl | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 13 | Ar | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 14 | Ca | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 15 | Cr | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 16 | Fe | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 17 | Co | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
+| 18 | Ni | — | 1 | 0 | 5 | 0 | 1e+38 | 0.01 | frozen by default |
 | 19 | H2 | — | 0.2 | 0 | 1 | 0 | 1 | 0.01 | frozen by default |
 | 20 | rho | g/cm^3 | 1 | 0 | 5 | 0 | 5 | 0.01 | frozen by default |
 | 21 | amin | mum | 0.025 | 0 | 0.25 | 0 | 0.25 | 0.01 | frozen by default |

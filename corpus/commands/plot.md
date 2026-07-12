@@ -1,7 +1,7 @@
 ---
 name: plot
 aliases: [xplot]
-also_documents: [fig:colors, plotchain, plotcontour, plotcounts, plotdata, plotdelchi, plotdelc, plotdem, plotefficien, ploteqw, plotfitstat, plotgoodness, ploticounts, plotinsensitivity, plotintegprob, plotlcounts, plotldata, plotmargin, plotmodel, plotemodel, ploteemodel, plotpolangle, plotpolfrac, plotratio, plotresiduals, plotsensitivity, plotsum, plotufspec, ploteufspec, ploteeufspec]
+also_documents: [fig:colors, plotchain, plotcontour, plotcounts, plotdata, plotdelchi, plotdelc, plotdem, plotdspec, plotdespec, plotdeespec, plotefficien, ploteqw, plotfitstat, plotgoodness, ploticounts, plotinsensitivity, plotintegprob, plotlcounts, plotldata, plotmargin, plotmodel, plotemodel, ploteemodel, plotpolangle, plotpolfrac, plotratio, plotresiduals, plotsensitivity, plotsum, plotufspec, ploteufspec, ploteeufspec]
 source: XSplot.tex
 ---
 
@@ -197,6 +197,50 @@ contributions to the statistic.
 Plot a histogram of the relative contributions of plasma at different
 temperatures for multi-temperature models. This is not very clever at
 the moment and only plots the last model calculated.
+
+- [dspec, despec, deespec]
+
+Plot the deconvolved unfolded spectrum and the model. These are the
+model-independent counterparts of `ufspec`, `eufspec` and
+`eeufspec`: the plotted flux density is obtained by inverting the
+detector response rather than by scaling the data by the model-dependent
+unfolded/folded ratio, so the data points depend only on the data,
+background and response and do { not} move when the model is changed.
+The inversion is a regularized, whitened truncated-SVD solve of the response
+on the plotted grid; the truncation rank is set automatically by the
+discrepancy principle (so the recovered resolution is matched to the
+signal-to-noise) and capped to bound noise amplification. XSPEC reports the
+number of recovered resolution elements and the maximum amplification for
+each plot group. `despec` and `deespec` apply the same
+$Ef(E)$ and $E^{2}f(E)$ (or $\lambda f(\lambda)$, $\lambda^{2}f(\lambda)$)
+weighting as `eufspec` and `eeufspec`, and both energy and
+wavelength (including per-Hz) axes are supported.
+
+A response can only supply a limited number of independent resolution
+elements (the number of significant singular values of the response
+matrix), and this is the most flux points the deconvolution can genuinely
+determine. It is therefore important that the spectrum be grouped so that
+the number of plotted bins is not much larger than the number of resolution
+elements reported in the diagnostic message. If the plot is over-resolved
+(many more bins than resolution elements) the extra points are fixed largely
+by extrapolation from the better-measured part of the spectrum: they show a
+correlated waviness and their error bars become misleadingly small,
+particularly at high energies where the counts are low. Grouping the data
+with, for example, the optimal-binning scheme (the { grppha} or
+{ ftgrouppha} tools, e.g. `grouptype=optsnmin`) so that the bin
+count is comparable to the resolution generally gives sensible error bars and
+much less waviness. Note that `ufspec` does not show this behaviour
+because it does not invert the response; it simply rescales the data, so its
+points remain uncorrelated.
+
+WARNING ! Deconvolution trades resolution against noise. The recovered
+points are strongly correlated bin-to-bin and individual points may be
+negative where the data require it; the plotted (diagonal) error bars are
+marginal and the points must { not} be re-fit with a diagonal
+$\chi^{2}$. Flux that redistributes into the plotted band from energies
+outside it, or across ignored channels, biases the bins near the band edges
+and on either side of any interior gap. The deconvolution is undefined for a
+spectrum carrying more than one response source and is refused in that case.
 
 - [eemodel]
 

@@ -1,5 +1,5 @@
 # XSPEC / PyXspec AI docs
-> XSPEC 13.0 | manual@57626605 | heasoft@9bfdb9e804
+> XSPEC 13.0 | manual@4818b776 | heasoft@c8a0e07c3c
 
 ## Models
 - [absori](corpus/models/absori.md): multiplicative model, 6 params
@@ -340,7 +340,7 @@
 - [ChainResult](corpus/api/ChainResult.md): 10 attrs, 1 methods
 - [Component](corpus/api/Component.md): 2 attrs, 1 methods
 - [FakeitSettings](corpus/api/FakeitSettings.md): 7 attrs, 1 methods
-- [Fit](corpus/api/Fit.md) (class `FitManager`): 20 attrs, 12 methods
+- [Fit](corpus/api/Fit.md) (class `FitManager`): 20 attrs, 13 methods
 - [HMCResult](corpus/api/HMCResult.md): 17 attrs, 1 methods
 - [Model](corpus/api/Model.md): 7 attrs, 9 methods
 - [NestedResult](corpus/api/NestedResult.md): 17 attrs, 1 methods
@@ -445,3 +445,11 @@
 
 ## Grounding
 - [manifest.json](corpus/manifest.json)
+
+## Casebook (judgment layer)
+> 1 case(s), 2 lesson(s) — worked studies + reusable lessons; retrieve by data fingerprint. See [SCHEMA.md](casebook/SCHEMA.md).
+- [Low-count NICER quiescent neutron star — cstat, and why bbodyrad is the wrong model](casebook/cases/nicer-lowcount-thermal-001.md) (core)
+
+### Lessons
+- [Use cstat, not chi, below ~1000 total counts on Poisson data.](casebook/lessons/cstat-below-1k-counts.md) (validated)
+- [A parameter pegged at a limit plus correlated residuals means the model is structurally wrong, not just badly initialised.](casebook/lessons/peg-at-limit-means-wrong-model.md) (candidate)

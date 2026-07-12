@@ -492,6 +492,11 @@
         "doc": "Perform a Monte Carlo calculation of the goodness-of-fit."
       },
       {
+        "name": "simulate",
+        "signature": "(nRealizations, fSigma=1.0, nostat=False, fit=False, hook=None)",
+        "doc": "Bulk posterior-predictive simulation (the `sim` command)."
+      },
+      {
         "name": "improve",
         "signature": "()",
         "doc": "Try to escape the current minimum (warm-restart global search)."

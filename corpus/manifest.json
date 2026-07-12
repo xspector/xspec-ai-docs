@@ -2,16 +2,18 @@
   "provenance": {
     "xspec_version": "13.0",
     "heasoft_src": "/Users/kaa/software/heasoft/Xspec/src",
-    "heasoft_commit": "9bfdb9e804",
+    "heasoft_commit": "c8a0e07c3c",
     "manual_dir": "/Users/kaa/software/Xspec-aux/doc/manual",
-    "manual_commit": "57626605"
+    "manual_commit": "4818b776"
   },
   "counts": {
     "models": 328,
     "pyxspec_api_classes": 18,
     "command_tokens": 161,
     "command_docs": 79,
-    "intents": 70
+    "intents": 70,
+    "casebook_cases": 1,
+    "casebook_lessons": 2
   },
   "models": [
     {
@@ -3274,7 +3276,7 @@
       "singleton": "Fit",
       "doc": "corpus/api/Fit.md",
       "n_attributes": 20,
-      "n_methods": 12
+      "n_methods": 13
     },
     {
       "class": "HMCResult",
@@ -4404,6 +4406,7 @@
     "tclout_keys": "XStclout.tex (documented options)",
     "xset_keys": "documented subset; xset accepts arbitrary KEY VALUE",
     "abundances": "manager/abundances.dat",
-    "xsect": "XSFunctions/NeutralOpacity.cxx"
+    "xsect": "XSFunctions/NeutralOpacity.cxx",
+    "casebook": "casebook/ (hand-authored + distilled; schema-gated by tests/validate_casebook.py)"
   }
 }
