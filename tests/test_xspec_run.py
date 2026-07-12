@@ -180,13 +180,21 @@ try:
           f"assess_fit tags pegged_limit kind: {pegged['issue_kinds']}")
     r.fit("cstat")                                # restore a real fit
 
-    # png driver is absent in this giza build -> gif; also confirm clear error
-    pg = r.plot_image("poc_plot.gif", "ldata delchi")
-    check(pg["ok"] and os.path.exists(pg["result"]["fileName"]),
-          f"plot_image wrote a file: {pg}")
+    # this giza build's reliable worker hardcopy formats are pdf + ps (exact
+    # filename, both panels); png/gif are not offered here.
+    pd = r.plot_image("poc_plot.pdf", "ldata delchi")
+    check(pd["ok"] and os.path.exists(pd["result"]["fileName"])
+          and os.path.getsize(pd["result"]["fileName"]) > 0,
+          f"plot_image wrote a pdf: {pd}")
+    ps = r.plot_image("poc_plot.ps")
+    check(ps["ok"] and os.path.exists(ps["result"]["fileName"])
+          and os.path.getsize(ps["result"]["fileName"]) > 0,
+          f"plot_image wrote a ps: {ps}")
+    # png/gif are unsupported in this build -> clear error naming the format,
+    # not a silent miss or a phantom fileName
     badext = r.plot_image("poc_plot.png")
-    check(not badext["ok"] and "giza" in badext.get("error", ""),
-          f"plot_image reports missing png driver clearly: {badext}")
+    check(not badext["ok"] and "png" in badext.get("error", "").lower(),
+          f"plot_image rejects unsupported png clearly: {badext}")
 
     ex = r.export_script()
     check(ex["ok"], f"export_script ok: {ex}")

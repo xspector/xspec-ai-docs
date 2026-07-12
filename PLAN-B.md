@@ -87,7 +87,7 @@ Composite, safe steps returning typed JSON (guide 01 patterns):
 | `run_mcmc(...)` | MCMC chain (length capped, overwrites) | B3 ✅ |
 | `save_session` / `restore_session` | .xcm persistence | B3 ✅ |
 | `assess_fit(...)` | composite quality check → {acceptable, issues} | aids ✅ |
-| `plot_image(...)` | render a figure (device from extension; no PNG in giza) | aids ✅ |
+| `plot_image(...)` | render a figure (device from extension: .pdf/.ps; giza png/gif unavailable in the worker) | aids ✅ |
 | `export_script` / `journal` | reproducible PyXspec script of the session | aids ✅ |
 | `pha_info(pha)` | inspect a PHA header (mission/exposure/RMF/ARF/grouping) | prep ✅ |
 | `group_spectrum(...)` | ftgrouppha (heasoftpy); self-contained output | prep ✅ |

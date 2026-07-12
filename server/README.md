@@ -73,8 +73,9 @@ Keep it separate from the read-only Tier A server; it is opt-in and higher-risk.
 
 **Agent aids:** `assess_fit` (composite quality check — pegged limits, residual
 runs test, reduced-chi sanity, optional Monte-Carlo goodness → `{acceptable,
-issues}`), `plot_image` (render a figure for a human; device inferred from
-extension — .gif/.ps/.cps/.eps/.pdf; no PNG driver in this giza build),
+issues, issue_kinds}`), `plot_image` (render a figure for a human; device
+inferred from extension — `.pdf` (recommended) or `.ps`; this giza build's other
+hardcopy drivers, incl. png/gif, don't work reliably in the worker),
 `export_script` / `journal` (emit a standalone PyXspec script reproducing the
 session — a reproducible artifact).
 

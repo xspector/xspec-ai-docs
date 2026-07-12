@@ -438,9 +438,13 @@ def h_assess_fit(a):
             "acceptable": not issues, "issues": issues, "issue_kinds": kinds}
 
 
-# file extension -> PGPLOT/giza device (this build has no /png driver)
-_IMG_DEV = {".gif": "/gif", ".png": "/png", ".ps": "/cps", ".cps": "/cps",
-            ".eps": "/vcps", ".pdf": "/pdf"}
+# file extension -> giza/PGPLOT device. This giza build's reliable hardcopy
+# drivers in the persistent worker are the single-file vector formats /pdf and
+# /ps (they write the exact filename and flush on device close). The raster/
+# per-page drivers (/png, /svg) buffer to '<stem>_NNNN<ext>' and do NOT reliably
+# materialize a file in the long-lived worker, and /gif is absent -- so they are
+# deliberately not offered. PDF is the recommended "figure for a human".
+_IMG_DEV = {".pdf": "/pdf", ".ps": "/ps"}
 
 
 def h_plot_image(a):
@@ -448,19 +452,27 @@ def h_plot_image(a):
     ext = os.path.splitext(fn)[1].lower()
     dev = _IMG_DEV.get(ext)
     if not dev:
-        raise ValueError(f"unsupported image extension {ext!r}; "
-                         f"use one of {sorted(_IMG_DEV)}")
-    # cpgopen for an unavailable device fails at Plot() time, not on assignment,
-    # with an empty message -> wrap both and raise a clear one.
+        raise ValueError(f"unsupported image extension {ext!r}; use one of "
+                         f"{sorted(_IMG_DEV)} (this giza build has no working "
+                         "png/gif hardcopy driver in the worker; use .pdf)")
+    try:
+        os.remove(fn)                               # clear any stale output
+    except OSError:
+        pass
+    # an unavailable device fails at Plot() time (often with an empty message),
+    # not on assignment -> convert to a clear error.
     try:
         Plot.device = fn + dev
         Plot.xAxis = a.get("xAxis", "keV")
         Plot(*(a.get("types") or "ldata delchi").split())
     except Exception:
         Plot.device = "/null"
-        raise ValueError(f"could not render {dev} in this PGPLOT/giza build "
-                         "(no PNG driver here; try .gif or .ps)")
-    Plot.device = "/null"
+        raise ValueError(f"could not render {dev} ({ext}) in this giza/PGPLOT "
+                         "build")
+    Plot.device = "/null"                            # close/flush the hardcopy
+    if not (os.path.exists(fn) and os.path.getsize(fn) > 0):
+        raise ValueError(f"{dev} produced no output for {ext} in this "
+                         "giza/PGPLOT build")
     return {"fileName": fn, "device": dev}
 
 
