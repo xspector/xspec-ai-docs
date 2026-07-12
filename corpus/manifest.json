@@ -2,7 +2,7 @@
   "provenance": {
     "xspec_version": "13.0",
     "heasoft_src": "/Users/kaa/software/heasoft/Xspec/src",
-    "heasoft_commit": "c8a0e07c3c",
+    "heasoft_commit": "89a96cc340",
     "manual_dir": "/Users/kaa/software/Xspec-aux/doc/manual",
     "manual_commit": "4818b776"
   },
@@ -12,8 +12,8 @@
     "command_tokens": 161,
     "command_docs": 79,
     "intents": 70,
-    "casebook_cases": 3,
-    "casebook_lessons": 3
+    "casebook_cases": 4,
+    "casebook_lessons": 4
   },
   "models": [
     {

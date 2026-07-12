@@ -74,12 +74,17 @@ needing other instruments note the response they will require.
    `cstat-below-1k-counts`. *Fills `low` with a non-thermal source.* (32 GRB + 15
    eROSITA/EP transient papers.)
 
-3. **⬜ Microcalorimeter line spectroscopy.** `agn|xrb / (high total, vlow per
-   bin) / cstat`. Trap: "bright source ⇒ chi" is wrong — the statistic is set by
-   counts *per bin*, not the total, and microcalorimeter data must **not** be
-   grouped up to force chi. Needs an XRISM/Resolve response. Spawns lesson
-   `counts-per-bin-not-total-drives-statistic` (and exposes a schema gap: the
-   `counts_regime` key is total-counts only). (XRISM = top mission, 38 papers.)
+3. **✅ Microcalorimeter line spectroscopy.** `cluster / high-total-vlow-per-bin
+   / cstat / bapec`. Trap: "bright source ⇒ chi" is wrong — 27k counts but ~1 per
+   bin; chi biases the Fe abundance +40% and the flux −35% behind a reduced χ² of
+   0.67, and grouping to rescue chi erases the turbulent-velocity signal. Authored
+   as `xrism-cluster-turbulence-001` on the real Resolve Hp response (60000 ch @
+   0.5 eV, gate-valve-closed). Spawns lesson
+   `counts-per-bin-not-total-drives-statistic`. **Concrete evidence for the
+   schema gap** already flagged in [SCHEMA.md](SCHEMA.md) (`counts_regime` is
+   total-counts only): this spectrum keys as `high` while the judgment context is
+   ~1 count/bin. A per-bin refinement is now motivated, not hypothetical. (XRISM =
+   top mission, 38 papers.)
 
 4. **⬜ Cluster ICM abundance.** `cluster / high / chi / tbabs*apec` (or
    `vapec`). Trap: a single-temperature fit to multi-phase gas biases the Fe
@@ -134,7 +139,7 @@ graduate `candidate → validated` (PLAN-C §4, the `fakeit` gate):
 | Lesson | From case | Status |
 |---|---|---|
 | `flat-photon-index-means-absorption` | 1 | **validated** (`bench/lessons/…`) |
-| `counts-per-bin-not-total-drives-statistic` | 3 | not yet authored |
+| `counts-per-bin-not-total-drives-statistic` | 3 | candidate (harness pending) |
 | `single-temperature-fe-bias` | 4 | not yet authored |
 | `systematics-dominate-above-1e5-counts` | 5 | not yet authored |
 | `ftest-invalid-for-line-significance` | 6, 10 | not yet authored |
