@@ -339,6 +339,34 @@ def emit_api(pyxspec_dir, outdir):
     return manifest, data
 
 
+def casebook_index(repo_root):
+    """Light regex index of the casebook (id + label + status) for the manifest
+    and llms.txt. Deliberately yaml-free so indexing works even without the
+    validation deps; full schema validation is the separate gate
+    (tests/validate_casebook.py). Returns (cases, lessons) lists of dicts."""
+    cb = repo_root / "casebook"
+    if not cb.exists():
+        return [], []
+
+    def field(fm, key, default):
+        m = re.search(rf"^{key}:\s*(.+)$", fm, re.M)
+        return m.group(1).strip().strip('"').strip("'") if m else default
+
+    def entries(subdir, label_key):
+        out = []
+        for p in sorted((cb / subdir).glob("*.md")):
+            txt = p.read_text(errors="replace")
+            m = re.match(r"^---\n(.*?)\n---\n", txt, re.S)
+            fm = m.group(1) if m else ""
+            out.append({"id": field(fm, "id", p.stem),
+                        "label": field(fm, label_key, p.stem),
+                        "status": field(fm, "status", ""),
+                        "doc": f"casebook/{subdir}/{p.name}"})
+        return out
+
+    return entries("cases", "title"), entries("lessons", "one_line")
+
+
 def main():
     stamp = config.version_stamp()
     models = modeldat.parse(config.MODEL_DAT)
@@ -386,6 +414,9 @@ def main():
         manifest_cmds.append(emit_command(tex, tokens_by_name, cdir))
     print(f"  emitted {len(manifest_cmds)} command docs")
 
+    # ---- casebook index (Tier C judgment layer) ----
+    cb_cases, cb_lessons = casebook_index(config.REPO_ROOT)
+
     # ---- full grounding manifest ----
     manifest = {
         "provenance": stamp,
@@ -395,6 +426,8 @@ def main():
             "command_tokens": len(tokens),
             "command_docs": len(manifest_cmds),
             "intents": len(intent_rows),
+            "casebook_cases": len(cb_cases),
+            "casebook_lessons": len(cb_lessons),
         },
         "models": manifest_models,
         "pyxspec_api": manifest_api,
@@ -417,6 +450,8 @@ def main():
             "xset_keys": "documented subset; xset accepts arbitrary KEY VALUE",
             "abundances": "manager/abundances.dat",
             "xsect": "XSFunctions/NeutralOpacity.cxx",
+            "casebook": "casebook/ (hand-authored + distilled; schema-gated by "
+                        "tests/validate_casebook.py)",
         },
     }
     (config.CORPUS / "manifest.json").write_text(json.dumps(manifest, indent=2))
@@ -454,8 +489,45 @@ def main():
                       for l in first[:8] if l.startswith("title:")), rec.stem)
         lines.append(f"- [{title}](corpus/recipes/{rec.name})")
     lines += ["", "## Grounding", "- [manifest.json](corpus/manifest.json)"]
+    if cb_cases or cb_lessons:
+        lines += ["", "## Casebook (judgment layer)",
+                  f"> {len(cb_cases)} case(s), {len(cb_lessons)} lesson(s) — "
+                  "worked studies + reusable lessons; retrieve by data "
+                  "fingerprint. See [SCHEMA.md](casebook/SCHEMA.md)."]
+        for c in cb_cases:
+            st = f" ({c['status']})" if c["status"] else ""
+            lines.append(f"- [{c['label']}]({c['doc']}){st}")
+        if cb_lessons:
+            lines += ["", "### Lessons"]
+            for les in cb_lessons:
+                st = f" ({les['status']})" if les["status"] else ""
+                lines.append(f"- [{les['label']}]({les['doc']}){st}")
     (config.REPO_ROOT / "llms.txt").write_text("\n".join(lines) + "\n")
     print("  emitted llms.txt")
+
+    # ---- casebook gate (Tier C) --------------------------------------------
+    # Validate the casebook against its schemas + refs + grounding set, so a
+    # broken casebook fails the regen -- same anti-drift discipline as the rest
+    # of the corpus. Runs last: the grounding check reads the manifest just
+    # written above. Loaded by file path to avoid a hard tests/ import coupling.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "validate_casebook",
+        str(config.REPO_ROOT / "tests" / "validate_casebook.py"))
+    cbmod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cbmod)
+    try:
+        n_cases, n_lessons, cb_errors = cbmod.validate_casebook(config.REPO_ROOT)
+    except RuntimeError as e:
+        print(f"  WARN: casebook not gated ({e}); "
+              "pip install -r generator/requirements.txt")
+    else:
+        if cb_errors:
+            print(f"  FAIL: casebook invalid ({len(cb_errors)}):")
+            for err in cb_errors:
+                print("    -", err)
+            raise SystemExit(1)
+        print(f"  casebook OK: {n_cases} case(s), {n_lessons} lesson(s) gated")
 
 
 if __name__ == "__main__":
