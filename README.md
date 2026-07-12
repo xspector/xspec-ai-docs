@@ -80,12 +80,13 @@ python server/xspec_run.py       # stdio; requires HEADAS + PyXspec
 
 Requires `mcp>=1.0` (`server/requirements.txt`). Env: `XSPEC_DATA_ROOT`
 (read allowlist), `XSPEC_OUTPUT_ROOT` (write allowlist), `XSPEC_HEADAS`,
-`XSPEC_PYTHON`.
+`XSPEC_PYTHON`, `XSPEC_RUN_GENERIC` (set to `0` to drop the generic tools).
 
 **Posture:** the structured tools are path-allowlisted and headless-guarded; the
 generic `xspec_get/set/call` are deliberately unrestricted (can reach
 code-loading / Tcl-script restore) — appropriate for a trusted local single-user
-setup. Drop the three generic tools for a less-trusted deployment.
+setup. Set `XSPEC_RUN_GENERIC=0` to drop the three generic tools for a
+less-trusted deployment (the structured, allowlisted tools remain).
 
 ## Regenerating the corpus
 

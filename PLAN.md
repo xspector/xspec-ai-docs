@@ -1,8 +1,11 @@
 # XSPEC / PyXspec AI Documentation — Design & Plan
 
-Status: **corpus complete** — reference layer (328 models + 79 command docs),
-full task layer (6 guides), and full grounding manifest all generate from source;
-executable claims verified against live data; auditor clean over 407 docs.
+Status: **implemented** — corpus (328 models + 79 command docs + task-layer
+guides 00–07 + full grounding manifest) generates from source; **Tier A**
+read-only MCP server (10 tools), **Tier B** live-PyXspec execution server
+([PLAN-B.md](PLAN-B.md)), and a seeded **Tier C** learning/casebook layer
+([PLAN-C.md](PLAN-C.md)); executable claims verified against live data, auditor
+clean, CI on every push.
 Owner: Keith Arnaud
 Generated-from XSPEC version: *(stamped by generator at build time)*
 
@@ -25,11 +28,13 @@ compute errors and fluxes, and return results as structured data.
 
 ## 2. Delivery model
 
-- **Structured text corpus now, MCP server later.** The corpus is authored so
-  it doubles as the MCP's backing data — no rework when the server is added.
-  **Tier A (read-only) MCP server implemented** in `server/` (FastMCP; 10 tools
-  over the corpus JSON; data layer unit-tested). Tier B (live PyXspec
-  execution) remains future work.
+- **Structured text corpus that doubles as MCP backing data.** The corpus is
+  authored so it also serves the MCP servers — no rework. **Tier A (read-only)
+  MCP server implemented** in `server/` (FastMCP; 10 tools over the corpus JSON;
+  data layer unit-tested). **Tier B (live PyXspec execution) implemented** —
+  `server/xspec_run.py` (+ `runner.py`/`worker.py`); see [PLAN-B.md](PLAN-B.md).
+  A **Tier C** learning/casebook layer is designed in [PLAN-C.md](PLAN-C.md) and
+  seeded (`casebook/`).
 - **Drive surface: PyXspec-first**, interactive Tcl cross-referenced. PyXspec
   returns typed values, raises exceptions instead of blocking on interactive
   prompts, and avoids `tclout` string-scraping — all better for an execution
@@ -79,8 +84,8 @@ Ranked by what an agent hits first when handed a dataset:
    Tcl cross-reference. Every API reference is validated against `api.json`
    (tests fail if an entry names a call that doesn't exist).
 
-> All six task-layer docs authored (2026-07-01). Reference layer + task layer
-> complete; remaining: full grounding manifest (step 3), commands reference.
+> All seven task-layer docs authored. Reference layer, task layer, grounding
+> manifest (§4), and command reference are all complete and generate from source.
 
 ## 4. Grounding manifest (JSON) — full grounding set
 
@@ -129,26 +134,36 @@ Everything an AI could hallucinate becomes checkable against one manifest.
 
 ```
 xspec-ai-docs/
-  PLAN.md                     # this file
-  llms.txt                    # root index (generated)
+  PLAN.md / PLAN-B.md / PLAN-C.md   # design docs (corpus + Tier A / Tier B / Tier C)
+  llms.txt                          # root index (generated)
   generator/
-    config.py                 # pinned source paths + version stamp
-    texmacros.py              # macro dictionary + LaTeX→markdown
-    modeldat.py               # model.dat parser
-    generate.py               # orchestrator
+    config.py        # pinned source paths + version stamp
+    texmacros.py     # macro dictionary + LaTeX→markdown
+    modeldat.py      # model.dat parser
+    grounding.py     # command/plot/statistic/abundance/xsect grounding
+    api.py           # PyXspec class-API extraction (ast)
+    intents.py       # intent → API index
+    generate.py      # orchestrator (+ `--check` drift gate)
   corpus/
-    models/     <name>.md + <name>.json
-    commands/   <cmd>.md
-    recipes/    task-layer docs, tcl_pyxspec_map.md
-    manifest.json             # full grounding set (generated)
-  tests/
-    run_recipes.py            # executes recipes against walkthrough data
+    models/    <name>.md + <name>.json
+    commands/  <cmd>.md
+    api/       <Class>.md + api.json
+    recipes/   00..07 guides + tcl_pyxspec_map.md
+    manifest.json / intent_index.json   # grounding set (generated)
+  server/            # Tier A (server.py/corpus.py) + Tier B (xspec_run/runner/worker)
+  casebook/          # Tier C: SCHEMA.md + schema/ + cases/ + lessons/
+  bench/             # ground-truth calibration (benchmark.py)
+  tests/             # run_all.py + audit_macros/test_server/validate_casebook/
+                     #   run_recipes/test_xspec_run
+  .claude/skills/xray-fit/   # end-to-end fitting skill
+  .github/workflows/ci.yml   # fast corpus-only checks on push/PR
 ```
 
-## 8. Prototype scope (this iteration)
+## 8. Prototype scope (historical)
 
-Validate extraction + join on a representative slice before committing to all
-~300 models:
+> **Completed and superseded** by the full 328-model corpus; retained for
+> history. The original prototype validated extraction + join on a slice before
+> committing to all models:
 - Models: `powerlaw` (additive, implicit norm), `TBabs` (multiplicative,
   scaled unit), `apec` (additive, multi-variant tex, frozen params).
 - Commands + Tcl↔PyXspec map: `data`, `model`, `fit`.

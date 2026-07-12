@@ -166,6 +166,8 @@ try:
     check(af["ok"], f"assess_fit ok: {af}")
     ar = af["result"]
     check(isinstance(ar["acceptable"], bool) and isinstance(ar["issues"], list)
+          and isinstance(ar["issue_kinds"], list)
+          and len(ar["issue_kinds"]) == len(ar["issues"])
           and ar["runs_test"] is not None and ar["goodness"] is not None,
           f"assess_fit structure: {ar}")
 
@@ -174,6 +176,8 @@ try:
     pegged = r.assess_fit()["result"]
     check(any("par 2" in s and "pegged" in s for s in pegged["issues"]),
           f"assess_fit detects pegged limit: {pegged['issues']}")
+    check("pegged_limit" in pegged["issue_kinds"],
+          f"assess_fit tags pegged_limit kind: {pegged['issue_kinds']}")
     r.fit("cstat")                                # restore a real fit
 
     # png driver is absent in this giza build -> gif; also confirm clear error

@@ -6,6 +6,7 @@ not thread-safe). Data paths are restricted to XSPEC_DATA_ROOT.
 Run (stdio):  python server/xspec_run.py
 Requires HEADAS + PyXspec installed; the worker bootstraps HEADAS itself.
 """
+import os
 import threading
 from typing import Any
 
@@ -16,6 +17,13 @@ from runner import XspecRunner
 _LOCK = threading.Lock()
 _RUNNER = XspecRunner()
 mcp = FastMCP("xspec-run")
+
+# The generic object-model tools (xspec_get/set/call) are unrestricted and
+# RCE-capable (see PLAN-B posture). On by default (trusted local use); set
+# XSPEC_RUN_GENERIC=0 (or false/no/off) to drop them for a less-trusted
+# deployment, keeping only the path-allowlisted structured tools.
+_GENERIC = os.environ.get("XSPEC_RUN_GENERIC", "1").strip().lower() \
+    not in ("0", "false", "no", "off")
 
 
 @mcp.tool()
@@ -224,7 +232,6 @@ def restore_session(fileName: str) -> dict:
         return _RUNNER.restore_session(fileName)
 
 
-@mcp.tool()
 def xspec_get(target: str) -> dict:
     """Read ANY PyXspec attribute by object-path. The path starts at a root
     (AllData, AllModels, Fit, Xset, Plot, AllChains) and navigates via .attr and
@@ -234,7 +241,6 @@ def xspec_get(target: str) -> dict:
         return _RUNNER.xget(target)
 
 
-@mcp.tool()
 def xspec_set(target: str, value: Any) -> dict:
     """Set ANY writable PyXspec attribute by object-path (must end in an
     attribute). Examples: xspec_set('Fit.nIterations', 100),
@@ -244,7 +250,6 @@ def xspec_set(target: str, value: Any) -> dict:
         return _RUNNER.xset(target, value)
 
 
-@mcp.tool()
 def xspec_call(target: str, method: str, args: list = None,
                kwargs: dict = None, timeout_s: float = 0) -> dict:
     """Call ANY PyXspec method. `target` resolves to the object; `method` is the
@@ -259,6 +264,13 @@ def xspec_call(target: str, method: str, args: list = None,
     and Tcl-script restore, and file-path args are not allowlisted."""
     with _LOCK:
         return _RUNNER.xcall(target, method, args, kwargs, timeout_s or None)
+
+
+# Register the generic tools only when enabled (default). Dropping them leaves
+# the guarded, path-allowlisted structured tools as the whole surface.
+if _GENERIC:
+    for _tool in (xspec_get, xspec_set, xspec_call):
+        mcp.tool()(_tool)
 
 
 if __name__ == "__main__":

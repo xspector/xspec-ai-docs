@@ -28,8 +28,9 @@ enforce the filesystem allowlist and can reach code-loading methods
 dunder navigation) arbitrary Python — i.e. effectively local RCE with XSPEC's
 capabilities. This is appropriate for a trusted local single-user setup. The 15
 structured tools remain the guarded, path-checked, ergonomic path; the generic
-tools are the completeness escape hatch. For a less-trusted deployment, drop the
-three generic tools (and keep the structured set) or gate them behind a flag.
+tools are the completeness escape hatch. For a less-trusted deployment, set
+`XSPEC_RUN_GENERIC=0` (implemented) to drop the three generic tools while
+keeping the structured set.
 
 Tier A (`server/server.py`) is stateless retrieval over the static corpus. Tier B
 is a **stateful compute engine**: it drives a live PyXspec so an agent can load

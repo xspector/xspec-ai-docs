@@ -86,9 +86,10 @@ absolute response/arf/background paths so the grouped output is self-contained).
 **Full API coverage:** `xspec_get`, `xspec_set`, `xspec_call` navigate the live
 object graph (`ROOT.attr(int)...` against AllData/AllModels/Fit/Xset/Plot/
 AllChains) to reach **any** attribute or method — 100% of the object-model API,
-not just the 15 structured tools. Unrestricted (per design decision): these do
+not just the structured tools. Unrestricted (per design decision): these do
 not enforce the filesystem allowlist and can reach code-loading/`restore` (RCE);
-appropriate for trusted local use. Drop them for a less-trusted deployment.
+appropriate for trusted local use. Set `XSPEC_RUN_GENERIC=0` to drop all three
+for a less-trusted deployment (the structured, allowlisted tools remain).
 
 Resource caps: steppar grid, MCMC length, fakeit spectra count, and a worker
 CPU-time `ulimit`. For the structured tools, read paths must be under
@@ -102,7 +103,8 @@ timeouts; data paths are restricted to `XSPEC_DATA_ROOT`.
 
 **Env:** `XSPEC_DATA_ROOT` (allowlisted read dir), `XSPEC_OUTPUT_ROOT`
 (allowlisted write dir for chains/.xcm), `XSPEC_HEADAS` (HEADAS path),
-`XSPEC_PYTHON` (interpreter that can import `xspec`).
+`XSPEC_PYTHON` (interpreter that can import `xspec`), `XSPEC_RUN_GENERIC`
+(`0`/`false`/`no`/`off` drops `xspec_get`/`xspec_set`/`xspec_call`; default on).
 
 **Config entry:**
 

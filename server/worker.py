@@ -359,7 +359,14 @@ def h_restore_session(a):
 
 def h_assess_fit(a):
     """Composite quality check so the agent doesn't have to remember them all."""
-    issues = []
+    issues, kinds = [], []
+
+    def flag(kind, msg):
+        # kind is a stable category (casebook `assess_issue_kind` vocab) so
+        # episodes/telemetry carry categories, not prose; msg is the human line.
+        kinds.append(kind)
+        issues.append(msg)
+
     stat, dof, sm = Fit.statistic, Fit.dof, Fit.statMethod
     reduced = stat / dof if dof else None
 
@@ -373,9 +380,9 @@ def h_assess_fit(a):
         # "pegged" = clamped to a limit: closeness relative to the limit's own
         # scale, NOT the (possibly enormous) full range.
         if abs(val - smin) <= 1e-6 * max(1.0, abs(smin), abs(val)):
-            issues.append(f"par {i} ({p.name}) pegged at soft min {smin:g}")
+            flag("pegged_limit", f"par {i} ({p.name}) pegged at soft min {smin:g}")
         elif abs(val - smax) <= 1e-6 * max(1.0, abs(smax), abs(val)):
-            issues.append(f"par {i} ({p.name}) pegged at soft max {smax:g}")
+            flag("pegged_limit", f"par {i} ({p.name}) pegged at soft max {smax:g}")
 
     # residual correlation: Wald-Wolfowitz runs test on delchi
     runs_info = None
@@ -400,18 +407,21 @@ def h_assess_fit(a):
             runs_info = {"runs": runs, "expected": round(mu, 1),
                          "z": round(z, 2), "nbins": n}
             if z < -2:
-                issues.append(f"systematic residuals (runs test z={z:.1f}; "
-                              "model likely missing structure)")
+                flag("systematic_residual",
+                     f"systematic residuals (runs test z={z:.1f}; "
+                     "model likely missing structure)")
     except Exception:
         pass
 
     # reduced chi-square sanity (only meaningful for chi)
     if sm == "chi" and reduced is not None:
         if reduced > 1.5:
-            issues.append(f"reduced chi-square high ({reduced:.2f}); poor fit")
+            flag("reduced_chi_high",
+                 f"reduced chi-square high ({reduced:.2f}); poor fit")
         elif reduced < 0.5:
-            issues.append(f"reduced chi-square low ({reduced:.2f}); "
-                          "over-fit or over-estimated errors")
+            flag("reduced_chi_low",
+                 f"reduced chi-square low ({reduced:.2f}); "
+                 "over-fit or over-estimated errors")
 
     # optional Monte-Carlo goodness (slow; opt-in)
     goodness = None
@@ -419,12 +429,13 @@ def h_assess_fit(a):
     if sims and sm in ("cstat", "lstat", "pgstat", "pstat"):
         goodness = Fit.goodness(sims, sim=True)
         if goodness >= 95:
-            issues.append(f"goodness {goodness:.0f}% of sims below observed; "
-                          "fit worse than most simulations")
+            flag("goodness_poor",
+                 f"goodness {goodness:.0f}% of sims below observed; "
+                 "fit worse than most simulations")
 
     return {"statistic": stat, "dof": dof, "statMethod": sm,
             "reduced": reduced, "runs_test": runs_info, "goodness": goodness,
-            "acceptable": not issues, "issues": issues}
+            "acceptable": not issues, "issues": issues, "issue_kinds": kinds}
 
 
 # file extension -> PGPLOT/giza device (this build has no /png driver)
