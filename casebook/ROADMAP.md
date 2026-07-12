@@ -127,10 +127,13 @@ needing other instruments note the response they will require.
    `below-100-counts-cannot-discriminate-models` and gives `cstat-below-1k-counts`
    its 3rd evidence case (→ promotion-eligible). *Fills `vlow`.* (16 TDE papers.)
 
-9. **⬜ Young SNR — non-equilibrium plasma.** `snr / mid / cstat / tbabs*vnei`.
-   Trap: fitting a collisional-*equilibrium* apec to a young remnant misreads kT;
-   the ionization timescale τ is a physical parameter, not a nuisance. (19 SNR +
-   eROSITA remnant-survey papers.)
+9. **✅ Young SNR — non-equilibrium plasma.** `snr / mid / cstat / tbabs*nei`.
+   Fitting equilibrium `apec` to an under-ionized (Tau=1e10) young remnant reads
+   kT=**0.53 keV** against a true 3.0 (6× low) and Fe 8× low; `nei` recovers
+   kT=3.2 and Tau, Δcstat=1069. τ is a physical parameter (age×density), not a
+   nuisance. Authored as `chandra-snr-nei-001`; spawns
+   `young-plasma-needs-nei-not-equilibrium`. (19 SNR + eROSITA remnant-survey
+   papers.)
 
 10. **⬜ Blazar curvature — nested-model significance.** `agn / high / chi /
     logpar vs. powerlaw`. The other half of the F-test teaching: when the
@@ -151,6 +154,7 @@ graduate `candidate → validated` (PLAN-C §4, the `fakeit` gate):
 | `counts-per-bin-not-total-drives-statistic` | 3 | **validated** (`bench/lessons/…`) |
 | `single-temperature-fe-bias` | 4 | **validated** (`bench/lessons/…`) |
 | `below-100-counts-cannot-discriminate-models` | 8 | **validated** (`bench/lessons/…`) |
+| `young-plasma-needs-nei-not-equilibrium` | 9 | candidate (harness pending) |
 | `systematics-dominate-above-1e5-counts` | 5 | **validated** (`bench/lessons/…`) |
 | `ftest-invalid-for-line-significance` | 6, 10 | **validated** (`bench/lessons/…`) |
 

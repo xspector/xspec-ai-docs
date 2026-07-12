@@ -447,11 +447,12 @@
 - [manifest.json](corpus/manifest.json)
 
 ## Casebook (judgment layer)
-> 8 case(s), 8 lesson(s) — worked studies + reusable lessons; retrieve by data fingerprint. See [SCHEMA.md](casebook/SCHEMA.md).
+> 9 case(s), 9 lesson(s) — worked studies + reusable lessons; retrieve by data fingerprint. See [SCHEMA.md](casebook/SCHEMA.md).
 - [A million-count black-hole binary — where the error bars stop meaning what they say](casebook/cases/chandra-bhxrb-vhigh-systematics-001.md) (core)
 - [Cluster metallicity on Chandra — how a single temperature biases the iron abundance threefold](casebook/cases/chandra-cluster-fe-bias-001.md) (core)
 - [Faint GRB afterglow at low counts — cstat over chi, and freezing what the data cannot constrain](casebook/cases/chandra-grb-afterglow-001.md) (core)
 - [Obscured Seyfert on Chandra — why an unabsorbed fit drives the photon index flat](casebook/cases/chandra-obscured-agn-001.md) (core)
+- [A young supernova remnant fit cool by mistake — equilibrium vs non-equilibrium plasma](casebook/cases/chandra-snr-nei-001.md) (core)
 - [A super-soft TDE in 81 counts — the temperature you can measure, the model you cannot](casebook/cases/chandra-tde-supersoft-vlow-001.md) (core)
 - [A cyclotron line that isn't there — why the F-test over-claims, and Monte-Carlo fixes it](casebook/cases/ginga-cyclotron-ftest-001.md) (core)
 - [Low-count NICER quiescent neutron star — cstat, and why bbodyrad is the wrong model](casebook/cases/nicer-lowcount-thermal-001.md) (core)
@@ -466,3 +467,4 @@
 - [A parameter pegged at a limit plus correlated residuals means the model is structurally wrong, not just badly initialised.](casebook/lessons/peg-at-limit-means-wrong-model.md) (validated)
 - [Fitting a single-temperature plasma to multi-phase cluster/group gas biases the measured metallicity (usually low -- the 'Fe bias'); an elevated fit statistic is the tell.](casebook/lessons/single-temperature-fe-bias.md) (validated)
 - [Above ~10^5 counts the statistical error bars shrink below the ~1-2% calibration floor, so they no longer represent the real uncertainty -- you are systematics-limited, and a reduced statistic above 1 usually flags an unmodelled few-percent feature.](casebook/lessons/systematics-dominate-above-1e5-counts.md) (validated)
+- [A young / under-ionized plasma (SNR ejecta, recent shock) must be fit with a non-equilibrium model (nei/vnei/pshock), not an equilibrium one (apec/mekal), which reads the low ionization as a low temperature and gets kT badly wrong.](casebook/lessons/young-plasma-needs-nei-not-equilibrium.md) (candidate)
