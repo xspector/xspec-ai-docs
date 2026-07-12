@@ -15,8 +15,8 @@ not_when: >
   normalisation, or an abundance truly at solar) — then the limit is informative,
   not a defect; OR the parameter is pegged only because its start value was
   absurd and a re-fit from a sensible value frees it.
-status: candidate
-validation: null
+status: validated
+validation: bench/lessons/peg-at-limit-means-wrong-model.py
 evidence_cases: [nicer-lowcount-thermal-001]
 promoted_to: null
 provenance:
@@ -35,8 +35,13 @@ parameter to paper over missing physics" pattern — seen in
 [`nicer-lowcount-thermal-001`](../cases/nicer-lowcount-thermal-001.md) where a
 blackbody's temperature pegged high while an atmosphere model was needed.
 
-**Validation (PLAN-C L3):** a `bench/lessons/` harness would fakeit data from a
-two-component (or atmosphere) truth, fit the deliberately-wrong one-component
-model, and assert that `assess_fit` raises both `pegged_limit` and
-`systematic_residual` — i.e. that the signal fires when the model is known to be
-wrong and stays quiet when it is right. Not yet built, so `status: candidate`.
+**Validation:** `bench/lessons/peg-at-limit-means-wrong-model.py` fakes an
+absorption-free power law plus a strong broad emission line, then fits
+`tbabs*powerlaw` (the wrong model): absorption cannot add a line, so `nH` is
+driven to its floor (pegged at soft min) while the missing line leaves strongly
+correlated residuals — `assess_fit` raises **both** `pegged_limit` and
+`systematic_residual`. The correct model (`powerlaw + gaussian`), initialised at
+the truth, raises **neither**. Because the signal fires when the model is wrong
+*and* stays quiet when it is right, the lesson is `validated`. (The construction
+differs from the case's blackbody-vs-atmosphere story but exercises the same
+signal.)
