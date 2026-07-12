@@ -39,7 +39,11 @@ try:
     except ValueError:
         pass
 
-    check(r.reset_session().get("ok"), "reset_session ok")
+    rs = r.reset_session()
+    check(rs.get("ok"), "reset_session ok")
+    # reset_session reports the running engine version (for corpus cross-check)
+    check(bool(rs["result"].get("xspec_version")),
+          f"reset_session reports xspec_version: {rs.get('result')}")
 
     ld = r.load_data("s54405.pha", ignore_bad=True, energy_range="**-0.5 8.0-**")
     check(ld["ok"], f"load_data ok: {ld}")

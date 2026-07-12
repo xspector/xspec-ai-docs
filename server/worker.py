@@ -84,7 +84,19 @@ def h_reset(a):
     AllModels.clear()
     _headless()
     _JOURNAL.clear()
-    return {"cleared": True}
+    out = {"cleared": True}
+    # report the running engine version so an agent can cross-check it against
+    # the corpus's generated-from version (Tier A corpus_info) and warn on drift.
+    try:
+        v = Xset.version                      # (pyxspec, xspec) version strings
+        if isinstance(v, (list, tuple)):
+            out["pyxspec_version"] = v[0]
+            out["xspec_version"] = v[-1]
+        else:
+            out["xspec_version"] = str(v)
+    except Exception:
+        pass
+    return out
 
 
 def h_load_data(a):

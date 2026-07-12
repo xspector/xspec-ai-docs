@@ -93,7 +93,11 @@ free-hand scripts.
 ## Notes
 
 - Everything runs headless (no GUI): "see" a fit via `plot` arrays or
-  `plot_image`, never a plot window.
+  `plot_image` (renders a `.pdf`/`.ps`), never a plot window.
+- **Version sanity:** `reset_session` reports the running XSPEC version and
+  `corpus_info` (xspec-ai-docs) the version the corpus was generated from. If
+  they differ at major.minor, note it — a model or parameter may have changed, so
+  the reference could lag the engine; prefer `get_model` over assumptions.
 - The casebook is the judgment layer and it grows: `find_cases` also takes free
   `text` (e.g. "background dominated", "F-test") and a `statistic` filter.
 - For 100% API coverage beyond the structured tools, use `xspec_get` /
