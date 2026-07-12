@@ -142,7 +142,7 @@ graduate `candidate → validated` (PLAN-C §4, the `fakeit` gate):
 |---|---|---|
 | `flat-photon-index-means-absorption` | 1 | **validated** (`bench/lessons/…`) |
 | `counts-per-bin-not-total-drives-statistic` | 3 | **validated** (`bench/lessons/…`) |
-| `single-temperature-fe-bias` | 4 | candidate (harness pending) |
+| `single-temperature-fe-bias` | 4 | **validated** (`bench/lessons/…`) |
 | `systematics-dominate-above-1e5-counts` | 5 | not yet authored |
 | `ftest-invalid-for-line-significance` | 6, 10 | not yet authored |
 

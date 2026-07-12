@@ -26,6 +26,7 @@ was asserted.
 | `peg-at-limit-means-wrong-model.py` | a parameter pegged at a limit **and** correlated residuals ⇒ structurally wrong model. Fits `tbabs*powerlaw` to power-law+line data (nH pegs at 0 + residuals) vs. the correct `powerlaw+gaussian` at truth (quiet). |
 | `flat-photon-index-means-absorption.py` | an implausibly flat/inverted photon index **and** a soft residual (but **not** a pegged parameter) ⇒ missing intrinsic absorption. Fits Galactic-only `tbabs*powerlaw` to an absorbed Seyfert twin (Γ→−1.0 + residual) vs. the correct `tbabs*ztbabs*powerlaw` at truth (Γ→1.73, quiet). |
 | `counts-per-bin-not-total-drives-statistic.py` | counts **per bin**, not total, set the statistic. On a real XRISM/Resolve twin (27k counts, median 1/bin), chi biases the Fe abundance to 1.00 (truth 0.70) behind a reduced chi of 0.67 while cstat recovers it. **HEADAS-only + needs the 372 MB Resolve RMF locally** (self-skips otherwise); ~2–3 min. |
+| `single-temperature-fe-bias.py` | a single-temperature fit to multi-phase ICM biases the iron abundance. Fits `tbabs*apec` to a two-phase (1.0+2.5 keV, Fe=0.5) twin → Fe=0.17 at cstat/dof=5.5, vs. `tbabs*(apec+apec)` → Fe=0.51 at cstat/dof=1.1. (Thaws apec's frozen-by-default Abundanc.) |
 
 ## Run
 

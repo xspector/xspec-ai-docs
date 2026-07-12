@@ -27,8 +27,8 @@ not_when: >
   high temperature (>~3-4 keV, Fe-K-dominated) a single-T fit to multi-T gas can
   bias the abundance HIGH (the inverse Fe bias) -- the sign depends on the
   temperature range spanned.
-status: candidate
-validation: null
+status: validated
+validation: bench/lessons/single-temperature-fe-bias.py
 evidence_cases: [chandra-cluster-fe-bias-001]
 promoted_to: null
 provenance:
@@ -65,8 +65,12 @@ cousin: the summary statistic can look fine while the physics is wrong.
 
 ## Promotion status
 
-`candidate`. Needs a `bench/lessons/single-temperature-fe-bias.py` harness (fit
-single-apec and apec+apec to the same multi-T `fakeit` twin; assert the single-T
-abundance is biased away from truth while the two-T recovers it) before it can move
-to `validated` (PLAN-C §4). The twin exists in `chandra-cluster-fe-bias-001`'s
-provenance.
+`validated`. The harness `bench/lessons/single-temperature-fe-bias.py` fits both
+single-apec and apec+apec to the same two-phase `fakeit` twin and asserts the
+single-T abundance is biased low (0.17) behind an elevated cstat/dof (5.5) where
+the two-T recovers it (0.51, cstat/dof 1.1) — both directions. (It thaws apec's
+Abundanc, which is frozen by default.)
+
+Not yet eligible for *promotion* into a guide/skill: that needs
+`len(evidence_cases) >= 3` (PLAN-C §4), and there is one so far. A higher-temperature
+cluster case (to show the inverse Fe bias) would add independent evidence.
