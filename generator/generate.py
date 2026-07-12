@@ -367,12 +367,17 @@ def casebook_index(repo_root):
     return entries("cases", "title"), entries("lessons", "one_line")
 
 
-def main():
+def main(out_corpus=None, out_root=None):
+    # Output roots are parameterized so `--check` can regenerate into a temp
+    # dir; default to the real corpus/repo. The casebook SOURCE and the gate
+    # always read the real repo root (they are inputs, not generated output).
+    out_corpus = Path(out_corpus) if out_corpus else config.CORPUS
+    out_root = Path(out_root) if out_root else config.REPO_ROOT
     stamp = config.version_stamp()
     models = modeldat.parse(config.MODEL_DAT)
     label_index = texmacros.build_label_index(config.MANUAL_DIR)
 
-    mdir = config.CORPUS / "models"
+    mdir = out_corpus / "models"
     mdir.mkdir(parents=True, exist_ok=True)
     names = SLICE_MODELS if SLICE_MODELS else sorted(models, key=str.lower)
     manifest_models = []
@@ -383,16 +388,16 @@ def main():
         manifest_models.append(emit_model(name, models, label_index, mdir))
     print(f"  emitted {len(manifest_models)} models")
 
-    rdir = config.CORPUS / "recipes"
+    rdir = out_corpus / "recipes"
     rdir.mkdir(parents=True, exist_ok=True)
     (rdir / "tcl_pyxspec_map.md").write_text(TCL_PY_MAP)
     (rdir / "00_object_model.md").write_text(OBJECT_MODEL)
-    intent_rows = emit_intents(rdir, config.CORPUS)
+    intent_rows = emit_intents(rdir, out_corpus)
     print(f"  emitted recipes/tcl_pyxspec_map.md + 00_object_model.md + "
           f"07_intent_index.md ({len(intent_rows)} intents)")
 
     # ---- PyXspec class-API reference ----
-    adir = config.CORPUS / "api"
+    adir = out_corpus / "api"
     adir.mkdir(parents=True, exist_ok=True)
     manifest_api, _ = emit_api(config.PYXSPEC_DIR, adir)
     print(f"  emitted {len(manifest_api)} API class docs")
@@ -404,7 +409,7 @@ def main():
         allnames = sorted([g["canonical"]] + g["aliases"])
         for n in allnames:
             tokens_by_name[n] = allnames
-    cdir = config.CORPUS / "commands"
+    cdir = out_corpus / "commands"
     cdir.mkdir(parents=True, exist_ok=True)
     manifest_cmds = []
     for tex in grounding.command_doc_files(config.MANUAL_DIR):
@@ -454,7 +459,7 @@ def main():
                         "tests/validate_casebook.py)",
         },
     }
-    (config.CORPUS / "manifest.json").write_text(json.dumps(manifest, indent=2))
+    (out_corpus / "manifest.json").write_text(json.dumps(manifest, indent=2))
     print(f"  emitted manifest.json "
           f"({len(tokens)} cmd tokens, {len(manifest_models)} models)")
 
@@ -482,6 +487,9 @@ def main():
         al = f" (aliases: {', '.join(c['aliases'])})" if c["aliases"] else ""
         lines.append(f"- [{c['name']}]({c['doc']}){al}")
     lines += ["", "## Recipes / guides"]
+    # index the canonical recipes dir (config.CORPUS), not out_corpus: it holds
+    # both generated recipes AND the hand-authored guides (01..06), and the
+    # latter are absent from a --check temp dir.
     for rec in sorted((config.CORPUS / "recipes").glob("*.md")):
         first = rec.read_text().splitlines()
         # prefer YAML frontmatter `title:`, else first heading
@@ -502,7 +510,7 @@ def main():
             for les in cb_lessons:
                 st = f" ({les['status']})" if les["status"] else ""
                 lines.append(f"- [{les['label']}]({les['doc']}){st}")
-    (config.REPO_ROOT / "llms.txt").write_text("\n".join(lines) + "\n")
+    (out_root / "llms.txt").write_text("\n".join(lines) + "\n")
     print("  emitted llms.txt")
 
     # ---- casebook gate (Tier C) --------------------------------------------
@@ -530,5 +538,60 @@ def main():
         print(f"  casebook OK: {n_cases} case(s), {n_lessons} lesson(s) gated")
 
 
+def _drift(committed, fresh):
+    """Files a fresh regen produces that differ from (or are absent in) the
+    committed tree. One-directional (fresh -> committed) on purpose: the
+    hand-authored recipe guides (01..06) live in committed corpus/recipes but
+    are not generated, so they must NOT be flagged as drift."""
+    committed, fresh = Path(committed), Path(fresh)
+    out = []
+    for p in sorted(fresh.rglob("*")):
+        if not p.is_file() or "__pycache__" in p.parts:
+            continue
+        rel = p.relative_to(fresh)
+        c = committed / rel
+        if not c.exists():
+            out.append(f"{rel} (generated but not committed)")
+        elif c.read_bytes() != p.read_bytes():
+            out.append(str(rel))
+    return out
+
+
+def check():
+    """Regenerate into a temp dir and diff against the committed corpus; exit 1
+    on any drift. The anti-drift gate: 'the corpus never drifts from source' is
+    only true at regen time -- this makes it checkable any time (and in CI, when
+    the source trees are present). Skips cleanly if the source trees are absent."""
+    import shutil
+    import sys
+    import tempfile
+
+    if not config.MODEL_DAT.exists():
+        print(f"SKIP: source trees absent ({config.MODEL_DAT} not found); "
+              "drift check needs heasoft + manual checkouts")
+        return 0
+    tmp = Path(tempfile.mkdtemp(prefix="xspec-corpus-check-"))
+    try:
+        main(out_corpus=tmp / "corpus", out_root=tmp)
+        drift = _drift(config.CORPUS, tmp / "corpus")
+        if (config.REPO_ROOT / "llms.txt").read_bytes() != \
+                (tmp / "llms.txt").read_bytes():
+            drift.append("llms.txt")
+        if drift:
+            print(f"\nDRIFT: {len(drift)} generated file(s) differ from a "
+                  "fresh regen:")
+            for d in drift:
+                print("  -", d)
+            print("\nrun `python generator/generate.py` and commit the result.")
+            return 1
+        print("\nno drift: committed corpus matches a fresh regen from source")
+        return 0
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
 if __name__ == "__main__":
+    import sys
+    if "--check" in sys.argv:
+        sys.exit(check())
     main()
