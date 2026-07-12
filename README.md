@@ -148,3 +148,15 @@ CI at the nominal rate?) and **pull** (unbiased, correctly-sized errors) — wit
 a trap showing `chi` is mis-calibrated on low counts where `cstat` is not. This
 measures whether the results are trustworthy, not just that the tools run. See
 [bench/README.md](bench/README.md).
+
+Per-lesson validation harnesses live in `bench/lessons/` — each earns a casebook
+lesson its `validated` status by asserting its signal against `fakeit` ground
+truth (see [PLAN-C.md](PLAN-C.md)).
+
+## Contributing and license
+
+Contributions — especially worked cases and lessons for the casebook — are
+welcome; see [CONTRIBUTING.md](CONTRIBUTING.md) for the schema, the no-proprietary
+-data / synthetic-twin rules, the trust tiers, and the lesson-promotion gate.
+
+Licensed under the [BSD 3-Clause License](LICENSE).
