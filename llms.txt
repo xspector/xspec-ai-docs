@@ -452,4 +452,4 @@
 
 ### Lessons
 - [Use cstat, not chi, below ~1000 total counts on Poisson data.](casebook/lessons/cstat-below-1k-counts.md) (validated)
-- [A parameter pegged at a limit plus correlated residuals means the model is structurally wrong, not just badly initialised.](casebook/lessons/peg-at-limit-means-wrong-model.md) (candidate)
+- [A parameter pegged at a limit plus correlated residuals means the model is structurally wrong, not just badly initialised.](casebook/lessons/peg-at-limit-means-wrong-model.md) (validated)
