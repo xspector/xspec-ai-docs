@@ -113,11 +113,15 @@ needing other instruments note the response they will require.
    `ftest-invalid-for-line-significance`. (7 CRSF papers; a live debate — "the
    elusive cyclotron line in 4U 1901+03".)
 
-7. **⬜ Spectro-polarimetry.** `xrb / mid / chistokes / polconst*(...)`. Joint
-   I,Q,U fitting; trap: fitting Stokes spectra with plain chi, or claiming a
-   polarization detection without checking it against the MDP. Fills the
-   `chistokes` vocabulary slot. Needs an IXPE response set. (27 polarimetry
-   papers.)
+7. **✅ Spectro-polarimetry.** `IXPE / vhigh / chi / polconst*powerlaw`. Joint
+   Stokes I/Q/U fitting on the manual's toy IXPE responses. Trap: PD=√(Q²+U²)/I is
+   positive-definite, so an *unpolarized* source returns a non-zero measured PD
+   (median 0.18%, never 0) and PD/σ exceeds 2 in **15.5%** of null realizations —
+   judge against the MDP99 (0.48% = 3σ), not PD/σ. A real 10% source is recovered
+   at 64σ. Authored as `ixpe-polarization-mdp-001`; spawns
+   `polarization-below-mdp-not-a-detection`. (Note: the toy Stokes spectra lack the
+   XCOV covariance, so `chi` is used — recovers A=0.498 vs a true 0.4986; real data
+   use `chistokes`.) (27 polarimetry papers.)
 
 8. **✅ Super-soft TDE, very low counts.** `tde / vlow / cstat / tbabs*bbodyrad`.
    At ~81 counts, bbody vs. diskbb is *undecidable* — the wrong model (diskbb) even
@@ -159,6 +163,7 @@ graduate `candidate → validated` (PLAN-C §4, the `fakeit` gate):
 | `single-temperature-fe-bias` | 4 | **validated** (`bench/lessons/…`) |
 | `below-100-counts-cannot-discriminate-models` | 8 | **validated** (`bench/lessons/…`) |
 | `young-plasma-needs-nei-not-equilibrium` | 9 | **validated** (`bench/lessons/…`) |
+| `polarization-below-mdp-not-a-detection` | 7 | candidate (harness pending) |
 | `systematics-dominate-above-1e5-counts` | 5 | **validated** (`bench/lessons/…`) |
 | `ftest-invalid-for-line-significance` | 6, 10 | **validated** (`bench/lessons/…`) |
 
