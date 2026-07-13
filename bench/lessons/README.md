@@ -31,6 +31,7 @@ was asserted.
 | `ftest-invalid-for-line-significance.py` | Monte-Carlo: 150 line-free `cutoffpl` sims, each fit with a searched `gabs`. The naive χ²₁ 1% threshold (Δχ²>6.63) is cleared by ~8% of null sims, not 1% — the F-test is anti-conservative for searched lines. |
 | `below-100-counts-cannot-discriminate-models.py` | model discrimination needs counts. A `bbodyrad` (kT=0.1) twin faked at ~80 counts is fit equally by `diskbb` (Δcstat=−1.6, wrong model wins); at ~40000 counts diskbb is decisively worse (Δcstat=+170). |
 | `young-plasma-needs-nei-not-equilibrium.py` | a young/under-ionized plasma needs NEI. Equilibrium `apec` fit to a `nei` twin (kT=3, Tau=1e10) returns kT=0.55 keV (6× low) at Δcstat=+1070 worse; `nei` recovers kT=3.2 and Tau=1e10. |
+| `polarization-below-mdp-not-a-detection.py` | IXPE MDP. On the toy Stokes responses, unpolarized (A=0) realizations give a positive-biased measured PD (median >0) with PD/σ>2 in ~14% (MDP99≈3σ), while a genuine 10% source is recovered at ~63σ. **Needs the toy IXPE Stokes files** (self-skips otherwise). |
 
 ## Run
 

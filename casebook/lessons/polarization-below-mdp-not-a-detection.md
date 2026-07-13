@@ -23,8 +23,8 @@ not_when: >
   PD >> MDP is recovered cleanly). Also, the caution is about the positive-definite
   amplitude PD; the signed normalised Stokes parameters q=Q/I and u=U/I
   individually are unbiased and may be treated normally.
-status: candidate
-validation: null
+status: validated
+validation: bench/lessons/polarization-below-mdp-not-a-detection.py
 evidence_cases: [ixpe-polarization-mdp-001]
 promoted_to: null
 provenance:
@@ -69,8 +69,11 @@ that carries the bias.
 
 ## Promotion status
 
-`candidate`. Needs a `bench/lessons/polarization-below-mdp-not-a-detection.py`
-harness: simulate many unpolarized Stokes triplets on the toy IXPE responses and
-assert the measured PD is positive-biased with `PD/sigma > 2` far more often than
-Gaussian (MDP99 ~ 3 sigma), while a genuinely polarized source is recovered above
-the MDP. The twin exists in `ixpe-polarization-mdp-001`'s provenance.
+`validated`. The harness `bench/lessons/polarization-below-mdp-not-a-detection.py`
+simulates unpolarized Stokes triplets on the toy IXPE responses and asserts the
+measured PD is positive-biased (median > 0), `PD/sigma > 2` in ~14% of null
+realizations (vs the Gaussian ~2.3%), and MDP99 ~ 3 sigma — while a genuine 10%
+polarization is recovered at ~63 sigma, far above the MDP. Both directions.
+
+Not yet eligible for *promotion* into a guide/skill: that needs
+`len(evidence_cases) >= 3` (PLAN-C §4), and there is one so far.
