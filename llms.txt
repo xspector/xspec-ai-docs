@@ -1,5 +1,5 @@
 # XSPEC / PyXspec AI docs
-> XSPEC 13.0 | manual@4818b776 | heasoft@89a96cc340
+> XSPEC 13.0 | manual@d449d599 | heasoft@b1c00b1b08
 
 ## Models
 - [absori](corpus/models/absori.md): multiplicative model, 6 params

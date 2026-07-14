@@ -2,9 +2,9 @@
   "provenance": {
     "xspec_version": "13.0",
     "heasoft_src": "/Users/kaa/software/heasoft/Xspec/src",
-    "heasoft_commit": "89a96cc340",
+    "heasoft_commit": "b1c00b1b08",
     "manual_dir": "/Users/kaa/software/Xspec-aux/doc/manual",
-    "manual_commit": "4818b776"
+    "manual_commit": "d449d599"
   },
   "counts": {
     "models": 328,
