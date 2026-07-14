@@ -1,8 +1,13 @@
 # Tier C — the learning loop (design)
 
-Status: **design recorded 2026-07-02 — nothing implemented.** This documents the
-judgment/worked-case-studies discussion and the decision record on trained
-models. Owner: Keith Arnaud.
+Status: **design recorded 2026-07-02; L1 + the L3 validation infrastructure built
+(2026-07).** The casebook, its schema and build gate, the `find_cases`/`get_case`
+retrieval tools, the skill's "consult the casebook" step, and per-lesson `fakeit`
+validation harnesses are all live — **11 worked cases, 10 lessons (all
+`validated`)**, with an authoring roadmap in `casebook/ROADMAP.md`. Still to come:
+episode auto-capture (L2), episode→case distillation and the judgment benchmark
+(rest of L3), and the community PR loop beyond the contribution guide (L4). See §7
+for the phase-by-phase state. Owner: Keith Arnaud.
 
 Goal (verbatim): *"a system which learns so that the agents get cleverer the
 more data analysis they do."*
@@ -174,9 +179,11 @@ against casebook size. Without this curve, "learning" is an anecdote.
 | `corpus/recipes/` guides + `xray-fit` skill | promotion target |
 | git repo | review gate + community distribution channel |
 
-New: the schema, the seed casebook, two Tier A tools, the episode writer +
-`note()`, `/distill-case`, `bench/lessons/`, the judgment benchmark. Mostly
-wiring and content — no new machinery class.
+New — built: the schema + build gate, the casebook (11 cases / 10 validated
+lessons) + `ROADMAP.md`, the two Tier A tools, and `bench/lessons/` (per-lesson
+`fakeit` validation). Still to build: the episode writer + `note()`,
+`/distill-case`, and the judgment benchmark. All wiring and content — no new
+machinery class.
 
 ## 6. Failure modes and defenses
 
@@ -191,21 +198,30 @@ wiring and content — no new machinery class.
 
 ## 7. Phasing
 
-- **L1 — schema + seed casebook + retrieval.** This *absorbs the deferred
-  worked-case-studies item*: 6–10 canonical studies written in the schema, each
-  encoding at least one trap — high-count CCD continuum; low-count cstat point
-  source; thermal plasma with abundance choices; background-dominated source;
-  joint multi-instrument fit; an F-test-misuse case; a
-  when-to-stop-adding-components case. Deliverables: `casebook/SCHEMA.md`,
-  `casebook/cases/*.md`, Tier A `find_cases`/`get_case`, skill step "consult
-  casebook after `pha_info`", generator indexes the casebook into the manifest.
-- **L2 — episode capture.** Episode writer on `export_script`; `note()` tool;
-  skill mandates decision notes; episodes under the output root.
-- **L3 — distillation + validation.** `/distill-case`; `bench/lessons/`
-  harness; the judgment benchmark; promotion policy in force.
-- **L4 — community loop.** Contribution guide (provenance + review
-  requirements), PR-based case review; revisit retrieval scaling (embeddings)
-  only if the casebook exceeds a few hundred entries. Sociological design: §10.
+- **L1 — schema + seed casebook + retrieval. ✅ done (and expanded).** Delivered
+  `casebook/SCHEMA.md` + `schema/*.json`, `tests/validate_casebook.py` as a build
+  gate, Tier A `find_cases`/`get_case`, the skill's "consult the casebook" step,
+  and the generator's casebook index in the manifest + `llms.txt`. The planned
+  6–10 studies grew into a survey-ranked **`casebook/ROADMAP.md`** and **11 worked
+  cases** covering the counts-regime grid (`vlow`→`vhigh`) and the intended traps —
+  the low-count cstat point source, thermal-plasma abundance (cluster Fe bias),
+  the F-test-misuse case (and its admissible mirror), when-to-stop — plus
+  microcalorimeter per-bin statistics, systematics-limited high counts, NEI
+  plasma, and IXPE polarimetry/MDP. (Not yet covered: a genuine joint
+  multi-instrument case.)
+- **L2 — episode capture. ⬜ pending.** Episode writer on `export_script`;
+  `note()` tool; skill mandates decision notes; episodes under the output root.
+- **L3 — distillation + validation. ◑ partly done.** The **validation** half is
+  built: `bench/lessons/` harnesses (9, plus `benchmark.py`) validate every one of
+  the 10 lessons both directions, and the promotion policy (§4) is in force — one
+  lesson (`cstat-below-1k-counts`) has reached the ≥3-evidence bar. Still to build:
+  `/distill-case` (episode→case, depends on L2) and the judgment benchmark that
+  tracks skill vs. casebook size.
+- **L4 — community loop. ◑ partly done.** The contribution guide is in place
+  (`CONTRIBUTING.md` + `LICENSE`: provenance, no-proprietary-data / synthetic-twin
+  rules, trust tiers, promotion gate), and review is PR-based on the git repo.
+  Still deferred: retrieval scaling (embeddings), revisited only if the casebook
+  exceeds a few hundred entries. Sociological design: §10.
 
 ## 8. Decision record — trained models (2026-07-02)
 

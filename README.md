@@ -12,9 +12,12 @@ Three things live here:
 3. **`xspec-run` MCP server (Tier B)** — executes a live PyXspec session. See
    [PLAN-B.md](PLAN-B.md).
 
-A third layer — a learning loop (casebook of worked cases + automatic episode
-capture, so agents get better with every analysis) — is designed in
-[PLAN-C.md](PLAN-C.md); not yet implemented.
+A third layer is now taking shape: **the learning loop (Tier C)** — a casebook of
+worked, `fakeit`-validated case studies and the reusable lessons they teach, which
+agents retrieve by a data fingerprint. The casebook, its retrieval tools, and the
+per-lesson validation harnesses are live (11 worked cases, 10 validated lessons);
+automatic episode capture is the remaining piece. See [PLAN-C.md](PLAN-C.md) and
+the [Casebook](#casebook-tier-c--the-learning-loop) section below.
 
 ## Entry point
 
@@ -37,8 +40,8 @@ server/      MCP servers: server.py (Tier A) + xspec_run.py/runner.py/worker.py 
              -- see server/README.md
 tests/       audit_macros.py, run_recipes.py, test_server.py (Tier A),
              test_xspec_run.py (Tier B)
-bench/       benchmark.py -- ground-truth calibration of xspec-run (see bench/README.md)
-casebook/    SCHEMA.md + schema/*.json + cases/ + lessons/ -- Tier C judgment layer (see PLAN-C.md)
+bench/       benchmark.py + lessons/ -- ground-truth calibration + per-lesson validation harnesses
+casebook/    SCHEMA.md + ROADMAP.md + schema/*.json + cases/ (11) + lessons/ (10) -- Tier C judgment layer (see PLAN-C.md)
 .claude/skills/xray-fit/     Claude Code skill: disciplined end-to-end fitting workflow
 PLAN.md / PLAN-B.md / PLAN-C.md   design docs (corpus + Tier A / Tier B / learning loop)
 ```
@@ -151,7 +154,40 @@ measures whether the results are trustworthy, not just that the tools run. See
 
 Per-lesson validation harnesses live in `bench/lessons/` — each earns a casebook
 lesson its `validated` status by asserting its signal against `fakeit` ground
-truth (see [PLAN-C.md](PLAN-C.md)).
+truth, both directions (fires when wrong, quiet when right). All 10 current
+casebook lessons are validated this way; see the
+[Casebook](#casebook-tier-c--the-learning-loop) section and
+[PLAN-C.md](PLAN-C.md).
+
+## Casebook (Tier C — the learning loop)
+
+`casebook/` is the judgment layer: worked, `fakeit`-validated case studies plus
+the reusable lessons they teach, so an agent can retrieve prior experience by a
+data fingerprint (mission, counts regime, source type, model, statistic) through
+the Tier A `find_cases` / `get_case` tools. Each case records the decisions **and
+the rejected alternatives** — which statistic, which band, which model, when to
+stop — the outcome, and what a careless analysis would have concluded.
+
+- **11 worked cases** spanning the counts-regime grid (`vlow` → `vhigh`) and a
+  range of missions and sources: obscured AGN, GRB afterglow, XRISM
+  microcalorimeter turbulence, cluster Fe bias, BH-XRB systematics, cyclotron
+  F-test, IXPE polarimetry, super-soft TDE, young-SNR non-equilibrium plasma, and
+  blazar curvature. Every case is grounded in a `fakeit` twin fit through the
+  Tier B server, so its numbers and `assess_fit` verdicts are reproducible.
+- **10 lessons, all `validated`.** Each is backed by a harness (`bench/lessons/`,
+  or `benchmark.py`) that asserts its signal fires when it should and stays quiet
+  when it should not, against `fakeit` ground truth — the gate a lesson passes to
+  move from `candidate` to `validated`. A lesson is a *hypothesis* the agent
+  checks (each carries `applies_when` / `not_when`), never an override;
+  `assess_fit` remains the judge.
+- [`casebook/ROADMAP.md`](casebook/ROADMAP.md) is the authoring queue, ranked from
+  a survey of recent XSPEC-citing literature.
+  [`casebook/SCHEMA.md`](casebook/SCHEMA.md) is the record spec, and
+  `tests/validate_casebook.py` gates schema + referential integrity + grounding at
+  build time (a case cannot name a model or table XSPEC does not have).
+
+See [PLAN-C.md](PLAN-C.md) for the full design and what remains (episode capture,
+distillation, and the judgment benchmark).
 
 ## Contributing and license
 
