@@ -117,7 +117,7 @@ timeouts; data paths are restricted to `XSPEC_DATA_ROOT`.
       "args": ["/Users/kaa/software/xspec-ai-docs/server/xspec_run.py"],
       "env": {
         "XSPEC_DATA_ROOT": "/Users/kaa/software/Xspec-aux/doc/manual/walkthrough",
-        "XSPEC_HEADAS": "/Users/kaa/software/heasoft/aarch64-apple-darwin25.4.0"
+        "XSPEC_HEADAS": "/Users/kaa/software/heasoft/aarch64-apple-darwin25.5.0"
       }
     }
   }

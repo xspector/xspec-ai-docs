@@ -13,8 +13,38 @@ import subprocess
 from pathlib import Path
 
 _HERE = Path(__file__).resolve().parent
-DEFAULT_HEADAS = os.environ.get(
-    "XSPEC_HEADAS", "/Users/kaa/software/heasoft/aarch64-apple-darwin25.4.0")
+
+HEASOFT_ROOT = Path("/Users/kaa/software/heasoft")
+
+
+def _discover_headas():
+    """Resolve HEADAS without hard-coding the OS version.
+
+    The arch directory is named for the macOS release
+    (aarch64-apple-darwin25.5.0) and is RENAMED by an OS update, so any
+    pinned version silently rots: the previous default here still pointed at
+    darwin25.4.0 long after that tree was gone, which does not raise -- it
+    just yields a HEADAS path that does not exist, so the worker fails to
+    bootstrap (or, worse, appears configured while being unusable).
+
+    Order: explicit XSPEC_HEADAS, then an already-initialized $HEADAS, then
+    the newest arch dir actually present on disk.  Returns a str for the
+    callers that interpolate it into a shell command.
+    """
+    env = os.environ.get("XSPEC_HEADAS") or os.environ.get("HEADAS")
+    if env and Path(env).is_dir():
+        return env
+    candidates = sorted(
+        (p for p in HEASOFT_ROOT.glob("aarch64-apple-darwin*") if p.is_dir()),
+        key=lambda p: p.name)
+    if candidates:
+        return str(candidates[-1])
+    # Nothing usable: keep the env value (if any) so the failure names what
+    # was asked for rather than an empty string.
+    return env or ""
+
+
+DEFAULT_HEADAS = _discover_headas()
 DEFAULT_PYTHON = os.environ.get("XSPEC_PYTHON", "/opt/miniconda3/bin/python")
 DEFAULT_DATA_ROOT = os.environ.get(
     "XSPEC_DATA_ROOT",

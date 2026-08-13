@@ -13,7 +13,7 @@
       "env": {
         "XSPEC_DATA_ROOT": "/Users/kaa/software/Xspec-aux/doc/manual/walkthrough",
         "XSPEC_OUTPUT_ROOT": "/Users/kaa/.xspec-run-out",
-        "XSPEC_HEADAS": "/Users/kaa/software/heasoft/aarch64-apple-darwin25.4.0"
+        "XSPEC_HEADAS": "/Users/kaa/software/heasoft/aarch64-apple-darwin25.5.0"
       }
     }
   }
