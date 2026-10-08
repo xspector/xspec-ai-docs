@@ -28,6 +28,8 @@ never be allowed to float during a fit. The extinction at V, A(V) =
 E(B-V) x Rv. Rv should typically remain frozen for a fit. Standard values 
 for Rv are MW = 3.08, LMC = 3.16 and SMC = 2.93 (from table 2 of [Pei 1992](https://ui.adsabs.harvard.edu/abs/1992ApJ...395..130P/abstract)), 
 although these may not be applicable to more distant dusty sources.
+`tbred` and `ztbred` combine these
+curves with `tbabs`, deriving E(B-V) from the X-ray column.
 
 ## Parameters
 

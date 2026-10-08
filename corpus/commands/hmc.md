@@ -82,8 +82,9 @@ held fixed throughout.
 depth of the NUTS tree-doubling recursion.  Default 10.  A trajectory
 of depth $K$ corresponds to up to $2^K$ leap-frog sub-steps, so the
 default caps the per-sample cost at 1024 gradient evaluations.
-Setting this lower trades sampling quality for speed; warnings are
-emitted at chatter $\geq 10$ when trajectories hit the cap.
+Setting this lower trades sampling quality for speed.  The number of
+trajectories that have hit the cap is the `capped` count on
+the progress lines.
 
 - [`target_accept` `<X>`]Target Metropolis acceptance probability for the dual-averaging
 adaptation.  Default 0.8 (Stan default).  Raise toward 0.95 for
@@ -113,15 +114,60 @@ per-chain checkpoint every `<N>` samples.  Default 200.  Set
 settings, the divergent count from the most recent run if any, and
 mean Metropolis acceptance.
 
+**Progress output:** at chatter $\geq 10$ each chain prints a
+line every 100 iterations of its warmup and sampling phases, and in
+any case whenever a minute has passed since its last line, so a run
+whose single iteration is expensive still reports.  The line gives
+the chain id (the `CHAINID` value in the output file), the
+phase and its iteration count, the log posterior of the current
+sample, the current step size `eps`, the tree depth and
+number of leap-frog steps of the last trajectory, its mean Metropolis
+acceptance, and three cumulative counts: divergent trajectories,
+trajectories that ran to `maxdepth` without a U-turn
+(`capped`), and gradient evaluations (`grads`).  A
+run that looks stalled is usually one whose trajectories are all
+capped: every such iteration costs $2^K-1$ gradient evaluations, and
+if this persists past the first few hundred warmup iterations the
+mass matrix has not found the parameter scales, which a `fit`
+before the run (to set the parameter deltas) normally cures.  The
+end of warmup prints the frozen step size and the range of the
+mass-matrix diagonal.
+
+**End-of-run summary:** the run loads its output file back in and
+prints a verdict and a per-parameter posterior table, in the same form
+`nest` uses.
+
+Because an HMC chain is a genuine Markov chain, the verdict is the
+ordinary chain diagnostic --- split-$\hat{R}$, bulk and tail effective
+sample size, and the integrated autocorrelation time, on the same
+thresholds `chain` `diag` applies --- together with the
+divergent-transition count, which the table does not carry.  A divergence
+means the integrator could not follow the posterior's geometry at that
+point, and the region around it is under-explored.
+
+The table is deliberately identical to the one `nest` prints: an
+equal-tailed credible interval per variable parameter, on the convention
+`error` uses.  The two samplers differ in how the sample was
+produced, and that difference belongs in the verdict rather than in the
+shape of the answer.
+
+As with `nest`, the run does not move the model: parameter values
+are restored and no error bounds are written.  Use
+`chain set` or `error` to act on the result.
+
+Everything the summary reports is also readable from a script
+with `tclout` `hmc` (Section tclouthmc), including the verdict and
+the per-parameter credible intervals.
+
 **Examples:**
 
 ```
-XSPEC12> fit
-XSPEC12> parallel hmc 4
-XSPEC12> hmc warmup 1000
-XSPEC12> hmc samples 1000
-XSPEC12> hmc chains 4
-XSPEC12> hmc run mychain.fits
+XSPEC> fit
+XSPEC> parallel hmc 4
+XSPEC> hmc warmup 1000
+XSPEC> hmc samples 1000
+XSPEC> hmc chains 4
+XSPEC> hmc run mychain.fits
 ```
 
 The samples are written to `mychain.fits` in a format

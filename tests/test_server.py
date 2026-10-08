@@ -34,9 +34,9 @@ check(not u["found"] and "powerlaw" in u["suggestions"], "get_model suggests")
 
 # list_models by type
 mul = C.list_models("mul")
-check(mul["count"] == 75 and all(x["type"] == "mul" for x in mul["models"]),
+check(mul["count"] == 77 and all(x["type"] == "mul" for x in mul["models"]),
       "list_models mul")
-check(C.list_models()["count"] == 328, "list_models all = 328")
+check(C.list_models()["count"] == 344, "list_models all = 344")
 
 # get_command with alias resolution
 fit = C.get_command("fit")

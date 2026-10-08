@@ -1,7 +1,7 @@
 ---
 name: fakeit
 aliases: [xfakeit]
-also_documents: [fakeitnone]
+also_documents: [fakeitnone, fakeitkeywords]
 source: XSfakeit.tex
 ---
 
@@ -11,36 +11,128 @@ source: XSfakeit.tex
 
 Produce spectra with simulated data.
 
-**Syntax:** `fakeit` [nowrite] [<file spec>...]
+**Syntax:** `fakeit` [nowrite] [writersp] [<file spec>...] [<number of spectra>]
+
+**Syntax:** `fakeit` [nowrite] [writersp] [clobber] <keyword>=<value>... [<file spec>...] [<number of spectra>]
 
 where `<file spec>` ::= [`<file number>`] `<file name>`[`{ranges}`]...
 is similar to the syntax used in the `backgrnd`, `corfile`, 
-and `response` command. The `fakeit` command is used to create a 
+and `response` commands. The `fakeit` command is used to create a 
 number of spectrum files, where the current model is multiplied by the 
 response curves and then added to a realization of any background.  
-Statistical fluctuations can be included. The integration time and correction 
-norm are requested for each file. The file names input as command line 
-arguments are used as background.  The number of faked spectra produced is 
-the maximum of the number of spectra currently loaded and the number of 
-file specifications in the command line arguments. The special case 
-`fakeit none` makes one fake spectrum for each spectrum loaded 
-(or one fake spectrum if there are none loaded). See the examples below 
-for a clearer description.
+Statistical fluctuations can be included.
 
-If `fakeit` is immediately followed by the `nowrite` specifier, 
-no actual output files will be generated.  In this case the fake spectra 
-will exist just for the duration of the Xspec session (or until they are unloaded).
+**The file specs on the command line are BACKGROUNDS**, not responses:
+`fakeit back.pha` fakes spectrum 1 with back.pha as its
+background.  The number of faked spectra produced is the maximum of the
+number of spectra currently loaded and the number of file specifications on
+the command line, or the trailing `<number of spectra>` if that is
+larger.  The special case `fakeit none` makes one fake spectrum for
+each spectrum loaded (or one fake spectrum if there are none loaded), with no
+background.  See the examples below for a clearer description.
+
+**Answering fakeit's questions.**  For the spectra it is about to make,
+`fakeit` needs, in this order: a response and an ARF for each spectrum
+that has none of its own; whether to apply counting statistics; an optional
+prefix for the output file names; and then, for each output file, its name and
+the exposure time, correction norm and background exposure time.  There are
+three ways to give them.
+
+- **Prompted** (the default): `fakeit` asks each question in
+turn, offering a default in parentheses.
+
+- **``&'' answers**: the answers follow the command, separated by
+`&`, in the order above, an empty answer taking the default; for
+example `fakeit none & resp.rmf & resp.arf & y & & sim.fak & 1000`.
+Miscounting them leaves the remaining questions to be answered from the
+terminal (or from the next lines of a script).
+
+- **The keyword form**: any
+`<keyword>`=`<value>` argument (or `clobber`) on the command
+line means `fakeit` asks nothing at all; whatever is not given takes the
+default the prompt would have offered.  It cannot be combined with
+``&'' answers.
+
+The keywords are:
+
+}
+`response=` & the response file for each spectrum that has no response of its own (the dummy response when not given) 
+
+`arf=` & its ARF, with an optional `{row}` 
+
+`background=` & the background for each fake spectrum, as the positional `<file spec>`s would give it; `none` for no background.  It cannot be given together with positional file specs 
+
+`exposure=` & the exposure time of each output file 
+
+`correction=` & the correction norm of each output file 
+
+`bexposure=` & the background exposure time of each output file 
+
+`stat=` & `yes` (the default) or `no`: whether to apply counting statistics 
+
+`prefix=` & a prefix for the default output file names 
+
+`file=` & the name of each output file 
+
+`seed=` & re-seed the random number generator first, exactly as `xset seed` does 
+
+A value is either one entry, used for every question it answers, or a comma
+separated list with exactly one entry per question: one per output file for
+`exposure=`, `correction=`, `bexposure=` and
+`file=`; one per response asked for (that is, per new spectrum) for
+`response=` and `arf=`; one per fake spectrum for
+`background=`.  An empty entry keeps that question's default.  A list
+of the wrong length is refused, naming the number expected, as is a single
+`file=` when there are several output files (use `prefix=`
+there), two output files with the same name, a `response=` or `arf=` that no question asks for, and
+an unknown keyword.  These checks are made before anything is simulated, so a
+refused command changes neither the loaded data nor any file.
+
+With nothing loaded and no `<number of spectra>`, the keyword form makes
+one spectrum, as `fakeit none` does.
+
+**Existing files.**  The prompted form asks before overwriting an output
+file that already exists; the ``&'' form overwrites it without asking.  The
+keyword form refuses, naming the file, if any file it would write (spectrum,
+_bkg background, or `writersp` response) already exists,
+unless `clobber` is given.  An overwritten file is replaced.
+
+If `writersp` is given and a fake spectrum is folded through a dummy
+response (`dummyrsp`, or no data loaded), the dummy response is also
+written, to <stem>.rsp beside the output file, and recorded as the
+file's RESPFILE, so the fake can be read back without a `dummyrsp`.
+This applies to type I output only.
+
+If the `nowrite` specifier is given, no output files are generated.
+In this case the fake spectra will exist just for the duration of the Xspec
+session (or until they are unloaded).  A fake spectrum keeps its background
+in memory, so a further `fakeit` based on it (a simulation loop, for
+instance) uses that background even though no background file was written.
+
+To simulate many realizations of the loaded data and collect a statistic from
+each, use `sim` instead: it makes its realizations in memory, can refit
+each one, and writes no spectrum files.  `fakeit` is for making
+spectrum files, or a few spectra to work with by hand.
 
 If a faked spectrum is based on a currently loaded spectrum, then by default 
 the background, response, correction file, and numerical information are 
 taken from the currently-defined data, unless a background file is specified 
 on the command line in which case it becomes the background.  The `fakeit none` 
 case prompts for the rmf and arf filenames and sets the default numerical 
-data to 1.0, except the correction norm, which is set to zero.  If the 
-output file is type II then the exposure time and correction scale factor 
+data to 1.0, except the correction norm, which is set to zero.  If the
+output file is type II then the exposure time and correction scale factor
 will be the same for all spectra in the file.
 
-For each output file, the user will be prompted for an output file name. If 
+A faked spectrum which is *not* based on a currently loaded spectrum
+(ie. one of the extras produced when more fake spectra are requested than are
+loaded) has no numerical information of its own, so the exposure time,
+correction norm, and background exposure time offered for it default to those
+of the preceding output file.  For example, after loading a single spectrum
+of 2100 s, `fakeit 2` will offer 2100 s for the second fake spectrum
+as well.  If such a spectrum is given a background file on the command line,
+that file's exposure time is used for the defaults instead.
+
+For each output file, `fakeit` asks for an output file name.  If 
 a background file is in use then `fakeit` will also simulate a new 
 background for each spectrum.  Background files are given the same names 
 as output spectrum files but with _bkg appended to the end of the stem.
@@ -80,7 +172,7 @@ currently loaded, spectrum 1 from file typeIdata.pha and spectra
 2 and 3 from file typeIIdata.pha.  Then,
 
 ```
-XSPEC12> fakeit
+XSPEC> fakeit
 ```
 
 will produce 3 fake spectra in 2 output files with names prompted from the 
@@ -92,7 +184,7 @@ spectra currently loaded,  for example by typing the following when
 the same 3 spectra above described are loaded:
 
 ```
-XSPEC12> fakeit 5
+XSPEC> fakeit 5
 ```
 
 then fake spectra 1-3 will be placed in the two files as before.  For the 
@@ -132,6 +224,15 @@ in this case ftgrouppha or similar tools cannot be run on the simulated spectrum
 If your simulated spectrum comes from the use of "fakeit none", then the 
 spectrum can be grouped with ftgrouppha or simulated tools.
 
+A spectrum faked on a dummy response (`dummyrsp`, or no data loaded)
+keeps that dummy as its own response for the rest of the session:
+`ignore`, `notice`, `data` and `response` do not
+remove it, as they do a dummy standing in for a real response.  Its channels
+are the dummy's, so a `chanlog` dummy gives the fake spectrum
+logarithmically spaced channels.  The file
+written carries no response, so reading it back needs a `dummyrsp` (or
+a real response) again.
+
 **Note For SPI/Integral Format:**
 
 Since the SPI/Integral format builds its responses from a combination of 
@@ -149,7 +250,7 @@ if no data is currently loaded, to create 3 fake SPI spectra from the RMFs
 and ARFs named in the RESPFILE_DB extension of the file realSpiData.pha:
 
 ```
-XSPEC12> fakeit 3
+XSPEC> fakeit 3
 // ...(various prompts will follow)...
 For fake spectrum #1 response file is needed:  realSpiData.pha
 // ...and ancillary file:  <Ret>
@@ -168,11 +269,11 @@ Therefore, much confusion can arise when the row numbers of the loaded spectra
 do not match that of the fake spectra.   For example:
 
 ```
-XSPEC12> data my_spi_data.pha{3-4}
+XSPEC> data my_spi_data.pha{3-4}
 // my_spi_data.pha contains a RESPFILE_DB table pointing to
-// arf1.fits, arf2.fit, arf3.fits.
+// arf1.fits, arf2.fits, arf3.fits.
 // ...(fit to some model(s))...
-XSPEC12> fakeit 
+XSPEC> fakeit 
 ```
 
 This will produce 2 fake spectra generated from the model*response operation, 
@@ -185,6 +286,44 @@ fakeit output file.
 
 **Examples:**
 
+**The keyword form:**
+
+With nothing loaded, one spectrum through a real response and ARF, with a
+background, 20 ks of exposure and a reproducible realization:
+
+```
+XSPEC> fakeit response=src.rmf arf=src.arf background=bkg.pha
+         exposure=2e4 file=sim.fak seed=7
+```
+
+(all on one line).  This is the same as
+
+```
+XSPEC> xset seed 7
+XSPEC> fakeit bkg.pha & src.rmf & src.arf & y & & sim.fak & 2e4
+```
+
+and writes sim.fak and sim_bkg.fak.
+
+With two spectra loaded, one fake of each, at different exposures:
+
+```
+XSPEC> fakeit file=a.fak,b.fak exposure=1e4,5e4
+```
+
+With nothing loaded, three spectra on the dummy response, the response
+written beside each, replacing any earlier run's files (on one line):
+
+```
+XSPEC> dummyrsp 0.3 10 500
+XSPEC> fakeit writersp clobber file=d1.fak,d2.fak,d3.fak
+         exposure=1000 3
+```
+
+Here `file=` is needed: the default names of new spectra on the same
+response are all the same, and the keyword form refuses to write two spectra
+to one file.
+
 **Type I files:**
 
 Using pre-loaded data:
@@ -193,7 +332,7 @@ For each of these examples, assume 3 spectra are currently loaded, each in
 its own type I file, and that the second spectrum has a background file. 
 
 ```
-XSPEC12> fakeit
+XSPEC> fakeit
 ```
 
 This will produce 3 fake spectra each in its own type I output file, and 
@@ -203,7 +342,7 @@ is invalid, the user will then be prompted.  A fake background file will
 be produced for the second spectrum.  
 
 ```
-XSPEC12> fakeit 4
+XSPEC> fakeit 4
 ```
 
 Produces 4 fake spectra, the first 3 created as in the previous example.  
@@ -211,7 +350,7 @@ The fourth will be created with no background spectrum, and the user is
 prompted for response information.
 
 ```
-XSPEC12> fakeit backa,,none 4
+XSPEC> fakeit backa,,none 4
 ```
 
 Produces 4 fake spectra.  For the first spectrum, a fake background file 
@@ -226,7 +365,7 @@ Not using pre-loaded data:
 If no data is currently loaded:  
 
 ```
-XSPEC12> fakeit 2
+XSPEC> fakeit 2
 ```
 
 Produces 2 fake spectra in separate type I files, unless the user first 
@@ -240,20 +379,20 @@ Using pre-loaded data:
 Assume four spectra with no backgrounds have been loaded from one type II file:
 
 ```
-XSPEC12> data original_type2_data.pha{5-8}
+XSPEC> data original_type2_data.pha{5-8}
 ```
 
 Then, after model(s) have been entered and a fit:
 
 ```
-XSPEC12> fakeit 
+XSPEC> fakeit 
 ```
 
 This will produce 4 fake spectra in rows 1 to 4 of one type II output file, 
 with responses and arfs taken from the columns of original_type2_data.pha.
 
 ```
-XSPEC12> fakeit ,,backb{1-3}
+XSPEC> fakeit ,,backb{1-3}
 ```
 
 This produces 5 fake spectra in two type II output files, and 3 fake background 
@@ -278,7 +417,7 @@ Not using pre-loaded data:
 Now assume no data is currently loaded:
 
 ```
-XSPEC12> fakeit 2 backb{1}
+XSPEC> fakeit 2 backb{1}
 ```
 
 2 fake spectra in one type II output file are produced, as is a 

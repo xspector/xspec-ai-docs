@@ -24,6 +24,7 @@ module: spectrum.py
 | flux | tuple | get | A tuple containing the results of the most recent flux |
 | ignored | list | get | A list of the currently ignored (1-based) channel numbers. |
 | index | — | get | The spectrum's current index number within the AllData |
+| managedBy | — | get | For a background spectrum set up by AllData.backModel, |
 | isPoisson | bool | get | Boolean flag, true if spectrum has Poisson errors. |
 | lumin | — | get | Similar to flux, the results of the most recent luminosity |
 | multiresponse | — | get/set | Get/Set detector response ARRAY elements when using multiple |
@@ -39,15 +40,19 @@ module: spectrum.py
 | groupIntent | — | get | Cached source-side group intent as a string, e.g. ``"optbin 5"``, |
 | backGroupMap | tuple | get | Tuple of per-source-bin super-bin indices for the |
 | backGroupIntent | — | get | Cached background-side group intent as a string, e.g. |
+| dataModels | tuple | get | The spectrum's data models, in the order applied: a tuple of |
 
 ## Methods
 
 - `__init__(dataFile, backFile='USE_DEFAULT', respFile='USE_DEFAULT', arfFile='USE_DEFAULT')` — Construct a Spectrum object.
-- `dummyrsp(lowE=None, highE=None, nBins=None, scaleType=None, chanOffset=None, chanWidth=None, sourceNum=1)` — Create a dummy response for this spectrum only.
+- `dummyrsp(lowE=None, highE=None, nBins=None, scaleType=None, chanOffset=None, chanWidth=None, sourceNum=1, chanLog=None)` — Create a dummy response for this spectrum only.
 - `fileinfo(keyword)` — Return the value of a particular keyword in the SPECTRUM extension.
 - `group(groupArgs)` — Apply a `group` command to this spectrum.
 - `ignore(ignoreRange)` — Ignore a range of the spectrum by channels or energy/wavelengths.
 - `ignoredString()` — Return a string of ignored channel ranges.
 - `notice(noticeRange)` — Notice a range of the spectrum by channels or energy/wavelengths.
 - `noticedString()` — Return a string of noticed channel ranges.
+- `addDataModel(name, *values)` — Attach a data model to this spectrum (the *dmodel* command).
+- `removeDataModel(name='')` — Remove the named data model from this spectrum, or every one
+- `dataModel(name)` — The attached data model named *name* (abbreviations as for
 - `show()` — Display information for this Spectrum object

@@ -23,7 +23,7 @@ delta <step size>  <# steps>`
 
 In the first case the parameter is stepped from `<low value>` to `<high value>` 
 in  `<# steps>` plus one trials. In the second case the parameter is stepped 
-from `<best fit value>`-`<step size>`*`<# steps>` to `<best fit value>>`
+from `<best fit value>`-`<step size>`*`<# steps>` to `<best fit value>`
 +`<step size>`*`<# steps>`, ie a total of 2`<# steps>`+1 trials. 
 The stepping is either linear or 
 log. Initially, the stepping is linear but it can be changed by the optional 
@@ -33,7 +33,7 @@ returned to the linear form.  If more than one parameter is entered, then
 variable parameter whose `<param index>` is NOT entered in the command will 
 still be allowed to vary freely during each steppar iteration. 
 
-To perform a `steppar` run on `gain` (or response) parameters, 
+To perform a `steppar` run on response parameters (those of `gain` or any other `rmodel` model), 
 the optional `[<modelName>:]` specifier is replaced by an optional 
 `[<sourceNumber>:]` specifier, and the letter 'r' needs to be 
 attached as a prefix to the `<parameter index>`.  For example:
@@ -43,6 +43,8 @@ steppar 2:r3 1.5 2. 10
 ```
 
 will step the third response parameter belonging to source number 2.
+A data parameter (see `dmodel`) is stepped with the prefix 'd' and no
+specifier: `steppar d1 0.5 1.5 10`.
 
 The number of steps is set initially to 10. At each value, the parameter is 
 frozen, a fit performed, and the resulting value of chi-squared given. 
@@ -55,11 +57,25 @@ If multiple `<step spec>` are given for different parameters, then a
 raster scan of the parameter ranges is performed.  At the end of the set, 
 the parameters and chi-squared are restored to the values they had initially.
 
-If the model is in a best-fit state when a `steppar` run is started 
-and a new best fit is found during the run, the user will be prompted at the 
-end of the run to determine if they wish to accept the new best-fit values 
-for their parameters.  This prompting can be disabled by the setting of 
+If the model is in a best-fit state when a `steppar` run is started
+and a new best fit is found during the run, the user will be prompted at the
+end of the run to determine if they wish to accept the new best-fit values
+for their parameters.  This prompting can be disabled by the setting of
 the `query` flag.
+
+When the grid is complete, `steppar` also scans it for competing
+local minima --- grid points that sit in a separate basin from the best
+grid point but within a delta-statistic of 9.0 of it (about the
+3-$\sigma$ region for a single parameter).  If more than one such basin
+is found, a short table of the local minima is printed, giving the
+delta-statistic and the stepped-parameter value(s) at each, ordered best
+first.  This is a read-only scan of the grid already in memory (it
+performs no additional fits) and is silent when the surface has a single
+minimum.  It flags parameter degeneracies that a single `fit` could
+miss: restart a `fit` from one of the listed points to refine it,
+or use `fit global` or `nest` for a global search.  The
+same set of grid-resolution minima is available to scripts through
+`tclout steppar` `minima`.
 
 Depending on the machine, a `steppar` run may be sped up significantly 
 by assigning it to multiple processes.  See the `parallel` command with 
@@ -70,13 +86,13 @@ the `steppar` option for more details.
 Assume that the current model has four parameters:
 
 ```
-XSPEC12> steppar 3 1.5 2.5
+XSPEC> steppar 3 1.5 2.5
 //Step parameter 3 from 1.5 to 2.5 in steps of .1.
-XSPEC12> steppar log
+XSPEC> steppar log
 //Repeat the above, only use multiplicative steps of 1.0524.
-XSPEC12> step nolog 2 -.2 .2 20
+XSPEC> step nolog 2 -.2 .2 20
 //Step parameter 2 linearly from -.2 to .2 in steps of 0.02.
-XSPEC12> step 2 delta 0.02 5
+XSPEC> step 2 delta 0.02 5
       //Step parameter 2 linearly from the best-fit value-0.1 to 
       //the best-fit value+0.1 in a total of 11 steps.
 ```

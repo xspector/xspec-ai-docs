@@ -1,0 +1,26 @@
+{
+  "name": "bkgnorm",
+  "type": "dat",
+  "func": "C_bkgnorm",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "Bnorm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.01,
+      "softmin": 0.01,
+      "softmax": 10.0,
+      "hardmax": 100.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "bkgnorm"
+  ],
+  "title": "bkgnorm: a factor on the background scaling of a spectrum"
+}

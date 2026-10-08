@@ -88,22 +88,22 @@ is `high` with `<energy>` = 100., `<nBins>` = 200, and `log`.
 **Examples:**
 
 ```
-XSPEC12> energies ,50,,log
+XSPEC> energies ,50,,log
 // Creates an array from .1 to 50. of 1000 logarithmic bins.
-XSPEC12> energies ,,,,100. 5 lin
+XSPEC> energies ,,,,100. 5 lin
 // Modifies previous array by adding 5 linear bins from 50. to 100.
-XSPEC12> energies ,,,,200.
+XSPEC> energies ,,,,200.
 // The 2nd range is now 50. to 200. in 5 linear bins.
-XSPEC12> energies 1.,,100
+XSPEC> energies 1.,,100
 // Array is now just 1 range, 1. to 50. in 100 logarithmic bins.
-XSPEC12> energies myFile.txt
+XSPEC> energies myFile.txt
 // Array is replaced with values stored in myFile.txt
-XSPEC12> energies extend ,75.,,lin
+XSPEC> energies extend ,75.,,lin
 // Models will go back to using response energies, but with an
 // extension of the high end to 75. keV in 100 additional linear bins. 
-XSPEC12> energies extend low .01
+XSPEC> energies extend low .01
 // Add a low-end extension to .01 keV with 100 new linear bins.
-XSPEC12> energies reset
+XSPEC> energies reset
 // All models will go back to using the original energy arrays 
 // from responses.
 ```

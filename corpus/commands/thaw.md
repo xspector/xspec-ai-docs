@@ -5,7 +5,7 @@ also_documents: [rthaw]
 source: XSthaw.tex
 ---
 
-# thaw (and rthaw)
+# thaw (and rthaw, dthaw)
 
 **allow fixed parameters to vary**
 
@@ -15,6 +15,9 @@ Allow indicated parameters to vary. (See also `freeze`)
 
 where `<param range>` ::= `[<modelName>:]<param#>|
 <param#> - <param#>`.
+
+**For data parameters** (see the `dmodel` command), use
+`dthaw` with data parameter numbers.
 
 **For response parameters** (see `gain` command):
 

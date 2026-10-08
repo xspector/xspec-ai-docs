@@ -13,11 +13,13 @@ Create a ``dummy'' response, covering a given energy range.
 
 **Syntax:** `dummyrsp` [<low energy> [<high energy>
 [<# of ranges> [log| linear [<channel offset> [<channel width>
-[<sourceNun>:<specNum>]]]]]]]
+[<sourceNun>:<specNum>]]]]]]] [chanlog| chanlin]
+
+**Syntax:** `dummyrsp` none [[<sourceNum>:]<spectrum range>]
 
 This command creates a dummy response matrix based on the given command line 
-arguments, which will either temporarily supersede the current response 
-matrix, or create a response matrix if one is not currently present. There 
+arguments, which will either supersede the current response matrix until
+it is removed, or create a response matrix if one is not currently present. There 
 are two main uses for this command: to do a "quick and dirty" analysis of 
 uncalibrated data (mode 1), and to examine the behaviour of the current 
 model outside the range of the data's energy response (mode 2).  
@@ -53,6 +55,17 @@ channels are assigned to have widths of energy `<channel width>`
 energy of `<channel offset>`. Then the data can be fit to models, 
 etc., under conditions that assume a perfect detector response. 
 
+The keyword `chanlog`, anywhere on the line, makes the detector
+channels logarithmically spaced instead: `<channel offset>` is then the
+lower edge of the first channel (in keV, and must be greater than 0) and
+`<channel width>` the fractional width $\Delta E/E$, so channel $i$
+(counting from 0) runs from $\mathrm{offset}\,(1+w)^i$ to
+$\mathrm{offset}\,(1+w)^{i+1}$. `chanlin` returns to linear channels.
+Like the channel offset, the choice is remembered for later `dummyrsp`
+commands; it starts as `chanlin`. It has no effect in mode 2 (channel
+width 0). `save` does not record a dummy response, linear or
+logarithmic.
+
 For mode 2 usage (channel width = 0.0), one can use this command to examine 
 the current model outside the range of the energy response of the detector. 
 When examining several aspects of the current model, such as plotting it or 
@@ -74,28 +87,46 @@ PHA channels, so the user should not try to fit-or plot-the data while
 the dummyrsp is active in this mode.   Also, data need not even be loaded 
 when calling this command in mode 2.
 
-The previous response matrices can be reimplemented with the `response` 
-command, with no arguments. Any use of the `data` and `notice` 
-commands will replace the dummy response with a correct set of matrices, 
-or with no response matrix if none was originally present.
+A dummy response stays until it is removed: `ignore` and
+`notice` (in every form, including `notice all` and
+`ignore bad`) leave it in place, and a `data` command removes
+it only from the spectra it replaces or deletes --- loading or removing
+another spectrum leaves it alone.  (Before XSPEC 13.0.2 any `ignore`,
+`notice` or `data` command restored the original responses.)
+
+`dummyrsp none` removes the dummy responses and restores the
+responses they replaced, or no response if there was none.  With a spectrum
+range (`2`, `1-3`, `1,4-5`) it does so only for those
+spectra, and with <sourceNum>`:` in front only for that source of
+those spectra.  The `response` command with no arguments removes every
+dummy response, as `dummyrsp none` with no range does.
+
+The exception is a spectrum faked on a dummy response by `fakeit`:
+that dummy is the spectrum's own response, so neither `dummyrsp none`
+nor the bare `response` removes it (a further `dummyrsp` over it
+is removed as usual).
 
 **Examples:**
 
 ```
-XSPEC12> dummyrsp
+XSPEC> dummyrsp
 //Create the dummy response for all spectra and sources with the 
 //default limits, initially .01, 100, and 200 bins.
-XSPEC12> dummyrsp .001 1
+XSPEC> dummyrsp .001 1
 //Create a dummy response with 200 bins that cover the range from 
 //0.001 to 1 keV.
-XSPEC12> dummyrsp ,,,500
+XSPEC> dummyrsp ,,,500
 //The same range, but now with 500 bins.
-XSPEC12> dummyrsp ,,,,lin
+XSPEC> dummyrsp ,,,,lin
 //The same range, but now with linearly spaced bins.
-XSPEC12> dummyrsp ,,,,,0.1
+XSPEC> dummyrsp ,,,,,0.1
 //The same range, but now create a diagonal response matrix, with 
 //channel widths of 0.1 keV.
-XSPEC12> response
+XSPEC> dummyrsp 0.05 50 3000 log 0.5 0.01 chanlog
+//Channels each 1% wide in energy, the first starting at 0.5 keV.
+XSPEC> dummyrsp none 2
+//Restore spectrum 2's original response; other dummies stay.
+XSPEC> response
 //Restore any previous correct responses.
 ```
 
@@ -104,7 +135,7 @@ Example dummy response matrix:
 Assume a spectrum with 4 channels, then
 
 ```
-XSPEC12> dummyrsp .0 30.0 3 lin 5.0 8.0
+XSPEC> dummyrsp .0 30.0 3 lin 5.0 8.0
 ```
 
 will produce the following response:

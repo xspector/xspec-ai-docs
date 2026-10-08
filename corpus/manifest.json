@@ -1,16 +1,16 @@
 {
   "provenance": {
-    "xspec_version": "13.0",
+    "xspec_version": "13.1.0",
     "heasoft_src": "/Users/kaa/software/heasoft/Xspec/src",
-    "heasoft_commit": "b1c00b1b08",
+    "heasoft_commit": "f2644bc7a6",
     "manual_dir": "/Users/kaa/software/Xspec-aux/doc/manual",
-    "manual_commit": "d449d599"
+    "manual_commit": "def75d749"
   },
   "counts": {
-    "models": 328,
-    "pyxspec_api_classes": 18,
-    "command_tokens": 161,
-    "command_docs": 79,
+    "models": 344,
+    "pyxspec_api_classes": 29,
+    "command_tokens": 189,
+    "command_docs": 83,
     "intents": 70,
     "casebook_cases": 11,
     "casebook_lessons": 10
@@ -69,6 +69,14 @@
         "bapec",
         "bvapec",
         "bvvapec"
+      ]
+    },
+    {
+      "name": "ascac",
+      "type": "mix",
+      "n_params": 4,
+      "family": [
+        "ascac"
       ]
     },
     {
@@ -242,6 +250,14 @@
         "bgnei",
         "bvgnei",
         "bvvgnei"
+      ]
+    },
+    {
+      "name": "bkgnorm",
+      "type": "dat",
+      "n_params": 1,
+      "family": [
+        "bkgnorm"
       ]
     },
     {
@@ -836,6 +852,12 @@
       ]
     },
     {
+      "name": "cgain",
+      "type": "rsp",
+      "n_params": 2,
+      "family": []
+    },
+    {
       "name": "cglumin",
       "type": "con",
       "n_params": 4,
@@ -865,6 +887,16 @@
         "bcie",
         "bvcie",
         "bvvcie"
+      ]
+    },
+    {
+      "name": "clmass",
+      "type": "mix",
+      "n_params": 36,
+      "family": [
+        "clmass",
+        "nfwmass",
+        "monomass"
       ]
     },
     {
@@ -985,6 +1017,14 @@
       "n_params": 21,
       "family": [
         "cplinear"
+      ]
+    },
+    {
+      "name": "crossarf",
+      "type": "mix",
+      "n_params": 0,
+      "family": [
+        "crossarf"
       ]
     },
     {
@@ -1218,6 +1258,12 @@
         "bvgadem",
         "bvvgadem"
       ]
+    },
+    {
+      "name": "gain",
+      "type": "rsp",
+      "n_params": 2,
+      "family": []
     },
     {
       "name": "gaussian",
@@ -1505,12 +1551,30 @@
       ]
     },
     {
+      "name": "mixmatrix",
+      "type": "mix",
+      "n_params": 0,
+      "family": [
+        "mixmatrix"
+      ]
+    },
+    {
       "name": "mkcflow",
       "type": "add",
       "n_params": 6,
       "family": [
         "mkcflow",
         "vmcflow"
+      ]
+    },
+    {
+      "name": "monomass",
+      "type": "mix",
+      "n_params": 36,
+      "family": [
+        "clmass",
+        "nfwmass",
+        "monomass"
       ]
     },
     {
@@ -1524,6 +1588,16 @@
         "bnei",
         "bvnei",
         "bvvnei"
+      ]
+    },
+    {
+      "name": "nfwmass",
+      "type": "mix",
+      "n_params": 22,
+      "family": [
+        "clmass",
+        "nfwmass",
+        "monomass"
       ]
     },
     {
@@ -1754,6 +1828,14 @@
       ]
     },
     {
+      "name": "polrot",
+      "type": "mix",
+      "n_params": 1,
+      "family": [
+        "polrot"
+      ]
+    },
+    {
       "name": "posm",
       "type": "add",
       "n_params": 1,
@@ -1768,6 +1850,14 @@
       "family": [
         "powerlaw",
         "zpowerlw"
+      ]
+    },
+    {
+      "name": "projct",
+      "type": "mix",
+      "n_params": 3,
+      "family": [
+        "projct"
       ]
     },
     {
@@ -1815,6 +1905,14 @@
       "n_params": 4,
       "family": [
         "rdblur"
+      ]
+    },
+    {
+      "name": "recorn",
+      "type": "dat",
+      "n_params": 1,
+      "family": [
+        "recorn"
       ]
     },
     {
@@ -2113,6 +2211,14 @@
       ]
     },
     {
+      "name": "suzpsf",
+      "type": "mix",
+      "n_params": 4,
+      "family": [
+        "suzpsf"
+      ]
+    },
+    {
       "name": "swind1",
       "type": "mul",
       "n_params": 4,
@@ -2203,6 +2309,15 @@
         "tbpcf",
         "tbvarabs",
         "tbrel"
+      ]
+    },
+    {
+      "name": "TBred",
+      "type": "mul",
+      "n_params": 4,
+      "family": [
+        "tbred",
+        "ztbred"
       ]
     },
     {
@@ -2808,6 +2923,14 @@
       ]
     },
     {
+      "name": "xmmpsf",
+      "type": "mix",
+      "n_params": 4,
+      "family": [
+        "xmmpsf"
+      ]
+    },
+    {
       "name": "xscat",
       "type": "mul",
       "n_params": 4,
@@ -3078,6 +3201,15 @@
       ]
     },
     {
+      "name": "zTBred",
+      "type": "mul",
+      "n_params": 5,
+      "family": [
+        "tbred",
+        "ztbred"
+      ]
+    },
+    {
       "name": "zvagauss",
       "type": "add",
       "n_params": 4,
@@ -3226,7 +3358,7 @@
       "class": "Background",
       "singleton": null,
       "doc": "corpus/api/Background.md",
-      "n_attributes": 7,
+      "n_attributes": 8,
       "n_methods": 1
     },
     {
@@ -3240,7 +3372,7 @@
       "class": "ChainManager",
       "singleton": "AllChains",
       "doc": "corpus/api/AllChains.md",
-      "n_attributes": 9,
+      "n_attributes": 16,
       "n_methods": 11
     },
     {
@@ -3251,18 +3383,67 @@
       "n_methods": 1
     },
     {
+      "class": "CommandError",
+      "singleton": null,
+      "doc": "corpus/api/CommandError.md",
+      "n_attributes": 1,
+      "n_methods": 1
+    },
+    {
+      "class": "ComparePreset",
+      "singleton": null,
+      "doc": "corpus/api/ComparePreset.md",
+      "n_attributes": 3,
+      "n_methods": 1
+    },
+    {
       "class": "Component",
       "singleton": null,
       "doc": "corpus/api/Component.md",
       "n_attributes": 2,
+      "n_methods": 3
+    },
+    {
+      "class": "ComponentDefinition",
+      "singleton": null,
+      "doc": "corpus/api/ComponentDefinition.md",
+      "n_attributes": 0,
       "n_methods": 1
+    },
+    {
+      "class": "Converter",
+      "singleton": null,
+      "doc": "corpus/api/Converter.md",
+      "n_attributes": 14,
+      "n_methods": 115
     },
     {
       "class": "DataManager",
       "singleton": "AllData",
       "doc": "corpus/api/AllData.md",
-      "n_attributes": 2,
-      "n_methods": 11
+      "n_attributes": 3,
+      "n_methods": 18
+    },
+    {
+      "class": "DataModel",
+      "singleton": null,
+      "doc": "corpus/api/DataModel.md",
+      "n_attributes": 4,
+      "n_methods": 2
+    },
+    {
+      "class": "DataRecord",
+      "singleton": null,
+      "doc": "corpus/api/DataRecord.md",
+      "n_attributes": 8,
+      "n_methods": 3
+    },
+    {
+      "class": "E",
+      "singleton": null,
+      "doc": "corpus/api/E.md",
+      "n_attributes": 0,
+      "n_methods": 1
     },
     {
       "class": "FakeitSettings",
@@ -3275,8 +3456,15 @@
       "class": "FitManager",
       "singleton": "Fit",
       "doc": "corpus/api/Fit.md",
-      "n_attributes": 20,
-      "n_methods": 13
+      "n_attributes": 25,
+      "n_methods": 29
+    },
+    {
+      "class": "FuzzyLink",
+      "singleton": null,
+      "doc": "corpus/api/FuzzyLink.md",
+      "n_attributes": 3,
+      "n_methods": 1
     },
     {
       "class": "HMCResult",
@@ -3290,14 +3478,14 @@
       "singleton": null,
       "doc": "corpus/api/Model.md",
       "n_attributes": 7,
-      "n_methods": 9
+      "n_methods": 10
     },
     {
       "class": "ModelManager",
       "singleton": "AllModels",
       "doc": "corpus/api/AllModels.md",
       "n_attributes": 2,
-      "n_methods": 20
+      "n_methods": 25
     },
     {
       "class": "NestedResult",
@@ -3310,42 +3498,63 @@
       "class": "Parameter",
       "singleton": null,
       "doc": "corpus/api/Parameter.md",
-      "n_attributes": 9,
+      "n_attributes": 11,
       "n_methods": 2
     },
     {
       "class": "PlotManager",
       "singleton": "Plot",
       "doc": "corpus/api/Plot.md",
-      "n_attributes": 11,
-      "n_methods": 21
+      "n_attributes": 16,
+      "n_methods": 25
     },
     {
       "class": "RModel",
       "singleton": null,
       "doc": "corpus/api/RModel.md",
-      "n_attributes": 2,
+      "n_attributes": 3,
+      "n_methods": 2
+    },
+    {
+      "class": "Report",
+      "singleton": null,
+      "doc": "corpus/api/Report.md",
+      "n_attributes": 7,
       "n_methods": 2
     },
     {
       "class": "Response",
       "singleton": null,
       "doc": "corpus/api/Response.md",
+      "n_attributes": 9,
+      "n_methods": 5
+    },
+    {
+      "class": "SmoothnessPrior",
+      "singleton": null,
+      "doc": "corpus/api/SmoothnessPrior.md",
       "n_attributes": 6,
-      "n_methods": 3
+      "n_methods": 1
     },
     {
       "class": "Spectrum",
       "singleton": null,
       "doc": "corpus/api/Spectrum.md",
-      "n_attributes": 28,
-      "n_methods": 9
+      "n_attributes": 30,
+      "n_methods": 12
+    },
+    {
+      "class": "TclError",
+      "singleton": null,
+      "doc": "corpus/api/TclError.md",
+      "n_attributes": 0,
+      "n_methods": 0
     },
     {
       "class": "XspecSettings",
       "singleton": "Xset",
       "doc": "corpus/api/Xset.md",
-      "n_attributes": 12,
+      "n_attributes": 16,
       "n_methods": 9
     }
   ],
@@ -3356,7 +3565,10 @@
     "arf",
     "autosave",
     "backgrnd",
+    "backmodel",
     "bayes",
+    "bias",
+    "cgof",
     "chain",
     "chatter",
     "compare",
@@ -3364,11 +3576,19 @@
     "corfile",
     "cornorm",
     "cosmo",
+    "coverage",
     "cpd",
     "data",
+    "datascan",
     "delcomp",
+    "derror",
+    "dfreeze",
     "diagrsp",
+    "dmodel",
+    "dnewpar",
+    "dthaw",
     "dummyrsp",
+    "duntie",
     "editmod",
     "energies",
     "eqwidth",
@@ -3392,6 +3612,7 @@
     "iplot",
     "lmod",
     "log",
+    "lrt",
     "lumin",
     "margin",
     "mdefine",
@@ -3400,6 +3621,7 @@
     "nest",
     "newpar",
     "notice",
+    "null",
     "parallel",
     "plot",
     "query",
@@ -3418,16 +3640,18 @@
     "setplot",
     "show",
     "sim",
+    "simftest",
     "statistic",
     "steppar",
+    "syscall",
     "systematic",
     "tclout",
+    "tcloutr",
     "thaw",
     "thleqw",
     "time",
     "uncertain",
     "undo",
-    "unknown",
     "untie",
     "version",
     "weight",
@@ -3436,7 +3660,10 @@
     "xarf",
     "xautosave",
     "xbackgrnd",
+    "xbackmodel",
     "xbayes",
+    "xbias",
+    "xcgof",
     "xchain",
     "xchatter",
     "xcompare",
@@ -3444,11 +3671,19 @@
     "xcorfile",
     "xcornorm",
     "xcosmo",
+    "xcoverage",
     "xcpd",
     "xdata",
+    "xdatascan",
     "xdelcomp",
+    "xderror",
+    "xdfreeze",
     "xdiagrsp",
+    "xdmodel",
+    "xdnewpar",
+    "xdthaw",
     "xdummyrsp",
+    "xduntie",
     "xeditmod",
     "xenergies",
     "xeqwidth",
@@ -3471,6 +3706,7 @@
     "xiplot",
     "xlmod",
     "xlog",
+    "xlrt",
     "xlumin",
     "xmargin",
     "xmdefine",
@@ -3498,6 +3734,7 @@
     "xsetplot",
     "xshow",
     "xsim",
+    "xsimftest",
     "xstatistic",
     "xsteppar",
     "xsystematic",
@@ -3638,6 +3875,13 @@
       "doc": "corpus/commands/backgrnd.md"
     },
     {
+      "name": "backmodel",
+      "aliases": [
+        "xbackmodel"
+      ],
+      "doc": "corpus/commands/backmodel.md"
+    },
+    {
       "name": "corfile",
       "aliases": [
         "xcorfile"
@@ -3708,6 +3952,20 @@
       "doc": "corpus/commands/bayes.md"
     },
     {
+      "name": "bias",
+      "aliases": [
+        "xbias"
+      ],
+      "doc": "corpus/commands/bias.md"
+    },
+    {
+      "name": "cgof",
+      "aliases": [
+        "xcgof"
+      ],
+      "doc": "corpus/commands/cgof.md"
+    },
+    {
       "name": "chain",
       "aliases": [
         "xchain"
@@ -3722,10 +3980,26 @@
       "doc": "corpus/commands/compare.md"
     },
     {
+      "name": "coverage",
+      "aliases": [
+        "xcoverage"
+      ],
+      "doc": "corpus/commands/coverage.md"
+    },
+    {
+      "name": "datascan",
+      "aliases": [
+        "xdatascan"
+      ],
+      "doc": "corpus/commands/datascan.md"
+    },
+    {
       "name": "error",
       "aliases": [
+        "derror",
         "rerror",
         "uncertain",
+        "xderror",
         "xerror",
         "xrerror",
         "xuncertain"
@@ -3777,6 +4051,13 @@
       "doc": "corpus/commands/improve.md"
     },
     {
+      "name": "lrt",
+      "aliases": [
+        "xlrt"
+      ],
+      "doc": "corpus/commands/lrt.md"
+    },
+    {
       "name": "margin",
       "aliases": [
         "xmargin"
@@ -3803,6 +4084,13 @@
         "xsim"
       ],
       "doc": "corpus/commands/sim.md"
+    },
+    {
+      "name": "simftest",
+      "aliases": [
+        "xsimftest"
+      ],
+      "doc": "corpus/commands/simftest.md"
     },
     {
       "name": "steppar",
@@ -3845,6 +4133,13 @@
         "xdelcomp"
       ],
       "doc": "corpus/commands/delcomp.md"
+    },
+    {
+      "name": "dmodel",
+      "aliases": [
+        "xdmodel"
+      ],
+      "doc": "corpus/commands/dmodel.md"
     },
     {
       "name": "dummyrsp",
@@ -3935,11 +4230,6 @@
       "doc": "corpus/commands/model.md"
     },
     {
-      "name": "modid",
-      "aliases": [],
-      "doc": "corpus/commands/modid.md"
-    },
-    {
       "name": "newpar",
       "aliases": [
         "rnewpar",
@@ -3947,6 +4237,13 @@
         "xrnewpar"
       ],
       "doc": "corpus/commands/newpar.md"
+    },
+    {
+      "name": "rmodel",
+      "aliases": [
+        "xrmodel"
+      ],
+      "doc": "corpus/commands/rmodel.md"
     },
     {
       "name": "systematic",
@@ -4040,26 +4337,6 @@
       "doc": "corpus/commands/xset.md"
     },
     {
-      "name": "lrt",
-      "aliases": [],
-      "doc": "corpus/commands/lrt.md"
-    },
-    {
-      "name": "multifake",
-      "aliases": [],
-      "doc": "corpus/commands/multifake.md"
-    },
-    {
-      "name": "rescalecov",
-      "aliases": [],
-      "doc": "corpus/commands/rescalecov.md"
-    },
-    {
-      "name": "simftest",
-      "aliases": [],
-      "doc": "corpus/commands/simftest.md"
-    },
-    {
       "name": "writefits",
       "aliases": [],
       "doc": "corpus/commands/writefits.md"
@@ -4088,6 +4365,7 @@
     "chain",
     "chisq",
     "contour",
+    "corner",
     "counts",
     "data",
     "deespec",
@@ -4107,6 +4385,7 @@
     "foldmodel",
     "goodness",
     "icounts",
+    "image",
     "insensitivity",
     "integprob",
     "lcounts",
@@ -4115,6 +4394,7 @@
     "leedata",
     "margin",
     "model",
+    "param",
     "polangle",
     "polfrac",
     "ratio",
@@ -4125,62 +4405,117 @@
   ],
   "tclout_keys": [
     "?",
+    "PARALLEL",
+    "accepted",
     "areascal",
     "arf",
+    "auto",
+    "back",
     "backgrnd",
     "backscal",
+    "bayes",
+    "bias",
+    "calls",
+    "cgof",
     "chain",
     "chatter",
     "compinfo",
+    "const",
+    "converged",
     "cosmo",
     "covariance",
+    "coverage",
+    "data",
     "datagrp",
+    "datascan",
     "datasets",
+    "debiased",
     "delstat",
+    "delta",
+    "derror",
+    "divergent",
+    "dmodel",
     "dof",
+    "dpar",
     "energies",
     "eqwidth",
     "error",
     "errsims",
+    "ess",
+    "expected",
     "expos",
+    "f",
+    "fhat",
+    "file",
     "fileinfo",
     "filename",
+    "first",
     "fitpars",
     "fitstat",
     "flux",
     "ftest",
     "gain",
     "goodness",
+    "grads",
+    "group",
+    "h",
+    "hmc",
     "idline",
     "ignore",
+    "intent",
+    "iters",
+    "logz",
+    "logzerr",
+    "lrt",
     "lumin",
     "margin",
+    "meanaccept",
+    "mincounts",
+    "minima",
+    "minsn",
+    "mixweights",
     "modcomp",
     "model",
+    "modes",
     "modgroups",
+    "modinfo",
     "modkeyval",
     "modnames",
     "modpar",
     "modval",
     "n",
     "nchan",
+    "nest",
+    "nlive",
+    "nominal",
     "noticed",
     "nullhyp",
+    "optbin",
     "option",
+    "original",
+    "par",
+    "parallel",
     "param",
     "pars",
     "peakrsid",
+    "percent",
     "pfree",
     "pinfo",
     "plink",
     "plot",
     "plotgrp",
+    "projct",
+    "pvalue",
     "query",
     "rate",
     "rerror",
     "response",
     "result",
+    "rmodel",
+    "rpar",
+    "samples",
     "scan",
+    "sd",
     "sigma",
     "sim",
     "simpars",
@@ -4190,24 +4525,34 @@
     "statistic",
     "statmethod",
     "steppar",
+    "sys",
     "systematic",
+    "termination",
     "test",
     "unnamed",
     "varpar",
+    "verdict",
     "version",
     "weight",
-    "xflt"
+    "xflt",
+    "xset",
+    "zscore"
   ],
   "xset_keys": [
+    "ADDER00",
+    "ADDSP00",
+    "ANALYTIC",
     "APEC",
     "APECBROADPSEUDO",
     "APECDOECOR",
     "APECEEBREMSS",
     "APECEIGENFILE",
     "APECLOGINTERP",
+    "APECLOGTINTERP",
     "APECMINFLUX",
     "APECMULTITHREAD",
     "APECNOLINES",
+    "APECREMOVELINES",
     "APECROOT",
     "APECTHERMAL",
     "APECUSENEI",
@@ -4215,6 +4560,7 @@
     "APECVELOCITY",
     "AREASCAL",
     "ASCA",
+    "BACKSCAL",
     "BEXRAV",
     "BEXRIV",
     "CARBATM",
@@ -4223,14 +4569,26 @@
     "CDDT",
     "CFLOW",
     "COMOVING",
+    "COMPONENT",
     "COMPPS",
+    "CONTROL_STRING",
+    "CONVAXIS",
+    "CONVMODL",
+    "CONVNORM",
+    "CONVOLVEMANY",
+    "CORRSCAL",
+    "DELTA",
+    "DISABLE",
     "DISC",
     "DSET",
     "DUMMY",
     "EINT",
     "ELASTIC",
+    "ENERG",
     "ENERGIES",
     "EQPAIR",
+    "ERROR",
+    "ESCALE",
     "EVOL",
     "EW_0",
     "FAST",
@@ -4241,31 +4599,58 @@
     "GRAD",
     "GT09",
     "HATM",
+    "HEADASNOQUERY",
     "HIELIMIT",
     "HT95",
+    "HYBRID",
     "IFILE",
     "IFILE1",
     "IGEOM",
     "IMAGE",
+    "INPUT",
+    "INTORDER",
+    "INTPERR",
+    "INTPSPEC",
     "IREFLECT",
+    "ISMABSROOT",
+    "ISMDUSTROOT",
+    "JSON",
     "KD18",
     "KD19",
     "L121",
+    "LEVEN",
+    "LIMIT",
+    "LINECRITLEVEL",
     "LOELIMIT",
+    "LOG10",
     "MASS",
     "MAXTAU",
+    "MDATA",
+    "MDATA_DOWNLOAD",
+    "MDATA_REMOTEDIR",
+    "MEAN",
     "MEKAL",
+    "METHOD",
+    "MINMAX",
+    "MIXENERGIES",
     "MIXFACT",
+    "MIXMATRIX",
+    "MIXMATRIX_FILE",
     "MNRAS",
+    "MODLUNIT",
     "MUST",
     "NEIAPECROOT",
+    "NEIVERS",
     "NNPTFILE",
+    "NNSCALE",
+    "NONE",
     "NORMVAL",
     "NSAGRAV",
     "NSMAX",
     "NSMAXG",
     "NTEEA",
     "ODDT",
+    "OFFSET",
     "OFILE",
     "OFILE1",
     "OGIP",
@@ -4285,11 +4670,17 @@
     "P40A",
     "P40B",
     "P40C",
+    "PARALLEL",
     "PARAMETERS",
     "PASJ",
+    "PCHIP",
     "PEXRAV",
     "PEXRIV",
+    "PILEUP",
+    "PROJCT",
     "PS96",
+    "RATIO",
+    "REDSHIFT",
     "REFLECT",
     "RFXCONV",
     "RGS_XSOURCE_BORESIGHT",
@@ -4297,13 +4688,19 @@
     "RGS_XSOURCE_IMAGE",
     "RISCO",
     "SCATTERING",
+    "SHARED",
+    "SIGMA",
     "SLIMBB",
     "SNII",
     "SNRS",
+    "SOURCE",
+    "SPECTRA",
     "SPEX",
     "SPEXBROADPSEUDO",
+    "SPEXDOECOR",
     "SPEXEEBREMSS",
     "SPEXLOGINTERP",
+    "SPEXLOGTINTERP",
     "SPEXMINFLUX",
     "SPEXMULTITHREAD",
     "SPEXNOLINES",
@@ -4311,9 +4708,9 @@
     "SPEXTHERMAL",
     "SPEXVELOCITY",
     "SRON",
+    "STANDARD",
     "STOKES",
     "SUZPSF",
-    "SUZSF",
     "T30A",
     "T30B",
     "T35A",
@@ -4322,9 +4719,12 @@
     "T40A",
     "T40B",
     "T40C",
+    "TABLE",
+    "TARGET",
     "TBABSVERSION",
     "THIS",
     "TLUSTY",
+    "TUNIT",
     "U12A",
     "U13A",
     "U15A",
@@ -4348,6 +4748,7 @@
     "WDD1",
     "WDD2",
     "WDD3",
+    "WEIGHT",
     "WMAP",
     "XFLT",
     "XFLT0001",
@@ -4358,11 +4759,13 @@
     "XILCONV",
     "XILLVER",
     "XMMPSF",
+    "XRISM",
     "XSCAT",
     "XSET",
     "XSPEC11",
     "XSPEC12",
     "XSTAR",
+    "XXVI",
     "Z12A",
     "Z13A",
     "Z15A",

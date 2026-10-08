@@ -5,7 +5,7 @@ module: inference.py
 
 # HMCResult
 
-Phase-(a) HMC/NUTS sampler output.
+**HMC/NUTS sampler output.**
 
 ## Attributes
 

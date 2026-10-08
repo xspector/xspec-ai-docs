@@ -36,6 +36,11 @@ replacement auxiliary response file. An <EOF> at this point is equivalent
 to `none`. See the `data` command for ways to completely remove 
 the dataset from consideration.
 
+Each ARF is checked as it is read
+(Appendix AppendixAlgorithmsInputChecks); one with a NaN area or an
+overlapping energy grid is refused unless `xset INPUT_CHECK warn`
+is set.
+
 Note: The `arf` command is currently not implemented for data formats 
 which use multiple RMFs per spectrum, such as Integral/SPI data. 
 

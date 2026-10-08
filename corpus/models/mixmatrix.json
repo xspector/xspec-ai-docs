@@ -1,0 +1,13 @@
+{
+  "name": "mixmatrix",
+  "type": "mix",
+  "func": "U_MixMatrixModel",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 0,
+  "params": [],
+  "family": [
+    "mixmatrix"
+  ],
+  "title": "mixmatrix: mixing model with weights from a file"
+}

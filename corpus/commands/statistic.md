@@ -12,11 +12,11 @@ source: XSstatistic.tex
 Change the fit or test statistic in use, for one or more spectra.
 
 }
-**Syntax:** & **statistic** & `[chi | cstat[#[b]] |
+**Syntax:** & **statistic** & `[chi | cstat |
 lstat | pgstat | pstat | whittle[#] | chistokes | chicov]
 [<weight method>] [<spectrum range>]`
 
-& **statistic test** & `[ad | chi | cvm | ks |
+& **statistic test** & `[ad | chi | cusum | cvm | ks |
  pchi | runs] [<weight method>] [<spectrum range>]`
 
 The fit statistic options are chi-squared (`chi`), C statistic
@@ -25,17 +25,21 @@ background), Loredo statistic (`lstat`), a statistic for
 Poisson data with assumed known background (`pstat`), a
 statistic for Poisson data with Gaussian background (`pgstat`),
 and the Whittle statistic (`whittle`) for power density
-functions. If the statistic is given as `cstat` with a number
-appended (e.g. cstat5) then the statistic is calculated after the data
-are binned to contain a minimum number of counts in each channel where
-the minimum number is the number appended. If the number is followed
-by b then the binning is based on the minimum number of counts in the
-background spectrum. Note that this binning only
-occurs when calculating the statistic and has to be done every time so
-it is much less efficent than using an external program (such as
-ftgrouppha). If the statistic is given as `whittle` with a
+functions. If the statistic is given as `whittle` with a
 number appended (e.g. whittle5) then the statistic is appropriate for
 that number of power density functions averaged together.
+
+Earlier versions accepted `cstat` with a number appended (e.g.
+cstat5, optionally followed by b), which binned the data to a minimum
+number of counts per channel while calculating the statistic. This option
+has been removed: it never applied the documented threshold (the test was
+made against counts multiplied by the exposure, so the effective threshold
+was the appended number divided by the exposure time, making cstat1 through
+cstat20 behave identically for a typical observation), and its analytic
+derivatives and degrees of freedom did not account for the binning. Group
+the data before fitting instead --- with the **group** command,
+which also recompresses the response, or with an external tool such as
+ftgrouppha --- and then use plain `cstat`.
 
 The `chistokes` statistic (with the general alias
 `chicov`) is a multivariate-Gaussian generalization of
@@ -84,19 +88,16 @@ Assume 3 spectra are currently loaded, all using the chi-squared statistic,
 and that chi-squared is the default statistic.
 
 ```
-XSPEC12>statistic cstat 2-3
+XSPEC>statistic cstat 2-3
    // Spectrum 1 continues to use chi-sq, 2 and 3 use cstat.
-XSPEC12>statistic cstat5 3
-   // Spectrum 3 uses cstat but with a binning to a minimum
-   // number of 5 counts/bin.
-XSPEC12>data 4 spec4.pha
+XSPEC>data 4 spec4.pha
    // New spectrum 4 will use chi-sq.
-XSPEC12>statistic cstat
+XSPEC>statistic cstat
    // All 4 spectra now use cstat, cstat is the new default.
-XSPEC12>data 5 spec5.pha
+XSPEC>data 5 spec5.pha
    // New spectrum 5 will use cstat.
-XSPEC12>statistic test ks
+XSPEC>statistic test ks
    // All 5 spectra now use ks as the test statistic.
-XSPEC12>statistic chi churazov 5
+XSPEC>statistic chi churazov 5
    // Spectrum 5 will use chi-sq using the churazov weighting
 ```

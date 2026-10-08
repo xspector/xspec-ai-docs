@@ -42,9 +42,9 @@ available in PyXspec as `Fit.globalBasins`.
 **Example:**
 
 ```
-XSPEC12> fit
+XSPEC> fit
 // Levenberg-Marquardt converges to a local minimum.
-XSPEC12> improve
+XSPEC> improve
 // Differential Evolution shell about that fit, then a polish; if a
 // deeper minimum is found the parameters move there, otherwise they
 // are left unchanged.

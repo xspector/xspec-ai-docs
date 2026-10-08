@@ -21,4 +21,7 @@ extra model component. WARNING : it is not correct to use the F-test statistic
 to test for the presence of a line (see Protassov et al 2002, ApJ 571, 545). 
 WARNING: this command can only be used if the extra model component is 
 additive, this does not give the correct result if the component is 
-multiplicative (see Orlandini et al. 2012, ApJ 748, 86).
+multiplicative (see Orlandini et al. 2012, ApJ 748, 86).  For those cases use
+`simftest` (one component of the current model) or `lrt` (any two
+models), which calibrate the likelihood ratio by simulation, or the runs test
+(`statistic test runs`) as Orlandini et al. do.

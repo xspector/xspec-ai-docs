@@ -17,7 +17,7 @@ Variants documented together: `vagauss`, `zvagauss`.
 ## Description
 
 A simple gaussian line profile in wavelength. If the width is $\leq 0$ then it is treated
-as a delta function. The zagauss variant computes a redshifted
+as a delta function. The zvagauss variant computes a redshifted
 gaussian.
 
 $$A(\lambda) = K {1\over{(\sigma/c)\sqrt{2\pi}}}

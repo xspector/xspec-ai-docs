@@ -13,7 +13,7 @@ Calculate the luminosity of the current model for a given redshift and
 source frame energy range.
 
 **Syntax:** `lumin` [<lowEnergy>] [<hiEnergy>] [<redshift>] [err 
-<number> <level>| noerr]
+<number> <level>| noerr] [zero <param list>]
 
 where `<lowEnergy>` and `<hiEnergy>` are the source frame energies 
 over which the luminosity is calculated and `<redshift>` is the 
@@ -53,6 +53,11 @@ centered on the best-fit parameters with sigmas from the covariance matrix.
 This is only an approximation in the case that fit statistic space is not 
 quadratic. 
 
+The `zero` clause holds the listed parameters at zero for the
+point value and every set of drawn parameter values -- for instance the
+column density, for the unabsorbed luminosity.  It is described with the
+`flux` command.
+
 There is also a model component `clumin` which can be used to 
 estimate luminosities and errors for part of the model. For instance, defining 
 the model as `wabs(pow + clumin(ga))` provides a fit parameter which gives 
@@ -68,4 +73,7 @@ XSPEC> lumin,,,0.5
 //for z=0.5
 XSPEC> lumin 6.4 7.0
 //Calculate the current luminosity over 6.4 to 7 keV.
+XSPEC> lumin 2 10 0.05 err 1000 90 zero 1
+//The unabsorbed 2-10 keV luminosity at z=0.05 (parameter 1, the
+//column density, held at zero) with its 90% range.
 ```

@@ -1,28 +1,41 @@
 ---
 name: simftest
-aliases: []
+aliases: [xsimftest]
 also_documents: []
 source: XSsimftest.tex
 ---
 
 # simftest
 
-**estimate the F-test probability for adding a component**
+**likelihood-ratio test for a model component, calibrated by simulation**
 
-Tcl script to generate simulated datasets and use these to estimate 
-the F-test probability for adding a model component. 
+Estimate how significant a component of the current model is, by the
+likelihood ratio calibrated by simulation (see `lrt`).
 
 **Syntax:** `simftest` <model_comp> <niter> [<filename>]
 
-This script runs `<niter>` sets of simulated datasets to estimate the F-test 
-probability for adding the additional model component number `<model_comp>`.  
-If `<filename>` is specified then passes this to lrt.tcl to 
-save likelihood ratio simulation information. The first line of the file 
-written contains the results for the data, the other lines for the 
-simulations. Each line comprises the statistic value for the model without 
-`<model_comp>`, that for the model with `<model_comp>`, and the 
-difference.
+`<model_comp>` is the number of a component of the default model, as
+`delcomp` counts them.  The alternative is the current model; the null
+is the same model with that component switched off and its parameters
+frozen.  An additive component is switched off by setting its
+normalisation to zero; a multiplicative component by setting the
+parameters its model definition names in `identity=` to the values
+there (for `gabs`, `Strength` = 0; for an absorber,
+`nH` = 0) --- see Appendix AppendixAddModels.  A multiplicative
+component with no `identity=` setting, a convolution or mixing
+component, and a component with no free parameter are refused; use
+`lrt` with an explicit null for those.  `<filename>` and the
+report are as for `lrt`.
 
-Before running this script the model should be set up including the additional 
-component to be tested. The script will create temporary files 
-model_with_comp.xcm and model_without_comp.xcm.
+**Examples:**
+
+```
+XSPEC> model powerlaw + gaussian
+XSPEC> fit
+XSPEC> simftest 2 1000
+// Is the gaussian needed?  Null: its norm at 0.
+XSPEC> model gabs*powerlaw
+XSPEC> fit
+XSPEC> simftest 1 1000 gabs.txt
+// The absorption line: null Strength = 0.
+```

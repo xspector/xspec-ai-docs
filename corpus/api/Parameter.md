@@ -20,6 +20,8 @@ module: parameter.py
 | frozen | bool | get/set | Bool, if True then parameter is frozen. |
 | unit | — | get | An optional string for the parameter's units (GET only). |
 | link | — | get/set | Parameter link expression string (empty if not linked). |
+| lowerExpr | — | get/set | The hard lower limit as an expression of other parameters |
+| upperExpr | — | get/set | The hard upper limit as an expression of other parameters |
 
 ## Methods
 

@@ -29,12 +29,12 @@ file (ie. the amount of information written to the log file) use the
 **Examples:**
 
 ```
-XSPEC12> log
+XSPEC> log
 //Turn on the log file (default xspec.log).
-XSPEC12> log none 
+XSPEC> log none 
 //Close the log file.
-XSPEC12> log >mylog
+XSPEC> log >mylog
 //Append to the log file (mylog.log)
-XSPEC12> chatter ,, 12
-//Set the log file chattiness to 12.
+XSPEC> chatter ,15
+//Set the log file chattiness to 15 (diagnostics).
 ```

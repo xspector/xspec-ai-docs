@@ -1,7 +1,7 @@
 ---
 name: nest
 aliases: [xnest]
-also_documents: [nestrun, nestlive, nesttol, nestenlarge, nestclusters, nestresample, nestcheckpoint, nestinfo, nestevidence]
+also_documents: [nestrun, nestlive, nesttol, nestenlarge, nestclusters, nestresample, nestcheckpoint, nestseed, nestinfo, nestevidence]
 source: XSnest.tex
 ---
 
@@ -90,24 +90,115 @@ file.
 checkpoint every `<N>` iterations.  Default 200.  Set
 `0` to disable checkpoint writing.
 
+- [`seed` `<N>`]Seed of the
+sampler's own random stream.  Default `0`, which makes each
+`nest run` draw a fresh seed; the seed used is printed at the
+end of the run and reported by `nest info`, so a run made
+this way can still be repeated afterwards by setting `seed` to
+that value.  The seed covers the resampled `CHAIN` extension as
+well as the sampler itself, so repeating a run reproduces the whole
+output file.  Nested sampling does not draw from the generator
+`xset` `seed` controls, so this setting is sufficient on
+its own -- two runs with the same seed agree even if that generator
+was disturbed in between.  Note that `parallel nest` `<N>`
+partitions the sampling across workers, so reproducing a run also
+requires the same worker count.
+
 - [`info`]Print the current sampler
-settings.
+settings, and the seed the most recent run used.
 
 - [`evidence`]Print the
 $\log Z$ estimate and its uncertainty from the most recent run.
 
+**Progress output:** every 100 iterations the sampler prints
+the iteration count, the running $\log Z$, the likelihood of the
+point just replaced (`worstL`), the information $H$, the
+number of bounding ellipsoids in use (`K`), the sampling
+efficiency over the interval since the previous line
+(`eff`: points replaced per likelihood evaluation) and the
+cumulative number of likelihood evaluations (`nlike`).  The
+efficiency is the number to watch: it starts near one while the
+ellipsoids still bound the whole prior and falls as the constrained
+region contracts and the ellipsoids over-cover it.  A run whose
+efficiency has fallen to $10^{-4}$ needs over ten thousand
+evaluations per replaced point and will not finish in a useful
+time; a warning is printed the first time this happens.  The usual
+remedies are narrower parameter limits (the ellipsoids are fit in
+the unit cube, so a decade of unused prior range is a decade of
+wasted volume), a smaller `enlarge` factor, or
+`clusters` `1` when `K` is seen to
+oscillate between one and several ellipsoids on a single-mode
+posterior.
+
+**End-of-run summary:** when the run finishes it reports on the
+answer, not only on the sampler.  The output file is loaded back in
+automatically (as `chain` `run` has always done), and the
+run then prints a verdict followed by a per-parameter posterior table.
+
+The verdict judges the two jobs a nested sampling run does, because it
+can pass one and fail the other.  It warns when the run stopped for any
+reason other than reaching the $\Delta\log Z$ tolerance --- a run halted
+by the iteration cap otherwise produces a finish line of exactly the same
+shape as a converged one --- when the effective sample size falls below
+400, and when the overall sampling efficiency falls below $10^{-4}$.  A
+posterior with more than one mode is reported as information rather than
+as a warning: multimodality is a property of the problem, but an
+equal-tailed interval computed across two modes describes neither of
+them, and the user needs to know that before reading the table.  The
+$\log Z$ uncertainty is printed alongside $\sqrt{H/n_{\rm live}}$, the
+value theory expects of it.
+
+The effective sample size is Kish's $(\sum w)^2/\sum w^2$ over the
+importance weights, and it is usually far smaller than the number of
+points in the file.  It is reported at the run level rather than per
+parameter because it depends only on the weights.  Note that a run with
+few live points will trip the 400 threshold even when its evidence is
+perfectly good; the threshold is about the posterior, not the evidence.
+
+The table reports an equal-tailed credible interval for each variable
+parameter, on exactly the convention `error` uses: the fit's
+$\Delta$-statistic setting is converted to a percentage through the
+$\chi^2$-with-one-degree-of-freedom equivalence, so the default 2.706
+gives the 5th and 95th percentiles.  The same interval is what
+`error` reports for a loaded chain, because it is the same
+computation.  Central values and the weighted standard deviation come
+from `chain` `stat` and `chain` `diag`.
+
+The run does *not* move the model.  Parameter values are restored to
+what they were before the run and no error bounds are written, so
+`show` `par` still displays the covariance from the last
+fit.  Use `chain set` to set the parameters from the
+chain, or `error` to write the credible interval into them.
+
+**Numbers from older files have changed:** `chain` `load`
+now reads the `NEST` extension, which holds the importance-weighted
+posterior, in preference to the `CHAIN` extension, which holds an
+equal-weight resampling of it.  Both are still written, so scripts that
+read the `CHAIN` extension directly are unaffected.  But
+`error`, `margin`, `flux`, `lumin`,
+`eqwidth`, `chain` `dic` and
+`chain` `stat` will return slightly different values for
+nest output files written by earlier versions, because they now use the
+weights instead of a lossy re-encoding of them.  The load announces the
+point count and the effective sample size so that a changed number can be
+connected to its cause.
+
+Everything the summary reports is also readable from a script
+with `tclout` `nest` (Section tcloutnest), including the verdict and
+the per-parameter credible intervals.
+
 **Examples:**
 
 ```
-XSPEC12> newpar 1 0.05 0.001 1e-6 1e-6 100000 1e6
-XSPEC12> newpar 5 0.04 0.01  1e-30 1e-30 1e20 1e24
-XSPEC12> bayes on
-XSPEC12> bayes 1 JEFFREYS
-XSPEC12> bayes 5 JEFFREYS
-XSPEC12> parallel nest 4
-XSPEC12> nest live 400
-XSPEC12> nest run nest.fits
-XSPEC12> nest evidence
+XSPEC> newpar 1 0.05 0.001 1e-6 1e-6 100000 1e6
+XSPEC> newpar 5 0.04 0.01  1e-30 1e-30 1e20 1e24
+XSPEC> bayes on
+XSPEC> bayes 1 JEFFREYS
+XSPEC> bayes 5 JEFFREYS
+XSPEC> parallel nest 4
+XSPEC> nest live 400
+XSPEC> nest run nest.fits
+XSPEC> nest evidence
 ```
 
 The `newpar` commands narrow the search ranges of the absorber

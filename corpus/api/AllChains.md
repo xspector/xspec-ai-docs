@@ -23,6 +23,13 @@ Singleton instance `AllChains` (class `ChainManager`).
 | defTemperature | — | get/set | Default chain temperature (orig = 1.0). |
 | defAlgorithm | — | get/set | Default chain algorithm (orig = 'gw'). |
 | defWalkers | — | get/set | Default walkers parameter for 'gw' chains (orig = 10). |
+| adapt | bool | get/set | Whether new Metropolis-Hastings chains adapt their proposal [bool]. |
+| adaptTarget | float | get/set | Target acceptance rate for an adapting chain [float] (0.234). |
+| tempering | — | get/set | Number of parallel-tempering rungs for new Metropolis-Hastings |
+| temperingTmax | float | get/set | Temperature of the hottest rung [float] (100). |
+| temperingSwap | int | get/set | Steps between swap rounds [int] (10). |
+| temperingAdapt | — | get/set | Whether the ladder adapts during the burn-in [None, True or False]. |
+| temperingSideFiles | bool | get/set | Write the hotter rungs to <chain>_T<k> side files [bool] (False). |
 
 ## Methods
 

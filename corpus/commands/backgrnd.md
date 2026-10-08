@@ -43,14 +43,14 @@ For details of how to remove spectra see the `data` command documentation.
 Suppose there are currently three spectra.  Then:
 
 ```
-XSPEC12> backgrnd a,b,c
+XSPEC> backgrnd a,b,c
 // New files for background subtraction are given for all 
 // three spectra.
-XSPEC12> backgrnd 2 none
+XSPEC> backgrnd 2 none
 // No background subtraction will be done for the second spectrum.
-XSPEC12> backgrnd ,d
+XSPEC> backgrnd ,d
 // d.pha becomes the background for the second spectrum. 
-XSPEC12> backgrnd 2 e{4-5}
+XSPEC> backgrnd 2 e{4-5}
 // Rows 4 and 5 of Type II file e.pha become the background for 
 // the second and third spectrum respectively.
 ```

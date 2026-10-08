@@ -18,10 +18,15 @@ source: XSbayes.tex
 
                  & **bayes** & `smooth clear`
 
+                 & **bayes** & `fuzzy  <par>  <par> ...  [tolerance <t>]  [ratio <c>]`
+
+                 & **bayes** & `fuzzy clear`
+
 where `<option>` ::= `[off | on | cons]`. If a 
 parameter number is given as the first argument then this command sets up 
 the prior for the specified model parameter but does not turn Bayesian 
-inference on. If the first argument to the `bayes` command is not a 
+inference on.  A data parameter (see `dmodel`) is given as `d`$n$,
+for example `bayes d1 lognormal 1 0.1`. If the first argument to the `bayes` command is not a 
 parameter number then one of the options `off`, `on`, or 
 `cons` is used.  The first two turn Bayesian inference off or on, 
 while `cons` turns Bayesian inference on and gives all parameters a 
@@ -55,9 +60,12 @@ studentst & $\ln{\Gamma((h_1+1)/2)} - 0.5\ln{(h_1\pi)} -
 
 halfnormal & $-0.5\ln{(h_1^2\pi/2)} - p^2/(2h_1^2)$ 
 
-powerlaw & $- p h_1$ for $h_2 \le p \le h_3$
+powerlaw & $-h_1\ln{(p)} - \ln{Z}$ for $h_2 \le p \le h_3$, where the prior
+density is $p^{-h_1}/Z$ and $Z = (h_3^{1-h_1}-h_2^{1-h_1})/(1-h_1)$, or
+$\ln{(h_3/h_2)}$ when $h_1=1$
  
-isotropic & $\ln{(\sin{(p)})}$
+isotropic & $\ln{(\sin{(p)})} + \ln{(\pi/360)}$, with p in
+degrees over $[0,180]$
  
 shiftedlognormal & $-\ln{((p-h_1) \sqrt{2\pi} h_3)} -0.5(\ln{(p-h_1)}-\ln{(h_2)})^{2}/h_3^{2}$
 
@@ -114,3 +122,27 @@ transform of its rank-deficient precision). The members must be free,
 unlinked, and free of a per-parameter prior. `bayes` `smooth clear`
 removes all smoothness terms (as does `bayes` `cons`). Registered
 terms are written to `save` files and listed by `show` `bayes`.
+
+**Fuzzy links.** A hard link (`newpar` `5 = 2`) makes
+two parameters identical. `bayes` `fuzzy` instead makes them equal
+*to within a tolerance*: it is a joint prior under which each pair of the
+listed parameters has a log ratio drawn from a Gaussian of standard deviation
+$\sigma = \ln(1 + t)$, the common level being left free. The parameters are
+named as for `newpar` (`5`, `mod:3`) and may belong to any
+models and data groups, but each must be free, unlinked, positive, free of a
+per-parameter prior and not already in another joint term.
+
+- [`tolerance` $t$] relative; the default, 0.2, means ``equal to
+  within 20%''.
+
+- [`ratio` $c$] for exactly two parameters, the expected value of the
+  first divided by the second (default 1).
+
+For example `bayes` `fuzzy 4 8 12 tolerance 0.1` ties three
+cross-normalisation constants to within 10% of one another, and
+`bayes` `fuzzy 2 5 ratio 2` expects parameter 2 to be twice
+parameter 5. Like `smooth`, adding a link turns Bayesian inference on,
+and the link acts in fits, error calculations and all four samplers.
+`bayes` `fuzzy clear` removes all fuzzy links and leaves smoothness
+terms alone (`bayes` `smooth clear` likewise leaves fuzzy links);
+`bayes` `cons` removes both.

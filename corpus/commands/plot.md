@@ -1,7 +1,7 @@
 ---
 name: plot
 aliases: [xplot]
-also_documents: [fig:colors, plotchain, plotcontour, plotcounts, plotdata, plotdelchi, plotdelc, plotdem, plotdspec, plotdespec, plotdeespec, plotefficien, ploteqw, plotfitstat, plotgoodness, ploticounts, plotinsensitivity, plotintegprob, plotlcounts, plotldata, plotmargin, plotmodel, plotemodel, ploteemodel, plotpolangle, plotpolfrac, plotratio, plotresiduals, plotsensitivity, plotsum, plotufspec, ploteufspec, ploteeufspec]
+also_documents: [fig:colors, plotchain, plotcontour, plotcorner, plotcounts, plotdata, plotdelchi, plotdelc, plotdem, plotdspec, plotdespec, plotdeespec, plotedata, ploteedata, plotefficien, ploteqw, plotfitstat, plotfoldmodel, plotgoodness, ploticounts, plotimage, plotinsensitivity, plotintegprob, plotlcounts, plotldata, plotledata, plotleedata, plotmargin, plotmodel, plotemodel, ploteemodel, plotparam, plotpolangle, plotpolfrac, plotratio, plotresiduals, plotsensitivity, plotsum, plotufspec, ploteufspec, ploteeufspec]
 source: XSplot.tex
 ---
 
@@ -13,16 +13,17 @@ Make one or more plots to the current plot device (see `cpd` or `setplot device`
 
 **Syntax:** `plot` <plot type> [<plot type>] [<plot type>] ...
 
-`<plot type>` is a keyword describing the various plots allowed.  Up 
-to six plot panes can be put on a single page by combining multiple 
-`<plot type>` options.  For example:
+`<plot type>` is a keyword describing the various plots allowed.
+Multiple plot panes can be put on a single page by combining multiple
+`<plot type>` options (see below for the current limits on the number
+of panes and stacks).  For example:
 
 ```
 plot data resid ratio model
 ```
 
-will produce a 4-pane plot.   However contour plots may not be combined 
-with other plots in this manner.  When a certain plot type takes additional 
+will produce a 4-pane plot.   However contour plots, `sum` and
+`corner` may not be combined with other plots in this manner.  When a certain plot type takes additional 
 arguments (eg. `chain`, `model`), simply list them in order 
 prior to specifying the next plot type:
 
@@ -172,6 +173,70 @@ plot contour
 plot cont,,4,1.,2.3,4.61,9.21 
 ```
 
+- [corner]
+
+Draw a corner plot of the loaded chains (see `chain`): for every pair
+of parameters, a panel showing their joint posterior, and on the diagonal
+each parameter's own.  Chains written by `chain` `run`,
+`hmc` and `nest` are all drawn the same way.
+
+`plot corner [<params>] [log [<params>]] [bins <n>] [smooth <sigma>]`
+
+With no `<params>`, every parameter in the chains is drawn.  A subset
+is chosen with the range specifiers `freeze` uses: `plot
+corner 1-3 5`, `plot corner mod2:1-4`, and `2:r1` for a
+response parameter.  The panels follow the order of the chain's columns,
+not the order the parameters are typed in.  A parameter the chains do not
+carry -- a frozen one, say -- is refused, and nothing is drawn.
+
+Each diagonal panel is the parameter's marginal posterior as a histogram,
+with a solid line at its median and dashed lines at the interval
+`error` reports for a loaded chain: equal-tailed about the median, at
+the confidence level the `fit` delta-statistic setting implies (5th
+and 95th percentiles by default).  They are the same numbers `error`
+reports, not a separate calculation.
+
+Each panel below the diagonal shows the highest-posterior-density regions
+enclosing 68.3%, 90% and 99% of the posterior, in red, green and blue --
+the levels `plot contour` draws for a two-parameter `steppar`
+grid ($\Delta$ statistic 2.30, 4.61 and 9.21).  A region is the contour of
+the parameters' two-dimensional histogram, smoothed with a Gaussian kernel of
+`<sigma>` bins (default 1; `smooth 0` turns it off), at the
+density that encloses the level.  The smoothing conserves the posterior mass,
+and the levels are fractions of the whole chain, not only of the part that
+falls inside the axes.
+
+`log` puts parameters on logarithmic axes, binned in equal steps
+of $\log_{10}$: the parameters listed after it, or with no list every
+plotted parameter that can take one.  A parameter whose values reach zero
+or below cannot: named explicitly it is refused, and under a bare
+`log` it stays linear and the command says so.  A log axis changes
+how the posterior is drawn, not what it is.  The quantiles, the median and
+the `error` interval are the same on either scale, and the regions
+remain the highest-density regions of the parameter itself --- the ones a
+linear axis draws, and the ones `margin` computes on a log grid ---
+so turning `log` on never changes which points a region contains.
+For a parameter spread over several decades this places the regions
+toward its smaller values, where its density is highest, rather than
+around the peak of the histogram, which counts per logarithmic interval.
+
+Each axis spans the parameter's 0.1% to 99.9% quantiles, and
+`<n>` (default 20, at least 5) sets the number of histogram bins
+across it.  A parameter that is constant in the chain is drawn on a
+slightly widened axis, and says so.
+
+If the chains carry importance weights (a `LOG_WEIGHT` column, as
+`nest` writes), every histogram, quantile and region is weighted.
+This matters: a nested-sampling file holds many low-weight points spread
+across the prior, and an unweighted plot would show the prior rather than
+the posterior.
+
+The plot uses a grid of its own rather than the stacks other plots use, so
+it is not subject to their limit on the number of panes: a 17-parameter
+chain draws all 153 panels.  Above 10 parameters the command says how many
+panels it is drawing and how to choose a subset.  Tick marks and axis
+labels appear only on the bottom row and the left column.
+
 - [counts]
 
 Plot the data (with the folded model, if defined) with the y-axis being 
@@ -213,7 +278,8 @@ signal-to-noise) and capped to bound noise amplification. XSPEC reports the
 number of recovered resolution elements and the maximum amplification for
 each plot group. `despec` and `deespec` apply the same
 $Ef(E)$ and $E^{2}f(E)$ (or $\lambda f(\lambda)$, $\lambda^{2}f(\lambda)$)
-weighting as `eufspec` and `eeufspec`, and both energy and
+weighting as `eufspec` and `eeufspec` (including
+`setplot eweight`), and both energy and
 wavelength (including per-Hz) axes are supported.
 
 A response can only supply a limited number of independent resolution
@@ -242,6 +308,16 @@ outside it, or across ignored channels, biases the bins near the band edges
 and on either side of any interior gap. The deconvolution is undefined for a
 spectrum carrying more than one response source and is refused in that case.
 
+- [edata, eedata]
+
+Plot the count-rate data (with the folded model, if defined), like
+`data`, but weighted by energy: `edata` multiplies the count
+spectrum by $E$ (an $Ef(E)$-style count plot) and `eedata` by
+$E^{2}$.  When plotting wavelength the weighting is $\lambda$ and
+$\lambda^{2}$ respectively.  See `ledata` for the logarithmic-axis
+versions.  If `setplot add` has been used then folded additive
+model components are shown as dotted lines.
+
 - [eemodel]
 
 See model.
@@ -250,9 +326,9 @@ See model.
 
  See ufspec.
 
-- [efficien]
+- [efficiency]
 
-Plot the total response efficiency versus incident photon energy. 
+Plot the total response efficiency versus incident photon energy.
 
 - [emodel]
 
@@ -273,6 +349,11 @@ Plot the contribution to the fit statistic from each bin. The
 contribution is plotted +ve or -ve depending on whether the residual
 is +ve or -ve.
 
+- [foldmodel]
+
+Plot the folded model alone, in count-rate units, without the data points.
+The individual additive model components are shown as dotted lines.
+
 - [goodness]
 
 Plot a histogram of the statistics calculated for each simulation of the 
@@ -285,6 +366,27 @@ linear bins.
 Integrated counts and folded model. The integrated counts are
 normalized to unity. If `setplot add` has been used
 then folded additive model components are shown as dotted lines.
+
+- [image]
+
+`plot image [delchi|ratio|residuals] [xkey `<name>` | xvalues `<v1 v2 ...>`]`.
+The residuals of every plot group as one colour image: x is energy, channel
+or wavelength as set by `setplot`, each row is a plot group (in
+order), and the colour is the measure (`delchi` by default), on a
+scale symmetric about 0 (about 1 for `ratio`).  With `xkey`
+the rows are placed at an `XFLT` entry or header keyword of each
+group's first spectrum (e.g. `TSTART` for time-sliced spectra); with
+`xvalues` they are given, one per plot group.  The bins are common to
+all rows: `setplot rebin` is applied to the coadded counts of every
+group, so faint rows borrow their binning from the total.  Every spectrum
+must share the same channels.  Cells whose channels are ignored are blank.
+`setplot group` and `setplot coadd` apply.  PLT draws equal
+pixels, so bins that are not uniform on the plotted axis are shown on a
+uniform grid of columns, each taking the value of the bin it falls in.  The
+image is drawn alone; in PyXspec `Plot.x()`, `Plot.y()` and
+`Plot.z()` return the columns, rows and values (NaN for a blank
+cell).  `plot im` is enough; `plot res` remains
+`residuals`.
 
 - [insensitivity]
 
@@ -318,9 +420,14 @@ Plot the data (with the folded model, if defined) with a logarithmic
 y-axis. If `setplot add` has been used
 then folded additive model components are shown as dotted lines.
 
+- [ledata, leedata]
+
+As `edata` and `eedata` (the energy- and $E^{2}$-weighted
+count spectra) but with a logarithmic y-axis.
+
 - [margin]
 
-Plot the probability distribution from the results of the most recently 
+Plot the probability distribution from the results of the most recently
 run `margin` command (must be a 1-D or 2-D distribution). A
 grey-scale image of the data being contoured is also plotted. This
 can be removed by using the PLT command `image off`.
@@ -333,8 +440,52 @@ additional argument. `emodel` plots $Ef(E)$ or, if plotting wavelength,
 $\lambda f(\lambda)$. `eemodel` plots $E^{2}f(E)$, or if plotting 
 wavelength, $\lambda^{2}f(\lambda)$. The $E$ (or $\lambda$) used in the 
 multiplicative factor is taken to be the geometric mean of the lower and 
-upper energies of the plot bin. The individual additive model
+upper energies of the plot bin, since the plot bins are the model's own
+energy bins and there is no finer information; on a coarse
+`energies` grid, use a finer one. The individual additive model
 components are shown by dotted lines.
+
+- [param]
+
+Plot best-fit parameter values with the error intervals the last
+`error` run stored.
+
+```
+plot param <par1> [<par2> ...] [xkey <name> | xvalues <x1> ...] [log]
+plot param <par> groups        [xkey <name> | xvalues <x1> ...] [log]
+```
+
+The first form plots the listed parameters (numbers, or
+`<model name>:<n>`); the second plots parameter `<par>`
+of the first data group and its copy in every other data group, in group
+order, which is the usual way to show a parameter fitted separately to
+several spectra (time-resolved or region-resolved fits). The x axis is the
+position in the list, or the data-group number for `groups`.
+`xkey` `<name>` takes x from each point's data group instead: an
+XFLT entry of the group's first spectrum (e.g. `major`, the radius
+`bayes smooth` reads) or, failing that, a numeric keyword in its
+SPECTRUM header (e.g. `TSTART`); a group without it is refused.
+`xvalues` gives one x value per point, and takes every number that
+follows it. There are no x error bars.
+
+The asymmetric y error bars are the intervals stored by the last
+`error` run, from the fit or from chains; the plot never runs
+`error` itself. A parameter with no stored interval, one whose
+interval no longer brackets its current value (it has been changed or
+refitted since), and frozen and linked parameters are drawn as points with
+no bar, and one note line names them. The y axis is labelled with the
+parameter name and unit when all the parameters share a name, and
+``Parameter value'' otherwise (with a note). `log` makes that pane's
+y axis logarithmic. Several `param` plots stack as panes sharing the
+x axis:
+
+```
+error 1 3 5 7
+plot param 1 groups xkey major param 2 groups log
+```
+
+`param` is the first plot type that `p` abbreviates; use
+`pol` for `polangle`.
 
 - [polangle]
 
@@ -373,6 +524,9 @@ and (folded model) is the model times the response as seen in the standard
 `plot data`. `eufspec` plots the unfolded spectrum and model 
 in $Ef(E)$, or if plotting wavelength, $\lambda f(\lambda)$. `eeufspec` 
 plots the unfolded spectrum and model in $E^{2}f(E)$, or if plotting wavelength,
-$\lambda^{2}f(\lambda)$. The E (or $\lambda$) used in the multiplicative factor 
-is taken to be the geometric mean of the lower and upper energies of the plot 
-bin.
+$\lambda^{2}f(\lambda)$. The $E^{p}$ in the multiplicative factor is, by
+default, the model's flux-weighted mean of $E^{p}$ over its energy bins
+inside the plot bin, so the plotted value is the bin average of $E^{p}f(E)$,
+for data and model alike; `setplot eweight` `geometric`
+uses the geometric mean of the lower and upper energies of the plot bin
+instead, as before.

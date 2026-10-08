@@ -26,7 +26,7 @@ Thomson scattering). Note that the default He cross-section changed in v11.
 The old version can be recovered using the command
 
 ```
-XSPEC12>xsect obcm
+XSPEC>xsect obcm
 ```
 
 ## Parameters

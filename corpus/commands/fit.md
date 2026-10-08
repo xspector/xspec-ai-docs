@@ -44,20 +44,58 @@ If `<number of iterations>`, `<critical delta>`, `<critical beta>`,
 command, it also becomes the future default value for the currently loaded 
 fit `method` (ie. Levenberg-Marquardt).
 
+**Parameters on a table grid node.**  An interpolated table model
+(`atable`, `mtable`, `etable`) changes slope at every
+node of its parameter grid, so a minimum of the statistic can sit exactly on
+a node, at a kink that the fitting methods, which assume a smooth surface, do
+not land on: they stop just beside it.  So when a fit finishes with a free
+table parameter within its fit delta of a grid node, XSPEC refits with that
+parameter held on the node, keeps the result if the statistic is lower, and
+then refits with every parameter free again.  A line such as
+
+```
+ Parameter 1 moved from 1.00031 to the table grid node 1: fit statistic 677.003 -> 676.639
+```
+
+reports each move.  `xset TABLE_NODE_POLISH no` turns this off.
+It applies to `fit`, `fit` `global` (to each basin it
+polishes) and the model fits of `compare`, and to the parameters of an
+`rmodel` table as well as to model parameters.  It is not applied
+inside `error` and `steppar`, whose fits continue from the best
+fit and so start on the node already.
+
+**Parameters against a hard limit.**  When a step would take a
+parameter past one of its hard limits, the Levenberg-Marquardt method takes
+only part of it, and a parameter whose best value lies beyond the limit then
+approaches the limit without ever reaching it, so that the fit stops well
+short of its minimum.  `fit` therefore also checks, when it finishes,
+for a free parameter within its fit delta of a hard limit, and handles it as
+it does a table grid node: it refits with the parameter held on the limit and
+keeps the result if the statistic is lower, reporting for example
+
+```
+ Parameter 2 moved onto its upper limit 1.9 (it stopped 1.2e-14 short): fit statistic 594.664 -> 411.661
+```
+
+`xset LIMIT_POLISH no` turns this off.  Additive normalizations are
+never moved this way: a normalization approaching zero changes the statistic
+by a negligible amount, and the fitting method has its own handling of
+components whose normalization reaches zero.
+
 **Examples:**
 
 ```
-XSPEC12> fit
+XSPEC> fit
 // Fit with the default number of iterations and critical delta 
 // chi-squared.
-XSPEC12> fit 60
+XSPEC> fit 60
 // Fit with 60 as the number of iterations.
-XSPEC12> fit  50 1.e-3
+XSPEC> fit  50 1.e-3
 // Fit with 1.e-3 as the critical delta.
-XSPEC12> fit 50 1.e-3  20.
+XSPEC> fit 50 1.e-3  20.
 // Same fit, but will now use |beta|/N = 20.0 as another stopping
 // criterion in addition to that of the critical delta. 
-XSPEC12> fit delay
+XSPEC> fit delay
 // Same fit, but will now use delayed gratification.
 ```
 
@@ -113,7 +151,7 @@ number hides; the suggestion is to test them as distinct models with
 **Example:**
 
 ```
-XSPEC12> fit global
+XSPEC> fit global
  ... Differential Evolution search, then a normal polish ...
 
  fit global: 1 additional competitive basin(s) within delta-stat < 9
@@ -121,6 +159,6 @@ XSPEC12> fit global
     basin       dStat          stat   parameters(in fit order)
        2      3.1846        247.14   2.0014, 0.00039876, ...
   (test these as distinct models with `compare`.)
-XSPEC12> fit global 300 40
+XSPEC> fit global 300 40
 // Run a longer global search: 300 generations, population 40.
 ```

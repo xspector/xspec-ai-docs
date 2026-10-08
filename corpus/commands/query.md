@@ -22,5 +22,5 @@ will be assumed to be `yes` or `no` depending on the value set.
 To ensure that fitting continues without any questions being asked use the command:
 
 ```
-XSPEC12> query yes
+XSPEC> query yes
 ```

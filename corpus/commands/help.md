@@ -28,30 +28,30 @@ The design allows for users to add help files for local models and scripts to th
 **Examples:**
 
 ```
-XSPEC12> help
+XSPEC> help
 //show the entire manual.
-XSPEC12> help fit
+XSPEC> help fit
 //Go to the help text for the fit command.
-XSPEC12> help model pow
+XSPEC> help model pow
 //Go to the help text for the powerlaw model. 
-//(Entering just "XSPEC12> model" will produce a scrolled-text 
+//(Entering just "XSPEC> model" will produce a scrolled-text 
 //list of all available model components.)
-XSPEC12> help appendices
+XSPEC> help appendices
 //show the manual appendices (which document the user interface,
 //the Cash statistic, how to add models to XSPEC, a summary of 
 //PLT commands, and associated FTOOLS and other programs for 
 //manipulating data).
-XSPEC12>help appendix local
+XSPEC>help appendix local
 //show the appendix describing how to add local models
 ```
 
 Help also displays the following information as scrolling text:
 
 ```
-XSPEC12> help ?
+XSPEC> help ?
 //Show a list of all available commands.
-XSPEC12> help ??
+XSPEC> help ??
 //Show a brief summary and usage syntax of all available commands.
-XSPEC12> <command> ?
+XSPEC> <command> ?
 // Show brief summary and syntax of <command>.
 ```

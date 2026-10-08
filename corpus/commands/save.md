@@ -23,16 +23,16 @@ both of the above. The default option is `model`. To recover the
 saved context use the command:
 
 ```
-XSPEC12>@filename
+XSPEC>@filename
 ```
 
 **Examples:**
 
 ```
-XSPEC12> save model fname 
+XSPEC> save model fname 
 // Write out model commands to the file fname.xcm
-XSPEC12> save
+XSPEC> save
 // Same as above, but save into file savexspec.xcm.
-XSPEC12> save files fname
+XSPEC> save files fname
 // Write out data file commands.
 ```

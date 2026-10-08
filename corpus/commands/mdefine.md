@@ -43,19 +43,19 @@ defined models:
 - To display the name, type and expression of all previously defined models: 
 
 ```
-XSPEC12>mdefine
+XSPEC>mdefine
 ```
 
 - To display the name, type and expression of a previously defined model by the name, MNAME:
 
 ```
-XSPEC12> mdefine MNAME
+XSPEC> mdefine MNAME
 ```
 
 - To delete a previously defined model by the name, MNAME:
 
 ```
-XSPEC12> mdefine MNAME :
+XSPEC> mdefine MNAME :
 ```
 
 **Operators:**
@@ -180,43 +180,43 @@ added as a parameter in the expression.
 **Examples:**
 
 //  define a model named "dplaw" with 3 parameters, p1, p2, f  
-XSPEC12> mdef dplaw E**p1 + f*E**p2
+XSPEC> mdef dplaw E**p1 + f*E**p2
 
 // define a model named "junk" with 2 parameters (a, b)
-XSPEC12> mdef junk a*e+b*log(e)/sin(e)  
+XSPEC> mdef junk a*e+b*log(e)/sin(e)  
 
 // define a model named "junk2" with 1 parameter, a; the option 
 //   following ":" says that it will be a multiplicative model. 
-XSPEC12> mdef junk2  exp(-a*e) : mul   
+XSPEC> mdef junk2  exp(-a*e) : mul   
 
 // define a model named "junk3" with 1 parameter, B, options 
 //   following ":" says that this will be a multiplicative model 
-XSPEC12> mdef junk3  0.2+B*e : mul 
+XSPEC> mdef junk3  0.2+B*e : mul 
 
 // try to define a blackbody model with name "bb", you get warning: 
-XSPEC12> mdef bb E**2/T**4/(exp(E/T)-1) 
+XSPEC> mdef bb E**2/T**4/(exp(E/T)-1) 
 
         ***Warning: bb is a pre-defined model
         Please use a different name for your model.
 
 // this defines a Gaussian convolution model with sigma varying with 
 //   square root of energy.
-XSPEC12> mdef sg  exp(-E^2/(2*A*.E)) / sqrt(6.283*A*sqrt(.E))  :  con
+XSPEC> mdef sg  exp(-E^2/(2*A*.E)) / sqrt(6.283*A*sqrt(.E))  :  con
                                         
 // delete junk2 
-XSPEC12> mdef junk2 :
+XSPEC> mdef junk2 :
 
 // define a two-temperature model with common abundance and redshift
-XSPEC12> mdef twotemp (1-f)*apec(T1,A,z) + f*apec(T2,A,z)
+XSPEC> mdef twotemp (1-f)*apec(T1,A,z) + f*apec(T2,A,z)
 
 // define a pexrav model with parameter inclination instead of its cosine
-XSPEC12> mdef mypex pexrav(g,f,refl,z,A,FeA,cos(Incl))
+XSPEC> mdef mypex pexrav(g,f,refl,z,A,FeA,cos(Incl))
 
 // define a model based on two other mdefine models
-XSPEC12> mdef mymod junk3(p1)*junk(p2,p3)
+XSPEC> mdef mymod junk3(p1)*junk(p2,p3)
 
 // display all user-defined models
-XSPEC12> mdef
+XSPEC> mdef
 
 Name ---- Type ---- Expression -----
 dplaw     add       E**p1+f*E**p2

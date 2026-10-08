@@ -19,14 +19,47 @@ is an implementation of the fast pile-up algorithm proposed by John Davis
 (see http://space.mit.edu/ davis/papers/pileup2001.pdf). The frame time 
 and maximum number of photons to pile up should be fixed. The grade morphing 
 is expressed through a single parameter, alpha, which should be left as a free 
-parameter. This model should be considered in beta test. Note that to 
-calculate fluxes etc. for the model you must remove the `pileup` 
-component. The pile-up model is similar to the operation of the convolution 
-models, differing only in the treatment of the detector efficiency during the 
-convolution.  Note that `renorm` will not work with `pileup` 
-since increasing the normalization does not linearly increase the predicted 
-count rate.  Therefore you should set `renorm none` prior to doing a 
-fit with `pileup`.
+parameter.
+
+`pileup` is a **pile-up** (`acn`) component: unlike a 
+convolution model it does not act on the photon spectrum but on the count 
+spectrum *after* it has been folded through the response, on the response 
+file's ungrouped detector channel grid.  Two photons landing in channels with 
+energies $E_1$ and $E_2$ during one frame produce a single event in the 
+channel containing $E_1 + E_2$, and the series is summed over 2 to 
+max_ph piled photons.  Ignored channels take part (the photons are 
+still there), piles whose summed energy falls beyond the last channel are 
+lost, and the model energy grid plays no role, so the `energies` command 
+is not needed.  The component acts on the sum of the components it 
+multiplies: `pileup*wabs*pow + gauss` piles the power law only, 
+`pileup*wabs*(pow + gauss)` both.  Only one `pileup` 
+component is allowed in a model, it must be the first component of its term 
+(nothing may multiply the piled count spectrum), and the spectrum it applies 
+to must use an ordinary RMF (with or without an ARF); a dummy response is 
+refused.
+
+Because the pile-up is applied after folding, `flux`, `lumin` and 
+`eqwidth` report the unpiled source model and the component need not 
+be removed to use them.  `renorm` is skipped for a model containing 
+`pileup`, since the predicted count rate is not linear in the 
+normalizations.  Additive components shown by `setplot add` are 
+the unpiled contributions; only the total model is piled.  When table-model 
+uncertainties are in use, each grouped bin's model variance is scaled by the 
+square of its piled-to-unpiled ratio.
+
+After every evaluation the model publishes two diagnostics as model strings 
+(see `xset`): `PILEUP_$n$_PILEFRAC`, the fraction of the 
+observed events in spectrum $n$ that are piles of two or more photons, and 
+`PILEUP_$n$_FRAMEOCC`, the mean number of detected photons per 
+region per frame.
+
+Versions before 13.0.1 applied the series to the photon spectrum multiplied 
+by the effective area, assuming a uniform model energy grid.  On the 
+non-uniform energy grids of real response matrices that mis-binned the piled 
+photons and lost a large fraction of the piled hard tail (25% of the 
+5--7 keV band at 0.6 photons per frame on an ACIS response), and a linear 
+grid set with `energies` gave undefined results; fits with the old 
+model should be repeated.
 
 ## Parameters
 

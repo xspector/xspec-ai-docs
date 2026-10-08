@@ -1,0 +1,36 @@
+{
+  "name": "gain",
+  "type": "rsp",
+  "func": "C_gain",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "slope",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.01,
+      "softmin": 0.5,
+      "softmax": 1.5,
+      "hardmax": 5.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "offset",
+      "unit": "keV",
+      "default": 0.0,
+      "hardmin": -1.0,
+      "softmin": -1.0,
+      "softmax": 1.0,
+      "hardmax": 1.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [],
+  "title": ""
+}

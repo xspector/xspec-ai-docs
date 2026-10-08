@@ -27,8 +27,8 @@ wa(po+ga+ga)
 Then
 
 ```
-XSPEC12> delcomp 3-4
+XSPEC> delcomp 3-4
 //Changes the model to wa(po)
-XSPEC12> delcomp 1
+XSPEC> delcomp 1
 //Changes the model to po
 ```

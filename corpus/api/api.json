@@ -1,4 +1,25 @@
 {
+  "CommandError": {
+    "class": "CommandError",
+    "module": "bridge.py",
+    "singleton": null,
+    "summary": "A bridged command failed.",
+    "attributes": [
+      {
+        "name": "line",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(message, line)",
+        "doc": ""
+      }
+    ]
+  },
   "ChainManager": {
     "class": "ChainManager",
     "module": "chain.py",
@@ -58,6 +79,48 @@
         "type": "",
         "access": "get/set",
         "doc": "Default walkers parameter for 'gw' chains (orig = 10)."
+      },
+      {
+        "name": "adapt",
+        "type": "bool",
+        "access": "get/set",
+        "doc": "Whether new Metropolis-Hastings chains adapt their proposal [bool]."
+      },
+      {
+        "name": "adaptTarget",
+        "type": "float",
+        "access": "get/set",
+        "doc": "Target acceptance rate for an adapting chain [float] (0.234)."
+      },
+      {
+        "name": "tempering",
+        "type": "",
+        "access": "get/set",
+        "doc": "Number of parallel-tempering rungs for new Metropolis-Hastings"
+      },
+      {
+        "name": "temperingTmax",
+        "type": "float",
+        "access": "get/set",
+        "doc": "Temperature of the hottest rung [float] (100)."
+      },
+      {
+        "name": "temperingSwap",
+        "type": "int",
+        "access": "get/set",
+        "doc": "Steps between swap rounds [int] (10)."
+      },
+      {
+        "name": "temperingAdapt",
+        "type": "",
+        "access": "get/set",
+        "doc": "Whether the ladder adapts during the burn-in [None, True or False]."
+      },
+      {
+        "name": "temperingSideFiles",
+        "type": "bool",
+        "access": "get/set",
+        "doc": "Write the hotter rungs to <chain>_T<k> side files [bool] (False)."
       }
     ],
     "methods": [
@@ -209,6 +272,751 @@
       }
     ]
   },
+  "E": {
+    "class": "E",
+    "module": "convert.py",
+    "singleton": null,
+    "summary": "A translated value: Python source, its static type, and the Tcl",
+    "attributes": [],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(code, typ, lit=None)",
+        "doc": ""
+      }
+    ]
+  },
+  "Report": {
+    "class": "Report",
+    "module": "convert.py",
+    "singleton": null,
+    "summary": "",
+    "attributes": [
+      {
+        "name": "source",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "total",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "native",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "bridged",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "fallbacks",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "untranslated",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "notes",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(source)",
+        "doc": ""
+      },
+      {
+        "name": "text",
+        "signature": "()",
+        "doc": ""
+      }
+    ]
+  },
+  "Converter": {
+    "class": "Converter",
+    "module": "convert.py",
+    "singleton": null,
+    "summary": "",
+    "attributes": [
+      {
+        "name": "source",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "report",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "lines",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "indent",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "used",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "tmp",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "scope",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "scopes_types",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "procs",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "line_no",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "loop_next",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "exited",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "cur_line",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "all_bridged",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(source)",
+        "doc": ""
+      },
+      {
+        "name": "emit",
+        "signature": "(text)",
+        "doc": ""
+      },
+      {
+        "name": "newtmp",
+        "signature": "(stem='_t')",
+        "doc": ""
+      },
+      {
+        "name": "fallback",
+        "signature": "(what)",
+        "doc": ""
+      },
+      {
+        "name": "pyname",
+        "signature": "(name)",
+        "doc": ""
+      },
+      {
+        "name": "is_global_ref",
+        "signature": "(name)",
+        "doc": ""
+      },
+      {
+        "name": "vtype",
+        "signature": "(name)",
+        "doc": ""
+      },
+      {
+        "name": "note_assign",
+        "signature": "(name, typ)",
+        "doc": ""
+      },
+      {
+        "name": "literal",
+        "signature": "(text)",
+        "doc": ""
+      },
+      {
+        "name": "strlit",
+        "signature": "(text)",
+        "doc": ""
+      },
+      {
+        "name": "as_str",
+        "signature": "(e)",
+        "doc": "Python source for the Tcl string form of e."
+      },
+      {
+        "name": "as_num",
+        "signature": "(e)",
+        "doc": ""
+      },
+      {
+        "name": "as_int",
+        "signature": "(e)",
+        "doc": ""
+      },
+      {
+        "name": "as_list",
+        "signature": "(e)",
+        "doc": ""
+      },
+      {
+        "name": "as_bool",
+        "signature": "(e)",
+        "doc": ""
+      },
+      {
+        "name": "word",
+        "signature": "(w)",
+        "doc": ""
+      },
+      {
+        "name": "tokens",
+        "signature": "(toks, form='bare')",
+        "doc": ""
+      },
+      {
+        "name": "concat",
+        "signature": "(parts)",
+        "doc": ""
+      },
+      {
+        "name": "arglist",
+        "signature": "(words)",
+        "doc": "Python argument source for words, {*}word expanded."
+      },
+      {
+        "name": "token",
+        "signature": "(t)",
+        "doc": ""
+      },
+      {
+        "name": "varref",
+        "signature": "(name, index)",
+        "doc": ""
+      },
+      {
+        "name": "cmd_value",
+        "signature": "(script)",
+        "doc": ""
+      },
+      {
+        "name": "command_value",
+        "signature": "(cmd)",
+        "doc": "A command used for its value: an expression, hoisting any"
+      },
+      {
+        "name": "body",
+        "signature": "(raw, base_line, ret_last=False, assign_last=None)",
+        "doc": "Translate a braced script (a body).  ret_last: a proc body, whose"
+      },
+      {
+        "name": "statement",
+        "signature": "(cmd)",
+        "doc": ""
+      },
+      {
+        "name": "dispatch",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "command_string",
+        "signature": "(words)",
+        "doc": "Python source for the command line these words make, as the bridge"
+      },
+      {
+        "name": "bridged",
+        "signature": "(words, text, value, reason=None)",
+        "doc": ""
+      },
+      {
+        "name": "shell",
+        "signature": "(words, value)",
+        "doc": ""
+      },
+      {
+        "name": "run_script",
+        "signature": "(args, value)",
+        "doc": ""
+      },
+      {
+        "name": "call_proc",
+        "signature": "(name, argwords, value)",
+        "doc": ""
+      },
+      {
+        "name": "target",
+        "signature": "(w)",
+        "doc": "The Python assignment target for a variable-name word."
+      },
+      {
+        "name": "tcl_set",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_unset",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_incr",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_append",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_lappend",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_global",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "expr_text",
+        "signature": "(words)",
+        "doc": "The expression source of `expr`'s argument words (several words are"
+      },
+      {
+        "name": "tcl_expr",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "expr",
+        "signature": "(src, ctx)",
+        "doc": ""
+      },
+      {
+        "name": "cond",
+        "signature": "(w)",
+        "doc": "A condition word (if/while/for): a braced expression, or a word"
+      },
+      {
+        "name": "tcl_if",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "body_word",
+        "signature": "(w)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_while",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_for",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_foreach",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_break",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_continue",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_switch",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_proc",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_return",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_error",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_catch",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_eval",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_source",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_package",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_null",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_puts",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_open",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_close",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_flush",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_gets",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_read",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_eof",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_file",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_exec",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_cd",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_pwd",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_glob",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_after",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_clock",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_info",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_array",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_list",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_llength",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_lindex",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_lrange",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_lsort",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_lsearch",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_linsert",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_lreplace",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_lreverse",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_concat",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_join",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_split",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_lset",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_lassign",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_dict",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_format",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_scan",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_string",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_regexp",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_regsub",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tclout_expr",
+        "signature": "(words, text)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_tclout",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "tcl_tcloutr",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "argstr",
+        "signature": "(words)",
+        "doc": ""
+      },
+      {
+        "name": "xs_data",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_ignore",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_notice",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_model",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_fit",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_error",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_statistic",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_query",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_abund",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_xsect",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_chatter",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_flux",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_lumin",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_energies",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_cpd",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_null",
+        "signature": "(words, text, value)",
+        "doc": ""
+      },
+      {
+        "name": "xs_save",
+        "signature": "(words, text, value)",
+        "doc": ""
+      }
+    ]
+  },
   "FakeitSettings": {
     "class": "FakeitSettings",
     "module": "data.py",
@@ -266,6 +1074,79 @@
       }
     ]
   },
+  "DataRecord": {
+    "class": "DataRecord",
+    "module": "data.py",
+    "singleton": null,
+    "summary": "**One file's worth of an AllData.load() batch.**",
+    "attributes": [
+      {
+        "name": "file",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "group",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "slot",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "rows",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "response",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "arf",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "background",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "fileName",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(file, group=None, slot=None, rows=None, response=None, arf=None, background=None, fileName=None)",
+        "doc": ""
+      },
+      {
+        "name": "fromArrays",
+        "signature": "(cls, eLow, eHigh, flux, fluxErr, xunit='keV', yunit='ph/cm^2/s', fileName=None, group=None, slot=None, rows=None)",
+        "doc": "A record for tabulated flux data (what *ftflx2xsp* makes)."
+      },
+      {
+        "name": "fromCounts",
+        "signature": "(cls, counts, exposure, response, arf=None, background=None, channels=None, poisson=True, statErr=None, fileName=None, group=None, slot=None)",
+        "doc": "A record for counts per channel."
+      }
+    ]
+  },
   "DataManager": {
     "class": "DataManager",
     "module": "data.py",
@@ -283,6 +1164,12 @@
         "type": "int",
         "access": "get",
         "doc": "The number of loaded spectra [int]."
+      },
+      {
+        "name": "dataModels",
+        "type": "",
+        "access": "get",
+        "doc": "Every data model on every spectrum, spectrum order then the order"
       }
     ],
     "methods": [
@@ -297,9 +1184,44 @@
         "doc": "DataManager get or set spectra."
       },
       {
+        "name": "load",
+        "signature": "(records, preserve=False)",
+        "doc": "Load a batch of spectra: the typed form of *AllData(\"...\")*."
+      },
+      {
+        "name": "loadArrays",
+        "signature": "(eLow, eHigh, flux, fluxErr, xunit='keV', yunit='ph/cm^2/s', fileName=None, group=None, slot=None, rows=None, preserve=False)",
+        "doc": "Load tabulated flux data: *load([DataRecord.fromArrays(...)])*."
+      },
+      {
         "name": "clear",
         "signature": "()",
         "doc": "Remove all spectra from the data container."
+      },
+      {
+        "name": "removeDataModels",
+        "signature": "()",
+        "doc": "Remove every data model from every spectrum (*dmodel clear*)."
+      },
+      {
+        "name": "registeredDataModels",
+        "signature": "()",
+        "doc": "The data models that can be attached (model.dat type dat)."
+      },
+      {
+        "name": "backModel",
+        "signature": "(expr, name='bkg', spectra=None, response=None, arf=None)",
+        "doc": "Fit the background with a model, together with the source."
+      },
+      {
+        "name": "backModelNone",
+        "signature": "(spectra=None)",
+        "doc": "Undo :meth:`backModel` for the given source spectra (default all)."
+      },
+      {
+        "name": "backModels",
+        "signature": "()",
+        "doc": "The backmodel set-up: a dict with \"components\" (each a dict of"
       },
       {
         "name": "diagrsp",
@@ -308,7 +1230,7 @@
       },
       {
         "name": "dummyrsp",
-        "signature": "(lowE=None, highE=None, nBins=None, scaleType=None, chanOffset=None, chanWidth=None)",
+        "signature": "(lowE=None, highE=None, nBins=None, scaleType=None, chanOffset=None, chanWidth=None, chanLog=None)",
         "doc": "Create a dummy response and apply it to all spectra."
       },
       {
@@ -333,13 +1255,130 @@
       },
       {
         "name": "removeDummyrsp",
-        "signature": "()",
-        "doc": "Remove all dummy responses, restore original responses (if any)."
+        "signature": "(spectra=None)",
+        "doc": "Remove dummy responses, restore original responses (if any)."
       },
       {
         "name": "show",
         "signature": "()",
         "doc": "Display information for all loaded spectra."
+      }
+    ]
+  },
+  "SmoothnessPrior": {
+    "class": "SmoothnessPrior",
+    "module": "fit.py",
+    "singleton": null,
+    "summary": "**A joint prior: the Tikhonov smoothness term of 'bayes smooth'.**",
+    "attributes": [
+      {
+        "name": "parameters",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "order",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "space",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "lam",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "radii",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "lambdaRule",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(parameters, order=2, space='log', lam=1.0, radii=None)",
+        "doc": ""
+      }
+    ]
+  },
+  "ComparePreset": {
+    "class": "ComparePreset",
+    "module": "fit.py",
+    "singleton": null,
+    "summary": "**A compare preset: one word for a family of alternatives.**",
+    "attributes": [
+      {
+        "name": "family",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "component",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "only",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(family, component=None, only=None)",
+        "doc": ""
+      }
+    ]
+  },
+  "FuzzyLink": {
+    "class": "FuzzyLink",
+    "module": "fit.py",
+    "singleton": null,
+    "summary": "**A joint prior: a fuzzy (soft) link -- 'bayes fuzzy'.**",
+    "attributes": [
+      {
+        "name": "parameters",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "tolerance",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      },
+      {
+        "name": "ratio",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(parameters, tolerance=0.2, ratio=1.0)",
+        "doc": ""
       }
     ]
   },
@@ -362,10 +1401,22 @@
         "doc": "The current Bayesian prior settings, as a listing [string]"
       },
       {
+        "name": "jointPriors",
+        "type": "list",
+        "access": "get",
+        "doc": "The joint prior terms in force [list] (GET only)."
+      },
+      {
         "name": "covariance",
         "type": "",
         "access": "get",
         "doc": "The covariance matrix from the most recent fit [tuple"
+      },
+      {
+        "name": "analyticGradient",
+        "type": "str",
+        "access": "get/set",
+        "doc": "The analytic-gradient mode [string]: \"auto\","
       },
       {
         "name": "criticalDelta",
@@ -378,6 +1429,18 @@
         "type": "float",
         "access": "get/set",
         "doc": "Set fit delta values to be proportional to the parameter value [float]."
+      },
+      {
+        "name": "deltaEscalation",
+        "type": "",
+        "access": "get/set",
+        "doc": "Whether a Levenberg-Marquardt fit retries a zero"
+      },
+      {
+        "name": "errorSearch",
+        "type": "str",
+        "access": "get/set",
+        "doc": "How Fit.error() searches for a confidence bound [string]."
       },
       {
         "name": "dof",
@@ -396,6 +1459,12 @@
         "type": "int",
         "access": "get/set",
         "doc": "The maximum number of fit iterations prior to query [int]."
+      },
+      {
+        "name": "geodesic",
+        "type": "bool",
+        "access": "get/set",
+        "doc": "Geodesic acceleration for the 'leven' method [bool]."
       },
       {
         "name": "nullhyp",
@@ -477,6 +1546,26 @@
         "doc": ""
       },
       {
+        "name": "addJointPrior",
+        "signature": "(prior)",
+        "doc": "Register a joint (multi-parameter) prior [dict]."
+      },
+      {
+        "name": "clearJointPriors",
+        "signature": "(kind=None)",
+        "doc": "Remove joint prior terms."
+      },
+      {
+        "name": "jacobian",
+        "signature": "(mode=None)",
+        "doc": "Predicted counts and their derivatives with respect to each free"
+      },
+      {
+        "name": "gradient",
+        "signature": "(mode=None)",
+        "doc": "The derivative of the fit statistic with respect to each free"
+      },
+      {
         "name": "error",
         "signature": "(argString, respPar=False)",
         "doc": "Determine confidence intervals of a fit."
@@ -507,9 +1596,69 @@
         "doc": "Perform a global fit (cold-start Differential Evolution + polish)."
       },
       {
+        "name": "posterior",
+        "signature": "()",
+        "doc": "Credible intervals from the loaded chain, on `error`'s convention."
+      },
+      {
+        "name": "nestVerdict",
+        "signature": "()",
+        "doc": "The last `nest` run's verdict (the block's [WARN]/[INFO] lines)."
+      },
+      {
+        "name": "hmcVerdict",
+        "signature": "()",
+        "doc": "The last `hmc` run's verdict."
+      },
+      {
+        "name": "bias",
+        "signature": "(draws=2000, seed=None)",
+        "doc": "Predict the W-statistic bias of the current fit (the `bias` command)."
+      },
+      {
+        "name": "coverage",
+        "signature": "(niter, params=None, method='error', level=None, file=None, seed=None)",
+        "doc": "How often error (or chain) intervals contain the truth (the"
+      },
+      {
+        "name": "lrt",
+        "signature": "(niter, null, alternative, file=None, seed=None)",
+        "doc": "Likelihood-ratio test of two models, calibrated by simulation (the"
+      },
+      {
+        "name": "simftest",
+        "signature": "(component, niter, file=None, seed=None)",
+        "doc": "Likelihood-ratio test of one model component, calibrated by"
+      },
+      {
+        "name": "dataScan",
+        "signature": "(setups, par=None, coord=None, method=None, file=None)",
+        "doc": "Refit the current model to alternative data setups and report"
+      },
+      {
+        "name": "cgof",
+        "signature": "(f=None, draws=2000, seed=None)",
+        "doc": "C-statistic goodness of fit with model systematics (the `cgof` command)."
+      },
+      {
+        "name": "cgofDelta",
+        "signature": "(deltaC, k, f, mu=None)",
+        "doc": "Corrected significance of a nested model component with systematics."
+      },
+      {
         "name": "compare",
         "signature": "(alternatives, method='lm', useGlobal=False)",
         "doc": "Compare alternative models against the current model (model selection)."
+      },
+      {
+        "name": "comparePresets",
+        "signature": "()",
+        "doc": "The compare preset registry, against the current model."
+      },
+      {
+        "name": "loadComparePresets",
+        "signature": "(path)",
+        "doc": "Add a compare preset registry file for this session."
       },
       {
         "name": "perform",
@@ -542,7 +1691,7 @@
     "class": "HMCResult",
     "module": "inference.py",
     "singleton": null,
-    "summary": "Phase-(a) HMC/NUTS sampler output.",
+    "summary": "**HMC/NUTS sampler output.**",
     "attributes": [
       {
         "name": "file_name",
@@ -754,6 +1903,16 @@
         "name": "__init__",
         "signature": "(compName, parNames)",
         "doc": "Component constructor."
+      },
+      {
+        "name": "link",
+        "signature": "(other)",
+        "doc": "Link every parameter to the same-position parameter of `other`."
+      },
+      {
+        "name": "untie",
+        "signature": "()",
+        "doc": "Untie every parameter of this component, keeping the values."
       }
     ]
   },
@@ -851,6 +2010,25 @@
         "name": "values",
         "signature": "(spectrumIndex)",
         "doc": "Get the Model object's values array for a given spectrum."
+      },
+      {
+        "name": "emittedLines",
+        "signature": "(loKeV, hiKeV)",
+        "doc": "The lines this model's AtomDB components emit in a window."
+      }
+    ]
+  },
+  "ComponentDefinition": {
+    "class": "ComponentDefinition",
+    "module": "model.py",
+    "singleton": null,
+    "summary": "**A model component's definition**, as *AllModels.info* returns it.",
+    "attributes": [],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(d)",
+        "doc": ""
       }
     ]
   },
@@ -885,24 +2063,44 @@
         "doc": "Get Model objects from the AllModels container."
       },
       {
+        "name": "info",
+        "signature": "(name)",
+        "doc": "A model component's definition, without loading it."
+      },
+      {
+        "name": "names",
+        "signature": "(pattern='')",
+        "doc": "The names of the model components matching a pattern."
+      },
+      {
         "name": "addPyMod",
-        "signature": "(func, parInfo, compType, calcsErrors=False, spectrumDependent=False)",
+        "signature": "(func, parInfo, compType, calcsErrors=False, spectrumDependent=False, vectorized=False, units=None)",
         "doc": "Add a user-defined Python model function to XSPEC's models library."
       },
       {
         "name": "calcFlux",
-        "signature": "(cmdStr)",
+        "signature": "(eMin=None, eMax=None, err=False, number=None, level=None, cmdStr=None, zero=None)",
         "doc": "Calculate the model flux for a given energy range."
       },
       {
         "name": "calcLumin",
-        "signature": "(cmdStr)",
+        "signature": "(eMin=None, eMax=None, redshift=None, err=False, number=None, level=None, cmdStr=None, zero=None)",
         "doc": "Calculate the model luminosity for a given energy range and redshift."
       },
       {
         "name": "clear",
         "signature": "()",
         "doc": "Remove all models."
+      },
+      {
+        "name": "projctDiagnostics",
+        "signature": "()",
+        "doc": "The conditioning of every projct component's deprojection, as of"
+      },
+      {
+        "name": "mixingWeights",
+        "signature": "(component, energy=None)",
+        "doc": "The weights a mixing model component mixes with (`tclout"
       },
       {
         "name": "eqwidth",
@@ -918,6 +2116,11 @@
         "name": "identify",
         "signature": "(energy=None, delta=None, redshift=None, lineList=None, tplasma=None, emiss=None)",
         "doc": "Identify spectral lines."
+      },
+      {
+        "name": "identifyLines",
+        "signature": "(energy, delta, top=20, group=1, model='')",
+        "doc": "List the lines the current model emits (the 'identify fit' command)."
       },
       {
         "name": "initpackage",
@@ -962,7 +2165,7 @@
       {
         "name": "tclLoad",
         "signature": "(fullLibPath)",
-        "doc": "Load a local model library by calling Tcl's 'load' command."
+        "doc": "Load a local model library by naming the library file directly."
       },
       {
         "name": "setActive",
@@ -980,7 +2183,7 @@
     "class": "NestedResult",
     "module": "nest.py",
     "singleton": null,
-    "summary": "In-memory view of a `nest run` output FITS file.",
+    "summary": "**In-memory view of a `nest run` output FITS file.**",
     "attributes": [
       {
         "name": "file_name",
@@ -1152,6 +2355,18 @@
         "type": "",
         "access": "get/set",
         "doc": "Parameter link expression string (empty if not linked)."
+      },
+      {
+        "name": "lowerExpr",
+        "type": "",
+        "access": "get/set",
+        "doc": "The hard lower limit as an expression of other parameters"
+      },
+      {
+        "name": "upperExpr",
+        "type": "",
+        "access": "get/set",
+        "doc": "The hard upper limit as an expression of other parameters"
       }
     ],
     "methods": [
@@ -1177,7 +2392,19 @@
         "name": "add",
         "type": "",
         "access": "get/set",
-        "doc": "Turn on/off the display of individual additive"
+        "doc": "The display of individual additive components:"
+      },
+      {
+        "name": "coadd",
+        "type": "",
+        "access": "get/set",
+        "doc": "Plot groups sum their spectra instead of averaging"
+      },
+      {
+        "name": "eweight",
+        "type": "",
+        "access": "get/set",
+        "doc": "How the ufspec and dspec families (and their e/ee"
       },
       {
         "name": "area",
@@ -1238,6 +2465,24 @@
         "type": "",
         "access": "get/set",
         "doc": "See xLog."
+      },
+      {
+        "name": "band",
+        "type": "bool",
+        "access": "get/set",
+        "doc": "Draw a credible band on model curves [bool] (False)."
+      },
+      {
+        "name": "bandLevels",
+        "type": "list",
+        "access": "get/set",
+        "doc": "Credible levels of the band, percent [list of float] ([68.0])."
+      },
+      {
+        "name": "bandDraws",
+        "type": "int",
+        "access": "get/set",
+        "doc": "Number of parameter draws for the band [int] (500)."
       }
     ],
     "methods": [
@@ -1268,7 +2513,7 @@
       },
       {
         "name": "iplot",
-        "signature": "(*panes)",
+        "signature": "(*panes, commands=None)",
         "doc": "Display the plot and leave it in interactive plotting mode."
       },
       {
@@ -1290,6 +2535,11 @@
         "name": "setID",
         "signature": "(temperature=None, emissivity=None, redshift=None)",
         "doc": "Switch on plotting of line IDs."
+      },
+      {
+        "name": "setIDModel",
+        "signature": "(top=20, fraction=0.01, group=1, model=None, lo=0.0, hi=0.0)",
+        "doc": "Label the lines the current model emits (``setplot id model``)."
       },
       {
         "name": "setRebin",
@@ -1322,9 +2572,24 @@
         "doc": "Return a list of Y-coordinate errors for a plot group and plot window"
       },
       {
+        "name": "bandLow",
+        "signature": "(plotGroup=1, level=None, plotWindow=1)",
+        "doc": "Lower edge of the credible band on the model curve, on the plot's"
+      },
+      {
+        "name": "bandHigh",
+        "signature": "(plotGroup=1, level=None, plotWindow=1)",
+        "doc": "Upper edge of the credible band (see bandLow)."
+      },
+      {
+        "name": "yErrLow",
+        "signature": "(plotGroup=1, plotWindow=1)",
+        "doc": "Return a list of lower Y-coordinate errors for a plot group and window"
+      },
+      {
         "name": "z",
         "signature": "()",
-        "doc": "Return a 2D list of the grid values for a 2D contour plot"
+        "doc": "Return a 2D list of the grid values for a 2D contour plot or"
       },
       {
         "name": "model",
@@ -1355,9 +2620,27 @@
     "summary": "Detector response class.",
     "attributes": [
       {
+        "name": "rmodels",
+        "type": "",
+        "access": "get",
+        "doc": ""
+      },
+      {
         "name": "arf",
         "type": "",
         "access": "get/set",
+        "doc": ""
+      },
+      {
+        "name": "firstOrder",
+        "type": "",
+        "access": "get/set",
+        "doc": ""
+      },
+      {
+        "name": "firstOrderInfo",
+        "type": "",
+        "access": "get",
         "doc": ""
       },
       {
@@ -1403,6 +2686,16 @@
         "doc": "Set multiple response parameters with a single function call."
       },
       {
+        "name": "addRModel",
+        "signature": "(name, *values)",
+        "doc": "Attach a response model to this response, or reset one already attached."
+      },
+      {
+        "name": "removeRModel",
+        "signature": "(name=None)",
+        "doc": "Remove one response model from this response, or all of them."
+      },
+      {
         "name": "show",
         "signature": "()",
         "doc": "Display response information including (optional) response parameters."
@@ -1422,6 +2715,12 @@
         "doc": "On/Off indicator for RModel object."
       },
       {
+        "name": "name",
+        "type": "",
+        "access": "get",
+        "doc": "The response model's name."
+      },
+      {
         "name": "parameterNames",
         "type": "",
         "access": "instance",
@@ -1437,7 +2736,7 @@
       {
         "name": "off",
         "signature": "()",
-        "doc": "Remove response parameters and turn the model OFF."
+        "doc": "Remove this response model and its parameters (turn it OFF)."
       }
     ]
   },
@@ -1472,6 +2771,12 @@
         "doc": "The spectrum's file name [string] (GET only)."
       },
       {
+        "name": "fromBackground",
+        "type": "",
+        "access": "get",
+        "doc": "For a correction (Spectrum.correction): the background file"
+      },
+      {
         "name": "isPoisson",
         "type": "bool",
         "access": "get",
@@ -1493,8 +2798,52 @@
     "methods": [
       {
         "name": "__init__",
-        "signature": "(backTuple, parent)",
+        "signature": "(backTuple, parent, isCorrection=False)",
         "doc": "Construct a Background object."
+      }
+    ]
+  },
+  "DataModel": {
+    "class": "DataModel",
+    "module": "spectrum.py",
+    "singleton": null,
+    "summary": "**A data model attached to a spectrum** (the *dmodel* command).",
+    "attributes": [
+      {
+        "name": "name",
+        "type": "",
+        "access": "get",
+        "doc": "The data model's name (get only)."
+      },
+      {
+        "name": "spectrum",
+        "type": "",
+        "access": "get",
+        "doc": "Index of the spectrum it is attached to (get only)."
+      },
+      {
+        "name": "parameters",
+        "type": "",
+        "access": "get",
+        "doc": "Its Parameter objects, row order (get only)."
+      },
+      {
+        "name": "parameterNames",
+        "type": "",
+        "access": "instance",
+        "doc": ""
+      }
+    ],
+    "methods": [
+      {
+        "name": "__init__",
+        "signature": "(spectrum, name, parNames, offset)",
+        "doc": "Intended for creation by a Spectrum object only."
+      },
+      {
+        "name": "__call__",
+        "signature": "(index)",
+        "doc": ""
       }
     ]
   },
@@ -1581,6 +2930,12 @@
         "type": "",
         "access": "get",
         "doc": "The spectrum's current index number within the AllData"
+      },
+      {
+        "name": "managedBy",
+        "type": "",
+        "access": "get",
+        "doc": "For a background spectrum set up by AllData.backModel,"
       },
       {
         "name": "isPoisson",
@@ -1671,6 +3026,12 @@
         "type": "",
         "access": "get",
         "doc": "Cached background-side group intent as a string, e.g."
+      },
+      {
+        "name": "dataModels",
+        "type": "tuple",
+        "access": "get",
+        "doc": "The spectrum's data models, in the order applied: a tuple of"
       }
     ],
     "methods": [
@@ -1681,7 +3042,7 @@
       },
       {
         "name": "dummyrsp",
-        "signature": "(lowE=None, highE=None, nBins=None, scaleType=None, chanOffset=None, chanWidth=None, sourceNum=1)",
+        "signature": "(lowE=None, highE=None, nBins=None, scaleType=None, chanOffset=None, chanWidth=None, sourceNum=1, chanLog=None)",
         "doc": "Create a dummy response for this spectrum only."
       },
       {
@@ -1715,11 +3076,34 @@
         "doc": "Return a string of noticed channel ranges."
       },
       {
+        "name": "addDataModel",
+        "signature": "(name, *values)",
+        "doc": "Attach a data model to this spectrum (the *dmodel* command)."
+      },
+      {
+        "name": "removeDataModel",
+        "signature": "(name='')",
+        "doc": "Remove the named data model from this spectrum, or every one"
+      },
+      {
+        "name": "dataModel",
+        "signature": "(name)",
+        "doc": "The attached data model named *name* (abbreviations as for"
+      },
+      {
         "name": "show",
         "signature": "()",
         "doc": "Display information for this Spectrum object"
       }
     ]
+  },
+  "TclError": {
+    "class": "TclError",
+    "module": "tclcompat.py",
+    "singleton": null,
+    "summary": "An error a Tcl command would have raised (``error``, a bad list, ...).",
+    "attributes": [],
+    "methods": []
   },
   "XspecSettings": {
     "class": "XspecSettings",
@@ -1755,7 +3139,7 @@
         "name": "logChatter",
         "type": "int",
         "access": "get/set",
-        "doc": "Get/Set the log chatter level [int]."
+        "doc": "Get/Set the log chatter level [int], on the same levels as chatter."
       },
       {
         "name": "cosmo",
@@ -1768,6 +3152,30 @@
         "type": "",
         "access": "get",
         "doc": "Get only: Returns the currently opened log file object,"
+      },
+      {
+        "name": "modelDataDir",
+        "type": "str",
+        "access": "get/set",
+        "doc": "Get/set the directory holding the model DATA files [string]."
+      },
+      {
+        "name": "inputCheck",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/set what XSPEC does with a response, ARF or table model"
+      },
+      {
+        "name": "tableInterp",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/set how table models interpolate between their tabulated"
+      },
+      {
+        "name": "modelDataDownload",
+        "type": "",
+        "access": "get/set",
+        "doc": "Get/set whether a missing model data file is downloaded"
       },
       {
         "name": "modelStrings",
@@ -1834,7 +3242,7 @@
       {
         "name": "show",
         "signature": "()",
-        "doc": ""
+        "doc": "Display Xset settings."
       },
       {
         "name": "restore",

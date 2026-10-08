@@ -44,6 +44,8 @@ The parameters which reference abundances relative to Solar are using the Solar
 abundances as set by the `abund` command.
 
 `tbabs` allows the user to vary just the hydrogen column.
+`tbred` and `ztbred` add the optical/UV
+reddening of the same column.
 
 ## Parameters
 

@@ -1,0 +1,13 @@
+{
+  "name": "crossarf",
+  "type": "mix",
+  "func": "U_CrossArf",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 0,
+  "params": [],
+  "family": [
+    "crossarf"
+  ],
+  "title": "crossarf: mixing model for psf corrections when fitting\n  multiple regions"
+}

@@ -16,7 +16,7 @@ MANUAL_DIR = Path(os.environ.get(
     "XSPEC_MANUAL_DIR", "/Users/kaa/software/Xspec-aux/doc/manual"))
 
 MODEL_DAT = HEASOFT_SRC / "manager" / "model.dat"
-PYXSPEC_DIR = HEASOFT_SRC / "XSUser" / "Python" / "xspec"
+PYXSPEC_DIR = HEASOFT_SRC / "PyXspec" / "xspec"   # XSUser/Python until 2026-09-06
 DEFINITIONS_TEX = MANUAL_DIR / "XspecManualDefinitions.tex"
 
 # Output

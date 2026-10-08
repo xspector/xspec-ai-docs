@@ -11,6 +11,8 @@ source: XScompare.tex
 
 **Syntax:** `compare` [`global` | `nest`] <alt> [<alt> ...]
 
+**Syntax:** `compare` `presets`
+
 The `compare` command automates model selection.  It evaluates one
 or more user-supplied alternative models against the *current* data,
 ignore ranges and fit statistic --- carrying shared parameters over by
@@ -40,12 +42,83 @@ Sourcing is model-only: `data`, `response`, `statistic`
 and `ignore` lines in the file are skipped so the noticed data and
 statistic are left unchanged.
 
+- [<family> {[}`component` <n>{]} {[}`only` <a,b,...>{]}]
+a *preset*: one word that stands for several alternatives (see
+*Presets* below).  `component` <n> picks the component the
+family acts on when the model has more than one of its members;
+`only` restricts the alternatives to the members or values listed.
+
 Shared parameters are matched *by name*, and only names that are
 unique within each model qualify --- the ambiguous norm carried
 by every additive component is deliberately skipped.  A comparison is
 meaningful only under a fixed statistic and identical noticed data, so an
 alternative that changes the number of noticed channels is reported and
 skipped.
+
+**Presets.** A preset compares the model with its neighbours in
+a family of components without typing each alternative.  A
+*substitute* family finds the model's member and refits the model with
+each other member *in its place*, the rest of the expression unchanged:
+on tbabs(diskbb+powerlaw), `compare absorbers` fits
+phabs(diskbb+powerlaw), wabs(diskbb+powerlaw), and so on.  A
+*variant* family refits the model with each other value of one
+parameter or session setting.  The shipped families are
+
+family & kind & members or values 
+
+`absorbers`      & substitute & `tbabs`, `phabs`, `wabs`, `tbfeo`, `tbgrain`, `tbvarabs` 
+
+`zabsorbers`     & substitute & `ztbabs`, `zphabs`, `zwabs`, `zvphabs` 
+
+`pcabsorbers`    & substitute & `pcfabs`, `tbpcf` 
+
+`comptonization` & substitute & `nthcomp`, `comptt`, `compps`, `comptb` 
+
+`disks`          & substitute & `diskbb`, `diskpn`, `ezdiskbb`, `kerrbb`, `kerrd` 
+
+`reflection`     & substitute & `pexrav`, `pexriv`, `pexmon` 
+
+`reflconv`       & substitute & `reflect`, `ireflect`, `rfxconv`, `xilconv` 
+
+`atomic`         & variant    & switch = 1 (mekal), 2 (AtomDB), 3 (SPEX) 
+
+`abund`          & variant    & `abund` `wilm`, `aspl`, `lpgs`, `angr` 
+
+`relxill`        & template   & `relxill`, `relxillCp`, `relxillD` 
+
+`torus`          & template   & MYTorus, borus02, UXClumpy, RXTorusD 
+
+`atomic` acts on any plasma component with a switch
+parameter, and on `apec`, which has none, by substituting
+`mekal` and `cie`.  `abund` reruns the model under
+each other abundance table and puts the session's table back afterwards.
+The *template* families are for models XSPEC does not ship: a member
+counts only when its local model is loaded (`lmod`) or a user registry
+gives its table file; the others are reported as skipped.
+`compare` `presets` lists the families and the component of the
+current model each would act on.
+
+In a substituted model every parameter outside the swapped component keeps
+exactly what it had --- value, freeze, link, prior --- however the parameter
+numbers move.  Inside it, parameters that play the same role (N_H, a
+photon index, a temperature, a redshift) start from the replaced
+component's values; the others start from their model.dat
+defaults.  An additive member's normalization is scaled before the fit so
+that its folded counts in the noticed band equal the replaced component's,
+so every row starts near the data.  Each row is labelled
+`<family>: <member>` (`atomic: switch=3 (SPEX)`,
+`abund: wilm`); under the table XSPEC names the abundance table the
+rows ran under and adds a note for each member whose authors recommend
+another table, each member skipped, and each link that could not be carried
+into the new component.  Presets and `{}<model-expr>`
+or `@`<file.xcm> alternatives can be mixed freely; two presets
+give the alternatives of each, not their combinations.
+
+The families are read from compare_presets.dat in the
+manager directory, then from $HOME/.xspec/compare_presets.dat
+and from the file named by `xset COMPARE_PRESETS`, which can add
+families, add members to a shipped one or replace a member.  The format and
+the role maps are described in Appendix AppendixAlgorithmsComparePresets.
 
 **Default (information criterion).** With no leading keyword,
 each alternative is fit with the current `method` and ranked by
@@ -119,7 +192,7 @@ highest-evidence model.
 **Examples:**
 
 ```
-XSPEC12> compare {powerlaw + gaussian} {bbody}
+XSPEC> compare {powerlaw + gaussian} {bbody}
 ```
 
 Fit powerlaw+gaussian and bbody against the current data and
@@ -138,18 +211,18 @@ powerlaw has the lower (better) AIC and BIC despite the identical
 statistic.
 
 ```
-XSPEC12> compare global {tbabs(diskbb+comptt)} {tbabs*relxilllpCp}
+XSPEC> compare global {tbabs(diskbb+comptt)} {tbabs*relxilllpCp}
 ```
 
 The same comparison, but each alternative is fit with a global optimiser so
 a poor local minimum cannot bias the result.
 
 ```
-XSPEC12> bayes on
-XSPEC12> bayes 2 jeffreys
-XSPEC12> fit
-XSPEC12> nest live 400
-XSPEC12> compare nest {powerlaw} @bbody_prior.xcm
+XSPEC> bayes on
+XSPEC> bayes 2 jeffreys
+XSPEC> fit
+XSPEC> nest live 400
+XSPEC> compare nest {powerlaw} @bbody_prior.xcm
 ```
 
 Rank the current model and two candidates by Bayesian evidence.  The inline
@@ -168,9 +241,25 @@ Model comparison by evidence (nested sampling, statistic = cstat):
 The blackbody is decisively rejected and the two power-law fits share the
 posterior probability.
 
+```
+XSPEC> model tbabs(diskbb+powerlaw)
+XSPEC> fit
+XSPEC> compare absorbers only phabs,TBfeo
+XSPEC> compare disks
+XSPEC> compare atomic {tbabs*apec}
+```
+
+Refit with `phabs` and `tbfeo` in place of `tbabs`,
+then with each other disk model in place of `diskbb` (each started at
+`diskbb`'s folded counts).  On a `vmekal` model,
+`compare atomic` gives the AtomDB and SPEX rows.
+
 **PyXspec.** The same harness is available as
 `Fit.compare(alternatives, method=``'lm'``|`%
 `'global'``|``'nest'``)`, which returns
 the per-model table as a list of dictionaries (the `nest` method adds
 `logZ`, `logZerr`, `deltaLogZ` and `postProb` to
-each row).
+each row).  A preset is given as a string, `"absorbers only phabs,wabs"`,
+or as `xspec.ComparePreset("absorbers", component=None, only=["phabs","wabs"])`;
+`Fit.comparePresets()` lists the families and
+`Fit.loadComparePresets(path)` adds a registry file.

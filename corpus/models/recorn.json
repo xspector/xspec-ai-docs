@@ -1,0 +1,26 @@
+{
+  "name": "recorn",
+  "type": "dat",
+  "func": "C_recorn",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "Cornorm",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": -10.0,
+      "softmin": -10.0,
+      "softmax": 10.0,
+      "hardmax": 10.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "recorn"
+  ],
+  "title": "recorn: change correction norm for a spectrum"
+}

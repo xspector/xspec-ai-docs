@@ -12,7 +12,7 @@ source: XSflux.tex
 Calculate the flux of the current model between certain limits.
 
 **Syntax:** `flux` [<lowEnergy> [<hiEnergy>]] [err 
-<number> <level>| noerr]
+<number> <level>| noerr] [zero <param list>]
 
 where `<lowEnergy>` and `<hiEnergy>` are the values over which 
 the flux is calculated. Initial default values are 2 to 10 keV.
@@ -52,21 +52,42 @@ multivariate Gaussian centered on the best-fit parameters with sigmas
 from the covariance matrix. This is only an approximation in the case that 
 fit statistic space is not quadratic.
 
-There is also a model component `cflux` which can be used to 
+The `zero` clause, which must come last, holds the parameters in
+`<param list>` at zero for the calculation: for the point value and,
+with `err`, for every set of drawn parameter values (each set is
+drawn for all the variable parameters, as without `zero`, and then
+the listed ones are set to zero).  The parameters are restored afterwards.
+Setting the column density of an absorption component to zero gives the
+unabsorbed flux and its error; setting the normalizations of the other
+additive components to zero gives the flux of one component.  The list
+uses the parameter-range syntax of `freeze` (`1`,
+`1-3`, `mymod:4`).  Linked parameters, and parameters whose
+hard limits exclude zero, are refused.  The clause is not remembered by
+the next `flux` command.
+
+There is also a model component `cflux` which can be used to
 estimate fluxes and errors for part of the model. For instance, defining 
 the model as `wabs(pow + cflux(ga))` provides a fit parameter which gives 
-the flux in the gaussian line.
+the flux in the gaussian line.  `cflux` makes the flux a fit
+parameter, so its error comes from the fit itself (`error`); the
+`zero` clause needs no change to the model, and its error comes
+from the same parameter draws as `err`.
 
 **Examples:**
   
 The current data have significant responses to data within 1.5 to 18 keV.
 
 ```
-XSPEC12> flux
+XSPEC> flux
 //Calculate the current model flux over the default range.
-XSPEC12> flux 6.4 7.0
+XSPEC> flux 6.4 7.0
 //Calculate the current flux over 6.4 to 7 keV
-XSPEC12> flux 1 10
+XSPEC> flux 1 10
 //The flux is calculated from 1.5 keV (the lower limit of the 
 //current response's sensitivity) to 10 keV.
+XSPEC> model phabs(powerlaw)
+XSPEC> fit
+XSPEC> flux 2 10 err 1000 90 zero 1
+//The unabsorbed 2-10 keV flux (the phabs column density, parameter
+//1, held at zero) with its 90% range from 1000 parameter draws.
 ```

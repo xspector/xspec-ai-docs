@@ -1,5 +1,5 @@
 # XSPEC / PyXspec AI docs
-> XSPEC 13.0 | manual@d449d599 | heasoft@b1c00b1b08
+> XSPEC 13.1.0 | manual@def75d749 | heasoft@f2644bc7a6
 
 ## Models
 - [absori](corpus/models/absori.md): multiplicative model, 6 params
@@ -8,6 +8,7 @@
 - [agnsed](corpus/models/agnsed.md): additive model, 16 params
 - [agnslim](corpus/models/agnslim.md): additive model, 15 params
 - [apec](corpus/models/apec.md): additive model, 4 params
+- [ascac](corpus/models/ascac.md): mixing model, 4 params
 - [bapec](corpus/models/bapec.md): additive model, 5 params
 - [bbody](corpus/models/bbody.md): additive model, 2 params
 - [bbodyrad](corpus/models/bbodyrad.md): additive model, 2 params
@@ -24,6 +25,7 @@
 - [bfeklor](corpus/models/bfeklor.md): additive model, 2 params
 - [bgadem](corpus/models/bgadem.md): additive model, 8 params
 - [bgnei](corpus/models/bgnei.md): additive model, 7 params
+- [bkgnorm](corpus/models/bkgnorm.md): dat model, 1 params
 - [bkn2pow](corpus/models/bkn2pow.md): additive model, 6 params
 - [bknpower](corpus/models/bknpower.md): additive model, 4 params
 - [bmc](corpus/models/bmc.md): additive model, 4 params
@@ -76,9 +78,11 @@
 - [cevmkl](corpus/models/cevmkl.md): additive model, 20 params
 - [cflow](corpus/models/cflow.md): additive model, 6 params
 - [cflux](corpus/models/cflux.md): convolution model, 3 params
+- [cgain](corpus/models/cgain.md): rsp model, 2 params
 - [cglumin](corpus/models/cglumin.md): convolution model, 4 params
 - [cheb6](corpus/models/cheb6.md): additive model, 11 params
 - [cie](corpus/models/cie.md): additive model, 5 params
+- [clmass](corpus/models/clmass.md): mixing model, 36 params
 - [clumin](corpus/models/clumin.md): convolution model, 4 params
 - [compbb](corpus/models/compbb.md): additive model, 4 params
 - [compLS](corpus/models/compLS.md): additive model, 3 params
@@ -93,6 +97,7 @@
 - [cpflux](corpus/models/cpflux.md): convolution model, 3 params
 - [cph](corpus/models/cph.md): additive model, 5 params
 - [cplinear](corpus/models/cplinear.md): additive model, 21 params
+- [crossarf](corpus/models/crossarf.md): mixing model, 0 params
 - [cutoffpl](corpus/models/cutoffpl.md): additive model, 3 params
 - [cyclabs](corpus/models/cyclabs.md): multiplicative model, 5 params
 - [disk](corpus/models/disk.md): additive model, 4 params
@@ -119,6 +124,7 @@
 - [feklor](corpus/models/feklor.md): additive model, 1 params
 - [gabs](corpus/models/gabs.md): multiplicative model, 3 params
 - [gadem](corpus/models/gadem.md): additive model, 7 params
+- [gain](corpus/models/gain.md): rsp model, 2 params
 - [gaussian](corpus/models/gaussian.md): additive model, 3 params
 - [gnei](corpus/models/gnei.md): additive model, 6 params
 - [grad](corpus/models/grad.md): additive model, 7 params
@@ -153,8 +159,11 @@
 - [lyman](corpus/models/lyman.md): multiplicative model, 4 params
 - [meka](corpus/models/meka.md): additive model, 5 params
 - [mekal](corpus/models/mekal.md): additive model, 6 params
+- [mixmatrix](corpus/models/mixmatrix.md): mixing model, 0 params
 - [mkcflow](corpus/models/mkcflow.md): additive model, 6 params
+- [monomass](corpus/models/monomass.md): mixing model, 36 params
 - [nei](corpus/models/nei.md): additive model, 5 params
+- [nfwmass](corpus/models/nfwmass.md): mixing model, 22 params
 - [nlapec](corpus/models/nlapec.md): additive model, 4 params
 - [notch](corpus/models/notch.md): multiplicative model, 3 params
 - [npshock](corpus/models/npshock.md): additive model, 7 params
@@ -182,13 +191,16 @@
 - [polconst](corpus/models/polconst.md): multiplicative model, 2 params
 - [pollin](corpus/models/pollin.md): multiplicative model, 4 params
 - [polpow](corpus/models/polpow.md): multiplicative model, 4 params
+- [polrot](corpus/models/polrot.md): mixing model, 1 params
 - [posm](corpus/models/posm.md): additive model, 1 params
 - [powerlaw](corpus/models/powerlaw.md): additive model, 2 params
+- [projct](corpus/models/projct.md): mixing model, 3 params
 - [pshock](corpus/models/pshock.md): additive model, 6 params
 - [pwab](corpus/models/pwab.md): multiplicative model, 3 params
 - [qsosed](corpus/models/qsosed.md): additive model, 7 params
 - [raymond](corpus/models/raymond.md): additive model, 4 params
 - [rdblur](corpus/models/rdblur.md): convolution model, 4 params
+- [recorn](corpus/models/recorn.md): dat model, 1 params
 - [redden](corpus/models/redden.md): multiplicative model, 1 params
 - [redge](corpus/models/redge.md): additive model, 3 params
 - [reflect](corpus/models/reflect.md): convolution model, 5 params
@@ -223,6 +235,7 @@
 - [stdisc](corpus/models/stdisc.md): additive model, 9 params
 - [step](corpus/models/step.md): additive model, 3 params
 - [sttorus](corpus/models/sttorus.md): additive model, 13 params
+- [suzpsf](corpus/models/suzpsf.md): mixing model, 4 params
 - [swind1](corpus/models/swind1.md): multiplicative model, 4 params
 - [tapec](corpus/models/tapec.md): additive model, 5 params
 - [TBabs](corpus/models/TBabs.md): multiplicative model, 1 params
@@ -230,6 +243,7 @@
 - [TBgas](corpus/models/TBgas.md): multiplicative model, 2 params
 - [TBgrain](corpus/models/TBgrain.md): multiplicative model, 6 params
 - [TBpcf](corpus/models/TBpcf.md): multiplicative model, 3 params
+- [TBred](corpus/models/TBred.md): multiplicative model, 4 params
 - [TBrel](corpus/models/TBrel.md): multiplicative model, 42 params
 - [TBvarabs](corpus/models/TBvarabs.md): multiplicative model, 42 params
 - [thcomp](corpus/models/thcomp.md): convolution model, 4 params
@@ -285,6 +299,7 @@
 - [wndabs](corpus/models/wndabs.md): multiplicative model, 2 params
 - [xilconv](corpus/models/xilconv.md): convolution model, 6 params
 - [xion](corpus/models/xion.md): multiplicative model, 13 params
+- [xmmpsf](corpus/models/xmmpsf.md): mixing model, 4 params
 - [xscat](corpus/models/xscat.md): multiplicative model, 4 params
 - [zagauss](corpus/models/zagauss.md): additive model, 4 params
 - [zashift](corpus/models/zashift.md): convolution model, 1 params
@@ -314,6 +329,7 @@
 - [zredden](corpus/models/zredden.md): multiplicative model, 2 params
 - [zsmdust](corpus/models/zsmdust.md): multiplicative model, 4 params
 - [zTBabs](corpus/models/zTBabs.md): multiplicative model, 2 params
+- [zTBred](corpus/models/zTBred.md): multiplicative model, 5 params
 - [zvagauss](corpus/models/zvagauss.md): additive model, 4 params
 - [zvarabs](corpus/models/zvarabs.md): multiplicative model, 19 params
 - [zvfeabs](corpus/models/zvfeabs.md): multiplicative model, 5 params
@@ -331,49 +347,66 @@
 - [zxipab](corpus/models/zxipab.md): multiplicative model, 5 params
 - [zxipcf](corpus/models/zxipcf.md): multiplicative model, 4 params
 
-## PyXspec API (18 classes)
-- [AllChains](corpus/api/AllChains.md) (class `ChainManager`): 9 attrs, 11 methods
-- [AllData](corpus/api/AllData.md) (class `DataManager`): 2 attrs, 11 methods
-- [AllModels](corpus/api/AllModels.md) (class `ModelManager`): 2 attrs, 20 methods
-- [Background](corpus/api/Background.md): 7 attrs, 1 methods
+## PyXspec API (29 classes)
+- [AllChains](corpus/api/AllChains.md) (class `ChainManager`): 16 attrs, 11 methods
+- [AllData](corpus/api/AllData.md) (class `DataManager`): 3 attrs, 18 methods
+- [AllModels](corpus/api/AllModels.md) (class `ModelManager`): 2 attrs, 25 methods
+- [Background](corpus/api/Background.md): 8 attrs, 1 methods
 - [Chain](corpus/api/Chain.md): 11 attrs, 3 methods
 - [ChainResult](corpus/api/ChainResult.md): 10 attrs, 1 methods
-- [Component](corpus/api/Component.md): 2 attrs, 1 methods
+- [CommandError](corpus/api/CommandError.md): 1 attrs, 1 methods
+- [ComparePreset](corpus/api/ComparePreset.md): 3 attrs, 1 methods
+- [Component](corpus/api/Component.md): 2 attrs, 3 methods
+- [ComponentDefinition](corpus/api/ComponentDefinition.md): 0 attrs, 1 methods
+- [Converter](corpus/api/Converter.md): 14 attrs, 115 methods
+- [DataModel](corpus/api/DataModel.md): 4 attrs, 2 methods
+- [DataRecord](corpus/api/DataRecord.md): 8 attrs, 3 methods
+- [E](corpus/api/E.md): 0 attrs, 1 methods
 - [FakeitSettings](corpus/api/FakeitSettings.md): 7 attrs, 1 methods
-- [Fit](corpus/api/Fit.md) (class `FitManager`): 20 attrs, 13 methods
+- [Fit](corpus/api/Fit.md) (class `FitManager`): 25 attrs, 29 methods
+- [FuzzyLink](corpus/api/FuzzyLink.md): 3 attrs, 1 methods
 - [HMCResult](corpus/api/HMCResult.md): 17 attrs, 1 methods
-- [Model](corpus/api/Model.md): 7 attrs, 9 methods
+- [Model](corpus/api/Model.md): 7 attrs, 10 methods
 - [NestedResult](corpus/api/NestedResult.md): 17 attrs, 1 methods
-- [Parameter](corpus/api/Parameter.md): 9 attrs, 2 methods
-- [Plot](corpus/api/Plot.md) (class `PlotManager`): 11 attrs, 21 methods
-- [RModel](corpus/api/RModel.md): 2 attrs, 2 methods
-- [Response](corpus/api/Response.md): 6 attrs, 3 methods
-- [Spectrum](corpus/api/Spectrum.md): 28 attrs, 9 methods
-- [Xset](corpus/api/Xset.md) (class `XspecSettings`): 12 attrs, 9 methods
+- [Parameter](corpus/api/Parameter.md): 11 attrs, 2 methods
+- [Plot](corpus/api/Plot.md) (class `PlotManager`): 16 attrs, 25 methods
+- [RModel](corpus/api/RModel.md): 3 attrs, 2 methods
+- [Report](corpus/api/Report.md): 7 attrs, 2 methods
+- [Response](corpus/api/Response.md): 9 attrs, 5 methods
+- [SmoothnessPrior](corpus/api/SmoothnessPrior.md): 6 attrs, 1 methods
+- [Spectrum](corpus/api/Spectrum.md): 30 attrs, 12 methods
+- [TclError](corpus/api/TclError.md): 0 attrs, 0 methods
+- [Xset](corpus/api/Xset.md) (class `XspecSettings`): 16 attrs, 9 methods
 
-## Commands (79 docs, 161 valid tokens incl. aliases)
+## Commands (83 docs, 189 valid tokens incl. aliases)
 - [abund](corpus/commands/abund.md) (aliases: xabund)
 - [addcomp](corpus/commands/addcomp.md) (aliases: xaddcomp)
 - [addline](corpus/commands/addline.md)
 - [arf](corpus/commands/arf.md) (aliases: xarf)
 - [autosave](corpus/commands/autosave.md) (aliases: xautosave)
 - [backgrnd](corpus/commands/backgrnd.md) (aliases: xbackgrnd)
+- [backmodel](corpus/commands/backmodel.md) (aliases: xbackmodel)
 - [bayes](corpus/commands/bayes.md) (aliases: xbayes)
+- [bias](corpus/commands/bias.md) (aliases: xbias)
+- [cgof](corpus/commands/cgof.md) (aliases: xcgof)
 - [chain](corpus/commands/chain.md) (aliases: xchain)
 - [chatter](corpus/commands/chatter.md) (aliases: xchatter)
 - [compare](corpus/commands/compare.md) (aliases: xcompare)
 - [corfile](corpus/commands/corfile.md) (aliases: xcorfile)
 - [cornorm](corpus/commands/cornorm.md) (aliases: xcornorm)
 - [cosmo](corpus/commands/cosmo.md) (aliases: xcosmo)
+- [coverage](corpus/commands/coverage.md) (aliases: xcoverage)
 - [cpd](corpus/commands/cpd.md) (aliases: xcpd)
 - [data](corpus/commands/data.md) (aliases: xdata)
+- [datascan](corpus/commands/datascan.md) (aliases: xdatascan)
 - [delcomp](corpus/commands/delcomp.md) (aliases: xdelcomp)
 - [diagrsp](corpus/commands/diagrsp.md) (aliases: xdiagrsp)
+- [dmodel](corpus/commands/dmodel.md) (aliases: xdmodel)
 - [dummyrsp](corpus/commands/dummyrsp.md) (aliases: xdummyrsp)
 - [editmod](corpus/commands/editmod.md) (aliases: xeditmod)
 - [energies](corpus/commands/energies.md) (aliases: xenergies)
 - [eqwidth](corpus/commands/eqwidth.md) (aliases: xeqwidth)
-- [error](corpus/commands/error.md) (aliases: rerror, uncertain, xerror, xrerror, xuncertain)
+- [error](corpus/commands/error.md) (aliases: derror, rerror, uncertain, xderror, xerror, xrerror, xuncertain)
 - [exit](corpus/commands/exit.md) (aliases: quit, xexit, xquit)
 - [fakeit](corpus/commands/fakeit.md) (aliases: xfakeit)
 - [fit](corpus/commands/fit.md) (aliases: xfit)
@@ -393,14 +426,12 @@
 - [iplot](corpus/commands/iplot.md) (aliases: xiplot)
 - [lmod](corpus/commands/lmod.md) (aliases: xlmod)
 - [log](corpus/commands/log.md) (aliases: xlog)
-- [lrt](corpus/commands/lrt.md)
+- [lrt](corpus/commands/lrt.md) (aliases: xlrt)
 - [lumin](corpus/commands/lumin.md) (aliases: flux, xflux, xlumin)
 - [margin](corpus/commands/margin.md) (aliases: xmargin)
 - [mdefine](corpus/commands/mdefine.md) (aliases: xmdefine)
 - [method](corpus/commands/method.md) (aliases: xmethod)
 - [model](corpus/commands/model.md) (aliases: xmodel)
-- [modid](corpus/commands/modid.md)
-- [multifake](corpus/commands/multifake.md)
 - [nest](corpus/commands/nest.md) (aliases: xnest)
 - [newpar](corpus/commands/newpar.md) (aliases: rnewpar, xnewpar, xrnewpar)
 - [notice](corpus/commands/notice.md) (aliases: xnotice)
@@ -408,14 +439,14 @@
 - [plot](corpus/commands/plot.md) (aliases: xplot)
 - [query](corpus/commands/query.md) (aliases: xquery)
 - [renorm](corpus/commands/renorm.md) (aliases: xrenorm)
-- [rescalecov](corpus/commands/rescalecov.md)
 - [response](corpus/commands/response.md) (aliases: xresponse)
+- [rmodel](corpus/commands/rmodel.md) (aliases: xrmodel)
 - [save](corpus/commands/save.md) (aliases: xsave)
 - [script](corpus/commands/script.md) (aliases: xscript)
 - [setplot](corpus/commands/setplot.md) (aliases: xsetplot)
 - [show](corpus/commands/show.md) (aliases: xshow)
 - [sim](corpus/commands/sim.md) (aliases: xsim)
-- [simftest](corpus/commands/simftest.md)
+- [simftest](corpus/commands/simftest.md) (aliases: xsimftest)
 - [statistic](corpus/commands/statistic.md) (aliases: xstatistic)
 - [steppar](corpus/commands/steppar.md) (aliases: xsteppar)
 - [syscall](corpus/commands/syscall.md)

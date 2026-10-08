@@ -40,7 +40,11 @@ def tier1_corpus_integrity():
         check(js.exists(), f"{name}: json missing")
         if js.exists():
             d = json.loads(js.read_text())
-            check(len(d["params"]) > 0, f"{name}: no params")
+            # model.dat declares the count; a mixing model may have none
+            # (crossarf, mixmatrix), any other must match its declaration.
+            check(len(d["params"]) == d["npars_declared"] + (d["type"] == "add"),
+                  f"{name}: {len(d['params'])} params, model.dat declares "
+                  f"{d['npars_declared']}")
             if d["type"] == "add":
                 check(any(p["kind"] == "norm" for p in d["params"]),
                       f"{name}: additive model lacks implicit norm")

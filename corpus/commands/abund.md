@@ -35,6 +35,8 @@ where `<option>` is:
 
 `lpgs` & [Lodders K., Palme H., Gail H.P. (2009, Landolt-Börnstein, New Series, vol VI/4B, pp 560–630)](https://ui.adsabs.harvard.edu/abs/2009LanB...4B..712L/abstract) (Proto-solar, using Table 10)
 
+`felc` & [Feldman U., Mandelbaum P., Seely J.L., Doschek G.A. & Gursky H. (1992, ApJSS 81, 387)](https://ui.adsabs.harvard.edu/abs/1992ApJS...81..387F/abstract) (Coronal)
+
 `file <filename>` & where `<filename>` is the path to and name of an ASCII file containing 30 lines, for the first 30 elements, with one number value per line. Set all abundance numbers relative to H. 
 
 If no `<option>` is given, the `abund` command reports which abundance table is currently in use.
@@ -109,80 +111,80 @@ Z  & El & angr     & aspl     & feld     & aneb     & grsa     & wilm
 
 {{1.5}
 
-Z  & El & lodd     & lgpp     & lgps    
+Z  & El & lodd     & lgpp     & lgps     & felc    
 
-1  & H  & 1.00E+00 & 1.00E+00 & 1.00E+00
+1  & H  & 1.00E+00 & 1.00E+00 & 1.00E+00 & 1.00E+00
 
-2  & He & 7.92E-02 & 8.41E-02 & 9.69E-02
+2  & He & 7.92E-02 & 8.41E-02 & 9.69E-02 & 7.94E-02
 
-3  & Li & 1.90E-09 & 1.26E-11 & 2.15E-09
+3  & Li & 1.90E-09 & 1.26E-11 & 2.15E-09 & 0.00E+00
 
-4  & Be & 2.57E-11 & 2.40E-11 & 2.36E-11
+4  & Be & 2.57E-11 & 2.40E-11 & 2.36E-11 & 0.00E+00
 
-5  & B  & 6.03E-10 & 5.01E-10 & 7.26E-10
+5  & B  & 6.03E-10 & 5.01E-10 & 7.26E-10 & 0.00E+00
 
-6  & C  & 2.45E-04 & 2.45E-04 & 2.78E-04
+6  & C  & 2.45E-04 & 2.45E-04 & 2.78E-04 & 3.89E-04
 
-7  & N  & 6.76E-05 & 7.24E-05 & 8.19E-05
+7  & N  & 6.76E-05 & 7.24E-05 & 8.19E-05 & 1.00E-04
 
-8  & O  & 4.90E-04 & 5.37E-04 & 6.06E-04
+8  & O  & 4.90E-04 & 5.37E-04 & 6.06E-04 & 7.76E-04
 
-9  & F  & 2.88E-08 & 3.63E-08 & 3.10E-08
+9  & F  & 2.88E-08 & 3.63E-08 & 3.10E-08 & 0.00E+00
 
-10 & Ne & 7.41E-05 & 1.12E-04 & 1.27E-04
+10 & Ne & 7.41E-05 & 1.12E-04 & 1.27E-04 & 1.20E-04
 
-11 & Na & 1.99E-06 & 2.00E-06 & 2.23E-06
+11 & Na & 1.99E-06 & 2.00E-06 & 2.23E-06 & 8.51E-06
 
-12 & Mg & 3.55E-05 & 3.47E-05 & 3.98E-05
+12 & Mg & 3.55E-05 & 3.47E-05 & 3.98E-05 & 1.41E-04
 
-13 & Al & 2.88E-06 & 2.95E-06 & 3.27E-06
+13 & Al & 2.88E-06 & 2.95E-06 & 3.27E-06 & 1.10E-05
 
-14 & Si & 3.47E-05 & 3.31E-05 & 3.86E-05
+14 & Si & 3.47E-05 & 3.31E-05 & 3.86E-05 & 1.26E-04
 
-15 & P  & 2.88E-07 & 2.88E-07 & 3.20E-07
+15 & P  & 2.88E-07 & 2.88E-07 & 3.20E-07 & 0.00E+00
 
-16 & S  & 1.55E-05 & 1.38E-05 & 1.63E-05
+16 & S  & 1.55E-05 & 1.38E-05 & 1.63E-05 & 1.86E-05
 
-17 & Cl & 1.82E-07 & 3.16E-07 & 2.00E-07
+17 & Cl & 1.82E-07 & 3.16E-07 & 2.00E-07 & 0.00E+00
 
-18 & Ar & 3.55E-06 & 3.16E-06 & 3.58E-06
+18 & Ar & 3.55E-06 & 3.16E-06 & 3.58E-06 & 3.80E-06
 
-19 & K  & 1.29E-07 & 1.32E-07 & 1.45E-07
+19 & K  & 1.29E-07 & 1.32E-07 & 1.45E-07 & 0.00E+00
 
-20 & Ca & 2.19E-06 & 2.14E-06 & 2.33E-06
+20 & Ca & 2.19E-06 & 2.14E-06 & 2.33E-06 & 8.51E-06
 
-21 & Sc & 1.17E-09 & 1.26E-09 & 1.33E-09
+21 & Sc & 1.17E-09 & 1.26E-09 & 1.33E-09 & 0.00E+00
 
-22 & Ti & 8.32E-08 & 7.94E-08 & 9.54E-08
+22 & Ti & 8.32E-08 & 7.94E-08 & 9.54E-08 & 0.00E+00
 
-23 & V  & 1.00E-08 & 1.00E-08 & 1.11E-08
+23 & V  & 1.00E-08 & 1.00E-08 & 1.11E-08 & 0.00E+00
 
-24 & Cr & 4.47E-07 & 4.37E-07 & 5.06E-07
+24 & Cr & 4.47E-07 & 4.37E-07 & 5.06E-07 & 0.00E+00
 
-25 & Mn & 3.16E-07 & 2.34E-07 & 3.56E-07
+25 & Mn & 3.16E-07 & 2.34E-07 & 3.56E-07 & 0.00E+00
 
-26 & Fe & 2.95E-05 & 2.82E-05 & 3.27E-05
+26 & Fe & 2.95E-05 & 2.82E-05 & 3.27E-05 & 1.26E-04
 
-27 & Co & 8.13E-08 & 8.32E-08 & 9.07E-08
+27 & Co & 8.13E-08 & 8.32E-08 & 9.07E-08 & 0.00E+00
 
-28 & Ni & 1.66E-06 & 1.70E-06 & 1.89E-06
+28 & Ni & 1.66E-06 & 1.70E-06 & 1.89E-06 & 6.92E-06
 
-29 & Cu & 1.82E-08 & 1.62E-08 & 2.09E-08
+29 & Cu & 1.82E-08 & 1.62E-08 & 2.09E-08 & 0.00E+00
 
-30 & Zn & 4.27E-08 & 4.17E-08 & 5.02E-08
+30 & Zn & 4.27E-08 & 4.17E-08 & 5.02E-08 & 0.00E+00
 
 }
 
 **Examples:**
 
-XSPEC12>abund
+XSPEC>abund
 angr:  Anders E. & Grevesse N. Geochimica et Cosmochimica Acta 53, 197 (1989)
-XSPEC12>abund ?
+XSPEC>abund ?
 Change/Report the solar abundance table in use
     Syntax: abund [ feld | angr | aneb | grsa | wilm | lodd | aspl | lpgp | lpgs ]
             abund file </path/to/filename>
             (define & load new vector from data in <filename>)
-XSPEC12>abund lodd
+XSPEC>abund lodd
  Solar Abundance Vector set to lodd:  Lodders, K. ApJ 591, 1220 (2003)
-XSPEC12>abund
+XSPEC>abund
 lodd:  Lodders, K. ApJ 591, 1220 (2003)

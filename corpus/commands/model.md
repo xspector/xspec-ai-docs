@@ -1,12 +1,11 @@
 ---
 name: model
 aliases: [xmodel]
-also_documents: [rmodel, rmodelnone]
+also_documents: []
 source: XSmodel.tex
 ---
 
-# model (and
-  rmodel)
+# model
 
 **define a theoretical model**
 
@@ -23,8 +22,6 @@ Define the form of the theoretical model to be fit to the data.
 **model** & `clear`
 
 **model** & `<name>| unnamed active| inactive`
-
-**rmodel** & `[<source num>:]<spec num> <response function>| none`
 
 where `<delimiter>` is some combination of (, +, $\ast$, ), and 
 `<componentJ>` is one of the model components known to XSPEC. 
@@ -76,9 +73,12 @@ factors. An example of a convolution model is a gaussian smoothing with energy
 dependent width. Thus, when using convolution models, the ordering of 
 components is in general significant (see below under **syntax rules**).
 
-The **pile-up** model is similar to the operation of the convolution 
-models.  The only difference is that the flux is multiplied by the effective 
-area on input and divided by the same factors on output.
+The **pile-up** model (type `acn`) is applied *after* the 
+model has been folded through the response: it acts on the count spectrum, 
+on the response's ungrouped detector channels, so that the pulse heights of 
+photons arriving in one frame add.  It operates on the sum of the components 
+it multiplies, must be the first component of its term, and only one is 
+allowed in a model (see `pileup`).
 
 **Mixing** model components implement two-dimensional transformations 
 of model spectra. The data are divided into regions by assigning them to 
@@ -91,12 +91,54 @@ and projects the flux computed from the other components onto
 A list of all the currently installed models is given in response to the command 
 
 ```
-XSPEC12> model ?
+XSPEC> model ?
 
  The '?' is not actually required.
 
  This will leave the current model in use.  
 ```
+
+Adding a component name shows that component's definition without loading
+it, so it works with no data and no model, and the current model is left
+untouched:
+
+```
+XSPEC> model ? gabs
+Model component gabs: multiplicative (mul), built-in
+   energy range 0 - 1e+20 keV
+   gradient: analytic, with VJP (gv);  spectrum dependent: no
+   model.dat tokens: grad=gv:... identity=Strength:0
+ Par  Name       Unit     Default    Hard min   Soft min   Soft max   Hard max   Delta
+   1  LineE      keV      1          0          0          1e+06      1e+06      0.05
+   2  Sigma      keV      0.01       0          0          10         20         0.05
+   3  Strength   keV      1          0          0          1e+06      1e+06      0.05
+ Documentation: help model gabs
+```
+
+The header gives the component's type and where it comes from: built-in, a
+local model (with the package that `lmod` loaded and the model
+description file), a Python model, or an `mdefine` component (with its
+expression). The second line says which analytic derivatives are registered
+for it (none means XSPEC uses finite differences) and whether it depends on
+the spectrum, and the third lists the keyed tokens of its model description
+file entry, as written (see Appendix AppendixAddModels). The parameter
+table gives each parameter's default, limits and delta from the model
+description file; a negative delta (frozen by default) is marked
+`frozen`, a switch parameter (`$`) shows its default setting,
+and a scale parameter (`*`) its fixed value. An additive component's
+normalization is not in the table. The name may be abbreviated as for
+`model` (an `mdefine` name must be given in full); an
+abbreviation that several components share lists them, and a name with
+`*` or `?` lists every component it matches, with its type and
+number of parameters:
+
+```
+XSPEC> model ? *gabs
+  gabs           mul  3 parameters
+  vgabs          mul  ...
+```
+
+`tclout modinfo` returns the same information as a Tcl list.
 
 The new command variants have the following uses:
 
@@ -121,17 +163,9 @@ refer to it by the string unnamed.
 See the commands `delcomp`, `addcomp` and `editmod` for details 
 on how to modify the current model without having to enter a completely new model.
 
-- [rmodel {[<source num>:{]}<spec num> <response function>| none}] 
-
-assigns or removes a response function to the response belonging to `<source num>` 
-of spectrum `<spec num>`.  Currently the only available `<response function>` 
-in XSPEC is `gain`, which makes `rmodel` redundant with the `gain` 
-command usage:
-
-`gain fit [<source num>:]<spec num>`
-
-The `rmodel none` option removes the response function and restores the response 
-to its initial state.
+Response models --- transformations of a detector response, such as a gain
+shift --- are attached to a response with the separate `rmodel`
+command.
 
 **Syntax Rules**
 
@@ -208,39 +242,39 @@ Note that po (= `powerlaw`) and ga (= `gauss`)
 are additive models, and that `wabs` and `phabs` 
 (different photoelectric absorption screens) are multiplicative models.
 
-XSPEC12> model po 
+XSPEC> model po 
 // The single component po (powerlaw) is the model.
-XSPEC12> model po+ga
-XSPEC12> model (po+ga)wabs
-XSPEC12> model phabs(po+ga)
-XSPEC12> model wa(phabs(po)+ga)
-XSPEC12> model wa po phabs ga //error: old syntax
-XSPEC12> model wa*phabs*po
-XSPEC12> model (po+po)phabs 
+XSPEC> model po+ga
+XSPEC> model (po+ga)wabs
+XSPEC> model phabs(po+ga)
+XSPEC> model wa(phabs(po)+ga)
+XSPEC> model wa po phabs ga //error: old syntax
+XSPEC> model wa*phabs*po
+XSPEC> model (po+po)phabs 
 //Note that though the first and second components are the same 
 // form, their parameters are varied separately.
-XSPEC12> model phabs*wa(po)
+XSPEC> model phabs*wa(po)
 
 A complex (and almost certainly unphysical) example is the following:
 
-XSPEC12>model wa(po+pha(peg+edge(disk+bbod)))const + pla(pos+hr*step) + not*gau
+XSPEC>model wa(po+pha(peg+edge(disk+bbod)))const + pla(pos+hr*step) + not*gau
 
 Applying multiple models:
 Assume 3 spectra are loaded, each with a single response (source 1 by default).
-XSPEC12> model wa(po)
+XSPEC> model wa(po)
 	// The unnamed model wa(po) will apply to all 3 spectra, accordingly 
 	// multiplied by each spectrum's response.
-XSPEC12> response 2:2 new_resp.pha 2:3 another_new_resp.pha
+XSPEC> response 2:2 new_resp.pha 2:3 another_new_resp.pha
 	// Additional responses assigned to source number 2 for spectra 2 and 3.
-XSPEC12> model 2:second_mod ga
+XSPEC> model 2:second_mod ga
 	// The model "second_mod" will now apply to source 2, and is therefore
 	// multiplied by new_resp.pha and another_new_resp.pha for spectra 2 
 	// and 3 respectively.
-XSPEC12> model second_mod inactive
+XSPEC> model second_mod inactive
 	// "second_mod" will no longer apply to spectra 2 and 3, though they
 	// retain responses for source 2.  
 	OR
-XSPEC12> response 2:2 none
-XSPEC12> response 2:3 none
+XSPEC> response 2:2 none
+XSPEC> response 2:3 none
 	// No responses exist for source number 2, second_mod is
 	// rendered inactive.

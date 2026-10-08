@@ -18,6 +18,7 @@ IR/optical/UV extinction from [Cardelli et al. (1989)](https://ui.adsabs.harvard
 transmission is set to unity shortward of the Lyman limit. This is 
 incorrect physically but does allow the model to be used in combination 
 with an X-ray photoelectric absorption model such as `phabs`.
+To tie E(B-V) to the X-ray column, with $R_V$ free, use `tbred`.
 
 ## Parameters
 

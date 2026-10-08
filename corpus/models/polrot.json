@@ -1,0 +1,26 @@
+{
+  "name": "polrot",
+  "type": "mix",
+  "func": "U_RotatePolarization",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 1,
+  "params": [
+    {
+      "name": "Angle",
+      "unit": "deg",
+      "default": 0.0,
+      "hardmin": -180.0,
+      "softmin": -180.0,
+      "softmax": 180.0,
+      "hardmax": 180.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [
+    "polrot"
+  ],
+  "title": "polrot: Rotate polarization"
+}

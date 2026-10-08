@@ -29,7 +29,7 @@ production can be ignored. These should only be used if $l_{bb} <~ 10$.
 The temperature of the thermal component of the electron distribution
 and the total electron optical depth (for both ionization electrons
 and electron-positron pairs) are written out if the chatter level is
-set to 15. This information is important for checking
+set to 20. This information is important for checking
 self-consistency.
 
 In versions 1.10 and above the Compton reflection is done by a call to

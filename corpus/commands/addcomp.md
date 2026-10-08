@@ -32,19 +32,19 @@ resulting models obeys the syntax rules documented in the `model` command.
 Thus,
 
 ```
-XSPEC12> mo  wa(po)
+XSPEC> mo  wa(po)
 ```
 
 Followed by
 
 ```
-XSPEC12> addcomp 2 bb
+XSPEC> addcomp 2 bb
 ```
 
 Yields the model achieved by
 
 ```
-XSPEC12> mo  wa(bb + po)
+XSPEC> mo  wa(bb + po)
 ```
 
 See also `delcomp` (delete component by number).
@@ -65,39 +65,39 @@ model  = gaussian[1] + powerlaw[2]
 The comments give the model expression following the entry of `addcomp`
 and `delcomp` commands:
 
-XSPEC12> addcomp 2 wab 
+XSPEC> addcomp 2 wab 
 // gaussian[1] + wabs[2](powerlaw[3])
-XSPEC12> addcomp 4 pha 
+XSPEC> addcomp 4 pha 
 // (gaussian[1] + wabs[2](powerlaw[3]))phabs[4]
-XSPEC12> delcomp 1	
+XSPEC> delcomp 1	
 // (wabs[1](powerlaw[2]))phabs[3]}
-XSPEC12> addcomp 2 zg 
+XSPEC> addcomp 2 zg 
 // (wabs[1](zgauss[2] + powerlaw[3]))phabs[4]
-XSPEC12> delcomp 3 
+XSPEC> delcomp 3 
 // (wabs[1](zgauss[2]))phabs[3]
 
-XSPEC12> mo wa(po)
-XSPEC12> addcomp 1 ga
+XSPEC> mo wa(po)
+XSPEC> addcomp 1 ga
 // gauss[1] + wabs[2]*powerlaw[3]
-XSPEC12> delcomp 1
-XSPEC12> addcomp 1 pha
+XSPEC> delcomp 1
+XSPEC> addcomp 1 pha
 // phabs[1]*wabs[2]*powerlaw[3]
 
-XSPEC12>mo wabs(po)
-XSPEC12> addcomp 3 bb
+XSPEC>mo wabs(po)
+XSPEC> addcomp 3 bb
 // wabs[1]*powerlaw[2] + bbody[3]
-XSPEC12> delcomp 1
-XSPEC12> addcomp 3 pha
+XSPEC> delcomp 1
+XSPEC> addcomp 3 pha
 // wabs[1]*powerlaw[2]*pha[3]
-XSPEC12> addcomp 3 po
+XSPEC> addcomp 3 po
 // ERROR: po (additive) is interpreted as being added to the 
 // multiplicative model pha[3], which is a context error.
 
 For multiply nested models?
-XSPEC12> mo wa(po + pha(bb + ga))
-XSPEC12> addcomp 6 po
+XSPEC> mo wa(po + pha(bb + ga))
+XSPEC> addcomp 6 po
 // wabs[1](powerlaw[2] + phabs[3](bbody[4] + ga[5]) + powerlaw[6])
-XSPEC12> addcomp 5 peg
+XSPEC> addcomp 5 peg
 // wabs[1](powerlaw[2] + phabs[3](bbody[4] + pegpwlw[5] ga[6]) + powerlaw[7])
-XSPEC12> addcomp 7 wa
+XSPEC> addcomp 7 wa
 // wabs[1](powerlaw[2] + phabs[3](bbody[4] + pegpwlw[5] ga[6]) + wabs[7]*powerlaw[8])

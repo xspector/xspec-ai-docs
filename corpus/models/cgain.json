@@ -1,0 +1,36 @@
+{
+  "name": "cgain",
+  "type": "rsp",
+  "func": "C_cgain",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 2,
+  "params": [
+    {
+      "name": "slope",
+      "unit": "",
+      "default": 1.0,
+      "hardmin": 0.01,
+      "softmin": 0.5,
+      "softmax": 1.5,
+      "hardmax": 5.0,
+      "delta": 0.01,
+      "frozen": false,
+      "kind": "fit"
+    },
+    {
+      "name": "offset",
+      "unit": "chan",
+      "default": 0.0,
+      "hardmin": -10000.0,
+      "softmin": -100.0,
+      "softmax": 100.0,
+      "hardmax": 10000.0,
+      "delta": 0.1,
+      "frozen": false,
+      "kind": "fit"
+    }
+  ],
+  "family": [],
+  "title": ""
+}

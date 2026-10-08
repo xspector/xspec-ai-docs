@@ -49,6 +49,23 @@ xsudmget.cxx and xspec.h into the user's local model directory.
 
 - invokes the compiler and builds the library.
 
+The generated code records the version of the local-model contract the
+package is built against, which `lmod` checks (see ``The local-model
+contract'' in Appendix AppendixAddModels).  The generated makefile links
+XSPEC's Python support library only for a package that contains Python
+(`Py_`) models, so a package of compiled models also loads into a
+program without Python.  A complete example package, with analytic gradients
+and a check of them, is installed in $HEADAS/lib/xspec-lmod-template.
+
+After building the library `initpackage` checks that it does not call
+any of the Fortran routines XSPEC 12.15.1 moved into the modules
+`xsfortran` and `xsfortfuncwrappers` the pre-12.15.1 way, which
+would stop XSPEC the first time the model was evaluated.  If it does, the
+command fails, naming each routine, its module, the source file that calls it,
+and the `xsmigrate_local_model` command that migrates the sources (see
+``Migrating Fortran local models from 12.14 and earlier'' in
+Appendix AppendixAddModels).
+
 A separate command, `lmod`, actually loads the library. This two step 
 process makes it easier to determine where the user is during the 
 process if compilation failures arise. Further, if the model is complete 

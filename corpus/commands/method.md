@@ -25,7 +25,7 @@ method to find the confidence regions.
 **leven**
 
 **Syntax:** `method` leven [<# of eval>] [<crit delta>]
-  [<crit beta>]] [delay | nodelay]
+  [<crit beta>]] [delay | nodelay] [geodesic | nogeodesic]
 
 The default XSPEC minimization method using the modified Levenberg-Marquardt 
 algorithm based on the CURFIT routine from Bevington. `<# of eval>` is 
@@ -48,16 +48,59 @@ gratification. It is turned off by `nodelay`. Delayed gratification
 modifies the way the damping parameter is set and has been shown in many 
 cases to speed up convergence. The default is `nodelay`.
 
-`<# of eval>`, `<crit delta>`, `<crit beta>`, `delay`, 
-and `nodelay` may also be set through the `fit` command.
+Including `geodesic` turns on geodesic acceleration (Transtrum &
+Sethna 2012), and `nogeodesic` turns it off; the default is
+`nogeodesic`.  Each iteration's step $\delta\theta_1$ gets a
+second-order correction $\delta\theta_2$ for the curvature of the model
+along it, at the cost of one more model calculation per iteration, which
+helps where the minimum lies at the end of a long curved valley
+(Appendix AppendixAlgorithmsGeodesic).  It pays when the derivatives
+are finite differences --- table models, convolutions, a model without an
+analytic gradient, or `xset` `DISABLE_ANALYTIC_GRAD` `yes`
+--- because then an iteration costs about twice as many model calculations
+as there are free parameters and saving iterations matters.  With analytic
+derivatives an iteration costs about two model calculations, and the extra
+one usually costs more than it saves.  `delay` alone is often as good;
+the two can be combined.  It is not used with `usechainrule no`, with
+a free response parameter, or with a dependent parameter limit (the fit
+takes plain steps and says so at chatter 10).  The fits made by
+`error`, `steppar` and the simulation commands inherit it, and
+`save` writes it.  At chatter 15 a fit ends with its number of
+iterations and model calculations.
 
-This method requires an estimate of the second derivative of the statistic 
-with respect to the parameters. By default, XSPEC calculates these using 
-an analytic expression which assumes that partial 2nd derivatives of the 
-model with respect to its parameters may be ignored.  This may be changed 
-by setting the USE_CHAIN_RULE flag to `false` in the user's 
-startup Xspec.init initialization file.  XSPEC will then calculate 
-all second derivatives numerically, which can be noticeably slower.
+`<# of eval>`, `<crit delta>`, `<crit beta>`, `delay`, 
+`nodelay`, `geodesic` and `nogeodesic` may also be set
+through the `fit` command.
+
+This method requires the first derivatives of the statistic with respect
+to the parameters, and an estimate of the second derivatives.  When every
+component of the active models has a registered analytic gradient, the
+first derivatives are by default computed analytically in a single pass
+(Appendix AppendixAlgorithms); set
+`xset` `DISABLE_ANALYTIC_GRAD` `yes` to revert to
+finite differences (for example to reproduce fit paths from earlier
+versions).  Under the default
+`xset` `ANALYTIC_GRAD` `auto`, components whose
+analytic gradient costs more than finite differences (at present table
+models) use finite differences for their parameters in leven fits.  The second derivatives are by default estimated using an
+analytic expression which assumes that partial 2nd derivatives of the
+model with respect to its parameters may be ignored.  This may be changed
+with `xset` `usechainrule` `no` (or by setting the
+USE_CHAIN_RULE flag to `false` in the user's startup
+Xspec.init initialization file); XSPEC will then differentiate
+the statistic numerically, which can be noticeably slower.
+
+A parameter whose curvature-matrix diagonal is zero is *pegged*: held
+fixed for an iteration with the message that the fit is insensitive to it.
+When its derivative is a finite difference, the zero is usually an artefact
+of a step too small for the model to change (a narrow line moving within one
+energy bin, a model that is piecewise constant on the energy grid), so leven
+first retries the step $\times 10$, up to three times and never beyond 1%
+of the parameter's hard range, keeping the larger step for the rest of that
+fit.  Because a step that large is a coarse derivative, a fit in which a step
+was raised is worth repeating: the next `fit` starts from the
+parameter's own delta.  `xset` `LM_DELTA_ESCALATE` `off`
+restores the old behaviour.
 
 **migrad**
 
@@ -73,11 +116,90 @@ slowest method with highest reliability. The default is
 fit statistic and the minimum is less than `<minuit tolerance>`
 times 0.001. The default tolerance is 0.1.
 
-The current version of Minuit2 included is that from ROOT v5.34. Documentation 
+Migrad is given the first derivatives of the statistic by XSPEC, analytic
+where the model allows it as for leven.  Under the default
+`xset` `ANALYTIC_GRAD` `auto` it keeps the analytic
+gradient of table models, which leven replaces by finite differences,
+because migrad stops when the gradient it is given is close to zero, and a finite-difference gradient of a table model can be close to zero short of the minimum.  With
+`never`, or `DISABLE_ANALYTIC_GRAD` `yes`, migrad
+fits of such models can stop early; check them with leven.
+
+The current version of Minuit2 included is that from ROOT v5.34. Documentation
 on Minuit2 can be found at http://seal.web.cern.ch/seal/MathLibs/Minuit2/html/.
 
-If migrad is not working well try experimenting with different hard and soft 
-limits on parameters.
+**Parameter limits and the Minuit methods.** Both Minuit methods work in
+the parameter's value directly, and *soft limits have no effect on them*.
+Where a hard limit is passed to Minuit, Minuit enforces it by minimizing in an
+internal coordinate of its own: for a parameter bounded on both sides the
+external value $P$ is related to the internal one $P_{\rm int}$ by
+
+$P = P_{\rm min} + \frac{1}{2}(P_{\rm max}-P_{\rm min})(\sin P_{\rm int} + 1)$
+
+and by a square-root relation for a parameter bounded on one side only. Minuit
+applies the Jacobian of this transformation to the gradient and to the
+covariance matrix itself, so both the fit and the reported uncertainties are in
+the coordinate you asked for.
+
+The cost is resolution. The internal coordinate covers the whole allowed range
+over an interval of order unity, so the wider the range between the hard
+limits, the less of the external parameter each internal step can resolve. A
+range far wider than the region the parameter can plausibly occupy therefore
+degrades the minimization and, more visibly, the uncertainties Minuit reports
+from its error matrix. This is Minuit's own advice as well: do not use limits
+you do not need, and where you do need them, make them tight.
+
+XSPEC passes a parameter's hard limits to Minuit only when they span a range of
+100 or less; a parameter whose hard limits are wider than that -- which
+includes every normalization, whose default hard maximum is $10^{24}$ -- is
+given to Minuit unbounded. Such a parameter is still confined to its hard
+limits, because XSPEC clamps it there, but outside them Minuit sees a flat
+statistic rather than a boundary.
+
+The practical advice when fitting with `migrad` or `simplex` is
+therefore to set the hard limits of the free parameters explicitly, with
+`newpar`, to a range the parameter can plausibly take -- for a
+normalization known to within a few orders of magnitude, say, a range of $10$
+rather than $10^{24}$ -- and to check afterwards that no parameter has ended up
+against a limit you imposed. Soft limits will not restrain a Minuit fit, and
+the reported uncertainties are only as good as the range Minuit was given.
+
+If migrad is still not working well, try `fit` `global` or a
+different starting point; a fit that reports convergence with a parameter
+pegged at a limit has usually not converged at all.
+
+A Minuit fit can end short of the minimum in two ways, and neither is visible
+in the parameter values it leaves behind, so XSPEC reports both. The test in
+each case is the estimated distance to the minimum (edm) --- Minuit's own
+estimate of how far in fit statistic the current point is from the minimum ---
+against the criterion Minuit converges on, which is 0.002 times the tolerance.
+
+The first is running out of function evaluations. This is ordinary, and
+continuing is simply another `fit`:
+
+```
+***Warning: migrad stopped at its limit on function evaluations, with an
+ estimated distance to the minimum of 1.86779 against a convergence
+ criterion of 0.0002.  It has not converged.
+ Fit again to continue from this point, or raise the number of evaluations
+ in the method command.
+```
+
+The second is Minuit stopping of its own accord, when the error matrix it
+carries between iterations yields no direction of improvement. Fitting again
+from that point will do the same thing, so the remedy is different:
+
+```
+***Warning: migrad did not converge.  Minuit found no direction of
+ improvement from this point, with an estimated distance to the minimum
+ of 3306.74 against a convergence criterion of 0.0002.
+ The parameter values below are where it stopped and may not be the minimum.
+```
+
+A fit that ends either way has not been minimized to Minuit's own satisfaction,
+whatever the parameter values look like. Note that the edm is an estimate made
+from the error matrix, so a fit that has in fact reached the minimum can still
+report a value above the criterion; what the warning tells you is that Minuit
+stopped for a reason other than convergence.
 
 **simplex**
 

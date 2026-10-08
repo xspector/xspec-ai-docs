@@ -1,7 +1,7 @@
 ---
 name: setplot
 aliases: [xsetplot]
-also_documents: [setplotadd, setplotnoadd, setplotarea, setplotnoarea, setplotareascale, setplotnoareascale, setplotbackground, setplotnobackground, setplotchannel, setplotcommand, setplotcontimage, setplotnocontimage, setplotdelete, setplotdevice, setplotenergy, setploterrortype, setplotgroup, setplotid, setplotnoid, setplotlist, setplotrebin, setplotredshift, setplotsplashpage, setplotungroup, setplotwave, setplotxlog, setplotylog]
+also_documents: [setplotadd, setplotnoadd, setplotaddauto, setplotcoadd, setplotarea, setplotnoarea, setplotareascale, setplotnoareascale, setplotbackground, setplotnobackground, setplotband, setplotchannel, setplotcommand, setplotcontimage, setplotnocontimage, setplotdelete, setplotdevice, setplotenergy, setploteweight, setploterrortype, setplotgroup, setplotid, setplotnoid, setplotlist, setplotrebin, setplotredshift, setplotsplashpage, setplotungroup, setplotwave, setplotxlog, setplotylog]
 source: XSsetplot.tex
 ---
 
@@ -17,9 +17,40 @@ where `<subcommand string>` is a keyword followed in some cases by
 arguments.  Current settings of all `setplot` items can be viewed 
 with `show plot`.
 
-- [add, noadd]
+An argument that cannot be applied --- an unknown subcommand, a value
+outside its range, a missing required argument --- is an error: the
+message goes to the error stream and the command fails, so a script
+stops there unless the command is wrapped in `catch`.  The one
+exception is `setplot id`, which applies the values it can read
+and warns about the rest.
 
-Switch on (add) and off (noadd) individual additive model components on data plots.
+- [add, noadd, addauto]
+
+How individual additive model components are shown.  `addauto`, the
+default, shows them on model plots (`model`, `emodel`,
+`eemodel`) and unfolded and deconvolved plots (the `ufspec` and
+`dspec` families) but not on data plots.  `add` also shows them
+(folded) on data plots (`data`, `ldata`, `counts`,
+`foldmodel`, `background`, `icounts`, ).
+`noadd` hides them everywhere, model and unfolded plots included.
+Residual plots never show them.  `save` writes `add` or
+`noadd`; the default writes nothing.
+
+- [coadd]
+
+`setplot coadd on|off`.  With `on`, the spectra in each
+`setplot group` are summed rather than averaged on folded count-space
+plots and their residuals (`data`, `ldata`, `counts`,
+`background`, `foldmodel`, `residuals`, `delchi`,
+`ratio`, `chi`): data, background and folded model are added,
+errors in quadrature, so `delchi` is
+$(\sum d - \sum m)/\sqrt{\sum \sigma^2}$, and `setplot rebin` acts on
+the summed counts.  The y label says ``(coadded)''.  Unfolded and model plots
+keep averaging (a note says so once), since one source's flux should not be
+multiplied by the number of data sets.  The spectra in a group must share
+their channels, which `setplot group` already requires.  The default
+is `off`; `save` writes `setplot coadd on`.  `co`
+alone still abbreviates `command`.
 
 - [area, noarea]
 
@@ -43,6 +74,29 @@ AREASCAL values are already included in the area for these plots.
 
 When running `plot data` or `plot ldata`, also show associated 
 background spectra (if any).  
+
+- [band on| off [level `<pct>` ...] [draws `<n>`]]
+
+Draw a credible band around the model curve (default `off`). The band
+at each plotted point is the central `<pct>` percent (default 68) of the
+model over `<n>` parameter draws (default 500): from loaded chains whose
+parameters match the current free parameters, otherwise from the covariance
+matrix of the last valid fit --- the same rule as the errors of `flux`
+and `eqwidth`. With neither, the plot is refused. Several levels give
+nested bands (`setplot band on level 68 95`). The curve drawn is still
+the best fit, and the band edges are drawn as dashed lines in the model's
+colour. Bands are drawn on the `model`, `emodel` and
+`eemodel` plots, the unfolded `ufspec` family, the deconvolved
+`dspec` family and the folded `data`, `ldata` and
+`counts` plots; never on residual panes (in `plot data delchi`
+only the data pane has one) or on added components. Each draw's model goes
+through the same rebinning, units and energy weighting as the plotted curve,
+so the two always agree. Each plot reports the number of draws and their
+source. The draws use the session's random numbers, so `xset seed`
+makes a band reproducible; reduce `<n>` for slow models. `wdata`
+writes the band edges as extra columns after the model (low then high, per
+level), and `tclout plot` returns the first level's edges as
+`bandlow` and `bandhigh`.
 
 - [channel]
 
@@ -73,13 +127,13 @@ and `setplot list`.
 
 Example:
 
-XSPEC12> setp co LA OT Crab  #Add the label "Crab" to future plots.
-XSPEC12> setplot co LA OT 
+XSPEC> setp co LA OT Crab  #Add the label "Crab" to future plots.
+XSPEC> setplot co LA OT 
 gD
 gx
 u2
 d  # delta chi-squared
-XSPEC12> setpl co LA OT 
+XSPEC> setpl co LA OT 
 
 gD
 
@@ -111,10 +165,10 @@ delete commands from the list passed to PLT when you use the XSPEC
 Set current plot device.
 
 ```
-XSPEC12>setplot device	 <plot device>
-XSPEC12>setplot device	<filename>
-XSPEC12>setplot device	<filename>/{ps,cps,vps,vcps}
-XSPEC12>setplot device	 none
+XSPEC>setplot device	 <plot device>
+XSPEC>setplot device	<filename>
+XSPEC>setplot device	<filename>/{ps,cps,vps,vcps}
+XSPEC>setplot device	 none
 ```
 
 If the second argument does not start with a '/' character, which indicates 
@@ -177,9 +231,9 @@ on Unix machines are :
 Examples:
 
 ```
-XSPEC12> setplot device /xt 
+XSPEC> setplot device /xt 
    // sets the device to the xterm.
-XSPEC12> setplot device none 
+XSPEC> setplot device none 
    // closes the plot file.
 ```
 
@@ -190,14 +244,35 @@ Change the X-axis on plots to energies, and optionally change the units.
 `setplot energy [<units>]`
 
 where `<units>` is an optional string for modifying X-axis energy units.  
-Valid choices currently are:  `keV, MeV, GeV`, and `Hz`, which are case-insensitive 
-and can be abbreviated.  Energy units initially default to `keV`.  
+Valid choices currently are:  `keV, eV, MeV, GeV, TeV`, and `Hz`, which are case-insensitive 
+and can be abbreviated.  Energy units initially default to `keV`.  The names and
+conversion factors are those XSPEC uses for the energy columns of files
+(Appendix AppendixEnergyUnits).  
 The selection made here also determines the units in the
 `ignore` and `notice` energy range specifiers.  
 
 Where applicable, Y-axis units will be modified to match the X-axis selection.  
 The exception is for the choice of Hz when emodel/eufspec is in Jy and 
 eemodel/eeufspec in ergs/cm^2/s.
+
+- [eweight]
+
+`setplot eweight bin|geometric`.  How the `ufspec` and
+`dspec` families weight each plotted bin by $E$ or $E^{2}$ (in
+`eufspec`, `eeufspec`, `despec`, `deespec`).
+`bin`, the default, uses the model's flux-weighted mean of $E^{p}$
+over its energy bins inside the plotted bin,
+$\sum_i E_i^{p}F_i / \sum_i F_i$, so a plotted point is the bin average of
+$E^{p}f(E)$; a line inside a wide bin is weighted at its own energy.  The
+same factor multiplies the data and the model, so data/model is unchanged,
+and each additive component takes its own.  `geometric` multiplies
+by the bin's geometric-centre energy (to the power $p$), as XSPEC did
+before; the two agree for narrow bins and differ where bins are wide or the
+spectrum curves within one.  Only these plots are affected:
+`emodel`/`eemodel` have no finer grid than their own (use a
+fine `energies` grid), and `edata`-style plots keep their
+count-space convention.  `save` writes `setplot eweight
+geometric`; the default writes nothing.
 
 - [errortype]
 
@@ -233,15 +308,15 @@ Examples:
 Assume that there are five spectra currently read in, all of them ungrouped 
 initially.
 
-XSPEC12> setplot group 1-4
+XSPEC> setplot group 1-4
    //The first four spectra are treated as one group, with the fifth 
    //  spectra on its own. Thus all plots will appear to have two spectra.
-XSPEC12> setplot group 1 2 3 4 
+XSPEC> setplot group 1 2 3 4 
    //The spectra are reset to each be in their own group.
-XSPEC12> setplot group 2-3 4-5 
+XSPEC> setplot group 2-3 4-5 
    //Now there are three plot groups, being spectrum 1, by itself, and 
    //  spectra 2-3 and 4-5 as groups.
-XSPEC12> setplot group 1-**
+XSPEC> setplot group 1-**
    //All the spectra are placed in a single plot group.
 
 - [id, noid]
@@ -260,7 +335,31 @@ low and high values given are assumed to be in wavelength units. The
 APEC version is the current default unless `xset apecroot` has
 been used to reset the APEC files then `setplot id` uses a
 filename based on the value of `apecroot` as described in the
-documentation for the `apec` model.
+documentation for the `apec` model. The list is that of a
+collisional-equilibrium plasma at the tabulated temperature nearest the one
+given (there is no interpolation), with the abundances built into the line
+file; for lines that follow the fitted model, use the model form below.
+
+`setplot id model [top <n>] [fraction <f>] [group <g>]
+[model <name>] [lo <E>] [hi <E>]`
+
+Labels the lines the current model emits, as `identify fit` lists them:
+the lines of its AtomDB components (`apec`, `vapec`, the
+multi-temperature and NEI families, ) at the current parameter values,
+including the ionization state of an NEI model and the model's abundances.
+The list is recomputed for every plot, so the labels follow a fit or a
+`newpar`. Each line is labelled at its observed energy (the component's
+redshift applied). Only lines in the plotted range, or in [`<lo>`,
+`<hi>`] keV if those are given, with a flux at least `<fraction>`
+(default 0.01) of the strongest such line are labelled, the strongest
+`<top>` (default 20) of them. `<group>` (default 1) and
+`<model>` pick the data group and the named model whose lines are used.
+A model with no AtomDB component gives a warning and no labels. Either form
+of `setplot id` replaces the other; `setplot noid` turns off
+both.
+
+XSPEC> setplot id model lo 6 hi 7.2 top 10
+   //Label the ten strongest lines the model emits between 6 and 7.2 keV.
 
 - [list]
 
@@ -297,15 +396,15 @@ quadrature to the source error.
 
 Examples:
 
-XSPEC12> setplot rebin 3 5 1
+XSPEC> setplot rebin 3 5 1
    //Bins in plot group 1 are plotted that have at least 3 sigma,
    // or are grouped in sets of 5 bins.
-XSPEC12> setplot rebin 5 5
+XSPEC> setplot rebin 5 5
    //The significance is increased to 5 sigma.
-XSPEC12> setplot rebin,,10,-1
+XSPEC> setplot rebin,,10,-1
    //All plotted bins can be grouped into up to 10 bins in reaching the 
    // 5 sigma significance criterion.
-XSPEC12> setplot rebin ,,,sqrt
+XSPEC> setplot rebin ,,,sqrt
    //Uses sqrt(N) to calculate error bars.
 
 - [redshift]
@@ -340,8 +439,9 @@ Change the x-axis on plots to wavelength, and optionally change the units.
 `setplot wave perhz [off]`
 
 where `<units>` is an optional string for modifying X-axis wavelength 
-units.  Valid choices currently are:  `angstom, cm, micron`, and `nm`, 
-which are case-insensitive and can be abbreviated.  Wavelength units 
+units.  Valid choices currently are:  `angstrom, cm, micron`, and `nm`,
+which are case-insensitive and can be abbreviated; `A`, `um` and
+`microns` are also accepted.  Wavelength units 
 initially default to `angstrom`.
 
 Where applicable, Y-axis units will be modified to match the X-axis 

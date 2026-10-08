@@ -22,16 +22,16 @@ for users who use the same set of commands repeatedly. Once a script file is
 written and saved, the user then can re-run the same set of commands on other data by:
 
 ```
-XSPEC12> source <script file>
+XSPEC> source <script file>
 ```
 
 **Examples:**
 
 ```
-XSPEC12> script
+XSPEC> script
 // Turn on the script file (default xspec.xcm)
-XSPEC12> script none
+XSPEC> script none
 // Close the script file.
-XSPEC12> script myscript 
+XSPEC> script myscript 
 // Open the script file (myscript.xcm)
 ```

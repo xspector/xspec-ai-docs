@@ -17,8 +17,12 @@ Variants documented together: `cempow`, `vcempow`, `bcempow`, `bvcempow`.
 ## Description
 
 A multi-temperature plasma emission model. Emission measures follow a
-power-law in temperature ($dEM =
-(T/T_{max})^{\alpha-1}dT/T_{max}$).The switch parameter
+power-law in temperature, $dEM = (T/T_{max})^{\alpha}\,d\log_{10}(T)$,
+summed over a grid uniform in $\log_{10}(T)$ with a step of 0.1. Written
+in terms of $dT$ this is $dEM =
+(T/T_{max})^{\alpha-1}dT/(T_{max}\ln 10)$; note the factor of $\ln 10$,
+which arises because the model integrates over $\log_{10}(T)$ rather than
+over $T$. The switch parameter
 determines whether the spectrum is calculated by running the mekal code,
 by interpolating on a pre-calculated mekal table, using the AtomDB
 data, or the SPEX data. The final two options are now

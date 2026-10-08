@@ -30,9 +30,9 @@ _Authoritative from `model.dat`. Negative fit-delta = frozen; additive models ca
 
 | # | param | unit | default | soft min | soft max | hard min | hard max | delta | note |
 |---|-------|------|---------|----------|----------|----------|----------|-------|------|
-| 1 | LineE | km/s | 1 | 0 | 1000000 | 0 | 1000000 | 0.05 |  |
-| 2 | Sigma | km/s | 100 | 0 | 10 | 0 | 20 | 0.05 |  |
-| 3 | Width | km/s | 100 | 0 | 10 | 0 | 20 | 0.05 |  |
+| 1 | LineE | keV | 1 | 0 | 1000000 | 0 | 1000000 | 0.05 |  |
+| 2 | Sigma | km/s | 100 | 0 | 300000 | 0 | 300000 | 0.05 |  |
+| 3 | Width | km/s | 100 | 0 | 300000 | 0 | 300000 | 0.05 |  |
 | 4 | Strength | keV | 1 | 0 | 1000000 | 0 | 1000000 | 0.05 |  |
 | 5 | Redshift | — | 0 | -0.999 | 10 | -0.999 | 10 | 0.01 | frozen by default |
 

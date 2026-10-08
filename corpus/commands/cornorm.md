@@ -19,7 +19,9 @@ value to be used for the normalization. A decimal point (.) is used to
 distinguish a correction norm from a single spectrum `<spectrum range>`. 
 If no correction norm is given, then the last value input is used (the initial 
 value is one (1)). If no range is given, then the last single range input is 
-modified. (See the `corfile` command.) 
+modified. (See the `corfile` command.) A spectrum's norm starts as the
+CORRSCAL of the file that named its correction: the data file, or the
+background file when the correction was taken from it. 
 
 **Examples:**
   
@@ -28,15 +30,15 @@ defined, either by default in their PHA file, or explicitly by using the
 `corfile` command.
 
 ```
-XSPEC12> cornorm 1-4 1.
+XSPEC> cornorm 1-4 1.
 //The correction norm for all four is set to 1.0
-XSPEC12> cornorm 0. 1-2 0.3 
+XSPEC> cornorm 0. 1-2 0.3 
 //The correction norm for the last input range (which was 1-4) 
 // is set to 0., then files 1 and 2 are reset to 0.3.
-XSPEC12> cornorm 4
+XSPEC> cornorm 4
 //file 4 has the correction also set to 0.3.
-XSPEC12> cornorm 1 4 -.3
+XSPEC> cornorm 1 4 -.3
 //files 1 and 4 are set to -.3.
-XSPEC12> cornorm .7
+XSPEC> cornorm .7
 //file 4 (as the last input single range) is set to 0.7.
 ```

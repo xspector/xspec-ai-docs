@@ -19,7 +19,21 @@ Variants documented together: `cheb6`, `vcheb6`, `bcheb6`, `bvcheb6`.
 `cheb6` is a multi-temperature collisional-ionization model
 using a sixth-order Chebyshev polynomial for the
 differential emission measure. The DEM is not constrained to be
-positive. The switch parameter determines whether spectrum is
+positive. The differential emission measure is defined per unit
+$\log_{10}(T)$,
+
+$$dEM = Q(x)\,(T/10^{6}\,{\rm K})\,d\log_{10}(T), \qquad
+Q(x) = \sum_{j=1}^{6} a_j T_j(x), \qquad
+x = 0.8\left(\log_{10}T[{\rm K}] - 5.5\right) - 1,$$
+
+where $T_j$ is the Chebyshev polynomial of the first kind of order $j$
+and the coefficients $a_1$--$a_6$ are par1--6. Note that the sum starts
+at $j=1$: there is no constant ($T_0$) term, so the DEM cannot be given
+a temperature-independent offset. The variable $x$ maps
+$\log_{10}T[{\rm K}] = 5.5$--8.0 onto $[-1,1]$, and the sum is evaluated
+on a grid uniform in $\log_{10}(T)$ over that range with a step of 0.1.
+As for `cempow`, expressing the DEM in terms of $dT$ instead
+introduces a factor of $\ln 10$. The switch parameter determines whether spectrum is
 calculated by running the mekal code, by interpolating on a
 pre-calculated mekal table, using the AtomDB data or the SPEX
 data. The final two options

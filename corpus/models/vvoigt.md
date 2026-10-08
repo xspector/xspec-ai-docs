@@ -33,8 +33,8 @@ _Authoritative from `model.dat`. Negative fit-delta = frozen; additive models ca
 | # | param | unit | default | soft min | soft max | hard min | hard max | delta | note |
 |---|-------|------|---------|----------|----------|----------|----------|-------|------|
 | 1 | LineE | keV | 6.5 | 0 | 1000000 | 0 | 1000000 | 0.01 |  |
-| 2 | Sigma | km/s | 100 | 0 | 10 | 0 | 20 | 0.005 |  |
-| 3 | Gamma | km/s | 100 | 0 | 10 | 0 | 20 | 0.005 |  |
+| 2 | Sigma | km/s | 100 | 0 | 300000 | 0 | 300000 | 0.005 |  |
+| 3 | Gamma | km/s | 100 | 0 | 300000 | 0 | 300000 | 0.005 |  |
 | 4 | norm | — | 1 | 0 | 1e+24 | 0 | 1e+24 | 0.01 | implicit norm |
 
 ## PyXspec

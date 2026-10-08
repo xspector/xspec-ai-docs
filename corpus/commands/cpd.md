@@ -103,11 +103,11 @@ Produce a set of color postscript plots in landscape orientation
 
 ```
 // ... commands to produce a plot.
-XSPEC12> cpd   dataplot.ps/cps
-XSPEC12> plot data chi
-XSPEC12> plot ufspec
-XSPEC12> plot efficiency
-XSPEC12> cpd none
+XSPEC> cpd   dataplot.ps/cps
+XSPEC> plot data chi
+XSPEC> plot ufspec
+XSPEC> plot efficiency
+XSPEC> cpd none
 ```
 
 Will produce 3 plots in the file dataplot.ps

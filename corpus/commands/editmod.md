@@ -28,24 +28,24 @@ model, prompting the user for any new parameter values which may be needed.
 **Examples:**
 
 ```
-XSPEC12> mo wabs(po)
-XSPEC12> ed wabs(po+ga)
+XSPEC> mo wabs(po)
+XSPEC> ed wabs(po+ga)
 //This command will add the component gauss to model
 // in the specified place and prompt the user for its initial
 // parameters.
-XSPEC12> mo wabs(po+zg)
-XSPEC12> ed po+zg
+XSPEC> mo wabs(po+zg)
+XSPEC> ed po+zg
 //This command will delete the component wabs from the 
 //model, leaving the other components and their current 
 //parameter values unchanged
-XSPEC12> mo wabs(po+po)
-XSPEC12> ed wabs(po)
+XSPEC> mo wabs(po+po)
+XSPEC> ed wabs(po)
 //Here an ambiguity exists as to which component to delete.
 //In this case XSPEC will print out  the current model, 
 //showing the component number for each component, and then 
 //prompt the user for which component he wants deleted.
-XSPEC12> mo wabs(po+ga)
-XSPEC12> ed wabs(po+zg)
+XSPEC> mo wabs(po+ga)
+XSPEC> ed wabs(po+zg)
 //The component gauss will be replaced by the component zgauss, 
 //and the user will be prompted for parameter values for the new
 // component

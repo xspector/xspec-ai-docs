@@ -1,0 +1,62 @@
+{
+  "name": "suzpsf",
+  "type": "mix",
+  "func": "U_Psf<Suzaku>(Psf,PsfTraits)",
+  "elo": "0.",
+  "ehi": "1.e20",
+  "npars_declared": 4,
+  "params": [
+    {
+      "name": "Alpha",
+      "unit": "",
+      "default": 2.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Beta",
+      "unit": "",
+      "default": 0.66,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Core",
+      "unit": "arcmin",
+      "default": 1.0,
+      "hardmin": 0.0,
+      "softmin": 0.0,
+      "softmax": 100.0,
+      "hardmax": 100.0,
+      "delta": -0.01,
+      "frozen": true,
+      "kind": "fit"
+    },
+    {
+      "name": "Switch",
+      "unit": "",
+      "default": 0.0,
+      "hardmin": null,
+      "softmin": null,
+      "softmax": null,
+      "hardmax": null,
+      "delta": null,
+      "frozen": true,
+      "kind": "switch"
+    }
+  ],
+  "family": [
+    "suzpsf"
+  ],
+  "title": "suzpsf: Suzaku surface brightness model"
+}

@@ -21,6 +21,8 @@ associated spectrum to incident X-rays.
 
                  & **response** & `[<source num>:]<spectrum num>  svdeps  <eps>`
 
+                 & **response** & `firstorder [[<source num>:]<spectra>]  auto|<k>|off`
+
 where `<filespec>` ::= [[`<source num>`:]`<spectrum
     num>`] `<file name>`..., and `<file name>` is the name of
 the response file to be used for the response of the associated
@@ -35,6 +37,15 @@ description. An important difference however is that the
 previously loaded spectrum: an error message is printed if the
 `<spectrum num>` is greater than the current number of spectra
 (as determined from the last use of the `data` command).
+
+Each response is checked as it is read
+(Appendix AppendixAlgorithmsInputChecks), and energies in units other
+than keV (angstrom, Hz, eV, , as given by TUNIT) are converted to keV
+(Appendix AppendixEnergyUnits).  A response with a defect
+XSPEC cannot work around --- a NaN energy or matrix element, bins out of
+order or overlapping --- is refused unless `xset INPUT_CHECK warn`
+is set; a decreasing energy grid or an energy $\le 0$ is corrected in
+memory, with a warning.
 
 If the `<file name>` argument is an SVD-K compressed response
 side-car (a `.svdmat.fits` file produced by `ftsvdcmprmf`
@@ -62,6 +73,50 @@ been attached:
    Use $-1$ to revert to the global default ($10^{-4}$).
 
 Neither override survives a re-load of the underlying RMF.
+
+**First-order folding.**
+`response firstorder` folds each model energy bin at the mean energy
+of its photons rather than at its centre, through the response and its
+derivative with energy (Kaastra & Bleeker 2016; see
+Appendix AppendixAlgorithmsFirstOrder).  A line near a bin edge, the
+worst case for the ordinary fold, is then placed where it is, so a much
+coarser model grid gives the same accuracy:
+
+- `response firstorder <k>` merges $k \ge 2$ rows of the
+  response into each model bin;
+
+- `response firstorder auto` chooses each bin's width from the
+  response's resolution and the spectrum's counts there (the paper's
+  Monte Carlo fit for first order);
+
+- `response firstorder off` restores the ordinary fold;
+
+- `response firstorder` with no mode lists each response's
+  setting.
+
+`<spectra>` is a spectrum number, a range such as `1-3`, or a
+list of those; without it, every response is changed.  `<source num>`
+restricts the change to that source's responses.  The change is all or
+nothing: if any response cannot be folded first order (a dummy response, a
+multiple-RMF response, one with response models such as `gain`
+attached, or an SVD-K side-car), none is changed.  The model is then
+evaluated on the half-bin grid of the coarse bins (`show response`
+gives the numbers of bins before and after), and additive models that supply
+their mean photon energies (`moment=1` in `model.dat`: the
+line models, `powerlaw`, `bbody`, `bremss` and the
+`apec` and `nei` families) are exact within each bin; the
+others are folded by a half-bin estimate, and `response`
+`firstorder` names them at chatter 10.
+
+A response file written first order --- a `DMATRIX` column beside
+`MATRIX` and `RESPORDR = 1`, as written by ftrmf1st
+--- is folded first order on its own grid as soon as it is read, and its
+grid cannot be changed; `response firstorder off` folds it zeroth
+order on that grid, with a warning that the grid assumes first order.  The
+setting survives `ignore`, `notice`, a change of grouping and a
+new `arf`; loading a new response file, or new data into the slot,
+starts it off.  `gain` and the other response models are refused
+while first order is on, and first order while they are attached.
 
 An optional `<source num>` may be specified to attach additional responses 
 to a spectrum, and should be paired with `<spectrum num>` separated by 
@@ -95,11 +150,11 @@ It is assumed that there are currently three spectra:
 Single source usage:
 
 ```
-XSPEC12> response a,b,c         
+XSPEC> response a,b,c         
 // New files for the response are given for all three files.
-XSPEC12> response 2 none        
+XSPEC> response 2 none        
 // No response will be used for the second file.
-XSPEC12> response ,d{2}         
+XSPEC> response ,d{2}         
 // The second response in d becomes the response for 
 //the second file.
 ```
@@ -107,12 +162,23 @@ XSPEC12> response ,d{2}
 Multiple source usage:
 
 ```
-XSPEC12> response 2:1 e
+XSPEC> response 2:1 e
 // A second source with response e.rsp is now added to  
 // the first spectrum.  A second model can be assigned 
 // to this source.
-XSPEC12> response 2:2 f  3:2 g                
+XSPEC> response 2:2 f  3:2 g                
 // A second and third source is assigned to spectrum 2.
-XSPEC12> response 2:2 none                  
+XSPEC> response 2:2 none                  
 // The second source is now removed from spectrum 2.
+```
+
+First-order folding:
+
+```
+XSPEC> response firstorder 8
+// Every response: 8 response rows per model bin.
+XSPEC> response firstorder 2-3 auto
+// Spectra 2 and 3: bin widths from the resolution and counts.
+XSPEC> response firstorder off
+// Every response back to the ordinary fold.
 ```

@@ -24,8 +24,8 @@
       "default": 100.0,
       "hardmin": 0.0,
       "softmin": 0.0,
-      "softmax": 10.0,
-      "hardmax": 20.0,
+      "softmax": 300000.0,
+      "hardmax": 300000.0,
       "delta": 0.005,
       "frozen": false,
       "kind": "fit"
@@ -36,8 +36,8 @@
       "default": 100.0,
       "hardmin": 0.0,
       "softmin": 0.0,
-      "softmax": 10.0,
-      "hardmax": 20.0,
+      "softmax": 300000.0,
+      "hardmax": 300000.0,
       "delta": 0.005,
       "frozen": false,
       "kind": "fit"

@@ -1,7 +1,7 @@
 ---
 name: tclout
 aliases: [xtclout]
-also_documents: [tcloutchain, tclouteqwidth, tclouterror, tcloutflux, tcloutgain, tcloutlumin, tcloutnchan, tcloutpeakrsid, tcloutplot, tcloutsigma, tcloutsim, tcloutsteppar, tcloutversion]
+also_documents: [tcloutcleared, tcloutbias, tcloutcgof, tcloutchain, tcloutderror, tcloutdmodel, tcloutdpar, tclouteqwidth, tclouterror, tcloutflux, tcloutgain, tclouthmc, tcloutlumin, tcloutmixweights, tcloutnchan, tcloutnest, tcloutpeakrsid, tcloutplot, tcloutrmodel, tcloutrpar, tcloutsigma, tcloutsim, tcloutsteppar, tcloutversion]
 source: XStclout.tex
 ---
 
@@ -17,7 +17,24 @@ output data as desired, use independent plotting software, etc.
 **Syntax:** `tclout` <option> [<par1>] [<par2>] [<par3>]
 
 `tclout` creates the tcl variable `$xspec_tclout`, which can then of course be 
-set to any named variable. The allowed values of `<option>` are:
+set to any named variable.
+
+The results of the analysis commands describe the data
+and models they were computed on.  Loading data (`data`, including
+`data none` and removing spectra) and defining or changing a model
+(`model`, `addcomp`, `delcomp`, `editmod`) clear
+them, and the options below that read them -- `error`, `sigma`,
+`goodness`, `ftest`, `sim`, `nest`,
+`hmc`, `steppar`, `margin`, `flux`,
+`lumin`, `eqwidth`, `lrt`, `coverage`,
+`cgof` and `bias` -- then return what they return before the
+command has been run.  `fit`, `newpar`, `ignore`,
+`notice`, `response` and `backgrnd` do not clear them, so
+`fit`, `error 1`, `tclout error 1` works, and so does
+reading a result after adjusting something to look at it.  Loaded chains are
+not affected.
+
+The allowed values of `<option>` are:
 
  |p{0.61}} 
 `?` & Show the valid options. Does not set $xspec_tclout.
@@ -30,6 +47,35 @@ If no second argument is given or it is ``s'' then the values are from the sourc
 `backgrnd n` & Background filename for spectrum n.
 
 `backscal n` `<s| b>` & Same as areascal option but for BACKSCAL value.
+
+`bayes` & The current Bayesian prior settings, in the same form
+printed by the `bayes` command (including any joint priors).
+
+`bias [bias| percent| first| debiased|
+  pars| verdict]`& Results of the last `bias`
+command, one value per free parameter in fit order: `bias` (the default)
+the predicted bias in parameter units, `percent` the same as a
+percentage of the debiased value, `first` the first-order estimate,
+`debiased` the debiased value $\theta_0$, `pars` the parameter
+numbers (`model:n` for a named model).  When the last run ended in the
+collapse verdict the numeric reads (other than `first`) are empty and
+`verdict` returns the verdict sentence; otherwise `verdict` is
+empty, so a script tests it first.  An error if no `bias` has run
+since the last refused one.
+
+`cgof [expected| sd| zscore| pvalue| fhat|
+  sys| delta]`& Results of the last `cgof`
+command.  With no option, four values: $E[C]$, its standard deviation,
+$(C-E[C])/{\rm sd}$ and the one-sided $p$-value without systematics;
+`expected` the first two of these, `sd`, `zscore` and
+`pvalue` each one of them; `fhat` the implied relative
+systematic $\hat f$ with its 68% lower and upper bounds; `sys`
+the run with systematics, $f$, $\mu_C$, $\sigma_C$, $E[C_{\rm sys}]$, its
+sd, $(C-E)/{\rm sd}$ and $p$ (empty unless `f` was given);
+`delta` the last `cgof` `delta`: $\Delta C$, $k$, $f$,
+$\mu$, $\alpha$, the nominal $p$ and the $p$ with systematics.  An error if
+no `cgof` (or `cgof` `delta`) has run since the last
+refused one.
 
 `chain best| dic| last| proposal|
   stat`& The best option returns 
@@ -59,9 +105,27 @@ If no indices are specified, then entire covariance matrix is retrieved.
 `datagrp [n]` & Data group number for spectrum n.  If no n is given, outputs the 
 total number of data groups.
 
+`datascan [drift| flagged| pars| setups|
+cond| corr| stat]` & From the last `datascan`: per row
+of its drift table, the largest $|\Delta|/\sigma$ (the default; $-1$ where
+none could be computed), whether it is flagged (1/0), the parameter, or the
+setup; or per setup, the session's first, its largest `projct`
+condition number ($-1$ without `projct`), its most negative
+adjacent-shell correlation ($1$ without `projct`) or its fit
+statistic.
+
 `datasets` & Number of datasets.
 
+`derror n`& The last confidence region calculated for data
+parameter n (see `dmodel`), and the error string, as for `error`.
+
+`dmodel <specNum>`& The names of the data models
+attached to spectrum <specNum>, in order of application; empty if none.
+
 `dof` & Degrees of freedom in fit, and the number of channels.
+
+`dpar n`& Value, delta, min, low, high, max of data
+parameter n, as `param` does for a model parameter.
 
 `energies [n]` & Writes a string of blank separated values giving the 
 energies for spectrum n on which the model is calculated.  If n is not 
@@ -73,7 +137,7 @@ If `errsims` keyword is supplied, this will instead return the
 complete sorted array of values generated for the most recent eqwidth error 
 simulation.
 
-`error [<mod>:]n`(for gain parameters use: `rerror [<sourceNum>:]n`) &
+`error [<mod>:]n`(for response parameters use: `rerror [<sourceNum>:]n`) &
 Writes last confidence region calculated for parameter n of model with optional 
 name <mod>, and a string listing any errors that occurred during the 
 calculation.  The string comprises nine letters, the letter is T or F 
@@ -120,14 +184,47 @@ completed sorted array of values generated during the most recent flux error cal
 
 `gain [<sourceNum>:]<specNum> slope|
   offset`&
-For gain fit parameters: value, delta, min, low, high, max for the slope or offset 
-parameter belonging to the [<sourceNum>:]<specNum> response.  
-For nonfit gain parameters, only the value is returned.
+Value, delta, min, low, high, max for the slope or offset parameter of the
+`gain` model attached to the [<sourceNum>:]<specNum> response
+(six fields whether or not the parameters are frozen).  With no gain
+attached, the nominal value alone (1 or 0).
 
-`goodness [sims]` & The percentage of realizations from the last goodness 
-command with statistic value less than the best-fit statistic using the data.  
-If optional `sims` keyword is specified, this will instead give the 
+`coverage [fraction| sigma| below| above|
+flagged| failed| pars| nominal]` & From the last
+`coverage` command, one value per tested parameter: the fraction of
+intervals containing the truth (the default), its binomial $1\sigma$, the
+fractions lying wholly below and above the truth, the flagged and failed
+counts, or the parameter identifiers.  `nominal` gives the nominal
+rate and the $\Delta$-statistic used.
+
+`lrt [p| observed| stat| sims]` & From the last
+`lrt` or `simftest`: the p-value and its binomial error (the
+default), the observed statistic difference (null minus alternative), the
+null's and the alternative's statistics, or every simulation's difference.
+
+`goodness [sims]` & The percentage of realizations from the last goodness
+command with statistic value less than the best-fit statistic using the data.
+If optional `sims` keyword is specified, this will instead give the
 full array of simulation values from the last goodness command.
+
+`group <n> [data| back] [intent]` & The grouping information
+for spectrum n.  With `data` (the default) this returns the per-channel
+grouping flags (1 starts a new bin, $-1$ continues it, 0 marks a bad channel);
+with `back` it returns the per-channel super-bin (pooling) index of the
+background.  If the `intent` keyword is added, the grouping intent is
+returned instead (`original`, or one of `minsn`,
+`mincounts`, `const`, `optbin` with its value,
+`auto` with its count target and resolution cap, or
+`file` with the filename).
+
+`hmc [divergent| accepted| meanaccept|
+  samples| grads| verdict| pars| par n]`%
+& Results of the last `hmc` run.
+`divergent` (the default), `accepted`, `meanaccept`,
+`samples` and `grads` are the numbers its finish line quotes.
+`verdict`, `pars` and `par` `n` behave as for
+`nest`; the verdict is the ordinary chain diagnostic plus the
+divergence count.  An error if no `hmc` has run.
 
 `idline e d` & Possible line IDs within the range [e-d, e+d]. 
 
@@ -136,14 +233,30 @@ full array of simulation values from the last goodness command.
 `lumin [n] [errsims]`& Last model luminosity calculated for spectrum n.
 Same output format as flux option, in units of $1.0\times 10^{44} erg/s$.
 
-`margin probability | fraction |\
+`margin probability | fraction | integprob |\
   [<modName>:]<parNum>` &
 The probability and fraction options return the probability and
 fraction columns, respectively, from the 
-most recent margin command.  Otherwise, the parameter column indicated by 
+most recent margin command.  The integprob option returns the integrated 
+(cumulative) probability column that `plot integprob` contours --- see 
+`margin` for how it is accumulated and what it is normalized over.  
+Otherwise, the parameter column indicated by 
 <parNum> is returned.  Note that for multi-dimensional margin the returned 
 parameter column will contain duplicate values, in the same order as they 
 originally appeared on the screen during the margin run.
+
+`mixweights [<modName>:]<n> [<energy>]`& The weights
+with which mixing model component <n> mixes the spectra, at its current
+parameter values: one list per mixing set (`projct` and the PSF and
+cluster-mass models have one per observation, other models one), holding the
+set's spectrum numbers and then one row per target spectrum, the weight with
+which each source spectrum's model reaches it (0 for a pair the model does
+not mix).  For example `{{1 2} {0.9 0.1} {0.1 0.9}}`.  Weights
+that depend on energy are given at <energy> (keV), which they then
+require: the factor the mix applies in the target's model energy bin
+containing it (NaN outside the target's model energies).  An error for a
+component that is not a mixing model, and for one with no weights to give:
+old-style local mixing models mix in their own code.
 
 `model` & Description of current model(s).
 
@@ -151,6 +264,17 @@ originally appeared on the screen during the margin run.
 
 `modgroups [<modName>]` & The data group numbers associated with a 
 model  (with optional model name).
+
+`modinfo <component>` & The definition of a model component,
+loaded or not (as `model ? <component>` shows it): name, type,
+origin (`built-in`, `local`, `python` or
+`mdefine`), the local package or the `mdefine` expression (else
+empty), minimum and maximum energy, gradient (`none`, `g` or
+`gv`), spectrum dependence (0/1), and the list of keyed model
+description tokens; then one list per parameter: name, unit, kind
+(`param`, `switch` or `scale`), default, hard minimum,
+soft minimum, soft maximum, hard maximum and delta (a switch or scale
+parameter repeats its default in the four limits and has delta 0).
 
 `modnames` & The names of models. 
 
@@ -171,12 +295,38 @@ $photons/cm^2/s/bin$.
 
 `nchan [<n>]`& Total number of channels in spectrum n (including ignored channels).
 
+`nest [logz| logzerr| h| modes| ess|
+  calls| iters| nlive| termination| converged|
+  verdict| pars| par n]`& Results of the
+last `nest` run.  `logz` (the default) and `logzerr` the
+evidence and its uncertainty, `h` the information $H$, `modes`
+the final ellipsoid count, `calls` and `iters` the likelihood
+evaluations and outer iterations, `nlive` the live points the run
+finished with, `termination` the reason it stopped and
+`converged` 1 when that reason was the $\Delta\log Z$ tolerance.
+`ess` is the Kish effective sample size, read off the loaded weighted
+chain rather than the run record, since it is a property of the weights.
+`verdict` returns the status word (`OK` or `WARN`) on the
+first line and one failing check per line after it, so a script can branch on
+`lindex 0`.  `pars` lists the parameter numbers
+(`model:n` for a named model) and `par` `n` the credible
+interval for the $n$th of them --- the same interval `tclout`
+`error` reports for that parameter, because it is the same
+computation.  An error if no `nest` has run.
+
 `noticed [<n>]` & Range (low,high) of noticed channels for spectrum n.
 
 `noticed energy [<n>]` & The noticed energies for spectrum n.
 
 `nullhyp` & When using chi-square for fits, this will retrieve the reported null 
 hypothesis probability.
+
+`parallel timing` & For the last pool of parallel subprocesses
+(`xset` `PARALLEL_TIMING`, see `parallel`): task,
+{pool}, subprocesses, runs, tasks, run time and time open (seconds), the
+minimum, median and maximum busy fraction, the tail ratio, the transfer time
+(seconds), and a list of {{name} value} totals.  An error before any
+pool has run.  `par` and shorter still mean `param`.
 
 `param [<mod>:]n` & (value, delta, min, low, high, max) for model parameter n.
 
@@ -196,12 +346,32 @@ by the multiplicative factor and additive constants if linked.
 `plot <option> <array> [<plot group n>]` &
 Write a string of blank separated values for the array.  <option>
 is one of the valid arguments for the plot or iplot commands.  <array> 
-is one of x, xerr, y, yerr, or model.  xerr and yerr output the 1-sigma error 
-bars generated for plots with errors.  The model array is for the convolved 
-model in data and ldata plots.  For contour plots this command just dumps the 
-steppar results.  The command does not work for genetic plot options. 
+is one of x, xerr, y, yerr, yerrlow, model, bandlow or bandhigh.  bandlow and
+bandhigh are the edges of the first level of the credible band
+(`setplot band`).  xerr and yerr output the 1-sigma error
+bars generated for plots with errors; for a plot with asymmetric y errors
+(`plot param`) yerr is the upper and yerrlow the lower bar, and for any
+other plot yerrlow equals yerr.  A plot type that takes arguments is written
+with them, before the array: `tclout plot param 1 groups y`.  The model array is for the convolved
+model in data and ldata plots.  For contour plots this command just dumps the
+steppar results.  Plot groups are numbered through the whole plot, so for
+`plot corner`, which draws many panes, <plot group n> counts
+across them: the panes run column by column, top down; a diagonal pane holds
+four groups (the histogram, then the median and the lower and upper interval
+as vertical lines) and a two-parameter pane one group per closed region
+boundary, the 68.3% region's first.  A subset is given after a colon, as a
+named model is: `tclout plot corner:1-3 y 1`.  On a log axis a
+histogram's x array is each bin's arithmetic centre and xerr its
+half-width, so x $\pm$ xerr are the bin's edges.
 
 `plotgrp` & Number of plot groups.
+
+`projct [cond| corr] [`<model name>`]` & For the
+`projct` component of the (named) model, one value per observation:
+the condition number of its shell-to-annulus matrix (the default), or the
+strongest correlation between radially adjacent shells.  As of the last time
+the matrix was built (the first evaluation after a model or data
+change).
 
 `query` & The setting of the query option.
 
@@ -215,6 +385,13 @@ errors that occurred during the calculation. See the help above on the
 error option for a description of the string.
 
 `response n` & Response filname(s) for the spectrum n.
+
+`rmodel [<sourceNum>:]<specNum>`& The names of the
+response models attached to the [<sourceNum>:]<specNum> response, in
+order of application (see `rmodel`); empty if none.
+
+`rpar [<sourceNum>:]n`& Value, delta, min, low, high, max of
+response parameter n of the source, as `param` does for a model parameter.
 
 `sigma [<modelName>:]n`& The sigma uncertainty value for parameter n.
 If n is not a variable parameter or fit was unable to calculate sigma, -1.0 is returned.
@@ -242,11 +419,15 @@ is returned.
 If optional `test` argument is given, this will give the name of the 
 test stat method.
 
-`steppar statistic |   delstat |
+`steppar statistic |   delstat |   minima |
   [<modName>:]<parNum>`&
-The `statistic` and `delstat` options return the statistic or 
-delta-statistic column respectively from the most recent steppar run.  
-Otherwise, the parameter column indicated by <parNum> is returned.  
+The `statistic` and `delstat` options return the statistic or
+delta-statistic column respectively from the most recent steppar run.  The
+`minima` option returns the grid-resolution local minima found by that
+run: the first two numbers are the number of minima and the number of stepped
+parameters, followed by one group per minimum (ordered best-first) giving the
+delta-statistic and the parameter value(s) at that minimum.
+Otherwise, the parameter column indicated by <parNum> is returned.
 Note that for multi-dimensional steppars the returned parameter column will 
 contain duplicate values, in the same order as they originally appeared on 
 the screen during the steppar run.
@@ -268,27 +449,36 @@ model, enter `unnamed`.
 `xflt n` & XFLT#### keywords for spectrum n. The first number written is the
 number of keywords and the rest are the keyword values.
 
+`xset <name>` & The value of any name `xset` accepts: a
+named setting, abbreviated as `xset` allows (`abund`,
+`cosmo`, `delta`, `mdatadir`, `method`,
+`seed`, `statistic`, `usechainrule`, `weight`,
+`xsect`); a control switch, its default when it has not been set (see
+`xset`); or a model string from the `xset` string database.  An
+error is reported if <name> is none of these.
+
 **Examples:**
 
 ```
-XSPEC12>data file1
-XSPEC12> model pha(po)
+XSPEC>data file1
+XSPEC> model pha(po)
 ...
-XSPEC12> fit
+XSPEC> fit
 ...
-XSPEC12>tclout stat
-XSPEC12>scan $xspec_tclout "%f" chistat
-XSPEC12>tclout param 1
-XSPEC12>scan $xspec_tclout "%f"par2
-XSPEC12>tclout param 2
-XSPEC12>scan $xspec_tclout "%f"par3
-XSPEC12>tclout param 3
+XSPEC>tclout stat
+XSPEC>scan $xspec_tclout "%f" chistat
+XSPEC>tclout param 1
+XSPEC>scan $xspec_tclout "%f" par1
+XSPEC>tclout param 2
+XSPEC>scan $xspec_tclout "%f" par2
+XSPEC>tclout param 3
+XSPEC>scan $xspec_tclout "%f" par3
 ```
 
-In this example, `scan` is a tcl command that does a formatted read of 
-the variable $xspec_tclout. It reads the first floating point number into 
-the variable given by the last argument on the line.This sequence creates a 
-simple model, fits it, and then writes the chi^2 statistic and the three 
+In this example, `scan` is a tcl command that does a formatted read of
+the variable $xspec_tclout. It reads the first floating point number into
+the variable given by the last argument on the line. This sequence creates a
+simple model, fits it, and then writes the chi^2 statistic and the three
 parameters to tcl variables $chistat, $par1, $par2, and $par3. These can 
 now be manipulated in any way permitted by tcl. Examples of using tclout and 
 tcloutr can be found in the Xspec/src/scripts directory.

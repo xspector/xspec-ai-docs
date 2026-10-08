@@ -54,7 +54,7 @@ _Authoritative from `model.dat`. Negative fit-delta = frozen; additive models ca
 |---|-------|------|---------|----------|----------|----------|----------|-------|------|
 | 1 | Emin | keV | 0.5 | 0 | 1000000 | 0 | 1000000 | 0.1 | frozen by default |
 | 2 | Emax | keV | 10 | 0 | 1000000 | 0 | 1000000 | 0.1 | frozen by default |
-| 3 | Redshift | — | 0 | -0.999 | 10 | -0.999 | 10 | 0.01 | frozen by default |
+| 3 | Redshift | — | 0 | 0 | 10 | 0 | 10 | 0.01 | frozen by default |
 | 4 | lg10Lum | cgs | 40 | -100 | 100 | -100 | 100 | 0.01 |  |
 
 ## PyXspec

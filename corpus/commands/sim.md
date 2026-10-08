@@ -13,7 +13,7 @@ Generate many simulated realizations of the loaded spectra, optionally
 refit each one and run a command file on it, and accumulate the
 results.  This is the in-program replacement for the common scripted
 loop of `tclout` `simpars`, `newpar` and
-`fakeit` (see the `multifake` script): it is faster, keeps
+`fakeit` (the retired multifake script): it is faster, keeps
 the whole random-number sequence under a single `xset`
 `seed`, and can be run in parallel.
 
@@ -113,9 +113,10 @@ The simulation may be spread over several processes by setting the
 `parallel` command's `sim` option.  The parameter sets are
 all drawn up front by the parent process, so the drawn values (and
 their order) are reproducible from the `xset` `seed` and
-are identical whether the run is serial or parallel; only the
-per-realization counting noise differs between a serial and a parallel
-run, as for the `goodness` command.
+are identical whether the run is serial or parallel.  So is the counting
+noise: each realization draws it from its own stream, derived from the seed
+and the realization's number, so a run's results are the same for any
+number of processes.
 
 When the loaded spectra form a covariance group fit with
 `statistic` `chistokes` or `chicov`, each
@@ -140,9 +141,9 @@ set xspec_simresult [list $p1 $f]
 and is driven by
 
 ```
-XSPEC12> parallel sim 4
-XSPEC12> xset seed 1234
-XSPEC12> sim 1000 fit @boot.xcm outfile boot.txt
+XSPEC> parallel sim 4
+XSPEC> xset seed 1234
+XSPEC> sim 1000 fit @boot.xcm outfile boot.txt
 ```
 
 After the run, `boot.txt` holds 1000 rows of the photon index

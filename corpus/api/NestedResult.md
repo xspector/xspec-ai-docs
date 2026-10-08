@@ -5,7 +5,7 @@ module: nest.py
 
 # NestedResult
 
-In-memory view of a `nest run` output FITS file.
+**In-memory view of a `nest run` output FITS file.**
 
 ## Attributes
 

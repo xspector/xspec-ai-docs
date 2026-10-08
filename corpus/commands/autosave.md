@@ -20,7 +20,7 @@ the XSPEC environment is saved every N commands.
 The saving of the environment is equivalent to the command
 
 ```
-XSPEC12>save all xautosav.xcm .,
+XSPEC>save all xautosav.xcm .,
 ```
 
 i.e. both the file and model information is saved to the file xautosav.xcm, 

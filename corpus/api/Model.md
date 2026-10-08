@@ -30,3 +30,4 @@ module: model.py
 - `showList()` — Show the list of all available XSPEC model components.
 - `untie()` — Remove links for all parameters in Model object
 - `values(spectrumIndex)` — Get the Model object's values array for a given spectrum.
+- `emittedLines(loKeV, hiKeV)` — The lines this model's AtomDB components emit in a window.

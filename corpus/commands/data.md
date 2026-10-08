@@ -61,10 +61,10 @@ the `tclout` `rate` command.
 **Examples:**
 
 ```
-XSPEC12> data pha2data{1,3,5-8,14-26,75-**}
+XSPEC> data pha2data{1,3,5-8,14-26,75-**}
 //  In addition to the various specified rows between 1 and 26, 
 //  also load rows 75 through the end of the file.
-XSPEC12> data pha2data{*}
+XSPEC> data pha2data{*}
 //  Select all rows in the file.
 ```
 
@@ -107,13 +107,13 @@ this point, they will be replaced, deleted, or added to depending on the
 command. For example, if there are 3 spectra loaded ($N_{s}$ = 3) and the user types:
 
 ```
-XSPEC12> data   multidatafile{1-2}
+XSPEC> data   multidatafile{1-2}
 ```
 
 then spectra 1 and 2 will be replaced and 3 deleted. The command
 
 ```
-XSPEC12> data   multidatafile{1-4}
+XSPEC> data   multidatafile{1-4}
 ```
 
 will replace all three spectra and add the fourth.
@@ -122,7 +122,7 @@ If the user specifies a ``load point'',
 i.e. the first spectrum number to be created by the new command, i.e.
 
 ```
-XSPEC12> data 3 multidatafile{1-4}
+XSPEC> data 3 multidatafile{1-4}
 ```
 
 then that load point may not exceed $N_{s}$ + 1. If it does, XSPEC will correct 
@@ -131,7 +131,7 @@ the number and issue a warning.
 A skipped-over argument can be effected by a comma, for example
 
 ```
-XSPEC12> data  3 spectrum1, , spectrum2
+XSPEC> data  3 spectrum1, , spectrum2
 ```
 
 indicates that the spectrum for that position, as input in an earlier invocation 
@@ -144,13 +144,13 @@ higher-number spectra unless `none` is terminated with a / character.
 For example:
 
 ```
-XSPEC12> data  3 none
+XSPEC> data  3 none
 ```
 
 removes all spectra numbered 3 or higher,
 
 ```
-XSPEC12>data 3 none/
+XSPEC>data 3 none/
 ```
 
 removes only spectrum 3 and renumbers the rest.
@@ -167,13 +167,13 @@ from the command line, whichever is greater.
 The command 
 
 ```
-XSPEC12> data 
+XSPEC> data 
 ```
 
 by itself prints the one-line help summary, as does
 
 ```
-XSPEC12> data ?
+XSPEC> data ?
 ```
 
 **data groups**
@@ -187,7 +187,7 @@ can be linked across data groups using the standard XSPEC syntax (see the
 Note that the data group number precedes the spectrum number: in the example
 
 ```
-XSPEC12> data  2:3 spectrum4
+XSPEC> data  2:3 spectrum4
 ```
 
 which assumes that at least two spectra are already present, the data group 
@@ -196,7 +196,7 @@ number is 2 and the spectrum number is 3.
 XSPEC will not allow the data group number to exceed the spectrum number: for example
 
 ```
-XSPEC12> data  3:2 spectrum4
+XSPEC> data  3:2 spectrum4
 ```
 
 is invalid. XSPEC will correct this and issue a warning.
@@ -204,35 +204,35 @@ is invalid. XSPEC will correct this and issue a warning.
 **More Examples:**
 
 ```
-XSPEC12> data a
+XSPEC> data a
 //The file a.pha is read in as the first (and only) spectrum.
-XSPEC12> data ,b
+XSPEC> data ,b
 //b.pha becomes the second spectrum, the first spectrum is
 // unmodified (i.e. it is still a.pha)
-XSPEC12> data c 3 d,e,f
+XSPEC> data c 3 d,e,f
 //c.pha replaces a.pha as the first spectrum;d.pha, e.pha, and 
 // f.pha provide the, third, fourth, and fifth spectra.
-XSPEC12> data g/
+XSPEC> data g/
 //g.pha replaces c.pha as the first spectrum; the slash (/)
 // indicates that the 2nd through the 5th spectra remain as before.
-XSPEC12> data 2 none/
+XSPEC> data 2 none/
 //the string none indicates that the 2nd spectrum (b.pha) is to be 
 // totally removed. The current total number of datasets thus becomes 
 // one less (4).The current spectra are g.pha,d.pha, e.pha,
 // and f.pha.
-XSPEC12> data h,,
+XSPEC> data h,,
 //The current total number of spectra becomes 2, the current data 
 // sets are from h.pha and d.pha.
-XSPEC12> data
+XSPEC> data
 //There is no change in the data status.
-XSPEC12> data 1
+XSPEC> data 1
 //The number of spectra is set explicitly to one, that being from 
 // h.pha.
-XSPEC12> data 1:1 a 2:2 b 3:3 c
+XSPEC> data 1:1 a 2:2 b 3:3 c
 //Read a.PHA into data group 1, b.pha into data group 2, and c.pha 
 //into data group 3
-XSPEC12> data 1:1 a 1:2 b 2:3 c
+XSPEC> data 1:1 a 1:2 b 2:3 c
 //Read a.pha and b.pha into data group 1, and c.pha into data group 2
-XSPEC12> data a{3}
+XSPEC> data a{3}
 // Read the third spectrum in the file a.pha.
 ```

@@ -32,7 +32,9 @@ turns on this option, `nofit` turns it off in which case the
 test statistic is calculated immediately after creating the simulated
 dataset. The default starting setting is `fit`. The goodness
 calculation may be sped up by setting the `parallel` command's
-`goodness` option to run multiple processes.
+`goodness` option to run multiple processes.  Each realization has
+its own random-number stream, derived from the `xset` `seed`,
+so the results are the same for any number of processes.
 
 When the data form a covariance group fit with `statistic`
 `chistokes` or `chicov`, each simulated dataset is drawn

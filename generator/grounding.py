@@ -10,15 +10,30 @@ from pathlib import Path
 
 
 def command_map(heasoft_src: Path):
-    """Parse XSGlobal.cxx createCommandMap. Returns (tokens, groups):
+    """Parse the CLI command table (XSCli/CliCommands.cxx, since the Tcl-free
+    CLI; XSUser/Global/XSGlobal.cxx's createCommandMap before). Returns
+    (tokens, groups):
       tokens  -- every valid command token (incl. x-prefixed aliases)
       groups  -- [{canonical, aliases}] grouped by handler
+    TABLE rows {"name", &XSGlobal::doX, autosave, result} register an
+    "x"+name twin for every name but "?"; the specials {"name", cmdX, xtwin}
+    register one only when xtwin is true.
     """
-    txt = (heasoft_src / "XSUser" / "Global" / "XSGlobal.cxx").read_text(
+    txt = (heasoft_src / "XSCli" / "CliCommands.cxx").read_text(
         errors="replace")
-    pairs = re.findall(r'commandMap\["([^"]+)"\]\s*=\s*&(\w+)', txt)
-    # real user commands are lowercase (or "?"); drop internal sentinels
-    # such as XSunknown.
+    pairs = []
+    for name, handler in re.findall(
+            r'\{\s*"([^"]+)"\s*,\s*&XSGlobal::(\w+)\s*,\s*(?:true|false)\s*,'
+            r'\s*(?:true|false)\s*\}', txt):
+        pairs.append((name, handler))
+        if name != "?":
+            pairs.append(("x" + name, handler))
+    for name, handler, xtwin in re.findall(
+            r'\{\s*"([^"]+)"\s*,\s*(cmd\w+)\s*,\s*(true|false)\s*\}', txt):
+        pairs.append((name, handler))
+        if xtwin == "true":
+            pairs.append(("x" + name, handler))
+    # real user commands are lowercase (or "?"); drop internal sentinels.
     pairs = [(n, h) for n, h in pairs if n == "?" or n[0].islower()]
     tokens = sorted({name for name, _ in pairs})
     by_handler = {}

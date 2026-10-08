@@ -17,10 +17,21 @@ where `<filespec>` is the same as for the `backgrnd`
 command.  The correction file can be associated with a spectrum to
 further adjust the count rates. It is a PHA file whose count rate is
 multiplied by the current associated correction norm (see the
-`cornorm` command and `recorn` model) and then subtracted
-from the input uncorrected data. The correction norm is not changed by
-running the `corfile` command. Default values for the correction
-file and norm are included in the data PHA file. Unlike the background
+`cornorm` command and the `recorn` data model) and then subtracted
+from the input uncorrected data. Under the Poisson statistics
+(`cstat`, `pgstat` and the others of
+Appendix AppendixStatistics) counts cannot be subtracted, so the
+correction is instead added to the predicted source counts, which is the
+same thing (Appendix CorrectionPoisson). The correction norm is not
+changed by running the `corfile` command. Default values for the
+correction file and norm are included in the data PHA file. If the data
+file names no correction file of its own (its CORRFILE is blank or absent,
+but not `none`) and its background file names one, that correction
+file is used, with the background file's CORRSCAL as the norm: a note is
+printed when the spectrum is loaded, `show files` names the
+background file it came from, and `corfile` `none` removes it.
+This happens only as a spectrum is loaded; a background set later with the
+`backgrnd` command brings no correction with it. Unlike the background
 file, the correction data does NOT contribute to the measurement
 error. A file name of `none` is equivalent to no correction
 file used.  If an input file can not be opened or found, an error
@@ -36,13 +47,13 @@ format as the PHA files used by the `data` command.
 It is assumed that there are currently three spectra:
 
 ```
-XSPEC12> corfile a,b,c
+XSPEC> corfile a,b,c
 // New correction files are used for all three spectra.>
-XSPEC12> corfile 2 none
+XSPEC> corfile 2 none
 // No correction will be done for the second spectrum.}
-XSPEC12> corfile ,d
+XSPEC> corfile ,d
 // The 2nd file now uses d.pha as its correction.
-XSPEC12> corfile 2 e{4-5}
+XSPEC> corfile 2 e{4-5}
 // Rows 4 and 5 of Type II file e.pha become the correction files 
 // for the second and third spectrum respectively.
 ```

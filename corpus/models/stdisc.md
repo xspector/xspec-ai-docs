@@ -36,6 +36,7 @@ should be frozen at unity.
 After evaluation the derived inclination { inc_degrees}
 ($\arccos(\mathtt{cos\_incl})$ in degrees) can be retrieved with the
 `xset` command. The reflection tables
+
 ({ stokes-neutral-iso-*-disc.fits}) are installed in the standard
 model-data directory.
 

@@ -15,9 +15,7 @@ source: manager/model.dat + XSmodelGsmooth.tex
 ## Description
 
 Gaussian smoothing with a variable width $\Sigma(E)$, which varies as the 
-par2 power of the energy. The width at 6 keV is set with par1. Note that the 
-energy binning must be uniform. If the response energies are not uniformly 
-spaced then the `energies` command should be used to set uniform energy binning.
+par2 power of the energy. The width at 6 keV is set with par1.
 
 $$dC(E) = \frac{1}{\sqrt{2\pi\Sigma(E)^2}}\exp\left[-\frac{1}{2}\left(\frac{E-X}{\Sigma(E)}\right)^2\right]A(X)dX$$
 

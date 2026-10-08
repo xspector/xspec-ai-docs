@@ -18,7 +18,22 @@ Variants documented together: `expcheb6`, `vexpcheb6`, `bexpcheb6`, `bvexpcheb6`
 
 `expcheb6` is a multi-temperature collisional-ionization
 equilibrium model using the exponential of a sixth-order Chebyshev polynomial for the
-differential emission measure. The switch parameter determines whether spectrum is
+differential emission measure. Unlike `cheb6`, the DEM is
+positive by construction. The differential emission measure is defined per unit
+$\log_{10}(T)$,
+
+$$dEM = e^{Q(x)}\,(T/10^{6}\,{\rm K})\,d\log_{10}(T), \qquad
+Q(x) = \sum_{j=1}^{6} a_j T_j(x), \qquad
+x = 0.8\left(\log_{10}T[{\rm K}] - 5.5\right) - 1,$$
+
+where $T_j$ is the Chebyshev polynomial of the first kind of order $j$
+and the coefficients $a_1$--$a_6$ are par1--6. Note that the sum starts
+at $j=1$: there is no constant ($T_0$) term, so the DEM cannot be given
+a temperature-independent scale factor. The variable $x$ maps
+$\log_{10}T[{\rm K}] = 5.5$--8.0 onto $[-1,1]$, and the sum is evaluated
+on a grid uniform in $\log_{10}(T)$ over that range with a step of 0.1.
+As for `cempow`, expressing the DEM in terms of $dT$ instead
+introduces a factor of $\ln 10$. The switch parameter determines whether spectrum is
 calculated by running the mekal code, by interpolating on a
 pre-calculated mekal table, using the AtomDB data, or using the SPEX
 data. The final two options
