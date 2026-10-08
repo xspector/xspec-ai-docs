@@ -4,7 +4,7 @@
     "heasoft_src": "/Users/kaa/software/heasoft/Xspec/src",
     "heasoft_commit": "f2644bc7a6",
     "manual_dir": "/Users/kaa/software/Xspec-aux/doc/manual",
-    "manual_commit": "def75d749"
+    "manual_commit": "4575de4e5"
   },
   "counts": {
     "models": 344,

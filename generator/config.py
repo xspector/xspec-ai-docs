@@ -25,9 +25,14 @@ CORPUS = REPO_ROOT / "corpus"
 
 
 def _git_commit(tree: Path) -> str:
+    # The last commit that touched THIS tree, not the repository's HEAD: the
+    # manual shares Xspec-aux with the test suite and heasoft's Xspec/src
+    # shares its repo with the rest of HEAsoft, so HEAD moves on commits that
+    # change nothing the corpus is generated from, and --check reported them
+    # as drift.
     try:
         return subprocess.check_output(
-            ["git", "-C", str(tree), "rev-parse", "--short", "HEAD"],
+            ["git", "-C", str(tree), "log", "-1", "--format=%h", "--", "."],
             stderr=subprocess.DEVNULL, text=True).strip()
     except Exception:
         return "unknown"
